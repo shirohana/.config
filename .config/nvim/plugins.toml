@@ -1,0 +1,222 @@
+# ================================
+# Required
+# ================================
+
+# Dein: Vim Plugin Manager
+# https://github.com/Shougo/dein.vim
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# ================================
+# Generic Plugin
+# ================================
+
+# Airline
+# https://github.com/vim-airline/vim-airline
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+on_source = 'vim-airline'
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+depends = 'vim-airline-themes'
+lazy = 0
+hook_add = 'source $NVIM_PLUGINS/airline.vim'
+
+# NERDTree
+# https://github.com/scrooloose/nerdtree
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+depends = 'nerdtree-git-plugin'
+on_cmd = 'NERDTree'
+hook_add = 'source $NVIM_PLUGINS/nerdtree.vim'
+[[plugins]]
+repo = 'Xuyuanp/nerdtree-git-plugin'
+lazy = 1
+
+# EasyMotion
+# https://github.com/easymotion/vim-easymotion
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+hook_add = 'source $NVIM_PLUGINS/easymotion.vim'
+lazy = 0
+
+# Incsearch
+# https://github.com/haya14busa/incsearch.vim
+[[plugins]]
+repo = 'haya14busa/incsearch.vim'
+on_func = 'incsearch#'
+[[plugins]]
+repo = 'haya14busa/incsearch-easymotion.vim'
+depends = ['incsearch.vim', 'vim-easymotion']
+on_map = '<Plug>(incsearch-easymotion-'
+[[plugins]]
+repo = 'haya14busa/incsearch-fuzzy.vim'
+depends = 'incsearch.vim'
+on_map = '<Plug>(incsearch-fuzzy-'
+
+# Cursorword
+# https://github.com/itchyny/vim-cursorword
+[[plugins]]
+repo = 'itchyny/vim-cursorword'
+lazy = 0
+hook_add = '''
+  autocmd MyAutoCmd FileType nerdtree let b:cursorword = 0
+'''
+
+# Peekaboo
+# https://github.com/junegunn/vim-peekaboo
+[[plugins]]
+repo = 'junegunn/vim-peekaboo'
+lazy = 0
+hook_add = '''
+  autocmd MyAutoCmd BufEnter * let b:peekaboo_on = 1
+  let g:peekaboo_delay = 250
+'''
+
+# Surround
+# https://github.com/tpope/vim-surround
+[[plugins]]
+repo = 'tpope/vim-surround'
+depends = 'vim-repeat'
+on_map = [
+  '<Plug>Csurround',
+  '<Plug>CSurround',
+  '<Plug>Dsurround',
+  '<Plug>Ysurround',
+  '<Plug>YSurround',
+  '<Plug>Yssurround',
+  '<Plug>YSsurround',
+  '<Plug>VSurround',
+  '<Plug>VgSurround'
+]
+hook_add = '''
+  let g:surround_no_mappings = 1
+'''
+
+# Repeat
+# https://github.com/tpope/vim-repeat
+[[plugins]]
+repo = 'tpope/vim-repeat'
+lazy = 1
+
+# AutoPairs
+# https://github.com/shirohana/auto-pairs
+[[plugins]]
+repo = 'shirohana/auto-pairs'
+lazy = 0
+hook_add = 'source $NVIM_PLUGINS/auto-pairs.vim'
+
+# Commentary
+# https://github.com/tpope/vim-commentary
+[[plugins]]
+repo = 'tpope/vim-commentary'
+# on_map = ['<Plug>Commentary', '<Plug>ChangeCommentary']
+on_map = '<Plug>Commentary'
+
+# BetterWhitespace
+# https://github.com/ntpeters/vim-better-whitespace
+[[plugins]]
+repo = 'ntpeters/vim-better-whitespace'
+on_event = 'BufEnter'
+hook_add = '''
+  let g:better_whitespace_operator = 0
+  let g:show_spaces_that_precede_tabs = 1
+'''
+hook_post_source = '''
+  EnableStripWhitespaceOnSave
+'''
+
+# MultipleCursors
+# https://github.com/terryma/vim-multiple-cursors
+[[plugins]]
+repo = 'terryma/vim-multiple-cursors'
+on_event = 'BufEnter'
+hook_add = '''
+  let g:multi_cursor_use_default_mapping = 0
+  let g:multi_cursor_exit_from_visual_mode = 0
+  let g:multi_cursor_exit_from_insert_mode = 0
+'''
+
+# Undotree
+# https://github.com/mbbill/undotree
+[[plugins]]
+repo = 'mbbill/undotree'
+on_cmd = 'UndotreeToggle'
+hook_add = 'source $NVIM_PLUGINS/undotree.vim'
+
+# GitGutter
+# https://github.com/airblade/vim-gitgutter
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+depends = 'vim-repeat'
+on_func = 'gitgutter#'
+on_event = 'BufEnter'
+hook_add = '''
+  let g:gitgutter_map_keys = 0
+'''
+
+# Tagbar
+# https://github.com/majutsushi/tagbar
+[[plugins]]
+repo = 'majutsushi/tagbar'
+on_cmd = 'Tagbar'
+
+# EasyAlign
+# https://github.com/junegunn/vim-easy-align
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+depends = 'vim-repeat'
+on_map = ['<Plug>(EasyAlign', '<Plug>(LiveEasyAlign)']
+
+# ZFZ
+# https://github.com/junegunn/fzf.vim
+[[plugins]]
+repo = 'junegunn/fzf'
+hook_post_update = './install --bin'
+# We need only executable
+merged = 0
+lazy = 1
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+on_cmd = ['Files', 'GFiles', 'Buffers', 'Ag', 'Tags', 'BTags', 'Marks', 'Windows', 'History:', 'Maps', 'Filetypes']
+hook_source = 'source $NVIM_PLUGINS/fzf.vim'
+
+# ================================
+# Theme
+# ================================
+
+# Solarized 8: True Colors
+# https://github.com/lifepillar/vim-solarized8
+[[plugins]]
+repo = 'lifepillar/vim-solarized8'
+
+# ================================
+# Language
+# ================================
+
+# markdown .md
+# https://github.com/plasticboy/vim-markdown
+# https://github.com/JamshedVesuna/vim-markdown-preview
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+on_ft = 'markdown'
+hook_add = '''
+  let g:vim_markdown_no_default_key_mappings = 1
+  let g:vim_markdown_new_list_item_indent = 2
+  let g:vim_markdown_folding_disabled = 1
+  let g:vim_markdown_conceal = 0
+'''
+[[plugins]]
+repo = 'JamshedVesuna/vim-markdown-preview'
+on_ft = 'markdown'
+hook_add = '''
+  let g:vim_markdown_preview_toggle = -1
+  let g:vim_markdown_preview_github = 1
+  let g:vim_markdown_preview_browser = 'Safari'
+'''
+
+# toml .toml
+# https://github.com/cespare/vim-toml
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
