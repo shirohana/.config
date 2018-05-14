@@ -1,4 +1,4 @@
-NeoVim 
+NeoVim
 ======
 
 #### Menu
@@ -100,7 +100,6 @@ Language | Repo
 Markdown | [plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown)
 &nbsp;   | [JamshedVesuna/vim-markdown-preview](https://github.com/JamshedVesuna/vim-markdown-preview)
 TOML     | [cespare/vim-toml](https://github.com/cespare/vim-toml)
-
 
 Uninstall
 ---------

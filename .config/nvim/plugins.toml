@@ -184,7 +184,7 @@ hook_add = '''
   let g:show_spaces_that_precede_tabs = 1
 '''
 hook_post_source = '''
-  EnableStripWhitespaceOnSave
+  autocmd BufEnter * EnableStripWhitespaceOnSave
 '''
 
 # ================================
