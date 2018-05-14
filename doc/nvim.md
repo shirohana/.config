@@ -19,7 +19,25 @@ NeoVim
     5. [Buffer](#buffer)
     6. [Window](#window)
     7. [Tabpage](#tabpage)
-4. [Uninstall](#uninstall)
+4. [Plugin Mappings](#plugin-mappings)
+    1. [Airline](#airline)
+    2. [AutoPairs](#autopairs)
+    3. [Commentary](#commentary)
+    4. [EasyAlign](#easyalign)
+    5. [EasyMotion - Line Navigating](#easymotion---line-navigating)
+    6. [EasyMotion - Word Navigating](#easymotion---word-navigating)
+    7. [EasyMotion - Repeating](#easymotion---repeating)
+    8. [EasyMotion - Searching](#easymotion---searching)
+    9. [FZF](#fzf)
+    10. [GitGutter](#gitgutter)
+    11. [Incsearch](#incsearch)
+    12. [MultipleCursors](#multiplecursors)
+    13. [NERDTree](#nerdtree)
+    14. [Peekaboo](#peekaboo)
+    15. [Surround](#surround)
+    16. [UndoTree](#undotree)
+    17. [FileType: Markdown](#filetype-markdown)
+5. [Uninstall](#uninstall)
 
 Installation
 ------------
@@ -184,6 +202,153 @@ Alias                            | To
 | v   | <kbd>Opt-Shift-[</kbd> | Switch to previous tab
 | v   | <kbd>Opt-Shift-]</kbd> | Switch to next tab
 
+Plugin Mappings
+---------------
+
+#### Airline
+| N   | Keystroke        | Action
+| :-: | ---------        | ------
+| v   | <kbd>Opt-1</kbd> | Switch to 1st buffer
+|     | ...              |
+| v   | <kbd>Opt-9</kbd> | Switch to 9th buffer
+
+#### AutoPairs
+| I   | Keystroke     | Action
+| :-: | ---------     | ------
+| v   | <kbd>⌃b</kbd> | Back insert close pair in [fly-mode](https://github.com/jiangmiao/auto-pairs#fly-mode)
+
+#### Commentary
+| n   | v   | o   | Keystroke                            | Action
+| :-: | :-: | :-: | ---------                            | ------
+| v   | v   | v   | <kbd>g</kbd><kbd>c</kbd>             | Toggle comment of lines with {motion}
+| v   |     |     | <kbd>g</kbd><kbd>c</kbd><kbd>c</kbd> | Toggle comment of current line
+| v   |     |     | <kbd>c</kbd><kbd>g</kbd><kbd>c</kbd> | Change adjacent commented lines
+
+#### EasyAlign
+| n   | v   | Keystroke                | Action
+| :-: | :-: | ---------                | ------
+| v   |     | <kbd>g</kbd><kbd>a</kbd> | Start interactive EasyAlign with {motion}
+|     | v   | <kbd>g</kbd><kbd>a</kbd> | Start **live** interactive EasyAlign in selection
+
+#### EasyMotion - Line Navigating
+Keystroke                                    | Action
+---------                                    | ------
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>j</kbd> | &lt;Plug&gt;(easymotion-sol-j)
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>J</kbd> | &lt;Plug&gt;(easymotion-j)
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>k</kbd> | &lt;Plug&gt;(easymotion-sol-k)
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>K</kbd> | &lt;Plug&gt;(easymotion-k)
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>h</kbd> | &lt;Plug&gt;(easymotion-linebackward)
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>l</kbd> | &lt;Plug&gt;(easymotion-lineforward)
+
+#### EasyMotion - Word Navigating
+Keystroke                                     | Action
+---------                                     | ------
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>w</kbd>  | &lt;Plug&gt;(easymotion-w)
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>W</kbd>  | &lt;Plug&gt;(easymotion-W)
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>b</kbd>  | &lt;Plug&gt;(easymotion-b)
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>B</kbd>  | &lt;Plug&gt;(easymotion-B)
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>e</kbd>  | &lt;Plug&gt;(easymotion-e)
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>E</kbd>  | &lt;Plug&gt;(easymotion-E)
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>ge</kbd> | &lt;Plug&gt;(easymotion-ge)
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>gE</kbd> | &lt;Plug&gt;(easymotion-gE)
+
+#### EasyMotion - Repeating
+Keystroke                                        | Action
+---------                                        | ------
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>n</kbd>     | &lt;Plug&gt;(easymotion-n)
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>N</kbd>     | &lt;Plug&gt;(easymotion-N)
+<kbd>_&lt;LocalLeader&gt;_</kbd><kbd>Space</kbd> | &lt;Plug&gt;(easymotion-repeat)
+
+#### EasyMotion - Searching
+| N   | V   | O   | Keystroke                | Action
+| :-: | :-: | :-: | ---------                | ------
+| v   |     |     | <kbd>s</kbd><kbd>s</kbd> | &lt;Plug&gt;(easymotion-sn)
+| v   |     |     | <kbd>s</kbd><kbd>f</kbd> | &lt;Plug&gt;(easymotion-fl)
+| v   |     |     | <kbd>s</kbd><kbd>F</kbd> | &lt;Plug&gt;(easymotion-Fl)
+| v   |     |     | <kbd>s</kbd><kbd>t</kbd> | &lt;Plug&gt;(easymotion-tl)
+| v   |     |     | <kbd>s</kbd><kbd>T</kbd> | &lt;Plug&gt;(easymotion-Tl)
+|     | v   |     | <kbd>f</kbd>             | &lt;Plug&gt;(easymotion-fl)
+|     | v   |     | <kbd>F</kbd>             | &lt;Plug&gt;(easymotion-Fl)
+|     | v   |     | <kbd>t</kbd>             | &lt;Plug&gt;(easymotion-tl)
+|     | v   |     | <kbd>T</kbd>             | &lt;Plug&gt;(easymotion-Tl)
+|     |     | v   | <kbd>f</kbd>             | &lt;Plug&gt;(easymotion-fl-fix)
+|     |     | v   | <kbd>F</kbd>             | &lt;Plug&gt;(easymotion-Fl-fix)
+|     |     | v   | <kbd>t</kbd>             | &lt;Plug&gt;(easymotion-tl-fix)
+|     |     | v   | <kbd>T</kbd>             | &lt;Plug&gt;(easymotion-Tl-fix)
+
+#### FZF
+| N   | Keystroke        | Action
+| :-: | ---------        | ------
+| v   | <kbd>⌃o</kbd>    | Show opened files
+| v   | <kbd>⌃p</kbd>    | Show files in `cwd`
+| v   | <kbd>Opt-f</kbd> | Search text in `cwd`
+
+#### GitGutter
+| N   | Keystroke                                                    | Action
+| :-: | ---------                                                    | ------
+| v   | <kbd>s</kbd><kbd>j</kbd>                                     | Jump to next hunk
+| v   | <kbd>s</kbd><kbd>j</kbd>                                     | Jump to previous hunk
+| v   | <kbd>_&lt;LocalLeader&gt;_</kbd><kbd>s</kbd><kbd>s</kbd>     | Stage hunk under cursor
+| v   | <kbd>_&lt;LocalLeader&gt;_</kbd><kbd>s</kbd><kbd>u</kbd>     | Unstage hunk under cursor
+| v   | <kbd>_&lt;LocalLeader&gt;_</kbd><kbd>s</kbd><kbd>r</kbd>     | Undo hunk under cursor
+| v   | <kbd>_&lt;LocalLeader&gt;_</kbd><kbd>s</kbd><kbd>Space</kbd> | Preview hunk under cursor
+
+#### Incsearch
+| N   | V   | Keystroke                            | Action
+| :-: | :-: | ---------                            | ------
+| v   | v   | <kbd>/</kbd>                         | Search pattern with highlight
+| v   | v   | <kbd>?</kbd>                         | Search pattern back with highlight
+| v   | v   | <kbd>g</kbd><kbd>/</kbd>             | Search pattern but stay cursor when cancel
+| v   | v   | <kbd>z</kbd><kbd>/</kbd>             | Fuzzy search
+| v   | v   | <kbd>z</kbd><kbd>?</kbd>             | Fuzzy search back
+| v   | v   | <kbd>z</kbd><kbd>g</kbd><kbd>/</kbd> | Fuzzy search and stay when cancel
+
+#### MultipleCursors
+| N   | `MultiCursorMode` | Keystroke      | Action
+| :-: | :---------------: | ---------      | ------
+| v   |                   | <kbd>⌃n</kbd>  | Start multiple cursor mode on current word
+|     | v                 | <kbd>⌃n</kbd>  | Join this word and jump to next
+|     | v                 | <kbd>⌃x</kbd>  | Skip current word and jump to next
+|     | v                 | <kbd>⌃b</kbd>  | Undo previous join or skip
+|     | v                 | <kbd>Esc</kbd> | Leave `MultiCursorMode`
+
+#### NERDTree
+| N   | Keystroke        | Action
+| :-: | ---------        | ------
+| v   | <kbd>Opt-;</kbd> | Toggle NERDTree
+
+#### Peekaboo
+| N   | I   | V   | Keystroke     | Action
+| :-: | :-: | :-: | ---------     | ------
+| v   |     |     | <kbd>"</kbd>  | Peek register and do (e.g. `"4p`, `"ay`)
+|     |     | v   | <kbd>"</kbd>  | Peek register and do
+|     | v   |     | <kbd>⌃r</kbd> | Peek register and paste selected
+
+#### Surround
+| N   | V   | Keystroke                            | Action
+| :-: | :-: | ---------                            | ------
+| v   |     | <kbd>c</kbd><kbd>s</kbd>             | Change surround (e.g. `cs]{`, ``cs`<kbd>``)
+| v   |     | <kbd>c</kbd><kbd>S</kbd>             | Change surround block (e.g. `cS}}`)
+| v   |     | <kbd>d</kbd><kbd>s</kbd>             | Remove surround
+| v   |     | <kbd>y</kbd><kbd>s</kbd>             | You surround with {motion} (e.g. `ysiw"`, `ysap<script>`)
+| v   |     | <kbd>y</kbd><kbd>S</kbd>             | You surround block with {motion}
+| v   |     | <kbd>y</kbd><kbd>s</kbd><kbd>s</kbd> | You surround current line
+| v   |     | <kbd>y</kbd><kbd>S</kbd><kbd>S</kbd> | You surround block of current line
+|     | v   | <kbd>S</kbd>                         | Surround selection
+|     | v   | <kbd>g</kbd><kbd>S</kbd>             | Surround block of selection
+
+#### UndoTree
+| N   | Keystroke    | Action
+| :-: | ---------    | ------
+| v   | <kbd>U</kbd> | Toggle UndoTree
+
+#### FileType: Markdown
+| N   | Keystroke                | Action
+| :-: | ---------                | ------
+| v   | <kbd>[</kbd><kbd>[</kbd> | Jump to previous title
+| v   | <kbd>]</kbd><kbd>]</kbd> | Jump to next title
+| v   | <kbd>Enter</kbd>         | Open markdown preview on Safari ([`grip`](#markdown-preview-with-github) required)
+
 Uninstall
 ---------
 
@@ -218,17 +383,17 @@ rm -rf ~/.cache/nvim
 [undotree]: https://github.com/mbbill/undotree
 [whitespace]: https://github.com/ntpeters/vim-better-whitespace
 
-[m-autopairs]: #
-[m-commentary]: #
-[m-easyalign]: #
-[m-easymotion]: #
-[m-fzf]: #
-[m-gitgutter]: #
-[m-incsearch-easymotion]: #
-[m-incsearch-fuzzy]: #
-[m-incsearch]: #
-[m-multicursors]: #
-[m-nerdtree]: #
-[m-peekaboo]: #
-[m-surround]: #
-[m-undotree]: #
+[m-autopairs]: #autopairs
+[m-commentary]: #commentary
+[m-easyalign]: #easyalign
+[m-easymotion]: #easymotion---line-navigating
+[m-fzf]: #fzf
+[m-gitgutter]: #gitgutter
+[m-incsearch-easymotion]: #incsearch
+[m-incsearch-fuzzy]: #incsearch
+[m-incsearch]: #incsearch
+[m-multicursors]: #multiplecursors
+[m-nerdtree]: #nerdtree
+[m-peekaboo]: #peekaboo
+[m-surround]: #surround
+[m-undotree]: #undotree
