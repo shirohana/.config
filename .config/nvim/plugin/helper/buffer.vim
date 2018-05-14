@@ -2,9 +2,6 @@ function! helper#buffer#close_buffer_keep_windows () abort
   " If tries to close PLACEHOLDER, do nothing
   if <SID>is_placeholder() | return | endif
 
-  " Is buffer is just new and clean
-  if helper#buffer#is_purely('%') | return | endif
-
   " Print error message when tries to quit modified buffers
   " TODO: Find better way to get vanilla error message belongs to user locale
   if helper#buffer#is_modified('%')
@@ -19,13 +16,18 @@ function! helper#buffer#close_buffer_keep_windows () abort
     let current_winnr = winnr()
     let target_winnrs = helper#window#find_winnrs_of_bufnr(current_bufnr)
 
-    if len(target_winnrs) > 1
+    if len(target_winnrs) == 1
+      execute 'bp | bw '.current_bufnr
+    else
       let placeholder_bufnr = <SID>ensure_placeholder()
-      call helper#window#change_wins_bufnr(target_winnrs, placeholder_bufnr)
+      if placeholder_bufnr == current_bufnr
+        execute 'bp'
+      else
+        call helper#window#change_wins_bufnr(target_winnrs, placeholder_bufnr)
+        execute current_winnr.'wincmd w'
+        execute 'bw '.current_bufnr
+      endif
     endif
-
-    execute current_winnr.'wincmd w'
-    execute 'bp | bw '.current_bufnr
   endif
 endfunction
 
