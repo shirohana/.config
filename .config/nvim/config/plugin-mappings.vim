@@ -15,22 +15,43 @@ if dein#tap('vim-airline')
 endif
 " }}}
 
-" ======== NERDTree ======== {{{
-if dein#tap('nerdtree')
-  " Toggle NERDTree, using `Opt-;`
-  nmap … :NERDTreeToggle<CR>
+" ======== AutoPairs ======== {{{
+if dein#tap('auto-pairs')
+  let g:AutoPairsShortcutBackInsert = '<C-b>'
+  let g:AutoPairsMapBS    = 1 " <BS>
+  let g:AutoPairsMapCR    = 1 " <CR>
+  let g:AutoPairsMapSpace = 1 " <Space>
+endif
+" }}}
+
+" ======== Commentary ======== {{{
+if dein#tap('vim-commentary')
+  nmap gc <Plug>Commentary
+  vmap gc <Plug>Commentary
+  omap gc <Plug>Commentary
+  nmap gcc <Plug>CommentaryLine
+  nmap cgc <Plug>ChangeCommentary
+  nmap gcu <Plug>Commentary<Plug>Commentary
+endif
+" }}}
+
+" ======== EasyAlign ======== {{{
+if dein#tap('vim-easy-align')
+  nmap ga <Plug>(EasyAlign)
+  vmap ga <Plug>(LiveEasyAlign)
 endif
 " }}}
 
 " ======== EasyMotion ======== {{{
 if dein#tap('vim-easymotion')
+  " Line Navigating
   map <LocalLeader>j <Plug>(easymotion-sol-j)
   map <LocalLeader>J <Plug>(easymotion-j)
   map <LocalLeader>k <Plug>(easymotion-sol-k)
   map <LocalLeader>K <Plug>(easymotion-k)
   map <LocalLeader>h <Plug>(easymotion-linebackward)
   map <LocalLeader>l <Plug>(easymotion-lineforward)
-
+  " Word Navigating
   map <LocalLeader>w  <Plug>(easymotion-w)
   map <LocalLeader>W  <Plug>(easymotion-W)
   map <LocalLeader>b  <Plug>(easymotion-b)
@@ -39,20 +60,22 @@ if dein#tap('vim-easymotion')
   map <LocalLeader>E  <Plug>(easymotion-E)
   map <LocalLeader>ge <Plug>(easymotion-ge)
   map <LocalLeader>gE <Plug>(easymotion-gE)
-
+  " Repeating
   map <LocalLeader>n <Plug>(easymotion-n)
   map <LocalLeader>N <Plug>(easymotion-N)
-
-  map ss <Plug>(easymotion-sn)
-  map sf <Plug>(easymotion-fl)
-  map sF <Plug>(easymotion-Fl)
-  map st <Plug>(easymotion-tl)
-  map sT <Plug>(easymotion-Tl)
-  xmap f <Plug>(easymotion-fl)
-  xmap F <Plug>(easymotion-Fl)
-  xmap t <Plug>(easymotion-tl)
-  xmap T <Plug>(easymotion-Tl)
-
+  map <LocalLeader><Space> <Plug>(easymotion-repeat)
+  " Word Searching
+  nmap ss <Plug>(easymotion-sn)
+  nmap sf <Plug>(easymotion-fl)
+  nmap sF <Plug>(easymotion-Fl)
+  nmap st <Plug>(easymotion-tl)
+  nmap sT <Plug>(easymotion-Tl)
+  " Word Searching (visual mode)
+  vmap f <Plug>(easymotion-fl)
+  vmap F <Plug>(easymotion-Fl)
+  vmap t <Plug>(easymotion-tl)
+  vmap T <Plug>(easymotion-Tl)
+  " Word Searching (operating mode)
   if get(g:, 'force_fix_easymotion_cursor', 0)
     omap f <Plug>(easymotion-fl-fix)
     omap F <Plug>(easymotion-Fl-fix)
@@ -64,8 +87,30 @@ if dein#tap('vim-easymotion')
     omap t <Plug>(easymotion-tl)
     omap T <Plug>(easymotion-Tl)
   endif
+endif
+" }}}
 
-  map <LocalLeader><Space> <Plug>(easymotion-repeat)
+" ======== FZF ======== {{{
+if dein#tap('fzf.vim')
+  nnoremap <C-o> :Buffers<CR>
+  nnoremap <C-p> :Files<CR>
+  " `Opt-f` to search file contents
+  nnoremap ƒ :Ag<Space>
+endif
+" }}}
+
+" ======== GitGutter ======== {{{
+if dein#tap('vim-gitgutter')
+  " Hunk Navigating
+  nmap sj <Plug>GitGutterNextHunk
+  nmap sk <Plug>GitGutterPrevHunk
+  " Hunk Staging
+  nmap     <LocalLeader>ss <Plug>GitGutterStageHunk
+  nnoremap <LocalLeader>su :<C-u>call system('git reset '.expand('%')) <bar> GitGutterAll<CR>
+  " Hunk Actions
+  nmap <LocalLeader>sr <Plug>GitGutterUndoHunk
+  " Toggle Preview Hunk
+  nmap <silent> <LocalLeader>s<Space> <Plug>(helper-gitgutter-toggle-preview)
 endif
 " }}}
 
@@ -77,6 +122,23 @@ if dein#tap('incsearch-easymotion.vim')
   map z/ <Plug>(incsearch-fuzzy-/)
   map z? <Plug>(incsearch-fuzzy-?)
   map zg/ <Plug>(incsearch-fuzzy-stay)
+endif
+" }}}
+
+" ======== MultipleCursors ======== {{{
+if dein#tap('vim-multiple-cursors')
+  let g:multi_cursor_start_word_key = '<C-n>'
+  let g:multi_cursor_next_key       = '<C-n>'
+  let g:multi_cursor_prev_key       = '<C-b>'
+  let g:multi_cursor_skip_key       = '<C-x>'
+  let g:multi_cursor_quit_key       = '<Esc>'
+endif
+" }}}
+
+" ======== NERDTree ======== {{{
+if dein#tap('nerdtree')
+  " Toggle NERDTree, using `Opt-;`
+  nmap … :NERDTreeToggle<CR>
 endif
 " }}}
 
@@ -102,33 +164,9 @@ if dein#tap('vim-surround')
 endif
 " }}}
 
-" ======== AutoPairs ======== {{{
-if dein#tap('auto-pairs')
-  let g:AutoPairsShortcutBackInsert = '<C-b>'
-  let g:AutoPairsMapBS    = 1 " <BS>
-  let g:AutoPairsMapCR    = 1 " <CR>
-  let g:AutoPairsMapSpace = 1 " <Space>
-endif
-" }}}
-
-" ======== Commentary ======== {{{
-if dein#tap('vim-commentary')
-  vmap gc <Plug>Commentary
-  nmap gc <Plug>Commentary
-  omap gc <Plug>Commentary
-  nmap gcc <Plug>CommentaryLine
-  nmap cgc <Plug>ChangeCommentary
-  nmap gcu <Plug>Commentary<Plug>Commentary
-endif
-" }}}
-
-" ======== MultipleCursors ======== {{{
-if dein#tap('vim-multiple-cursors')
-  let g:multi_cursor_start_word_key = '<C-n>'
-  let g:multi_cursor_next_key       = '<C-n>'
-  let g:multi_cursor_prev_key       = '<C-b>'
-  let g:multi_cursor_skip_key       = '<C-x>'
-  let g:multi_cursor_quit_key       = '<Esc>'
+" ======== Tagbar ======== {{{
+if dein#tap('tagbar')
+  nnoremap <silent> <LocalLeader>d :<C-u>TagbarToggle<CR>
 endif
 " }}}
 
@@ -138,44 +176,7 @@ if dein#tap('undotree')
 endif
 " }}}
 
-" ======== Tagbar ======== {{{
-if dein#tap('tagbar')
-  nnoremap <silent> <LocalLeader>d :<C-u>TagbarToggle<CR>
-endif
-" }}}
-
-" ======== GitGutter ======== {{{
-if dein#tap('vim-gitgutter')
-  nmap sj <Plug>GitGutterNextHunk
-  nmap sk <Plug>GitGutterPrevHunk
-
-  nmap <LocalLeader>ss <Plug>GitGutterStageHunk
-  nmap <LocalLeader>su :<C-u>call system('git reset '.expand('%')) <bar> GitGutterAll<CR>
-
-  nmap <LocalLeader>sr <Plug>GitGutterUndoHunk
-
-  " Toggle PreviewHunk
-  nmap <silent> <LocalLeader>s<Space> <Plug>(helper-gitgutter-toggle-preview)
-endif
-" }}}
-
-" ======== EasyAlign ======== {{{
-if dein#tap('vim-easy-align')
-  nmap ga <Plug>(EasyAlign)
-  vmap ga <Plug>(LiveEasyAlign)
-endif
-" }}}
-
-" ======== FZF ======== {{{
-if dein#tap('fzf.vim')
-  nnoremap <C-o> :Buffers<CR>
-  nnoremap <C-p> :Files<CR>
-  " `Opt-f` to search file contents
-  nnoremap ƒ :Ag<Space>
-endif
-" }}}
-
-" ======== FileType:markdown ======== {{{
+" ======== FileType:Markdown ======== {{{
 if dein#tap('vim-markdown')
   autocmd MyAutoCmd FileType markdown
         \ nmap ]] <Plug>Markdown_MoveToNextHeader |
