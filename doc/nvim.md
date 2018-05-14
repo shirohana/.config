@@ -11,7 +11,15 @@ NeoVim
     5. [Editing](#editing)
     6. [Utility](#utility)
     7. [Language](#language)
-3. [Uninstall](#uninstall)
+3. [Mappings](#mappings)
+    1. [Generic](#generic)
+    2. [Moving](#moving)
+    3. [Editing](#editing)
+    4. [Command](#command)
+    5. [Buffer](#buffer)
+    6. [Window](#window)
+    7. [Tabpage](#tabpage)
+4. [Uninstall](#uninstall)
 
 Installation
 ------------
@@ -100,6 +108,81 @@ Language | Repo
 Markdown | [plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown)
 &nbsp;   | [JamshedVesuna/vim-markdown-preview](https://github.com/JamshedVesuna/vim-markdown-preview)
 TOML     | [cespare/vim-toml](https://github.com/cespare/vim-toml)
+
+Mappings
+--------
+
+Alias                            | To
+-----                            | --
+<kbd>_&lt;Leader&gt;_</kbd>      | <kbd>Space</kbd>
+<kbd>_&lt;LocalLeader&gt;_</kbd> | <kbd>;</kbd>
+⌥                                | <kbd>Opt</kbd> (But we'll still use <kbd>Opt</kbd> because <kbd>⌥</kbd> is unreadable)
+⇧                                | <kbd>Shift</kbd> (But we'll still use <kbd>Shift</kbd> because <kbd>⇧</kbd> is unreadable)
+⌃                                | <kbd>Ctrl</kbd>
+
+### Generic
+| N   | I   | V   | Keystroke                    | Action
+| :-: | :-: | :-: | ---------                    | ------
+| v   | v   | v   | <kbd>⌃l</kbd>                | &lt;Esc&gt;
+| v   |     |     | <kbd>Esc</kbd><kbd>Esc</kbd> | Cancal highlighe search
+
+### Moving
+| N   | Keystroke                | Action
+| :-: | ---------                | ------
+| v   | <kbd>z</kbd><kbd>h</kbd> | Move screen left
+| v   | <kbd>z</kbd><kbd>l</kbd> | Move screen right
+| v   | <kbd>\\</kbd>            | Jump to older cursor position
+| v   | <kbd>&#124;</kbd>        | Jump to newer cursor position
+
+### Editing
+| N   | I   | Keystroke                | Action
+| :-: | :-: | ---------                | ------
+|     | v   | <kbd>O</kbd><kbd>O</kbd> | Insert one line above current editing line
+|     | v   | <kbd>⌃a</kbd>            | Move cursor to start of line
+|     | v   | <kbd>⌃e</kbd>            | Move cursor to end of line
+| v   |     | <kbd>y</kbd><kbd>p</kbd> | Yank current paragraph and paste below
+
+### Command
+| C   | Keystroke     | Action
+| :-: | ---------     | ------
+| v   | <kbd>⌃a</kbd> | Move cursor to start of command
+| v   | <kbd>⌃e</kbd> | Move cursor to end of command
+
+### Buffer
+| N   | Keystroke                               | Action
+| :-: | ---------                               | ------
+| v   | <kbd>Opt-t</kbd>                        | Create new buffer
+| v   | <kbd>_&lt;Leader&gt;_</kbd><kbd>w</kbd> | Save current buffer
+| v   | <kbd>_&lt;Leader&gt;_</kbd><kbd>q</kbd> | Wipe current buffer
+| v   | <kbd>Opt-[</kbd>                        | Switch to previous buffer
+| v   | <kbd>Opt-]</kbd>                        | Switch to next buffer
+
+### Window
+| N   | Keystroke                               | Action
+| :-: | ---------                               | ------
+| v   | <kbd>_&lt;Leader&gt;_</kbd><kbd>h</kbd> | Create vertical split :arrow_left:
+| v   | <kbd>_&lt;Leader&gt;_</kbd><kbd>l</kbd> | Create vertical split :arrow_right:
+| v   | <kbd>_&lt;Leader&gt;_</kbd><kbd>j</kbd> | Create horizontal split :arrow_down:
+| v   | <kbd>_&lt;Leader&gt;_</kbd><kbd>k</kbd> | Create horizontal split :arrow_up:
+| v   | <kbd>_&lt;Leader&gt;_</kbd><kbd>c</kbd> | Close current window
+| v   | <kbd>Opt-h</kbd>                        | Move cursor :arrow_left:
+| v   | <kbd>Opt-l</kbd>                        | Move cursor :arrow_right:
+| v   | <kbd>Opt-j</kbd>                        | Move cursor :arrow_down:
+| v   | <kbd>Opt-k</kbd>                        | Move cursor :arrow_up:
+| v   | <kbd>&lt;Tab&gt;</kbd>                  | Move cursor to next window
+| v   | <kbd>&lt;Shift-Tab&gt;</kbd>            | Move cursor to previous window
+| v   | <kbd>&lt;Up&gt;</kbd>                   | Shrink window :arrow_up_down:
+| v   | <kbd>&lt;Down&gt;</kbd>                 | Expand window :arrow_up_down:
+| v   | <kbd>&lt;Left&gt;</kbd>                 | Shrink window :left_right_arrow:
+| v   | <kbd>&lt;Right&gt;</kbd>                | Exapnd window :left_right_arrow:
+
+### Tabpage
+| N   | Keystroke              | Action
+| :-: | ---------              | ------
+| v   | <kbd>Opt-Shift-t</kbd> | Create new tab
+| v   | <kbd>Opt-Shift-q</kbd> | Close current tab
+| v   | <kbd>Opt-Shift-[</kbd> | Switch to previous tab
+| v   | <kbd>Opt-Shift-]</kbd> | Switch to next tab
 
 Uninstall
 ---------
