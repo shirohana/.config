@@ -1,1 +1,5 @@
-/.config/nvim/.netrwhist
+.DS_Store
+.netrwhist
+.swp$
+vim-markdown-preview.html
+~$
