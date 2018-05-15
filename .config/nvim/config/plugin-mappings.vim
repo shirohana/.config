@@ -179,8 +179,8 @@ endif
 " ======== FileType:Markdown ======== {{{
 if dein#tap('vim-markdown')
   autocmd MyAutoCmd FileType markdown
-        \ nmap ]] <Plug>Markdown_MoveToNextHeader |
-        \ nmap [[ <Plug>Markdown_MoveToPreviousHeader
+        \ map ]] <Plug>Markdown_MoveToNextHeader |
+        \ map [[ <Plug>Markdown_MoveToPreviousHeader
 endif
 if dein#tap('vim-markdown-preview')
   autocmd MyAutoCmd FileType markdown
