@@ -6,6 +6,7 @@ let $CACHE_DIR = expand('~/.cache/nvim')
 let $NVIM = fnamemodify(expand('<sfile>'), ':h')
 let $NVIM_CONFIG = expand('$NVIM/config')
 let $NVIM_PLUGINS = expand('$NVIM/config/plugins')
+let $NVIM_SNIPPETS = expand('$NVIM/UltiSnips')
 
 function! s:source_file (path)
   execute 'source' expand('$NVIM/'.a:path)

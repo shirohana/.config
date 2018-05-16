@@ -125,11 +125,18 @@ Name                       | Description
 [tpope/vim-repeat][repeat] | Allow plugins repeat multi-actions  with <kbd>.</kbd>
 
 ### Languages
-Language | Repo
--------- | ----
-Markdown | [plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown)
-&nbsp;   | [JamshedVesuna/vim-markdown-preview](https://github.com/JamshedVesuna/vim-markdown-preview)
-TOML     | [cespare/vim-toml](https://github.com/cespare/vim-toml)
+Language   | Repo
+--------   | ----
+CSS3       | [hail2u/vim-css3-syntax](https://github.com/hail2u/vim-css3-syntax)
+&nbsp;     | [ap/vim-css-color](https://github.com/ap/vim-css-color)
+HTML5      | [othree/html5.vim](https://github.com/othree/html5.vim)
+JavaScript | [pangloss/vim-javascript](https://github.com/pangloss/vim-javascript)
+Markdown   | [plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown)
+&nbsp;     | [JamshedVesuna/vim-markdown-preview](https://github.com/JamshedVesuna/vim-markdown-preview)
+Pug        | [digitaltoad/vim-pug](https://github.com/digitaltoad/vim-pug)
+Stylus     | [shirohana/vim-stylus](https://github.com/shirohana/vim-stylus)
+TOML       | [cespare/vim-toml](https://github.com/cespare/vim-toml)
+Vue        | [posva/vim-vue](https://github.com/posva/vim-vue)
 
 Key Mappings
 --------

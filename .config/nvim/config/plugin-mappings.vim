@@ -170,6 +170,14 @@ if dein#tap('tagbar')
 endif
 " }}}
 
+" ======== UltiSnips ======== {{{
+if dein#tap('ultisnips')
+  let g:UltiSnipsExpandTrigger = '<Tab>'
+  let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+  let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+endif
+" }}}
+
 " ======== Undotree ======== {{{
 if dein#tap('undotree')
   nmap U :<C-u>UndotreeToggle <bar> wincmd p<CR>
