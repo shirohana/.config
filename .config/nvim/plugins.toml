@@ -101,6 +101,19 @@ repo = 'shirohana/auto-pairs'
 lazy = 0
 hook_add = 'source $NVIM_PLUGINS/auto-pairs.vim'
 
+# BetterWhitespace
+# https://github.com/ntpeters/vim-better-whitespace
+[[plugins]]
+repo = 'ntpeters/vim-better-whitespace'
+on_event = 'BufEnter'
+hook_add = '''
+  let g:better_whitespace_operator = 0
+  let g:show_spaces_that_precede_tabs = 1
+'''
+hook_post_source = '''
+  autocmd MyAutoCmd BufEnter * EnableStripWhitespaceOnSave
+'''
+
 # Commentary
 # https://github.com/tpope/vim-commentary
 [[plugins]]
@@ -167,25 +180,23 @@ hook_add = '''
   let g:surround_no_mappings = 1
 '''
 
+# UltiSnips
+# https://github.com/SirVer/ultisnips
+[[plugins]]
+repo = 'SirVer/ultisnips'
+on_event = 'InsertEnter'
+on_ft = 'snippets'
+hook_add = '''
+  let g:UltiSnipsSnippetDirectories = [$NVIM_SNIPPETS]
+  let g:UltiSnipsEnableSnipMate = 0
+'''
+
 # Undotree
 # https://github.com/mbbill/undotree
 [[plugins]]
 repo = 'mbbill/undotree'
 on_cmd = 'UndotreeToggle'
 hook_add = 'source $NVIM_PLUGINS/undotree.vim'
-
-# BetterWhitespace
-# https://github.com/ntpeters/vim-better-whitespace
-[[plugins]]
-repo = 'ntpeters/vim-better-whitespace'
-on_event = 'BufEnter'
-hook_add = '''
-  let g:better_whitespace_operator = 0
-  let g:show_spaces_that_precede_tabs = 1
-'''
-hook_post_source = '''
-  autocmd MyAutoCmd BufEnter * EnableStripWhitespaceOnSave
-'''
 
 # ================================
 # Utility
