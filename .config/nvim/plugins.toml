@@ -110,7 +110,7 @@ hook_add = '''
   let g:better_whitespace_operator = 0
   let g:show_spaces_that_precede_tabs = 1
 '''
-hook_post_source = '''
+hook_source = '''
   autocmd MyAutoCmd BufEnter * EnableStripWhitespaceOnSave
 '''
 
