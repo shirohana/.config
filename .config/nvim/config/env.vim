@@ -48,9 +48,6 @@ set backspace=indent,eol,start
 " Allow hidden buffers
 set hidden
 
-" Use old regex engine
-set regexpengine=1
-"
 " Enable error bells (I really like this <3)
 set belloff=
 set errorbells
