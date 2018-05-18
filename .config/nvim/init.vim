@@ -54,6 +54,7 @@ autocmd VimEnter * call dein#call_hook('post_source')
 
 call <SID>source_file('config/plugin-mappings.vim')
 
+call <SID>source_file('config/commands.vim')
 call <SID>source_file('config/mappings.vim')
 call <SID>source_file('config/theme.vim')
 
