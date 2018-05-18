@@ -1,0 +1,60 @@
+global !p
+import snippets
+c_props = {
+  '#': 'hex',
+  'r': 'rgb',
+  'ra': 'rgba',
+  'h': 'hsl',
+  'ha': 'hsla'
+}
+endglobal
+
+# #000
+snippet hex "#000"
+#${1:000}
+endsnippet
+
+# rgb(red, green, blue)
+snippet rgb "rgb(red, green, blue)"
+rgb(${1:red}, ${2:green}, ${3:blue})
+endsnippet
+
+# rgba(red, green, blue, alpha)
+snippet rgba "rgba(red, green, blue, alpha)"
+rgba(${1:red}, ${2:green}, ${3:blue}, ${4:alpha})
+endsnippet
+
+# hsl(hue, saturation, lightness)
+snippet hsl "hsl(hue, saturation, lightness)"
+hsl(${1:hue}, ${2:saturation}, ${3:lightness})
+endsnippet
+
+# hsla(hue, saturation, lightness, alpha)
+snippet hsla "hsla(hue, saturation, lightness, alpha)"
+hsla(${1:hue}, ${2:saturation}, ${3:lightness}, ${4:alpha})
+endsnippet
+
+# color:
+snippet c "color: "
+color: $1
+$0
+endsnippet
+
+# color: {color}
+post_jump "snippets.expand(snip)"
+snippet /c:(#|ra?|ha?)/ "/c:(#|r|ra|h|ha) => color: (...)" r
+color: `!p snip.rv = c_props[match.group(1)]`$1
+$0
+endsnippet
+
+# opacity:
+snippet op "opacity: "
+opacity: $1
+$0
+endsnippet
+
+# opacity: {number}
+snippet /\bop((?:0?\.)?\d+)/ "op.5, op1, op0.25, ..." r
+opacity: `!p snip.rv = match.group(1)`
+$0
+endsnippet

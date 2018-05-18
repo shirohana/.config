@@ -1,0 +1,80 @@
+global !p
+import snippets
+d_props = {
+  'i': 'inline',
+  'b': 'block',
+  'c': 'contents',
+  'f': 'flex',
+  'g': 'grid',
+  'ib': 'inline-block',
+  'if': 'inline-flex',
+  'ig': 'inline-grid',
+  'it': 'inline-table',
+  'l': 'list-item',
+  'ri': 'run-in',
+  't': 'table',
+  'tcap': 'table-caption',
+  'tcolg': 'table-column-group',
+  'thg': 'table-header-group',
+  'tfg': 'table-footer-group',
+  'trowg': 'table-row-group',
+  'tc': 'table-cell',
+  'tcol': 'table-column',
+  'trow': 'table-row',
+  'n': 'none'
+}
+pos_props = {
+  'a': 'absolute',
+  'f': 'fixed',
+  's': 'static',
+  'r': 'relative'
+}
+directions = {
+  't': 'top',
+  'r': 'right',
+  'b': 'bottom',
+  'l': 'left'
+}
+endglobal
+
+# display:
+snippet d "display: "
+display: ${1:flex}
+$0
+endsnippet
+
+# display: {prop}
+snippet /\bd:([bcfgln]|i[bfgt]?|ri|t(?:cap|colg?|[hf]g|rowg?|c))/ "/d:(i|b|c|f|g|ib|if|ig||it|t|ri|t|tcap|tcolg|thg|tfg|trowg|tc|tcol|trow|n)/ => display: (...)" r
+display: `!p snip.rv = d_props[match.group(1)]`
+$0
+endsnippet
+
+# position:
+snippet pos
+position: ${1:relative}
+$0
+endsnippet
+
+# position: {prop}
+snippet /\bpos:([afsr])/ "/pos:[afsr]/ => position: (absolute|fixed|static|relative)" r
+position: `!p snip.rv = pos_props[match.group(1)]`
+$0
+endsnippet
+
+# {direction}:
+snippet /([trbl])/ "/[trbl]/ => (top|right|bottom|left): " rb
+`!p snip.rv = directions[match.group(1)]`: $1
+$0
+endsnippet
+
+# {direction}: {prop}
+snippet /\b([trbl]):a/ "/[trbl]:a/ => (top|right|bottom|left): auto" r
+`!p snip.rv = directions[match.group(1)]`: auto
+$0
+endsnippet
+
+# {direction}: {number}{unit}
+snippet /\b([trbl])(-?\d+(?:\.\d+)?(\w+|%)?)/ "t20, b2rem, l-50%, ..." r
+`!p snip.rv = directions[match.group(1)]`: `!p snip.rv = snippets.unit(*match.group(2, 3))`
+$0
+endsnippet

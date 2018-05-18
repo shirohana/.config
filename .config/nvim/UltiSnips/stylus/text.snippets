@@ -1,0 +1,195 @@
+global !p
+import snippets
+ta_props = {
+  'l': 'left',
+  'r': 'right',
+  'c': 'center',
+  'j': 'justify',
+  'i': 'inherit',
+  'r': 'initial'
+}
+tal_props = {
+  'a': 'auto',
+  'l': 'left',
+  'r': 'right',
+  'c': 'center',
+  'j': 'justify',
+  's': 'start',
+  'e': 'end',
+  'i': 'inherit',
+  'r': 'initial'
+}
+va_props = {
+  'bl': 'baseline',
+  'sub': 'sub',
+  'sup': 'super',
+  't': 'top',
+  'tt': 'text-top',
+  'm': 'middle',
+  'b': 'bottom',
+  'tb': 'text-bottom',
+  'i': 'inherit',
+  'r': 'initial'
+}
+ws_props = {
+  'n': 'normal',
+  'nw': 'nowrap',
+  'p': 'pre',
+  'pl': 'pre-line',
+  'pw': 'pre-wrap'
+}
+wob_props = {
+  'n': 'normal',
+  'ba': 'break-all',
+  'ka': 'keep-all',
+  'bw': 'break-word'
+}
+wow_props = {
+  'n': 'normal',
+  'b': 'break-word'
+}
+endglobal
+
+# text-align:
+snippet ta "text-align: "
+text-align: ${1:left}
+$0
+endsnippet
+
+# text-align: {prop}
+snippet /\bta:([lrcjir])/ "/ta:[lrcjir]/ => text-align: (left|right|center|justify|inherit|initial)" r
+text-align: `!p snip.rv = ta_props[match.group(1)]`
+$0
+endsnippet
+
+# text-align-last:
+snippet tal "text-align-last: "
+text-align-last: ${1:start}
+$0
+endsnippet
+
+# text-align-last: {prop}
+snippet /\btal:([alrcjseir])/ "/tal:[alrcjseir]/ => text-align-last: (auto|left|right|center|justify|start|end|inherit|initial)" r
+text-align-last: `!p snip.rv = tal_props[match.group(1)]`
+$0
+endsnippet
+
+# vertical-align:
+snippet va "vertical-align: "
+vertical-align: ${1:top}
+$0
+endsnippet
+
+# vertical-align: {prop}
+snippet /\bva:(bl|sub|sup|t[tb]?|m|b|i|r)/ "/va:(bl|sub|sup|t|tt|m|b|tb|i|r) => vertical-align: (baseline|sub|super|top|text-top|middle|bottom|text-bottom|inherit|initial)" r
+vertical-align: `!p snip.rv = va_props[match.group(1)]`
+$0
+endsnippet
+
+# text-decoration:
+snippet td "text-decoration"
+text-decoration: $1
+$0
+endsnippet
+
+# text-decoration-color:
+snippet tdc "text-decoration-color"
+text-decoration-color: $1
+$0
+endsnippet
+
+# text-decoration-line:
+snippet tdl "text-decoration-line"
+text-decoration-line: $1
+$0
+endsnippet
+
+# text-decoration-style:
+snippet tds "text-decoration-style"
+text-decoration-style: $1
+$0
+endsnippet
+
+# text-indent:
+snippet ti "text-indent"
+text-indent: $1
+$0
+endsnippet
+
+# text-indent: {number}{unit}
+# snippet /\bti/ "text-indent"
+# text-indent: $1
+# $0
+# endsnippet
+
+# line-height:
+snippet lh "line-height: "
+line-height: $1
+$0
+endsnippet
+
+# line-height: {number}
+snippet /\blh((?:\d*\.)?\d+)/ "lh1.5, lh.75, lh0, ..." r
+line-height: `!p snip.rv = match.group(1)`
+$0
+endsnippet
+
+# letter-spacing:
+snippet lts "letter-spacing: "
+letter-spacing: $1
+$0
+endsnippet
+
+# letter-spacing: {number}{unit}
+snippet /\blts(-?\d+(?:\.\d+)?(\w+)?)/ "letter-spacing: " r
+letter-spacing: `!p snip.rv = snippets.unit(*match.group(1, 2))`
+$0
+endsnippet
+
+# white-space:
+snippet ws "white-space: "
+white-space: $1
+$0
+endsnippet
+
+# white-space: {prop}
+snippet /\bws:(nw?|p[lw]?)/ "/ws:(n|nw|p|pl|pw)/ => white-space: (normal|nowrap|pre|pre-line|pre-wrap)" r
+white-space: `!p snip.rv = ws_props[match.group(1)]`
+$0
+endsnippet
+
+# word-break:
+snippet wob "word-break: "
+word-break: $1
+$0
+endsnippet
+
+# word-break: {prop}
+snippet /\bwob:(n|b[aw]|ka)/ "/wob:(n|ba|ka|bw)/ => word-break: (normal|break-all|keep-all|break-word)" r
+word-break: `!p snip.rv = wob_props[match.group(1)]`
+$0
+endsnippet
+
+# word-spacing:
+snippet wos "word-spacing: "
+word-spacing: $1
+$0
+endsnippet
+
+# word-spacing: {number}{unit}
+snippet /\bwos(-?\d+(?:\.\d+)?(\w+)?)/ "wos0.5, wos12px, wos0, ..." r
+word-spacing: `!p snip.rv = snippets.unit(*match.group(1, 2), 'em')`
+$0
+endsnippet
+
+# word-wrap:
+snippet wow "word-wrap: "
+word-wrap: $1
+$0
+endsnippet
+
+# word-wrap: {prop}
+snippet /wow:([nb])/ "/wow:[nb]/ => word-wrap: (normal|break-word)" r
+word-wrap: `!p snip.rv = wow_props[match.group(1)]`
+$0
+endsnippet

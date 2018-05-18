@@ -1,0 +1,52 @@
+global !p
+import snippets
+p_props = {
+  'i': 'inherit',
+  'r': 'initial'
+}
+directions = {
+  't': 'top',
+  'r': 'right',
+  'b': 'bottom',
+  'l': 'left'
+}
+endglobal
+
+# padding:
+snippet p "padding: "
+padding: $1
+$0
+endsnippet
+
+# padding: {prop}
+snippet /\bp:([ir])/ "/p:[ir]/ => padding: (inherit|initial)" r
+padding: `!p snip.rv = p_props[match.group(1)]`
+$0
+endsnippet
+
+# padding: {number}{unit} {number}{unit}
+snippet /\bp(-?\d+(?:\.\d+)?(\w+|%)?)(?:-(-?\d+(?:\.\d+)?(\w+|%)?))?/ "p20, p20%-40%, p1em-1.5em, ..." r
+padding: `!p
+v = snippets.unit(*match.group(1, 2))
+h = snippets.unit(*match.group(3, 4))
+snip.rv = v + (' ' + h if h else '')`
+$0
+endsnippet
+
+# padding-{direction}:
+snippet /[^:]\bp([trbl])/ "/p[trbl]/ => padding-(top|right|bottom|left):" r
+padding-`!p snip.rv = directions[match.group(1)]`: $1
+$0
+endsnippet
+
+# padding-{direction}: {prop}
+snippet /\bp([trbl]):([ir])/ "/p[trbl]:[ir]/ => padding-(top|right|bottom|left): (inherit|initial)" r
+padding-`!p snip.rv = directions[match.group(1)]`: `!p snip.rv = p_props[match.group(2)]`
+$0
+endsnippet
+
+# padding-{direction}: {number}{unit}
+snippet /\bp([trbl])(-?\d+(?:\.\d+)?(\w+|%)?)/ "pt20, pb-2em, pl50%, ..." r
+padding-`!p snip.rv = directions[match.group(1)]`: `!p snip.rv = snippets.unit(*match.group(2, 3))`
+$0
+endsnippet
