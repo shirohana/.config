@@ -1,6 +1,6 @@
 let g:NERDTreeAutoCenter = 0
 let g:NERDTreeCaseSensitiveSort = 1
-let g:NERDTreeChDirMode = 1
+let g:NERDTreeChDirMode = 2
 let g:NERDTreeShowBookmarks = 1
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeBookmarksFile = expand('$CACHE_DIR/bookmarks')
