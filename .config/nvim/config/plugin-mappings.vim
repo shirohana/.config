@@ -164,12 +164,6 @@ if dein#tap('vim-surround')
 endif
 " }}}
 
-" ======== Tagbar ======== {{{
-if dein#tap('tagbar')
-  nnoremap <silent> <LocalLeader>d :<C-u>TagbarToggle<CR>
-endif
-" }}}
-
 " ======== UltiSnips ======== {{{
 if dein#tap('ultisnips')
   let g:UltiSnipsExpandTrigger = '<Tab>'

@@ -208,12 +208,6 @@ hook_add = 'source $NVIM_PLUGINS/undotree.vim'
 repo = 'tpope/vim-repeat'
 lazy = 1
 
-# Tagbar
-# https://github.com/majutsushi/tagbar
-[[plugins]]
-repo = 'majutsushi/tagbar'
-on_cmd = 'Tagbar'
-
 # ================================
 # Language
 # ================================
