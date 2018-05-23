@@ -77,5 +77,9 @@ nnoremap <silent> Œ :<C-u>tabclose<CR>
 nnoremap <silent> ’ :<C-u>tabnext<CR>
 nnoremap <silent> ” :<C-u>tabprevious<CR>
 
+" ======== Terminal ========
+" Enter -- NORMAL --
+tnoremap <C-l> <C-\><C-n>
+
 " ======== Temporary ========
 nnoremap <F5> :so ~/.config/nvim/init.vim<CR>

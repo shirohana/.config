@@ -2,9 +2,9 @@ function! helper#buffer#close_buffer_keep_windows () abort
   " If tries to close PLACEHOLDER, do nothing
   if <SID>is_placeholder() | return | endif
 
-  " Print error message when tries to quit modified buffers
+  " Print error message when tries to quit modified buffer or terminal
   " TODO: Find better way to get vanilla error message belongs to user locale
-  if helper#buffer#is_modified('%')
+  if helper#buffer#is_modified('%') || &buftype == 'terminal'
     try | execute 'bw %' | catch | echoerr v:exception | endtry
     return
   endif
