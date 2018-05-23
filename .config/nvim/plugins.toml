@@ -239,12 +239,17 @@ hook_add = '''
 
 # JavaScript .js
 # https://github.com/pangloss/vim-javascript
+# https://github.com/gavocanov/vim-js-indent
 [[plugins]]
 repo = 'pangloss/vim-javascript'
 on_ft = 'javascript'
 hook_add = '''
   let g:javascript_plugin_flow = 1
 '''
+[[plugins]]
+repo = 'gavocanov/vim-js-indent'
+depends = 'vim-javascript'
+on_ft = 'javascript'
 
 # Markdown .md
 # https://github.com/plasticboy/vim-markdown
