@@ -56,6 +56,7 @@ call <SID>source_file('config/plugin-mappings.vim')
 
 call <SID>source_file('config/commands.vim')
 call <SID>source_file('config/mappings.vim')
+call <SID>source_file('config/abbreviations.vim')
 call <SID>source_file('config/theme.vim')
 
 autocmd OptionSet guicursor noautocmd set guicursor=
