@@ -20,6 +20,7 @@ NeoVim
 - [Buffer](#buffer)
 - [Window](#window)
 - [Tabpage](#tabpage)
+- [Terminal](#terminal)
 
 #### Plugin Key Mappings
 - [Airline](#airline)
@@ -209,6 +210,11 @@ Alias                            | To
 | v   | <kbd>Opt-Shift-q</kbd> | Close current tab
 | v   | <kbd>Opt-Shift-[</kbd> | Switch to previous tab
 | v   | <kbd>Opt-Shift-]</kbd> | Switch to next tab
+
+### Terminal
+| T   | Keystroke     | Action
+| :-: | ---------     | ------
+| v   | <kbd>⌃l</kbd> | Enter `-- NORMAL --` from `-- TERMINAL --`
 
 Plugin Key Mappings
 ---------------
