@@ -42,6 +42,7 @@ NeoVim
 - [FileType: Markdown](#filetype-markdown)
 
 #### Commands
+- [Terminal Commands](#terminal-commands)
 - [Helper Commands](#helper-commands)
 
 #### Abbreviations
@@ -369,6 +370,11 @@ Keystroke                                        | Action
 
 Commands
 --------
+
+### Terminal Commands
+Command        | Description
+-------        | -----------
+`:ClearScroll` | Clear scroll history of current terminal buffer
 
 ### Helper Commands
 Command        | Description
