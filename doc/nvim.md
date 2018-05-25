@@ -41,6 +41,9 @@ NeoVim
 - [UndoTree](#undotree)
 - [FileType: Markdown](#filetype-markdown)
 
+#### Commands
+- [Helper Commands](#helper-commands)
+
 #### Abbreviations
 - [Command Abbreviations](#command-abbreviations)
 
@@ -363,6 +366,14 @@ Keystroke                                        | Action
 | v   | v   | v   | <kbd>[</kbd><kbd>[</kbd> | Jump to previous title
 | v   | v   | v   | <kbd>]</kbd><kbd>]</kbd> | Jump to next title
 | v   |     |     | <kbd>Enter</kbd>         | Open markdown preview on Safari ([`grip`](#markdown-preview-with-github) required)
+
+Commands
+--------
+
+### Helper Commands
+Command        | Description
+-------        | -----------
+`:SyntaxCheck` | Print current highlighted syntaxes at cursor position
 
 Abbreviations
 -------------
