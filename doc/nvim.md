@@ -40,6 +40,9 @@ NeoVim
 - [UndoTree](#undotree)
 - [FileType: Markdown](#filetype-markdown)
 
+#### Abbreviations
+- [Command Abbreviations](#command-abbreviations)
+
 #### Clean up
 - [Uninstall](#uninstall)
 
@@ -353,6 +356,19 @@ Keystroke                                        | Action
 | v   | v   | v   | <kbd>[</kbd><kbd>[</kbd> | Jump to previous title
 | v   | v   | v   | <kbd>]</kbd><kbd>]</kbd> | Jump to next title
 | v   |     |     | <kbd>Enter</kbd>         | Open markdown preview on Safari ([`grip`](#markdown-preview-with-github) required)
+
+Abbreviations
+-------------
+
+### Command Abbreviations
+lhs | rhs | Description
+--- | --- | -----------
+Wq  | wq  | Write & quit
+WQ  | wq  | Write & quit
+Qa  | qa  | Quit all
+QA  | qa  | Quit all
+Wqa | wqa | Write & quit all
+WQa | wqa | Write & quit all
 
 Uninstall
 ---------
