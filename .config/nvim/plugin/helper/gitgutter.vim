@@ -1,6 +1,6 @@
 function! helper#gitgutter#toggle_preview () abort
   let current_status = <SID>status()
-  let status = helper#tab#getvar_current('gitgutter', 'preview_info', {})
+  let status = helper#tab#getvar('', 'gitgutter', 'preview_info', {})
 
   if current_status.hunk_index < 0
     call gitgutter#utility#warn('cursor is not in a hunk')
@@ -11,7 +11,7 @@ function! helper#gitgutter#toggle_preview () abort
       execute 'GitGutterPreviewHunk'
     endtry
   else
-    call helper#tab#setvar_current('gitgutter', 'preview_info', current_status)
+    call helper#tab#setvar('', 'gitgutter', 'preview_info', current_status)
     execute 'GitGutterPreviewHunk'
   endif
 endfunction

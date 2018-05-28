@@ -40,7 +40,7 @@ function! helper#buffer#is_purely (bufnr) abort
 endfunction
 
 function! s:ensure_placeholder () abort
-  let bufnr = helper#tab#getvar_current('hana', 'placeholder_bufnr', 0)
+  let bufnr = helper#tab#getvar('', 'hana', 'placeholder_bufnr', 0)
 
   if bufnr == 0 || !bufexists(bufnr)
     execute 'enew | file PLACEHOLDER'
@@ -52,7 +52,7 @@ function! s:ensure_placeholder () abort
     setlocal bufhidden=wipe
 
     let bufnr = bufnr('')
-    call helper#tab#setvar_current('hana', 'placeholder_bufnr', bufnr)
+    call helper#tab#setvar('', 'hana', 'placeholder_bufnr', bufnr)
   endif
 
   return bufnr
