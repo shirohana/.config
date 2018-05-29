@@ -31,6 +31,13 @@ hook_add = '''
   autocmd MyAutoCmd FileType nerdtree let b:cursorword = 0
 '''
 
+# CtrlSpace
+# https://github.com/vim-ctrlspace/vim-ctrlspace
+[[plugins]]
+repo = 'vim-ctrlspace/vim-ctrlspace'
+lazy = 0
+hook_add = 'source $NVIM_PLUGINS/ctrlspace.vim'
+
 # Solarized8
 # https://github.com/lifepillar/vim-solarized8
 [[plugins]]
