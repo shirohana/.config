@@ -35,6 +35,16 @@ if dein#tap('vim-commentary')
 endif
 " }}}
 
+" ======== CtrlSpace ======== {{{
+if dein#tap('vim-ctrlspace')
+  nnoremap <LocalLeader>c :<C-u>CtrlSpace<CR>
+  " Buffer Navigating
+  nnoremap <silent> ‘     :<C-u>CtrlSpaceGoDown<CR>
+  nnoremap <silent> “     :<C-u>CtrlSpaceGoUp<CR>
+  nnoremap <silent> <C-o> :<C-u>CtrlSpaceBuffers<CR>
+endif
+" }}}
+
 " ======== EasyAlign ======== {{{
 if dein#tap('vim-easy-align')
   nmap ga <Plug>(EasyAlign)
@@ -92,10 +102,12 @@ endif
 
 " ======== FZF ======== {{{
 if dein#tap('fzf.vim')
-  nnoremap <C-o> :Buffers<CR>
-  nnoremap <C-p> :Files<CR>
+  if mapcheck('<C-o>', 'n') == ''
+    nnoremap <C-o> :<C-u>Buffers<CR>
+  endif
+  nnoremap <C-p> :<C-u>Files<CR>
   " `Opt-f` to search file contents
-  nnoremap ƒ :Ag<Space>
+  nnoremap ƒ :<C-u>Ag<Space>
 endif
 " }}}
 

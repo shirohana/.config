@@ -35,6 +35,7 @@ hook_add = '''
 # https://github.com/vim-ctrlspace/vim-ctrlspace
 [[plugins]]
 repo = 'vim-ctrlspace/vim-ctrlspace'
+depends = 'fzf.vim'
 lazy = 0
 hook_add = 'source $NVIM_PLUGINS/ctrlspace.vim'
 
