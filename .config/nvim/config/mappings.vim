@@ -78,6 +78,16 @@ nnoremap <silent> Œ :<C-u>tabclose<CR>
 " Tab Navigating, using `Opt-Shift-[` & `Opt-Shift-]`
 nnoremap <silent> ’ :<C-u>tabnext<CR>
 nnoremap <silent> ” :<C-u>tabprevious<CR>
+" Buffer Navigating, using `Opt+[1-9]`
+nnoremap ¡ :<C-u>1tabn<CR>
+nnoremap ™ :<C-u>2tabn<CR>
+nnoremap £ :<C-u>3tabn<CR>
+nnoremap ¢ :<C-u>4tabn<CR>
+nnoremap ∞ :<C-u>5tabn<CR>
+nnoremap § :<C-u>6tabn<CR>
+nnoremap ¶ :<C-u>7tabn<CR>
+nnoremap • :<C-u>8tabn<CR>
+nnoremap ª :<C-u>9tabn<CR>
 
 " ======== Terminal ========
 " Enter -- NORMAL --

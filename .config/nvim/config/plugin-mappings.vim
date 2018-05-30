@@ -1,20 +1,3 @@
-" ======== Airline ======== {{{
-if dein#tap('vim-airline')
-  " Buffer Navigating, using `Opt+[1-9]`
-  if get(g:, 'airline#extensions#tabline#buffer_idx_mode', 0)
-    nmap ¡ <Plug>AirlineSelectTab1
-    nmap ™ <Plug>AirlineSelectTab2
-    nmap £ <Plug>AirlineSelectTab3
-    nmap ¢ <Plug>AirlineSelectTab4
-    nmap ∞ <Plug>AirlineSelectTab5
-    nmap § <Plug>AirlineSelectTab6
-    nmap ¶ <Plug>AirlineSelectTab7
-    nmap • <Plug>AirlineSelectTab8
-    nmap ª <Plug>AirlineSelectTab9
-  endif
-endif
-" }}}
-
 " ======== AutoPairs ======== {{{
 if dein#tap('auto-pairs')
   let g:AutoPairsShortcutBackInsert = '<C-b>'
