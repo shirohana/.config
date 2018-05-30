@@ -1,4 +1,4 @@
-function! helper#gitgutter#toggle_preview () abort
+function! helper#gitgutter#toggle_preview ()
   let current_status = <SID>status()
   let status = helper#tab#getvar('', 'gitgutter', 'preview_info', {})
 
@@ -16,7 +16,7 @@ function! helper#gitgutter#toggle_preview () abort
   endif
 endfunction
 
-function! s:compare_status (s1, s2) abort
+function! s:compare_status (s1, s2)
   for key in keys(a:s1)
     if a:s1[key] != a:s2[key]
       return 0
@@ -25,7 +25,7 @@ function! s:compare_status (s1, s2) abort
   return 1
 endfunction
 
-function! s:status () abort
+function! s:status ()
   return {
         \ 'bufnr': bufnr(''),
         \ 'changenr': changenr(),
@@ -33,7 +33,7 @@ function! s:status () abort
         \ }
 endfunction
 
-function! s:current_hunk_index () abort
+function! s:current_hunk_index ()
   let bufnr = bufnr('')
   let hunks = gitgutter#hunk#hunks(bufnr)
   let l:index = -1
