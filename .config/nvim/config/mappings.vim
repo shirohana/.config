@@ -40,7 +40,7 @@ nnoremap <silent> † :<C-u>enew<CR>
 " Save buffer
 nnoremap <silent> <Leader>w :<C-u>write<CR>
 " Wipe buffer
-nmap <Leader>q <Plug>(close-buffer-keep-windows)
+nmap <Leader>q <Plug>(close-buffer-keep-layout)
 " Buffer Navigating, using `Opt+[` & `Opt+]`
 if mapcheck('“', 'n') == '' && mapcheck('‘', 'n') == ''
   nnoremap <silent> “ :<C-u>bprev<CR>
