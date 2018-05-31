@@ -26,4 +26,3 @@ let g:airline#extensions#tabline#fnametruncate = 12
 " airline # extensions # ctrlspace {{{
 let g:airline#extensions#ctrlspace#enabled = 1
 " }}}
-

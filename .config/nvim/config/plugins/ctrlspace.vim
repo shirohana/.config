@@ -14,4 +14,3 @@ command! CtrlSpaceBuffers
       \ 'sink': 'e',
       \ 'down': '20%'
       \ })
-
