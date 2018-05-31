@@ -6,3 +6,9 @@ noremap <silent><Plug>(easymotion-fl-fix) :<C-u>call EasyMotion#SL(1, 0, 0) <bar
 noremap <silent><Plug>(easymotion-Fl-fix) :<C-u>call EasyMotion#SL(1, 0, 1) <bar> call helper#cursor#block()<CR>
 noremap <silent><Plug>(easymotion-tl-fix) :<C-u>call EasyMotion#TL(1, 0, 0) <bar> call helper#cursor#block()<CR>
 noremap <silent><Plug>(easymotion-Tl-fix) :<C-u>call EasyMotion#TL(1, 0, 1) <bar> call helper#cursor#block()<CR>
+
+command! NextBuffer
+      \ call helper#buffer#NextBuffer()
+
+command! PrevBuffer
+      \ call helper#buffer#PreviousBuffer()

@@ -42,10 +42,8 @@ nnoremap <silent> <Leader>w :<C-u>write<CR>
 " Wipe buffer
 nmap <Leader>q <Plug>(close-buffer-keep-layout)
 " Buffer Navigating, using `Opt+[` & `Opt+]`
-if mapcheck('“', 'n') == '' && mapcheck('‘', 'n') == ''
-  nnoremap <silent> “ :<C-u>bprev<CR>
-  nnoremap <silent> ‘ :<C-u>bnext<CR>
-endif
+nnoremap <silent> “ :<C-u>PrevBuffer<CR>
+nnoremap <silent> ‘ :<C-u>NextBuffer<CR>
 
 " ======== Window ========
 " Create Vertical Split, using `<Space>[hl]`

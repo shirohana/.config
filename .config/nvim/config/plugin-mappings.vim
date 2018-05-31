@@ -22,8 +22,6 @@ endif
 if dein#tap('vim-ctrlspace')
   nnoremap <LocalLeader>c :<C-u>CtrlSpace<CR>
   " Buffer Navigating
-  nnoremap <silent> ‘     :<C-u>CtrlSpaceGoDown<CR>
-  nnoremap <silent> “     :<C-u>CtrlSpaceGoUp<CR>
   nnoremap <silent> <C-o> :<C-u>CtrlSpaceBuffers<CR>
 endif
 " }}}

@@ -29,8 +29,18 @@ function! helper#tab#getvar (tabnr, scope, key, ...)
         \ ? get(dict[a:scope], a:key, get(a:000, 0)) : get(a:000, 0)
 endfunction
 
+function! helper#tab#BufnrList (tabnr)
+  if get(g:, 'CtrlSpaceLoaded', 0)
+    return map(ctrlspace#api#BufferList(a:tabnr), 'v:val["index"]')
+  else if exists('*nvim_list_bufs')
+    return filter(nvim_list_bufs(), 'buflisted(v:val)')
+  else
+    return filter(range(1, bufnr('$')), 'buflisted(v:val)')
+  endif
+endfunction
+
 function! helper#tab#ContainsBuffer (tabnr, bufnr)
-  if exists('*ctrlspace#api#Buffers')
+  if get(g:, 'CtrlSpaceLoaded', 0)
     return has_key(ctrlspace#api#Buffers(a:tabnr), a:bufnr)
   else
     return bufexists(a:bufnr) && getbufvar(a:bufnr, '&buflisted')
