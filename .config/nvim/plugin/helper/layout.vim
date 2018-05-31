@@ -1,7 +1,13 @@
 let s:placeholder_bufnr = 0
 
 function! helper#layout#CloseBufferInTab (tabnr, bufnr) abort
-  " If tries to close PLACEHOLDER, do nothing
+  let buffers = helper#tab#BufnrList(a:tabnr)
+  let buf_index = index(buffers, a:bufnr)
+
+  " Do nothing when buffer didn't contained in tab
+  if buf_index == -1 | return | endif
+
+  " Do nothing when tries to close PLACEHOLDER
   if <SID>is_placeholder() | return | endif
 
   " Print error message when tries to quit modified buffer or terminal
@@ -11,30 +17,34 @@ function! helper#layout#CloseBufferInTab (tabnr, bufnr) abort
     return
   endif
 
-  let modified_tabs = 0
-  let original_tabnr = tabpagenr()
+  let is_only_window = len(filter(tabpagebuflist(a:tabnr), 'v:val == '.a:bufnr)) == 0
 
-  let contained_tabs = 0
+  " Switch buffer of windows
+  if !is_only_window
+    " NOTE: This action may change current `tabpagenr` and/or `winnr`
+    let placeholder_bufnr = <SID>ensure_placeholder()
+    call helper#tab#SwitchWindowsByBufnr(a:tabnr, a:bufnr, placeholder_bufnr)
+  endif
 
-  for tabnr in range(1, tabpagenr('$'))
-    if !helper#tab#ContainsBuffer(tabnr, a:bufnr) | continue | endif
+  if len(buffers) == 1
+    execute 'enew'
+  else
+    let next_buf_index = (buf_index + 1) == len(buffers)
+          \ ? buf_index - 1
+          \ : buf_index + 1
+    let next_bufnr = get(buffers, next_buf_index, 0)
 
-    if tabnr == a:tabnr
-      " Switch buffer of windows
-      if winnr('$') == 1
-        execute 'bp'
-      else
-        let placeholder_bufnr = <SID>ensure_placeholder()
-        call helper#tab#SwitchWindowsByBufnr(tabnr, a:bufnr, placeholder_bufnr)
-      endif
+    " Switch buffer back of current window
+    if next_bufnr > 0
+      execute next_bufnr.'buffer'
     endif
+  endif
 
-    let contained_tabs += 1
-  endfor
+  let contained_tabs = map(range(1, tabpagenr('$')), 'helper#tab#ContainsBuffer(v:val, '.a:bufnr.')')
+  let contained_in_other_tabs = len(filter(contained_tabs, 'v:val == 1')) > 1
 
-  call helper#tab#Jump(original_tabnr)
-
-  if contained_tabs <= 1
+  " Perform close buffer
+  if !contained_in_other_tabs
     execute 'bwipe '.a:bufnr
   else
     if has_key(t:, 'CtrlSpaceList')
@@ -49,7 +59,7 @@ function! s:ensure_placeholder () abort
   if bufnr == 0 || !bufexists(bufnr)
     execute 'enew | file PLACEHOLDER'
 
-    setlocal nobuflisted
+    setlocal buflisted
     setlocal noswapfile
     setlocal nomodifiable
     setlocal buftype=nofile
