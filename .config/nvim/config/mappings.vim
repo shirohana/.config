@@ -76,7 +76,7 @@ nnoremap <silent> Œ :<C-u>tabclose<CR>
 " Tab Navigating, using `Opt-Shift-[` & `Opt-Shift-]`
 nnoremap <silent> ’ :<C-u>tabnext<CR>
 nnoremap <silent> ” :<C-u>tabprevious<CR>
-" Buffer Navigating, using `Opt+[1-9]`
+" Tab Navigating, using `Opt+[1-9]`
 nnoremap ¡ :<C-u>1tabn<CR>
 nnoremap ™ :<C-u>2tabn<CR>
 nnoremap £ :<C-u>3tabn<CR>
