@@ -41,6 +41,14 @@ lazy = 0
 # File Navigation
 # ================================
 
+# CtrlSpace
+# https://github.com/vim-ctrlspace/vim-ctrlspace
+[[plugins]]
+repo = 'vim-ctrlspace/vim-ctrlspace'
+depends = 'fzf.vim'
+lazy = 0
+hook_add = 'source $NVIM_PLUGINS/ctrlspace.vim'
+
 # NERDTree
 # https://github.com/scrooloose/nerdtree
 [[plugins]]
