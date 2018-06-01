@@ -13,6 +13,12 @@ command! NextBuffer
 command! PrevBuffer
       \ call helper#buffer#PreviousBuffer()
 
+command! ToggleZoomWindow
+      \ call helper#window#ToggleZoom()
+
+command! RenameTabLabel
+      \ call helper#ctrlspace#RenameTabLabelPrompt()
+
 command! LoadWorkspace
       \ call helper#ctrlspace#LoadWorkspace()
 
@@ -21,6 +27,3 @@ command! SaveWorkspace
 
 command! SaveWorkspacePrompt
       \ call helper#ctrlspace#SaveWorkspacePrompt()
-
-command! RenameTabLabel
-      \ call helper#ctrlspace#RenameTabLabelPrompt()

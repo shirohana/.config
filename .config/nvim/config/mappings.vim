@@ -67,6 +67,8 @@ nnoremap <silent> <Up>    :<C-u>resize -2<CR>
 nnoremap <silent> <Down>  :<C-u>resize +2<CR>
 nnoremap <silent> <Left>  :<C-u>vertical resize -4<CR>
 nnoremap <silent> <Right> :<C-u>vertical resize +4<CR>
+" Toggle Zoom
+nnoremap <silent> <Leader>z :<C-u>ToggleZoomWindow<CR>
 
 " ======== Tabpage ========
 " Create New Tab, using `Opt-Shift-t`
