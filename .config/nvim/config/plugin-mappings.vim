@@ -32,6 +32,8 @@ if dein#tap('vim-ctrlspace')
   nnoremap <silent> ß :<C-u>SaveWorkspace<CR>
   " Save Workspace with Name, using <Opt-Shift-s>
   nnoremap <silent> Í :<C-u>SaveWorkspacePrompt<CR>
+  " Rename tab
+  nnoremap <silent> <LocalLeader>= :<C-u>RenameTabLabel<CR>
 endif
 " }}}
 

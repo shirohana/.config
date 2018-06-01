@@ -21,3 +21,6 @@ command! SaveWorkspace
 
 command! SaveWorkspacePrompt
       \ call helper#ctrlspace#SaveWorkspacePrompt()
+
+command! RenameTabLabel
+      \ call helper#ctrlspace#RenameTabLabelPrompt()

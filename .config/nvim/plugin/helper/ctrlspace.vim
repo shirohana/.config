@@ -24,10 +24,33 @@ function! helper#ctrlspace#SaveWorkspacePrompt (...)
   call <SID>save_workspace(name)
 endfunction
 
+function! helper#ctrlspace#RenameTabLabelPrompt (...)
+  if len(a:000) > 0
+    let label = a:000[0]
+  else
+    let tabnr = tabpagenr()
+    let label = ctrlspace#util#Gettabvar(tabnr, "CtrlSpaceLabel")
+    let label = input('⌗  Label for tab '.tabnr.': ', label)
+    redraw
+  endif
+
+  call <SID>tab_label(label)
+  call <SID>refresh_tabline()
+endfunction
+
+function! s:refresh_tabline ()
+  call airline#extensions#tabline#ctrlspace#invalidate()
+  let &tabline = &tabline
+endfunction
+
 function! s:load_workspace (name)
   call ctrlspace#workspaces#LoadWorkspace(0, a:name)
 endfunction
 
 function! s:save_workspace (name)
   call ctrlspace#workspaces#SaveWorkspace(a:name)
+endfunction
+
+function! s:tab_label (label)
+  call ctrlspace#tabs#SetTabLabel(tabpagenr(), a:label, 0)
 endfunction
