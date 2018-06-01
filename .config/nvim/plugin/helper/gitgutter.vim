@@ -1,18 +1,23 @@
+let s:scope = 'helper_gitgutter'
+
 function! helper#gitgutter#toggle_preview ()
+  let key = 'preview_info'
+  let tabnr = tabpagenr()
+
   let current_status = <SID>status()
-  let status = helper#tab#getvar('', 'gitgutter', 'preview_info', {})
+  let saved_status = helper#tab#Getvar(tabnr, s:scope, key, {})
 
   if current_status.hunk_index < 0
     call gitgutter#utility#warn('cursor is not in a hunk')
-  elseif !empty(status) && <SID>compare_status(current_status, status)
+  elseif !empty(saved_status) && <SID>compare_status(current_status, saved_status)
     try
       wincmd P | wincmd p | pclose
     catch
-      execute 'GitGutterPreviewHunk'
+      call gitgutter#hunk#preview()
     endtry
   else
-    call helper#tab#setvar('', 'gitgutter', 'preview_info', current_status)
-    execute 'GitGutterPreviewHunk'
+    call helper#tab#Setvar(tabnr, s:scope, key, current_status)
+    call gitgutter#hunk#preview()
   endif
 endfunction
 
@@ -22,6 +27,7 @@ function! s:compare_status (s1, s2)
       return 0
     endif
   endfor
+
   return 1
 endfunction
 

@@ -1,32 +1,21 @@
-let s:user_dictionary_key = 'user_dictionary'
-
-function! helper#tab#setvar (tabnr, scope, key, value)
-  " Initialize tabnr
-  let tabnr = (type(a:tabnr) == v:t_string && len(a:tabnr) == 0)
-        \ ? tabpagenr() : a:tabnr
-
+function! helper#tab#Setvar (tabnr, scope, key, value)
   " Get dictionary from tabvar or create one
-  let dict = get(gettabvar(tabnr, ''), s:user_dictionary_key, {})
+  let dict = get(gettabvar(a:tabnr, ''), a:scope, {})
 
   " Put dictionary into tabvar if didn't exists
-  if empty(dict) | call settabvar(tabnr, s:user_dictionary_key, dict) | endif
+  if empty(dict)
+    call settabvar(a:tabnr, a:scope, dict)
+  endif
 
-  " Update dict.scope.key = value
-  let scope = get(dict, a:scope, {})
-  let scope[a:key] = a:value
-  let dict[a:scope] = scope
+  " Assign value
+  let dict[a:key] = a:value
 endfunction
 
-function! helper#tab#getvar (tabnr, scope, key, ...)
-  " Initialize tabnr
-  let tabnr = (type(a:tabnr) == v:t_string && len(a:tabnr) == 0)
-        \ ? tabpagenr() : a:tabnr
-
+function! helper#tab#Getvar (tabnr, scope, key, ...)
   " Get dictionary from tabvar
-  let dict = get(gettabvar(tabnr, ''), s:user_dictionary_key, {})
+  let dict = get(gettabvar(a:tabnr, ''), a:scope, {})
 
-  return (has_key(dict, a:scope))
-        \ ? get(dict[a:scope], a:key, get(a:000, 0)) : get(a:000, 0)
+  return get(dict, a:key, get(a:000, 0))
 endfunction
 
 function! helper#tab#BufnrList (tabnr)
