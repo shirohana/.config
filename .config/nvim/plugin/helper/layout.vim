@@ -27,7 +27,7 @@ function! helper#layout#CloseBufferInTab (tabnr, bufnr) abort
   endif
 
   if len(buffers) == 1
-    execute 'enew'
+    enew
   else
     let next_buf_index = (buf_index + 1) == len(buffers)
           \ ? buf_index - 1
@@ -57,7 +57,7 @@ function! s:ensure_placeholder () abort
   let bufnr = s:placeholder_bufnr
 
   if bufnr == 0 || !bufexists(bufnr)
-    execute 'enew | file PLACEHOLDER'
+    enew | file PLACEHOLDER
 
     setlocal buflisted
     setlocal noswapfile
