@@ -12,3 +12,12 @@ command! NextBuffer
 
 command! PrevBuffer
       \ call helper#buffer#PreviousBuffer()
+
+command! LoadWorkspace
+      \ call helper#ctrlspace#LoadWorkspace()
+
+command! SaveWorkspace
+      \ call helper#ctrlspace#SaveWorkspace()
+
+command! SaveWorkspacePrompt
+      \ call helper#ctrlspace#SaveWorkspacePrompt()

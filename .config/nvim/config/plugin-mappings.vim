@@ -20,9 +20,18 @@ endif
 
 " ======== CtrlSpace ======== {{{
 if dein#tap('vim-ctrlspace')
+  " Show ctrlspace menu
   nnoremap <LocalLeader>c :<C-u>CtrlSpace<CR>
   " Buffer Navigating
   nnoremap <silent> <C-o> :<C-u>CtrlSpaceBuffers<CR>
+  " Create New Workspace, using <Opt-Shift-w>
+  nnoremap <silent> „ :<C-u>CtrlSpaceNewWorkspace<CR>
+  " Load Workspace, using <Opt-w>
+  nnoremap <silent> ∑ :<C-u>LoadWorkspace<CR>
+  " Save workspace, using <Opt-s>
+  nnoremap <silent> ß :<C-u>SaveWorkspace<CR>
+  " Save Workspace with Name, using <Opt-Shift-s>
+  nnoremap <silent> Í :<C-u>SaveWorkspacePrompt<CR>
 endif
 " }}}
 

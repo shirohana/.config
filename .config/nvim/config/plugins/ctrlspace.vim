@@ -14,3 +14,6 @@ command! CtrlSpaceBuffers
       \ 'sink': 'e',
       \ 'down': '20%'
       \ })
+
+" Initialize workspace manually for custom workspace selector
+call ctrlspace#workspaces#SetWorkspaceNames()
