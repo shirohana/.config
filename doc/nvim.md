@@ -23,9 +23,9 @@ NeoVim
 - [Terminal](#terminal)
 
 #### Plugin Key Mappings
-- [Airline](#airline)
 - [AutoPairs](#autopairs)
 - [Commentary](#commentary)
+- [CtrlSpace](#ctrlspace)
 - [EasyAlign](#easyalign)
 - [EasyMotion - Line Navigating](#easymotion---line-navigating)
 - [EasyMotion - Word Navigating](#easymotion---word-navigating)
@@ -42,7 +42,10 @@ NeoVim
 - [FileType: Markdown](#filetype-markdown)
 
 #### Commands
+- [Buffer Commands](#buffer-commands)
+- [Window Commands](#window-commands)
 - [Terminal Commands](#terminal-commands)
+- [Plugin Commands](#plugin-commands)
 - [Helper Commands](#helper-commands)
 
 #### Abbreviations
@@ -100,11 +103,12 @@ Name                                             | Description
 [lifepillar/vim-solarized8][solarized8]          | [Solarized][solarized] with true color support
 
 ### File Navigating
-&nbsp;               | Name                                               | Description
-------               | ----                                               | -----------
-[:memo:][m-fzf]      | [junegunn/fzf.vim][fzf]                            | :mag: fzf & vim & ag
-[:memo:][m-nerdtree] | [scrooloose/nerdtree][nerdtree]                    | :open_file_folder: Tree explorer
-&nbsp;               | [Xuyuanp/nerdtree-git-plugin][nerdtree-git-plugin] | Showing git status in `NERDTree`
+&nbsp;                | Name                                               | Description
+------                | ----                                               | -----------
+[:memo:][m-ctrlspace] | [vim-ctrlspace/vim-ctrlspace][ctrlspace]           | :globe_with_meridians: Vim Space Controller
+[:memo:][m-fzf]       | [junegunn/fzf.vim][fzf]                            | :mag: fzf & vim & ag
+[:memo:][m-nerdtree]  | [scrooloose/nerdtree][nerdtree]                    | :open_file_folder: Tree Explorer
+&nbsp;                | [Xuyuanp/nerdtree-git-plugin][nerdtree-git-plugin] | Showing git status in `NERDTree`
 
 ### Moving & Searching
 &nbsp;                           | Name                                                        | Description
@@ -185,7 +189,7 @@ Alias                            | To
 | :-: | ---------                               | ------
 | v   | <kbd>Opt-t</kbd>                        | Create new buffer
 | v   | <kbd>_&lt;Leader&gt;_</kbd><kbd>w</kbd> | Save current buffer
-| v   | <kbd>_&lt;Leader&gt;_</kbd><kbd>q</kbd> | Wipe current buffer
+| v   | <kbd>_&lt;Leader&gt;_</kbd><kbd>q</kbd> | Close current buffer (wiped when no other tab contains this buffer)
 | v   | <kbd>Opt-[</kbd>                        | Switch to previous buffer
 | v   | <kbd>Opt-]</kbd>                        | Switch to next buffer
 
@@ -215,6 +219,10 @@ Alias                            | To
 | v   | <kbd>Opt-Shift-q</kbd> | Close current tab
 | v   | <kbd>Opt-Shift-[</kbd> | Switch to previous tab
 | v   | <kbd>Opt-Shift-]</kbd> | Switch to next tab
+| v   | <kbd>Opt-1</kbd>       | Switch to 1st tab
+| v   | <kbd>Opt-2</kbd>       | Switch to 2nd tab
+|     | ...                    |
+| v   | <kbd>Opt-9</kbd>       | Switch to 9th tab
 
 ### Terminal
 | T   | Keystroke     | Action
@@ -223,13 +231,6 @@ Alias                            | To
 
 Plugin Key Mappings
 ---------------
-
-### Airline
-| N   | Keystroke        | Action
-| :-: | ---------        | ------
-| v   | <kbd>Opt-1</kbd> | Switch to 1st buffer
-|     | ...              |
-| v   | <kbd>Opt-9</kbd> | Switch to 9th buffer
 
 ### AutoPairs
 | I   | Keystroke     | Action
@@ -242,6 +243,17 @@ Plugin Key Mappings
 | v   | v   | v   | <kbd>g</kbd><kbd>c</kbd>             | Toggle comment of lines with {motion}
 | v   |     |     | <kbd>g</kbd><kbd>c</kbd><kbd>c</kbd> | Toggle comment of current line
 | v   |     |     | <kbd>c</kbd><kbd>g</kbd><kbd>c</kbd> | Change adjacent commented lines
+
+### CtrlSpace
+| n   | Keystroke                                    | Action
+| :-: | ---------                                    | ------
+| v   | <kbd>_&lt;LocalLeader&gt;_</kbd><kbd>c</kbd> | Show main menu
+| v   | <kbd>⌃o</kbd>                                | Show listed buffers in current tab
+| v   | <kbd>Opt-w</kbd>                             | Load workspace
+| v   | <kbd>Opt-s</kbd>                             | Save workspace
+| v   | <kbd>Opt-Shift-w</kbd>                       | Create new empty workspace
+| v   | <kbd>Opt-Shift-s</kbd>                       | Save as new workspace
+| v   | <kbd>_&lt;LocalLeader&gt;_</kbd><kbd>=</kbd> | Rename current tab label
 
 ### EasyAlign
 | n   | v   | Keystroke                | Action
@@ -298,7 +310,7 @@ Keystroke                                        | Action
 ### FZF
 | N   | Keystroke        | Action
 | :-: | ---------        | ------
-| v   | <kbd>⌃o</kbd>    | Show opened files
+| v   | <kbd>⌃o</kbd>    | Show buffers (only available when [CtrlSpace][ctrlspace] disabled)
 | v   | <kbd>⌃p</kbd>    | Show files in `cwd`
 | v   | <kbd>Opt-f</kbd> | Search text in `cwd`
 
@@ -307,6 +319,7 @@ Keystroke                                        | Action
 | :-: | ---------                                                    | ------
 | v   | <kbd>s</kbd><kbd>j</kbd>                                     | Jump to next hunk
 | v   | <kbd>s</kbd><kbd>j</kbd>                                     | Jump to previous hunk
+| v   | <kbd>_&lt;LocalLeader&gt;_</kbd><kbd>s</kbd><kbd>a</kbd>     | Refresh GitGutter signs
 | v   | <kbd>_&lt;LocalLeader&gt;_</kbd><kbd>s</kbd><kbd>s</kbd>     | Stage hunk under cursor
 | v   | <kbd>_&lt;LocalLeader&gt;_</kbd><kbd>s</kbd><kbd>u</kbd>     | Unstage hunk under cursor
 | v   | <kbd>_&lt;LocalLeader&gt;_</kbd><kbd>s</kbd><kbd>r</kbd>     | Undo hunk under cursor
@@ -371,10 +384,29 @@ Keystroke                                        | Action
 Commands
 --------
 
+### Buffer Commands
+Command       | Description
+-------       | -----------
+`:NextBuffer` | Switch to next buffer. Used to integrate with [vim-ctrlspace][ctrlspace]
+`:PrevBuffer` | Switch to previous buffer. Used to integrate with [vim-ctrlspace][ctrlspace]
+
+### Window Commands
+Command             | Description
+-------             | -----------
+`:ToggleZoomWindow` | Maximize/Equalize windows
+
 ### Terminal Commands
 Command        | Description
 -------        | -----------
 `:ClearScroll` | Clear scroll history of current terminal buffer
+
+### Plugin Commands
+Plugin                 | Command                | Description
+------                 | -------                | -----------
+[CtrlSpace][ctrlspace] | `:RenameTabLabel`      | Rename label of current tab, wrap to force refresh tabline
+&nbsp;                 | `:LoadWorkspace`       | Show workspace list to load, wrapped by [fzf.vim][fzf]
+&nbsp;                 | `:SaveWorkspace`       | Save current workspace, or prompts to provide workspace name
+&nbsp;                 | `:SaveWorkspacePrompt` | Save workspace with prompt
 
 ### Helper Commands
 Command        | Description
@@ -408,6 +440,7 @@ rm -rf ~/.cache/nvim
 [airline]: https://github.com/vim-airline/vim-airline
 [autopairs]: https://github.com/shirohana/auto-pairs
 [commentary]: https://github.com/tpope/vim-commentary
+[ctrlspace]: https://github.com/vim-ctrlspace/vim-ctrlspace
 [cursorword]: https://github.com/itchyny/vim-cursorword
 [dein]: https://github.com/Shougo/dein.vim
 [easyalign]: https://github.com/junegunn/vim-easy-align
@@ -430,6 +463,7 @@ rm -rf ~/.cache/nvim
 
 [m-autopairs]: #autopairs
 [m-commentary]: #commentary
+[m-ctrlspace]: #ctrlspace
 [m-easyalign]: #easyalign
 [m-easymotion]: #easymotion---line-navigating
 [m-fzf]: #fzf
