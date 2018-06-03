@@ -157,6 +157,13 @@ if dein#tap('vim-peekaboo')
 endif
 " }}}
 
+" ======== SplitJoin ======== {{{
+if dein#tap('splitjoin.vim')
+  nmap gS <Plug>SplitjoinSplit
+  nmap gJ <Plug>SplitjoinJoin
+endif
+" }}}
+
 " ======== Surround ======== {{{
 if dein#tap('vim-surround')
   nmap cs  <Plug>Csurround
