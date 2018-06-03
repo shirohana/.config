@@ -168,6 +168,16 @@ hook_add = '''
   let g:peekaboo_delay = 250
 '''
 
+# SplitJoin
+# https://github.com/AndrewRadev/splitjoin.vim
+[[plugins]]
+repo = 'AndrewRadev/splitjoin.vim'
+on_map = '<Plug>Splitjoin'
+hook_add = '''
+  let g:splitjoin_join_mapping = 0
+  let g:splitjoin_split_mapping = 0
+'''
+
 # Surround
 # https://github.com/tpope/vim-surround
 [[plugins]]
