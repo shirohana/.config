@@ -37,6 +37,7 @@ NeoVim
 - [MultipleCursors](#multiplecursors)
 - [NERDTree](#nerdtree)
 - [Peekaboo](#peekaboo)
+- [SplitJoin](#splitjoin)
 - [Surround](#surround)
 - [UndoTree](#undotree)
 - [FileType: Markdown](#filetype-markdown)
@@ -127,6 +128,7 @@ Name                                             | Description
 [:memo:][m-gitgutter]    | [airblade/vim-gitgutter][gitgutter]          | :octocat: Show git diffs and preview changes
 [:memo:][m-multicursors] | [terrtma/vim-multiple-cursors][multicursors] | :dart: Multiple selections
 [:memo:][m-peekaboo]     | [junegunn/vim-peekaboo][peekaboo]            | :eyes: Peeking register
+[:memo:][m-splitjoin]    | [AndrewRadev/splitjoin.vim][splitjoin]       | :hocho: Transform code between multiline and single-line
 [:memo:][m-surround]     | [tpope/vim-surround][surround]               | :coffee: Quoting pairs simple
 [:memo:][m-undotree]     | [mbbill/undotree][undotree]                  | :leftwards_arrow_with_hook: Undo history visualizer
 &nbsp;                   | [ntpeters/vim-better-whitespace][whitespace] | :coffee: Highlight trailing whitespaces and remove them on save
@@ -356,6 +358,12 @@ Keystroke                                        | Action
 |     |     | v   | <kbd>"</kbd>  | Peek register and do
 |     | v   |     | <kbd>⌃r</kbd> | Peek register and paste selected
 
+### SplitJoin
+| N   | Keystroke                | Action
+| :-: | ---------                | ------
+| v   | <kbd>g</kbd><kbd>S</kbd> | Split oneline into multiple lines
+| v   | <kbd>g</kbd><kbd>J</kbd> | Join multiple lines into oneline
+
 ### Surround
 | N   | V   | Keystroke                            | Action
 | :-: | :-: | ---------                            | ------
@@ -457,6 +465,7 @@ rm -rf ~/.cache/nvim
 [repeat]: https://github.com/tpope/vim-repeat
 [solarized8]: https://github.com/lifepillar/vim-solarized8
 [solarized]: https://github.com/altercation/vim-colors-solarized
+[splitjoin]: https://github.com/AndrewRadev/splitjoin.vim
 [surround]: https://github.com/tpope/vim-surround
 [undotree]: https://github.com/mbbill/undotree
 [whitespace]: https://github.com/ntpeters/vim-better-whitespace
@@ -474,5 +483,6 @@ rm -rf ~/.cache/nvim
 [m-multicursors]: #multiplecursors
 [m-nerdtree]: #nerdtree
 [m-peekaboo]: #peekaboo
+[m-splitjoin]: #splitjoin
 [m-surround]: #surround
 [m-undotree]: #undotree
