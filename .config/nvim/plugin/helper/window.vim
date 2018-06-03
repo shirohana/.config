@@ -23,11 +23,11 @@ endfunction
 
 function! helper#window#Setvar (winnr, scope, key, value)
   " Get dictionary from winvar or create one
-  let dict = get(getwinvar(winnr, ''), a:scope, {})
+  let dict = get(getwinvar(a:winnr, ''), a:scope, {})
 
   " Put dictionary into winvar if didn't exists
   if empty(dict)
-    call setwinvar(winnr, a:scope, dict)
+    call setwinvar(a:winnr, a:scope, dict)
   endif
 
   " Assign value
@@ -36,7 +36,7 @@ endfunction
 
 function! helper#window#Getvar (winnr, scope, key, ...)
   " Get dictionary from winvar
-  let dict = get(getwinvar(winnr, ''), a:scope, {})
+  let dict = get(getwinvar(a:winnr, ''), a:scope, {})
 
   return get(dict, a:key, get(a:000, 0))
 endfunction
