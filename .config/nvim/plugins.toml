@@ -243,6 +243,12 @@ hook_add = '''
 repo = 'ap/vim-css-color'
 on_ft = ['css', 'stylus']
 
+# Dockerfile docker-compose.yml
+# https://github.com/ekalinin/Dockerfile.vim
+[[plugins]]
+repo = 'ekalinin/Dockerfile.vim'
+on_ft = ['Dockerfile', 'docker-compose']
+
 # HTML5 .html .htm
 # https://github.com/othree/html5.vim
 [[plugins]]

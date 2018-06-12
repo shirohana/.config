@@ -51,6 +51,7 @@ NeoVim
 
 #### Abbreviations
 - [Command Abbreviations](#command-abbreviations)
+- [Plugin Abbreviations](#plugin-abbreviations)
 
 #### Clean up
 - [Uninstall](#uninstall)
@@ -143,6 +144,7 @@ Language   | Repo
 --------   | ----
 CSS3       | [hail2u/vim-css3-syntax](https://github.com/hail2u/vim-css3-syntax)
 &nbsp;     | [ap/vim-css-color](https://github.com/ap/vim-css-color)
+Docker     | [ekalinin/Dockerfile.vim](https://github.com/ekalinin/Dockerfile.vim)
 HTML5      | [othree/html5.vim](https://github.com/othree/html5.vim)
 JavaScript | [pangloss/vim-javascript](https://github.com/pangloss/vim-javascript)
 &nbsp;     | [gavocanov/vim-js-indent](https://github.com/gavocanov/vim-js-indent)
@@ -433,6 +435,13 @@ Qa  | qa  | Quit all
 QA  | qa  | Quit all
 Wqa | wqa | Write & quit all
 WQa | wqa | Write & quit all
+
+### Plugin Abbreviations
+Plugin                            | Reference
+------                            | ---------
+[ekalinin/Dockerfile.vim][docker] | https://github.com/ekalinin/Dockerfile.vim/blob/master/ftplugin/Dockerfile.vim
+
+[docker]: https://github.com/ekalinin/Dockerfile.vim
 
 Uninstall
 ---------
