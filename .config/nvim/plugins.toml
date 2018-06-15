@@ -263,6 +263,7 @@ hook_add = '''
 
 # JavaScript .js
 # https://github.com/pangloss/vim-javascript
+# https://github.com/mxw/vim-jsx
 # https://github.com/gavocanov/vim-js-indent
 [[plugins]]
 repo = 'pangloss/vim-javascript'
@@ -270,6 +271,10 @@ on_ft = 'javascript'
 hook_add = '''
   let g:javascript_plugin_flow = 1
 '''
+[[plugins]]
+repo = 'mxw/vim-jsx'
+depends = 'vim-javascript'
+on_ft = 'javascript'
 [[plugins]]
 repo = 'gavocanov/vim-js-indent'
 depends = 'vim-javascript'
