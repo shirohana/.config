@@ -301,6 +301,12 @@ hook_add = '''
   let g:vim_markdown_preview_browser = 'Safari'
 '''
 
+# Nginx conf
+# https://github.com/chr4/nginx.vim
+[[plugins]]
+repo = 'chr4/nginx.vim'
+on_ft = 'nginx'
+
 # Pug .pug
 # https://github.com/digitaltoad/vim-pug
 [[plugins]]
