@@ -200,6 +200,6 @@ if dein#tap('vim-markdown')
 endif
 if dein#tap('vim-markdown-preview')
   autocmd MyAutoCmd FileType markdown
-        \ nnoremap <silent> <CR> :<C-u>call Vim_Markdown_Preview_Local()<CR>
+        \ nnoremap <buffer> <silent> <CR> :<C-u>call Vim_Markdown_Preview_Local()<CR>
 endif
 " }}}
