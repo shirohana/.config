@@ -37,10 +37,12 @@ cnoremap <C-e> <End>
 " ======== Buffer ========
 " Create New Buffer, using `Opt-t`
 nnoremap <silent> † :<C-u>enew<CR>
-" Save buffer
+" Save Buffer
 nnoremap <silent> <Leader>w :<C-u>write<CR>
-" Wipe buffer
+" Wipe Buffer
 nmap <Leader>q <Plug>(close-buffer-keep-layout)
+" Save & Wipe Buffer
+nnoremap <silent> <Leader>W :<C-u>write <bar> exec "normal \<Plug>(close-buffer-keep-layout)"<CR>
 " Buffer Navigating, using `Opt+[` & `Opt+]`
 nnoremap <silent> “ :<C-u>PrevBuffer<CR>
 nnoremap <silent> ‘ :<C-u>NextBuffer<CR>

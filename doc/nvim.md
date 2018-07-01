@@ -196,6 +196,7 @@ Alias                            | To
 | :-: | ---------                               | ------
 | v   | <kbd>Opt-t</kbd>                        | Create new buffer
 | v   | <kbd>_&lt;Leader&gt;_</kbd><kbd>w</kbd> | Save current buffer
+| v   | <kbd>_&lt;Leader&gt;_</kbd><kbd>W</kbd> | Save current buffer and Close
 | v   | <kbd>_&lt;Leader&gt;_</kbd><kbd>q</kbd> | Close current buffer (wiped when no other tab contains this buffer)
 | v   | <kbd>Opt-[</kbd>                        | Switch to previous buffer
 | v   | <kbd>Opt-]</kbd>                        | Switch to next buffer
