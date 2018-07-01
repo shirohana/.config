@@ -136,6 +136,18 @@ repo = 'junegunn/vim-easy-align'
 depends = 'vim-repeat'
 on_map = ['<Plug>(EasyAlign', '<Plug>(LiveEasyAlign)']
 
+# EditorConfig
+# https://github.com/editorconfig/editorconfig-vim
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
+on_event = 'InsertEnter'
+hook_add = '''
+  let g:EditorConfig_disable_rules = [
+    \ 'insert_final_newline',
+    \ 'trim_trailing_whitespace',
+    \ ]
+'''
+
 # GitGutter
 # https://github.com/airblade/vim-gitgutter
 [[plugins]]
