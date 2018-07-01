@@ -121,18 +121,19 @@ Name                                             | Description
 [:memo:][m-incsearch-fuzzy]      | [haya14busa/incsearch-fuzzy.vim][incsearch-fuzzy]           | Intremental fuzzy search extensions for `incsearch`
 
 ### Editing
-&nbsp;                   | Name                                         | Description
-------                   | ----                                         | -----------
-[:memo:][m-autopairs]    | [shirohana/auto-pairs][autopairs]            | :coffee: Insert/Delete quotes in pair
-[:memo:][m-commentary]   | [tpope/vim-commentary][commentary]           | :hash: Toggle comments in line/block
-[:memo:][m-easyalign]    | [junegunn/vim-easy-align][easyalign]         | :left_right_arrow: Alignning like a boss
-[:memo:][m-gitgutter]    | [airblade/vim-gitgutter][gitgutter]          | :octocat: Show git diffs and preview changes
-[:memo:][m-multicursors] | [terrtma/vim-multiple-cursors][multicursors] | :dart: Multiple selections
-[:memo:][m-peekaboo]     | [junegunn/vim-peekaboo][peekaboo]            | :eyes: Peeking register
-[:memo:][m-splitjoin]    | [AndrewRadev/splitjoin.vim][splitjoin]       | :hocho: Transform code between multiline and single-line
-[:memo:][m-surround]     | [tpope/vim-surround][surround]               | :coffee: Quoting pairs simple
-[:memo:][m-undotree]     | [mbbill/undotree][undotree]                  | :leftwards_arrow_with_hook: Undo history visualizer
-&nbsp;                   | [ntpeters/vim-better-whitespace][whitespace] | :coffee: Highlight trailing whitespaces and remove them on save
+&nbsp;                   | Name                                          | Description
+------                   | ----                                          | -----------
+[:memo:][m-autopairs]    | [shirohana/auto-pairs][autopairs]             | :coffee: Insert/Delete quotes in pair
+[:memo:][m-commentary]   | [tpope/vim-commentary][commentary]            | :hash: Toggle comments in line/block
+[:memo:][m-easyalign]    | [junegunn/vim-easy-align][easyalign]          | :left_right_arrow: Alignning like a boss
+&nbsp;                   | [editorconfig/editorconfig-vim][editorconfig] | :pencil: Use local editorconfig
+[:memo:][m-gitgutter]    | [airblade/vim-gitgutter][gitgutter]           | :octocat: Show git diffs and preview changes
+[:memo:][m-multicursors] | [terrtma/vim-multiple-cursors][multicursors]  | :dart: Multiple selections
+[:memo:][m-peekaboo]     | [junegunn/vim-peekaboo][peekaboo]             | :eyes: Peeking register
+[:memo:][m-splitjoin]    | [AndrewRadev/splitjoin.vim][splitjoin]        | :hocho: Transform code between multiline and single-line
+[:memo:][m-surround]     | [tpope/vim-surround][surround]                | :coffee: Quoting pairs simple
+[:memo:][m-undotree]     | [mbbill/undotree][undotree]                   | :leftwards_arrow_with_hook: Undo history visualizer
+&nbsp;                   | [ntpeters/vim-better-whitespace][whitespace]  | :coffee: Highlight trailing whitespaces and remove them on save
 
 ### Utilities
 Name                       | Description
@@ -464,6 +465,7 @@ rm -rf ~/.cache/nvim
 [dein]: https://github.com/Shougo/dein.vim
 [easyalign]: https://github.com/junegunn/vim-easy-align
 [easymotion]: https://github.com/easymotion/vim-easymotion
+[editorconfig]: https://github.com/editorconfig/editorconfig-vim
 [fzf]: https://github.com/junegunn/fzf.vim
 [gitgutter]: https://github.com/airblade/vim-gitgutter
 [incsearch-easymotion]: https://github.com/haya14busa/incsearch-easymotion.vim
