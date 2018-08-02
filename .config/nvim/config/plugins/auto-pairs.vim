@@ -1,4 +1,4 @@
-let g:AutoPairsCenterLine = 1
+let g:AutoPairsCenterLine = 0
 let g:AutoPairsFlyMode = 1
 let g:AutoPairsMultilineClose = 1
 
