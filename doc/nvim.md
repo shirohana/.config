@@ -174,7 +174,7 @@ Alias                            | To
 | N   | I   | V   | Keystroke                    | Action
 | :-: | :-: | :-: | ---------                    | ------
 | v   | v   | v   | <kbd>⌃l</kbd>                | &lt;Esc&gt;
-| v   |     |     | <kbd>Esc</kbd><kbd>Esc</kbd> | Cancal highlighe search
+| v   |     |     | <kbd>Esc</kbd><kbd>Esc</kbd> | Cancal highlight search
 
 ### Moving
 | N   | Keystroke                | Action
@@ -214,24 +214,24 @@ Alias                            | To
 | v   | <kbd>Opt-l</kbd>                        | Move cursor :arrow_right:
 | v   | <kbd>Opt-j</kbd>                        | Move cursor :arrow_down:
 | v   | <kbd>Opt-k</kbd>                        | Move cursor :arrow_up:
-| v   | <kbd>&lt;Tab&gt;</kbd>                  | Move cursor to next window
-| v   | <kbd>&lt;Shift-Tab&gt;</kbd>            | Move cursor to previous window
 | v   | <kbd>&lt;Up&gt;</kbd>                   | Shrink window :arrow_up_down:
 | v   | <kbd>&lt;Down&gt;</kbd>                 | Expand window :arrow_up_down:
 | v   | <kbd>&lt;Left&gt;</kbd>                 | Shrink window :left_right_arrow:
 | v   | <kbd>&lt;Right&gt;</kbd>                | Exapnd window :left_right_arrow:
 
 ### Tabpage
-| N   | Keystroke              | Action
-| :-: | ---------              | ------
-| v   | <kbd>Opt-Shift-t</kbd> | Create new tab
-| v   | <kbd>Opt-Shift-q</kbd> | Close current tab
-| v   | <kbd>Opt-Shift-[</kbd> | Switch to previous tab
-| v   | <kbd>Opt-Shift-]</kbd> | Switch to next tab
-| v   | <kbd>Opt-1</kbd>       | Switch to 1st tab
-| v   | <kbd>Opt-2</kbd>       | Switch to 2nd tab
-|     | ...                    |
-| v   | <kbd>Opt-9</kbd>       | Switch to 9th tab
+| N   | Keystroke                    | Action
+| :-: | ---------                    | ------
+| v   | <kbd>Opt-Shift-t</kbd>       | Create new tab
+| v   | <kbd>Opt-Shift-q</kbd>       | Close current tab
+| v   | <kbd>Opt-Shift-[</kbd>       | Switch to previous tab
+| v   | <kbd>Opt-Shift-]</kbd>       | Switch to next tab
+| v   | <kbd>&lt;Tab&gt;</kbd>       | Switch to next tab
+| v   | <kbd>&lt;Shift-Tab&gt;</kbd> | Switch to previous tab
+| v   | <kbd>Opt-1</kbd>             | Switch to 1st tab
+| v   | <kbd>Opt-2</kbd>             | Switch to 2nd tab
+|     | ...                          |
+| v   | <kbd>Opt-9</kbd>             | Switch to 9th tab
 
 ### Terminal
 | T   | Keystroke     | Action
