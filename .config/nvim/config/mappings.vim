@@ -1,6 +1,7 @@
 " ======== Defaults ========
 nmap s <Nop>
 nmap Q <Nop>
+nmap K <Nop>
 
 " ======== Generic ========
 " Better <Esc>
@@ -61,9 +62,6 @@ nnoremap <silent> ˙ <C-w>h
 nnoremap <silent> ∆ <C-w>j
 nnoremap <silent> ˚ <C-w>k
 nnoremap <silent> ¬ <C-w>l
-" Next/Prev Window, using <Tab> and <S-Tab>
-nnoremap <silent> <Tab>   <C-w>w
-nnoremap <silent> <S-Tab> <C-w>W
 " Window Resize, using arrow keys
 nnoremap <silent> <Up>    :<C-u>resize -2<CR>
 nnoremap <silent> <Down>  :<C-u>resize +2<CR>
@@ -77,9 +75,12 @@ nnoremap <silent> <Leader>z :<C-u>ToggleZoomWindow<CR>
 nnoremap <silent> ˇ :<C-u>tabnew<CR>
 " Close Tab, using `Opt-Shift-q`
 nnoremap <silent> Œ :<C-u>tabclose<CR>
-" Tab Navigating, using `Opt-Shift-[` & `Opt-Shift-]`
+" Next/Prev Tab, using `Opt-Shift-[` & `Opt-Shift-]`
 nnoremap <silent> ’ :<C-u>tabnext<CR>
 nnoremap <silent> ” :<C-u>tabprevious<CR>
+" Next/Prev Tab, using <Tab> and <S-Tab>
+nnoremap <silent> <Tab>   :<C-u>tabnext<CR>
+nnoremap <silent> <S-Tab> :<C-u>tabprevious<CR>
 " Tab Navigating, using `Opt+[1-9]`
 nnoremap ¡ :<C-u>1tabn<CR>
 nnoremap ™ :<C-u>2tabn<CR>
