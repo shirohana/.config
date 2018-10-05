@@ -45,7 +45,7 @@ function! helper#layout#CloseBufferInTab (tabnr, bufnr) abort
 
   " Perform close buffer
   if !contained_in_other_tabs
-    execute 'bwipe '.a:bufnr
+    try | execute 'bwipe '.a:bufnr | catch | endtry
   else
     if has_key(t:, 'CtrlSpaceList')
       call remove(t:CtrlSpaceList, a:bufnr)
