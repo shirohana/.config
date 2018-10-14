@@ -12,8 +12,12 @@ function! helper#layout#CloseBufferInTab (tabnr, bufnr) abort
 
   " Print error message when tries to quit modified buffer or terminal
   " TODO: Find better way to get vanilla error message belongs to user locale
-  if getbufvar(a:bufnr, '&modified') || &buftype == 'terminal'
+  if getbufvar(a:bufnr, '&modified')
     try | execute 'bw %' | catch | echoerr v:exception | endtry
+    return
+  endif
+
+  if getbufvar(a:bufnr, '&buftype') == 'terminal' && confirm('Sure to close Terminal?', "&Quit\n&No") > 1
     return
   endif
 
@@ -26,7 +30,7 @@ function! helper#layout#CloseBufferInTab (tabnr, bufnr) abort
     call helper#tab#SwitchWindowsByBufnr(a:tabnr, a:bufnr, placeholder_bufnr)
   endif
 
-  if len(buffers) == 1
+  if len(buffers) == 1 || getbufvar(a:bufnr, '&buftype') == 'terminal'
     enew
   else
     let next_buf_index = (buf_index + 1) == len(buffers)
@@ -45,7 +49,11 @@ function! helper#layout#CloseBufferInTab (tabnr, bufnr) abort
 
   " Perform close buffer
   if !contained_in_other_tabs
-    try | execute 'bwipe '.a:bufnr | catch | endtry
+    if getbufvar(a:bufnr, '&buftype') == 'terminal'
+      execute 'bwipe! '.a:bufnr
+    else
+      execute 'bwipe '.a:bufnr
+    endif
   else
     if has_key(t:, 'CtrlSpaceList')
       call remove(t:CtrlSpaceList, a:bufnr)
