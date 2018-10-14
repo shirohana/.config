@@ -94,7 +94,7 @@ nnoremap ª :<C-u>9tabn<CR>
 
 " ======== Terminal ========
 " Enter -- NORMAL --
-tnoremap <C-l> <C-\><C-n>
+tnoremap <C-k> <C-\><C-n>
 
 " ======== Temporary ========
 nnoremap <F5> :so ~/.config/nvim/init.vim<CR>
