@@ -44,6 +44,8 @@ cnoremap <C-e> <End>
 nnoremap <silent> † :<C-u>enew<CR>
 " Save Buffer
 nnoremap <silent> <Leader>w :<C-u>write<CR>
+" Reload Buffer
+nnoremap <silent> <Leader>e :<C-u>edit<CR>
 " Wipe Buffer
 nmap <Leader>q <Plug>(close-buffer-keep-layout)
 " Save & Wipe Buffer
