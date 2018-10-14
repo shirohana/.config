@@ -2,6 +2,7 @@
 nmap s <Nop>
 nmap Q <Nop>
 nmap K <Nop>
+vmap s <Nop>
 
 " ======== Generic ========
 " Better <Esc>
@@ -20,6 +21,9 @@ nnoremap zh z8h
 nnoremap <Bslash> <C-o>
 " Jump to newer cursor position
 nnoremap <Bar> <C-i>
+" Search left/rright of previous inline-jump by <Opt-,> and <Opt-.>
+noremap ≤ ,
+noremap ≥ ;
 
 " ======== Editing ========
 " Insert one line above current line in -- INSERT --
