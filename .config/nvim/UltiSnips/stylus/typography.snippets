@@ -51,69 +51,64 @@ wow_props = {
 endglobal
 
 # text-align:
-snippet ta "text-align: "
+snippet ta "text-align: " b
 text-align: ${1:left}
 $0
 endsnippet
 
 # text-align: {prop}
-snippet /\bta:([lrcjir])/ "/ta:[lrcjir]/ => text-align: (left|right|center|justify|inherit|initial)" r
+snippet /ta:([lrcjir])/ "/ta:[lrcjir]/ => text-align: (left|right|center|justify|inherit|initial)" rb
 text-align: `!p snip.rv = ta_props[match.group(1)]`
 $0
 endsnippet
 
 # text-align-last:
-snippet tal "text-align-last: "
+snippet tal "text-align-last: " b
 text-align-last: ${1:start}
 $0
 endsnippet
 
 # text-align-last: {prop}
-snippet /\btal:([alrcjseir])/ "/tal:[alrcjseir]/ => text-align-last: (auto|left|right|center|justify|start|end|inherit|initial)" r
+snippet /tal:([alrcjseir])/ "/tal:[alrcjseir]/ => text-align-last: (auto|left|right|center|justify|start|end|inherit|initial)" rb
 text-align-last: `!p snip.rv = tal_props[match.group(1)]`
 $0
 endsnippet
 
 # vertical-align:
-snippet va "vertical-align: "
-vertical-align: ${1:top}
+snippet va "vertical-align: " b
+vertical-align: ${1:center}
 $0
 endsnippet
 
 # vertical-align: {prop}
-snippet /\bva:(bl|sub|sup|t[tb]?|m|b|i|r)/ "/va:(bl|sub|sup|t|tt|m|b|tb|i|r) => vertical-align: (baseline|sub|super|top|text-top|middle|bottom|text-bottom|inherit|initial)" r
+snippet /va:(bl|sub|sup|t[tb]?|m|b|i|r)/ "/va:(bl|sub|sup|t|tt|m|b|tb|i|r) => vertical-align: (baseline|sub|super|top|text-top|middle|bottom|text-bottom|inherit|initial)" rb
 vertical-align: `!p snip.rv = va_props[match.group(1)]`
 $0
 endsnippet
 
 # text-decoration:
-snippet td "text-decoration"
-text-decoration: $1
-$0
+snippet td "text-decoration" b
+text-decoration: $0
 endsnippet
 
 # text-decoration-color:
-snippet tdc "text-decoration-color"
-text-decoration-color: $1
-$0
+snippet tdc "text-decoration-color" b
+text-decoration-color: $0
 endsnippet
 
 # text-decoration-line:
-snippet tdl "text-decoration-line"
-text-decoration-line: $1
-$0
+snippet tdl "text-decoration-line" b
+text-decoration-line: $0
 endsnippet
 
 # text-decoration-style:
-snippet tds "text-decoration-style"
-text-decoration-style: $1
-$0
+snippet tds "text-decoration-style" b
+text-decoration-style: $0
 endsnippet
 
 # text-indent:
-snippet ti "text-indent"
-text-indent: $1
-$0
+snippet ti "text-indent" b
+text-indent: $0
 endsnippet
 
 # text-indent: {number}{unit}
@@ -123,73 +118,67 @@ endsnippet
 # endsnippet
 
 # line-height:
-snippet lh "line-height: "
-line-height: $1
-$0
+snippet lh "line-height: " b
+line-height: $0
 endsnippet
 
 # line-height: {number}
-snippet /\blh((?:\d*\.)?\d+)/ "lh1.5, lh.75, lh0, ..." r
+snippet /\blh((?:\d*\.)?\d+)/ "lh1.5, lh.75, lh0, ..." rb
 line-height: `!p snip.rv = match.group(1)`
 $0
 endsnippet
 
 # letter-spacing:
-snippet lts "letter-spacing: "
-letter-spacing: $1
-$0
+snippet lts "letter-spacing: " b
+letter-spacing: $0
 endsnippet
 
 # letter-spacing: {number}{unit}
-snippet /\blts(-?\d+(?:\.\d+)?(\w+)?)/ "letter-spacing: " r
+snippet /\blts(-?\d+(?:\.\d+)?)(\w+)?/ "letter-spacing: " rb
 letter-spacing: `!p snip.rv = snippets.unit(*match.group(1, 2))`
 $0
 endsnippet
 
 # white-space:
-snippet ws "white-space: "
-white-space: $1
-$0
+snippet ws "white-space: " b
+white-space: $0
 endsnippet
 
 # white-space: {prop}
-snippet /\bws:(nw?|p[lw]?)/ "/ws:(n|nw|p|pl|pw)/ => white-space: (normal|nowrap|pre|pre-line|pre-wrap)" r
+snippet /\bws:(nw?|p[lw]?)/ "/ws:(n|nw|p|pl|pw)/ => white-space: (normal|nowrap|pre|pre-line|pre-wrap)" rb
 white-space: `!p snip.rv = ws_props[match.group(1)]`
 $0
 endsnippet
 
 # word-break:
-snippet wob "word-break: "
-word-break: $1
-$0
+snippet wob "word-break: " b
+word-break: $0
 endsnippet
 
 # word-break: {prop}
-snippet /\bwob:(n|b[aw]|ka)/ "/wob:(n|ba|ka|bw)/ => word-break: (normal|break-all|keep-all|break-word)" r
+snippet /\bwob:(n|b[aw]|ka)/ "/wob:(n|ba|ka|bw)/ => word-break: (normal|break-all|keep-all|break-word)" rb
 word-break: `!p snip.rv = wob_props[match.group(1)]`
 $0
 endsnippet
 
 # word-spacing:
-snippet wos "word-spacing: "
-word-spacing: $1
-$0
+snippet wos "word-spacing: " b
+word-spacing: $0
 endsnippet
 
 # word-spacing: {number}{unit}
-snippet /\bwos(-?\d+(?:\.\d+)?(\w+)?)/ "wos0.5, wos12px, wos0, ..." r
+snippet /\bwos(-?\d+(?:\.\d+)?)(\w+)?/ "wos0.5, wos12px, wos0, ..." rb
 word-spacing: `!p snip.rv = snippets.unit(*match.group(1, 2), 'em')`
 $0
 endsnippet
 
 # word-wrap:
-snippet wow "word-wrap: "
-word-wrap: $1
-$0
+snippet wow "word-wrap: " b
+word-wrap: $0
 endsnippet
 
 # word-wrap: {prop}
-snippet /wow:([nb])/ "/wow:[nb]/ => word-wrap: (normal|break-word)" r
+snippet /wow:([nb])/ "/wow:[nb]/ => word-wrap: (normal|break-word)" rb
 word-wrap: `!p snip.rv = wow_props[match.group(1)]`
 $0
 endsnippet

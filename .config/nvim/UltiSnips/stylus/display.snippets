@@ -38,43 +38,42 @@ directions = {
 endglobal
 
 # display:
-snippet d "display: "
+snippet d "d => display: " b
 display: ${1:flex}
 $0
 endsnippet
 
 # display: {prop}
-snippet /\bd:([bcfgln]|i[bfgt]?|ri|t(?:cap|colg?|[hf]g|rowg?|c))/ "/d:(i|b|c|f|g|ib|if|ig||it|t|ri|t|tcap|tcolg|thg|tfg|trowg|tc|tcol|trow|n)/ => display: (...)" r
+snippet /\bd:([bcfgln]|i[bfgt]?|ri|t(?:cap|colg?|[hf]g|rowg?|c))/ "/d:(i|b|c|f|g|ib|if|ig||it|t|ri|t|tcap|tcolg|thg|tfg|trowg|tc|tcol|trow|n)/ => display: (...)" rb
 display: `!p snip.rv = d_props[match.group(1)]`
 $0
 endsnippet
 
 # position:
-snippet pos
+snippet pos "pos => position: " b
 position: ${1:relative}
 $0
 endsnippet
 
 # position: {prop}
-snippet /\bpos:([afsr])/ "/pos:[afsr]/ => position: (absolute|fixed|static|relative)" r
+snippet /\bpos:([afsr])/ "/pos:[afsr]/ => position: (absolute|fixed|static|relative)" rb
 position: `!p snip.rv = pos_props[match.group(1)]`
 $0
 endsnippet
 
 # {direction}:
 snippet /([trbl])/ "/[trbl]/ => (top|right|bottom|left): " rb
-`!p snip.rv = directions[match.group(1)]`: $1
-$0
+`!p snip.rv = directions[match.group(1)]`: $0
 endsnippet
 
 # {direction}: {prop}
-snippet /\b([trbl]):a/ "/[trbl]:a/ => (top|right|bottom|left): auto" r
+snippet /\b([trbl]):a/ "/[trbl]:a/ => (top|right|bottom|left): auto" rb
 `!p snip.rv = directions[match.group(1)]`: auto
 $0
 endsnippet
 
 # {direction}: {number}{unit}
-snippet /\b([trbl])(-?\d+(?:\.\d+)?(\w+|%)?)/ "t20, b2rem, l-50%, ..." r
+snippet /\b([trbl])(-?\d+(?:\.\d+)?)(\w+|%)?/ "t20, b2rem, l-50%, ..." rb
 `!p snip.rv = directions[match.group(1)]`: `!p snip.rv = snippets.unit(*match.group(2, 3))`
 $0
 endsnippet

@@ -14,19 +14,18 @@ directions = {
 endglobal
 
 # margin:
-snippet m "margin: "
-margin: $1
-$0
+snippet m "margin: " b
+margin: $0
 endsnippet
 
 # margin: {prop}
-snippet /\bm:([air])/ "/m:[air]/ => margin: (auto|inherit|initial)" r
+snippet /\bm:([air])/ "/m:[air]/ => margin: (auto|inherit|initial)" rb
 margin: `!p snip.rv = m_props[match.group(1)]`
 $0
 endsnippet
 
 # margin: {number}{unit} {number}{unit}
-snippet /\bm(-?\d+(?:\.\d+)?(\w+|%)?)(?:-(-?\d+(?:\.\d+)?(\w+|%)?))?/ "m20, m20%-40%, m1em-1.5em, ..." r
+snippet /\bm(-?\d+(?:\.\d+)?)(\w+|%)?(?:-(-?\d+(?:\.\d+)?)(\w+|%)?)?/ "m20, m20%-40%, m1em-1.5em, ..." rb
 margin: `!p
 v = snippets.unit(*match.group(1, 2))
 h = snippets.unit(*match.group(3, 4))
@@ -35,19 +34,18 @@ $0
 endsnippet
 
 # margin-{direction}:
-snippet /\bm([trbl])/ "/m[trbl]/ => margin-(top|right|bottom|left):" r
-margin-`!p snip.rv = directions[match.group(1)]`: $1
-$0
+snippet /\bm([trbl])/ "/m[trbl]/ => margin-(top|right|bottom|left):" rb
+margin-`!p snip.rv = directions[match.group(1)]`: $0
 endsnippet
 
 # margin-{direction}: {prop}
-snippet /\bm([trbl]):([air])/ "/m[trbl]:[air]/ => margin-(top|right|bottom|left): (auto|inherit|initial)" r
+snippet /\bm([trbl]):([air])/ "/m[trbl]:[air]/ => margin-(top|right|bottom|left): (auto|inherit|initial)" rb
 margin-`!p snip.rv = directions[match.group(1)]`: `!p snip.rv = m_props[match.group(2)]`
 $0
 endsnippet
 
 # margin-{direction}: {number}{unit}
-snippet /\bm([trbl])(-?\d+(?:\.\d+)?(\w+|%)?)/ "mt20, mb-2em, ml50%, ..." r
+snippet /\bm([trbl])(-?\d+(?:\.\d+)?)(\w+|%)?/ "mt20, mb-2em, ml50%, ..." rb
 margin-`!p snip.rv = directions[match.group(1)]`: `!p snip.rv = snippets.unit(*match.group(2, 3))`
 $0
 endsnippet

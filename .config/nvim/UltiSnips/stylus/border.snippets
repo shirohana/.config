@@ -21,39 +21,35 @@ bds_props = {
 endglobal
 
 # border:
-snippet 'bd' "border: " b
-border: $1
-$0
+snippet bd "bd => border: " b
+border: $0
 endsnippet
 
 # border-{direction}:
 snippet /bd([trbl])/ "/bd[trbl]/ => border-[top|right|bottom|left]: " rb
-border-`!p snip.rv = directions[match.group(1)]`: $1
-$0
+border-`!p snip.rv = directions[match.group(1)]`: $0
 endsnippet
 
 # border-width:
-snippet 'bdw' "border-width: " b
-border-width: $1
-$0
+snippet bdw "bdw => border-width: " b
+border-width: $0
 endsnippet
 
 # border-width: {number}{unit}
-snippet /bdw(-?\d+(?:\.\d+)?(\w+|%)?)/ "bdw20, bdw5%, bdw-2em, ..." rb
+snippet /bdw(-?\d+(?:\.\d+)?)(\w+|%)?/ "bdw20, bdw5%, bdw-2em, ..." rb
 border-width: `!p snip.rv = snippets.unit(*match.group(1, 2))`
 $0
 endsnippet
 
 # border-{direction}-width: {number}{unit}
-snippet /bd([trbl])w(-?\d+(?:\.\d+)?(\w+|%)?)/ "bdtw20, bdbw5%, bdlw-2em, ..." rb
+snippet /bd([trbl])w(-?\d+(?:\.\d+)?)(\w+|%)?/ "bdtw20, bdbw5%, bdlw-2em, ..." rb
 border-`!p snip.rv = directions[match.group(1)]`-width: `!p snip.rv = snippets.unit(*match.group(2, 3))`
 $0
 endsnippet
 
 # border-style:
-snippet 'bds' "border-style: " b
-border-style: $1
-$0
+snippet bds "bds => border-style: " b
+border-style: $0
 endsnippet
 
 # border-style: {prop}
@@ -69,21 +65,19 @@ $0
 endsnippet
 
 # border-color:
-snippet 'bdc' "border-color: " b
-border-color: $1
-$0
+snippet bdc "bdc => border-color: " b
+border-color: $0
 endsnippet
 
 # border-color: {prop}
-snippet 'bdc:t' "border-color: transparent" b
+snippet bdc:t "bdc:t => border-color: transparent" b
 border-color: transparent
 $0
 endsnippet
 
 # border-{direction}-color:
 snippet /bd([trbl])c/ "/bd[trbl]c/ => border-(top|right|bottom|left)-color: " rb
-border-`!p snip.rv = directions[match.group(1)]`-color: $1
-$0
+border-`!p snip.rv = directions[match.group(1)]`-color: $0
 endsnippet
 
 # border-{direction}-color: {prop}
@@ -93,31 +87,29 @@ $0
 endsnippet
 
 # border-spacing:
-snippet 'bdsp' "border-spacing: " b
-border-spacing: $1
-$0
+snippet bdsp "bdsp => border-spacing: " b
+border-spacing: $0
 endsnippet
 
 # border-spacing: {number}{unit}
-snippet /bdsp(\d+(?:\.\d+)?(\w+|%)?)/ "bdsp20, bdsp1em, bdsp5%, ..." rb
+snippet /bdsp(\d+(?:\.\d+)?)(\w+|%)?/ "bdsp20, bdsp1em, bdsp5%, ..." rb
 border-spacing: `!p snip.rv = snippets.unit(*match.group(1, 2))`
 $0
 endsnippet
 
 # border-radius:
-snippet 'bdrs' "border-radius: " b
-border-radius: $1
-$0
+snippet bdrs "bdrs => border-radius: " b
+border-radius: $0
 endsnippet
 
 # border-radius: {number}{unit}
-snippet /bdrs(\d+(?:\.\d+)?(\w+|%)?)/ "bdrs20, bdrs10%, bdrs2em, ..." rb
+snippet /bdrs(\d+(?:\.\d+)?)(\w+|%)?/ "bdrs20, bdrs10%, bdrs2em, ..." rb
 border-radius: `!p snip.rv = snippets.unit(*match.group(1, 2))`
 $0
 endsnippet
 
 # border-{direction}-radius: {number}{unit}
-snippet /bd([tb])([lr])rs(\d+(?:\.\d+)?(\w+|%)?)/ "bdtlrs20, bdblrs10%, bdtrrs2em, ..." rb
+snippet /bd([tb])([lr])rs(\d+(?:\.\d+)?)(\w+|%)?/ "bdtlrs20, bdblrs10%, bdtrrs2em, ..." rb
 border-`!p snip.rv = directions[match.group(1)] + '-' + directions[match.group(2)]`-radius: `!p snip.rv = snippets.unit(*match.group(3, 4))`
 $0
 endsnippet
