@@ -1,0 +1,121 @@
+global !p
+import snippets
+anidi_props = {
+	'n': 'normal',
+	'r': 'reverse',
+	'a': 'alternate',
+	'ar': 'alternate-reverse'
+}
+anifm_props = {
+	'n': 'none',
+	'f': 'forwards',
+	'b': 'backwards',
+	'bo': 'both'
+}
+anips_props = {
+	'p': 'paused',
+	'r': 'running'
+}
+endglobal
+
+# animation:
+snippet ani "ani => animation: " b
+animation: $0
+endsnippet
+
+# animation:
+snippet ani:help "Help: `animation`" b
+animation: name duration [timing-function] [delay] [iteration-count] [direction] [fill-mode] [play-state]
+$0
+endsnippet
+
+# animation-delay:
+snippet anid "anid => animation-delay: " b
+animation-delay: $0
+endsnippet
+
+# animation-delay: {number}{unit}
+snippet /anid(-?\d*(?:\.\d+)?)(m?s)?/ "anid60, anid2s, anid0.8s" rb
+animation-delay: `!p snip.rv = snippets.unit(*match.group(1, 2), 'ms')`
+$0
+endsnippet
+
+# animation-direction:
+snippet anidi "anidi => animation-direction: " b
+animation-direction: $0
+endsnippet
+
+# animation-direction: {prop}
+snippet /anidi:(n|r|ar?)/ "anidi:(n|r|a|ar) => animation-direction: (normal|reverse|alternate|alternate-reverse)" rb
+animation-direction: `!p snip.rv = anidi_props[match.group(1)]`
+$0
+endsnippet
+
+# animation-duration:
+snippet anidu "anidu => animation-duration: " b
+animation-duration: $0
+endsnippet
+
+# animation-duration: {number}{unit}
+snippet /anidu(-?\d*(?:\.\d+)?)(m?s)?/ "anidu60, anidu2s, anidu0.8s, etc." rb
+animation-duration: `!p snip.rv = snippets.unit(*match.group(1, 2), 'ms')`
+$0
+endsnippet
+
+# animation-fill-mode:
+snippet anifm "anifm => animation-fill-mode: " b
+animation-fill-mode: $0
+endsnippet
+
+# animation-fill-mode: {prop}
+snippet /anifm:(n|f|bo?)/ "anifm:(n|f|b|bo) => animation-fill-mode: (none|forwards|backwards|both)" rb
+animation-fill-mode: `!p snip.rv = anifm_props[match.group(1)]`
+$0
+endsnippet
+
+# animation-iteration-count:
+snippet aniic "aniic => animation-iteration-count: " b
+animation-iteration-count: $0
+endsnippet
+
+# animation-iteration-count: {prop}
+snippet aniic "aniic:i => animation-iteration-count: infinite" b
+animation-iteration-count: infinite
+$0
+endsnippet
+
+# animation-iteration-count: {number}
+snippet /aniic(\d+)/ "aniic2, aniic10, etc." rb
+animation-iteration-count: `!p snip.rv = match.group(1)`
+$0
+endsnippet
+
+# animation-name:
+snippet anin "anin => animation-name: " b
+animation-name: $0
+endsnippet
+
+# animation-play-state:
+snippet anips "anips => animation-play-state: " b
+animation-play-state: $0
+endsnippet
+
+# animation-play-state: {prop}
+snippet /anips:(p|r)/ "anips:(p|r) => animation-play-state: (paused|running)" rb
+animation-play-state: `!p snip.rv = anips_props[match.group(1)]`
+$0
+endsnippet
+
+# animation-timing-function:
+snippet anitf "anitf => animation-timing-function: " b
+animation-timing-function: $0
+endsnippet
+
+# animation-timing-function:
+snippet anitf:help "Help: `animation-timing-function`" b
+animation-timing-function: linear
+animation-timing-function: ease | ease-in | ease-out | ease-in-out
+animation-timing-function: step-start | step-end | steps(n, start|end)
+animation-timing-function: cubic-bezier(x1, y1, x2, y2)
+$0
+endsnippet
