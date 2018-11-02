@@ -183,6 +183,7 @@ if dein#tap('ultisnips')
   let g:UltiSnipsExpandTrigger = '<Tab>'
   let g:UltiSnipsJumpForwardTrigger = '<Tab>'
   let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+  autocmd MyAutoCmd FileType stylus inoremap <CR> <C-R>=(helper#ultisnips#ExpandOrJump() > 0) ? '' : "\n"<CR>
 endif
 " }}}
 
