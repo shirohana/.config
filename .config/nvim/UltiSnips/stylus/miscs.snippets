@@ -1,0 +1,59 @@
+global !p
+import snippets
+endglobal
+
+# all:
+snippet all "all: _" b
+all: $0
+endsnippet
+
+# clear:
+snippet clear "clear: _" b
+clear: ${1:both}
+$0
+endsnippet
+
+# cursor:
+snippet cur "cursor: _" b
+cursor: ${0:help|pointer|text|wait|zoom-in|zoom-out}
+endsnippet
+
+# float:
+snippet float "float: _" b
+float: $0
+endsnippet
+
+# page-break-after:
+snippet pba "page-break-after: _" b
+page-break-after: ${0:auto|always|avoid|left|right}
+endsnippet
+
+# page-break-before:
+snippet pbb "page-break-before: _" b
+page-break-before: ${0:auto|always|avoid|left|right}
+endsnippet
+
+# page-break-inside:
+snippet pbi "page-break-inside: _" b
+page-break-inside: ${0:auto|avoid}
+endsnippet
+
+# pointer-events:
+snippet poe "pointer-events: _" b
+pointer-events: ${0:auto|none}
+endsnippet
+
+# resize:
+snippet res "resize: _" b
+resize: ${0:none|both|horizontal|vertical}
+endsnippet
+
+# scroll-behavior:
+snippet scroll "scroll-behavior: _" b
+scroll-behavior: ${0:auto|smooth}
+endsnippet
+
+# user-select:
+snippet us "user-select: _" b
+user-select: ${0:auto|none|text|all}
+endsnippet

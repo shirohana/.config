@@ -35,24 +35,11 @@ hsla(${1:${2:hue}, ${3:saturation}, ${4:lightness}}, ${5:alpha})
 endsnippet
 
 # color:
-snippet c "color: " b
+snippet c "color: _" b
 color: $0
 endsnippet
-
 # color: {color}
-post_jump "snippets.expand(snip)"
-snippet /c:(#|ra?|ha?)/ "/c:(#|r|ra|h|ha) => color: (...)" rb
-color: `!p snip.rv = c_props[match.group(1)]`
-$0
-endsnippet
-
-# opacity:
-snippet op "opacity: " b
-opacity: $0
-endsnippet
-
-# opacity: {number}
-snippet /op((?:0?\.)?\d+)/ "op.5, op1, op0.25, ..." rb
-opacity: `!p snip.rv = match.group(1)`
-$0
+post_jump "snippets.expand(snip, [0])"
+snippet /c;(ra?|ha?|#)/ "c;(r|ra|h|ha|#) => color: {color}" rb
+color: `!p snip.rv = c_props[match.group(1)]`$0
 endsnippet

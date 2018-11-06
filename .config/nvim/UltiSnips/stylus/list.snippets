@@ -2,18 +2,30 @@ global !p
 import snippets
 endglobal
 
-snippet ls "list-style: " b
-list-style: $0
+# list-style:
+snippet lst "list-style: _" b
+list-style: ${0:<type> <position> <image>}
 endsnippet
 
-snippet lsi "list-style-image: " b
-list-style-image: $0
+# list-style-image:
+snippet lsti "list-style-image: _" b
+list-style-image: ${0:url()}
 endsnippet
 
-snippet lsp "list-style-position: " b
-list-style-position: $0
+# list-style-position:
+snippet lstp "list-style-position: _" b
+list-style-position: ${0:inside|outside}
 endsnippet
 
-snippet lst "list-style-type: " b
+# list-style-type:
+snippet lstt "list-style-type: _" b
 list-style-type: $0
+endsnippet
+# list-style-type:
+snippet ulst "list-style-type: _" b
+list-style-type: ${0:circle|disc|square}
+endsnippet
+# list-style-type:
+snippet olst "list-style-type: _" b
+list-style-type: ${0:cjk-ideographic|decimal|decimal-leading-zero|lower-alpha|lower-roman|upper-alpha|upper-roman}
 endsnippet

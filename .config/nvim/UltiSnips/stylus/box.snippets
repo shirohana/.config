@@ -1,148 +1,172 @@
 global !p
 import snippets
-bsz_props = {
-  'cb': 'content-box',
-  'bb': 'border-box'
+bfv_props = {
+	'v': 'visible',
+	'h': 'hidden'
 }
-bdcl_props = {
-  's': 'separate',
-  'c': 'collapse'
+bdb_props = {
+	's': 'slice',
+	'c': 'clone'
+}
+bsz_props = {
+  'c': 'content-box',
+  'b': 'border-box'
 }
 endglobal
 
-snippet w "w => width: " b
-width: $0
+# backface-visibility:
+snippet bfv "backface-visibility: _" b
+backface-visibility: $0
 endsnippet
-
-snippet w:a "w:a => width: auto" b
-width: auto
+# backface-visibility: {prop}
+snippet /bfv;(v|h)/ "bfv;(v|h) => backface-visibility: (visible|hidden)" rb
+backface-visibility: `!p snip.rv = bfv_props[match.group(1)]`
 $0
 endsnippet
 
-snippet /\bw(\d+(?:\.\d+)?)(\w+|%)?/ "w640, w50%, w12rem, ..." rb
-width: `!p snip.rv = snippets.unit(*match.group(1, 2))`
+# box-decoration-break:
+snippet bodb "box-decoration-break: _" b
+box-decoration-break: ${1:clone}
+$0
+endsnippet
+# box-decoration-break: {prop}
+snippet /bodb;(s|c)/ "bodb;(s|c) => box-decoration-break: (slice|break)" rb
+box-decoration-break: `!p snip.rv = bdb_props[match.group(1)]`
 $0
 endsnippet
 
-snippet maw "maw => max-width: " b
-max-width: $0
-endsnippet
-
-snippet maw:n "maw:b => max-width: none" b
-max-width: none
-$0
-endsnippet
-
-snippet /maw(\d+(?:\.\d+)?)(\w+|%)?/ "maw640, maw12em, maw50%, ..." rb
-max-width: `!p snip.rv = snippets.unit(*match.group(1, 2))`
-$0
-endsnippet
-
-snippet miw "miw => min-width: " b
-min-width: $0
-endsnippet
-
-snippet miw:n "miw:n => min-width: none" b
-min-width: none
-$0
-endsnippet
-
-snippet /miw(\d+(?:\.\d+)?)(\w+|%)?/ "miw640, miw12em, miw50%, ..." rb
-min-width: `!p snip.rv = snippets.unit(*match.group(1, 2))`
-$0
-endsnippet
-
-snippet h "h => height: " b
-height: $0
-endsnippet
-
-snippet h:a "h:a => height: auto" b
-height: auto
-$0
-endsnippet
-
-snippet /\bh(\d+(?:\.\d+)?)(\w+|%)?/ "h640, h50%, h12rem, ..." rb
-height: `!p snip.rv = snippets.unit(*match.group(1, 2))`
-$0
-endsnippet
-
-snippet mah "mah => max-height: " b
-max-height: $0
-endsnippet
-
-snippet mah:n "mah:n => max-height: none" b
-max-height: none
-$0
-endsnippet
-
-snippet /mah(\d+(?:\.\d+)?)(\w+|%)?/ "mah640, mah12em, mah50%, ..." rb
-max-height: `!p snip.rv = snippets.unit(*match.group(1, 2))`
-$0
-endsnippet
-
-snippet mih "mih => min-height: " b
-min-height: $0
-endsnippet
-
-snippet mih:n "mih:n => min-height: none" b
-min-height: none
-$0
-endsnippet
-
-snippet /mih(\d+(?:\.\d+)?)(\w+|%)?/ "mih640, mih12em, mih50%, ..." rb
-min-height: `!p snip.rv = snippets.unit(*match.group(1, 2))`
-$0
-endsnippet
-
-snippet bsz "bsz => box-sizing: " b
+# box-sizing:
+snippet bosz "box-sizing: _" b
 box-sizing: ${1:border-box}
 $0
 endsnippet
-
-snippet /\bbsz:(cb|bb)/ "/bsz:(cb|bb)/ => box-sizing: (content-box|border-box)" rb
+# box-sizing: {prop}
+snippet /bosz;(c|b)/ "bosz;(c|b) => box-sizing: (content-box|border-box)" rb
 box-sizing: `!p snip.rv = bsz_props[match.group(1)]`
 $0
 endsnippet
 
-snippet bsd "bsd => box-shadow: " b
-box-shadow: $0
+# height:
+snippet h "height: _" b
+height: $0
 endsnippet
-
-snippet bsd:n "bsd:n => box-shadow: none" b
-box-shadow: none
+# height: {prop}
+snippet /h;a/ "h;(a) => height: (auto)" rb
+height: auto
+$0
+endsnippet
+# height: {number}{unit}
+snippet /h((?:\d*\.)?\d+)(\w+|%)?/ "h12, h640x, h50p, etc." rb
+height: `!p snip.rv = snippets.unit(*match.group(1, 2))`
 $0
 endsnippet
 
-snippet bdcl "bdcl => border-collapse: " b
-border-collapse: ${1:collapse}
+# max-height:
+snippet mah "max-height: _" b
+max-height: $0
+endsnippet
+# max-height: {prop}
+snippet /mah;n/ "mah;(n) => max-height: none" rb
+max-height: none
+$0
+endsnippet
+# max-height: {number}{unit}
+snippet /mah((?:\d*\.)?\d+)(\w+|%)?/ "mah24, mah50p, mah18vw, etc." rb
+max-height: `!p snip.rv = snippets.unit(*match.group(1, 2))`
 $0
 endsnippet
 
-snippet /\bbdcl:([sc])/ "/bdcl:[sc]/ => border-collapse: (separate|collapse)" rb
-border-collapse: `!p snip.rv = bdcl_props[match.group(1)]`
+# max-width:
+snippet maw "max-width: _" b
+max-width: $0
+endsnippet
+# max-width: {prop}
+snippet /maw;n/ "maw;(n) => max-width: none" rb
+max-width: none
+$0
+endsnippet
+# max-width: {number}{unit}
+snippet /maw((?:\d*\.)?\d+)(\w+|%)?/ "maw24, maw50p, maw18vw, etc." rb
+max-width: `!p snip.rv = snippets.unit(*match.group(1, 2))`
 $0
 endsnippet
 
-snippet bdi "bdi => border-image: " b
-border-image: $0
+# min-height:
+snippet mih "min-height: _" b
+min-height: $0
+endsnippet
+# min-height: {prop}
+snippet /mih;n/ "mih;(n) => min-height: none" rb
+min-height: none
+$0
+endsnippet
+# min-height: {number}{unit}
+snippet /mih((?:\d*\.)?\d+)(\w+|%)?/ "mih24, mih50p, mih18vw, etc." rb
+min-height: `!p snip.rv = snippets.unit(*match.group(1, 2))`
+$0
 endsnippet
 
-snippet bdio "bdio => border-image-outset: " b
-border-image-outset: $0
+# min-width:
+snippet miw "min-width: _" b
+min-width: $0
+endsnippet
+# min-width: {prop}
+snippet /miw;n/ "miw;(n) => min-width: none" rb
+min-width: none
+$0
+endsnippet
+# min-width: {number}{unit}
+snippet /miw((?:\d*\.)?\d+)(\w+|%)?/ "miw24, miw50p, miw18vw, etc." rb
+min-width: `!p snip.rv = snippets.unit(*match.group(1, 2))`
+$0
 endsnippet
 
-snippet bdir "bdir => border-image-repeat: " b
-border-image-repeat: $0
+# object-fit:
+snippet obf "object-fit: _" b
+object-fit: ${0:fill|contain|cover|scale-down|none}
 endsnippet
 
-snippet bdis "bdis => border-image-slice: " b
-border-image-slice: $0
+# object-position
+snippet obp "object-position: _" b
+object-position: ${0:50% 50%}
 endsnippet
 
-snippet bdiso "bdiso => border-image-source: " b
-border-image-source: $0
+# outline
+snippet ol "outline: _" b
+outline: ${0:<width> <style> <color>}
 endsnippet
 
-snippet bdiw "bdiw => border-image-width: " b
-border-image-width: $0
+# outline-color
+snippet olc "outline-color: _" b
+outline-color: $0
+endsnippet
+
+# outline-offset
+snippet olo "outline-offset: _" b
+outline-offset: $0
+endsnippet
+
+# outline-style
+snippet ols "outline-style: _" b
+outline-style: ${0:none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset}
+endsnippet
+
+# outline-width
+snippet olw "outline-width: _" b
+outline-width: $0
+endsnippet
+
+# width:
+snippet w "width: _" b
+width: $0
+endsnippet
+# width: {prop}
+snippet /w;a/ "w;(a) => width: (auto)" rb
+width: auto
+$0
+endsnippet
+# width: {number}{unit}
+snippet /w((?:\d*\.)?\d+)(\w+|%)?/ "w18, w33.33p, w20vw, w640x, etc." rb
+width: `!p snip.rv = snippets.unit(*match.group(1, 2))`
+$0
 endsnippet

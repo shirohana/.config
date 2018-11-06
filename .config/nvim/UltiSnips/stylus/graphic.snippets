@@ -1,0 +1,192 @@
+global !p
+import snippets
+iso_props = {
+	'a': 'auto',
+	'i': 'isolate'
+}
+tfs_props = {
+	'f': 'flat',
+	'p': 'preserve-3d'
+}
+endglobal
+
+# box-shadow:
+snippet bosd "box-shadow: _" b
+box-shadow: $0
+endsnippet
+# box-shadow: {prop}
+snippet /bosd;n/ "bosd;(n) => box-shadow: (none)" rb
+box-shadow: none
+$0
+endsnippet
+
+# clip:
+snippet clip "clip: _" b
+clip: ${1:rect($2)}
+$0
+endsnippet
+
+# filter:
+snippet fil "filter: _" b
+filter: ${0:blur(px)|brightnes(%)|contrast(%)|drop-shadow()|grayscale(%)|hue-rotate(deg)|invert(%)|opacity(%)|saturate(%)|sepia(%)|url()}
+endsnippet
+
+# isolation:
+snippet iso "isolation: _" b
+isolation: ${0:isolate|auto}
+endsnippet
+
+# isolation: {prop}
+snippet /iso;(a|i)/ "iso;(a|i) => isolation: (auto|isolate)" rb
+isolation: `!p snip.rv = iso_props[match.group(1)]`
+endsnippet
+
+# opacity:
+snippet op "opacity: _" b
+opacity: $0
+endsnippet
+# opacity: {number}
+snippet /op(\.?\d+)/ "op.5, op1, etc." rb
+opacity: `!p snip.rv = match.group(1)`
+$0
+endsnippet
+
+# perspective:
+snippet pp "perspective: _" b
+perspective: $0
+endsnippet
+
+# perspective-origin:
+snippet ppo "perspective-origin: _" b
+perspective-origin: $0
+endsnippet
+
+# text-shadow:
+snippet ts "text-shadow: _" b
+text-shadow: $0
+endsnippet
+
+# transform:
+snippet tf "transform: _" b
+transform: ${0:none|translate()|scale()|rotate()|skew()|perspective()}
+endsnippet
+# transform: {prop}
+snippet tf;n "transform: none" b
+transform: none
+$0
+endsnippet
+# transform: matrix()
+snippet tf;m "transform: matrix(a, b, c, d, e, f)" b
+transform: matrix($1)$0
+endsnippet
+# transform: matrix3d()
+snippet tf;m3 "transform: matrix3d(...)" b
+transform: matrix3d($1)$0
+endsnippet
+
+# transform: translate()
+snippet tf;t "transform: translate(x, y)" b
+transform: translate(${1:x}, ${2:y})$0
+endsnippet
+# transform: translate3d()
+snippet tf;t3 "transform: translate(x, y)" b
+transform: translate(${1:x}, ${2:y}, ${3:z})$0
+endsnippet
+# transform: translateX()
+snippet tf;tx "transform: translateX(x)" b
+transform: translateX(${1:x})$0
+endsnippet
+# transform: translateY()
+snippet tf;ty "transform: translateY(y)" b
+transform: translateY(${1:y})$0
+endsnippet
+# transform: translateZ()
+snippet tf;tz "transform: translateZ(y)" b
+transform: translateZ(${1:z})$0
+endsnippet
+
+# transform: scale()
+snippet tf;s "transform: scale(x, y)" b
+transform: scale(${1:x}, ${2:y})$0
+endsnippet
+# transform: scale3d()
+snippet tf;s3 "transform: scale3d(x, y, z)" b
+transform: scale3d(${1:x}, ${2:y}, ${3:z})$0
+endsnippet
+# transform: scaleX()
+snippet tf;sx "transform: scaleX(x)" b
+transform: scaleX(${1:x})$0
+endsnippet
+# transform: scaleY()
+snippet tf;sy "transform: scaleY(y)" b
+transform: scaleY(${1:y})$0
+endsnippet
+# transform: scaleZ()
+snippet tf;sz "transform: scaleZ(y)" b
+transform: scaleZ(${1:z})$0
+endsnippet
+
+# transform: rotate()
+snippet tf;r "transform: rotate(<angle>)" b
+transform: rotate(${1:${2:<angle>}deg})$0
+endsnippet
+# transform: rotate3d()
+snippet tf;r3 "transform: rotate3d(<angle>)" b
+transform: rotate3d(${1:x}, ${2:y}, ${3:z}, ${4:${5:<angle>}deg})$0
+endsnippet
+# transform: rotateX()
+snippet tf;rx "transform: rotateX(<angle>)" b
+transform: rotateX(${1:${2:<angle>}deg})$0
+endsnippet
+# transform: rotateY()
+snippet tf;ry "transform: rotateY(<angle>)" b
+transform: rotateY(${1:${2:<angle>}deg})$0
+endsnippet
+# transform: rotateZ()
+snippet tf;rz "transform: rotateZ(<angle>)" b
+transform: rotateZ(${1:${2:<angle>}deg})$0
+endsnippet
+
+# transform: skew()
+snippet tf;sk "transform: skew(<x-angle>[, <y-angle>])" b
+transform: skew($1)$0
+endsnippet
+# transform: skewX()
+snippet tf;skx "transform: skewX(<x-angle>)" b
+transform: skewX(${1:${2:<angle>}deg})$0
+endsnippet
+# transform: skewY()
+snippet tf;sky "transform: skewY(<y-angle>)" b
+transform: skewY(${1:${2:<angle>}deg})$0
+endsnippet
+
+# transform: perspective()
+snippet tf;per "transform: perspective()" b
+transform: perspective($1)$0
+endsnippet
+
+# transform-origin:
+snippet tfo "transform-origin: _" b
+transform-origin: $0
+endsnippet
+
+# transform-style:
+snippet tfs "transform-style: _" b
+transform-style: $0
+endsnippet
+
+# transform-style: {prop}
+snippet /tfs;(f|p)/ "tfs;(f|p) => transform-style: (flat|preserve-3d)" rb
+transform-style: `!p snip.rv = tfs_props[match.group(1)]`
+$0
+endsnippet
+
+# z-index:
+snippet z "z-index: _" b
+z-index: $0
+endsnippet
+# z-index: {number}
+snippet /z(\d+)/ "z10, etc." rb
+z-index: `!p snip.rv = match.group(1)`
+$0
+endsnippet

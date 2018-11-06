@@ -1,50 +1,61 @@
 global !p
 import snippets
-p_props = {
-  'i': 'inherit',
-  'r': 'initial'
-}
 directions = {
   't': 'top',
   'r': 'right',
   'b': 'bottom',
   'l': 'left'
 }
+p_props = {
+	'a': 'auto',
+  'i': 'inherit',
+  'r': 'initial'
+}
 endglobal
 
 # padding:
-snippet p "padding: " b
+snippet p "padding: _" b
 padding: $0
 endsnippet
-
 # padding: {prop}
-snippet /\bp:([ir])/ "/p:[ir]/ => padding: (inherit|initial)" rb
+snippet /p;(a|i|r)/ "p;(a|i|r) => padding: (auto|inherit|initial)" rb
 padding: `!p snip.rv = p_props[match.group(1)]`
 $0
 endsnippet
-
+# padding: {number}{unit}
+snippet /p(-?(?:\d*\.)?\d+)([a-z]+|%)?/ "p.75, p20p, etc." rb
+padding: `!p snip.rv = snippets.unit(*match.group(1, 2))`
+$0
+endsnippet
 # padding: {number}{unit} {number}{unit}
-snippet /\bp(-?\d+(?:\.\d+)?)(\w+|%)?(?:-(-?\d+(?:\.\d+)?)(\w+|%)?)?/ "p20, p20%-40%, p1em-1.5em, ..." rb
+snippet /p(-?(?:\d*\.)?\d+)(%|[a-z]+?|(?=\.|-|;));?(-?(?:\d*\.)?\d+)([a-z]+?|%)?/ "p1.5.75, p20p40p, etc." rb
 padding: `!p
 v = snippets.unit(*match.group(1, 2))
 h = snippets.unit(*match.group(3, 4))
-snip.rv = v + (' ' + h if h else '')`
+snip.rv = ' '.join((v, h))`
+$0
+endsnippet
+# padding: {number}{unit} {number}{unit} {number}{unit}
+snippet /p;(-?(?:\d*\.)?\d+)(%|[a-z]+?|(?=\.|-|;));?(-?(?:\d*\.)?\d+)(%|[a-z]+?|(?=\.|-|;));?(-?(?:\d*\.)?\d+)([a-z]+|%)?/ "p1.5.75;3, p20p15p30p, etc." rb
+padding: `!p
+t = snippets.unit(*match.group(1, 2))
+h = snippets.unit(*match.group(3, 4))
+b = snippets.unit(*match.group(5, 6))
+snip.rv = ' '.join((t, h, b))`
 $0
 endsnippet
 
 # padding-{direction}:
-snippet /[^:]\bp([trbl])/ "/p[trbl]/ => padding-(top|right|bottom|left):" rb
+snippet /p([trbl])/ "p(t|r|b|l) => padding-(top|right|bottom|left): _" rb
 padding-`!p snip.rv = directions[match.group(1)]`: $0
 endsnippet
-
 # padding-{direction}: {prop}
-snippet /\bp([trbl]):([ir])/ "/p[trbl]:[ir]/ => padding-(top|right|bottom|left): (inherit|initial)" rb
+snippet /p([trbl]);(a|i|r)/ "p(t|r|b|l);(a|i|r) => padding-(top|right|bottom|left): (auto|inherit|initial)" rb
 padding-`!p snip.rv = directions[match.group(1)]`: `!p snip.rv = p_props[match.group(2)]`
 $0
 endsnippet
-
 # padding-{direction}: {number}{unit}
-snippet /\bp([trbl])(-?\d+(?:\.\d+)?)(\w+|%)?/ "pt20, pb-2em, pl50%, ..." rb
+snippet /p([trbl])(-?(?:\d*\.)?\d+)(\w+|%)?/ "pt1.5, pb-2e, pr15p, etc." rb
 padding-`!p snip.rv = directions[match.group(1)]`: `!p snip.rv = snippets.unit(*match.group(2, 3))`
 $0
 endsnippet

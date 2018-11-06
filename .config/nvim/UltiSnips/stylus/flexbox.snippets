@@ -1,0 +1,142 @@
+global !p
+import snippets
+ac_props = {
+	's': 'stretch',
+  'c': 'center',
+	'fs': 'flex-start',
+	'fe': 'flex-end',
+	'sb': 'space-between',
+	'sa': 'space-around'
+}
+ai_props = {
+	's': 'stretch',
+	'c': 'center',
+	'fs': 'flex-start',
+	'fe': 'flex-end',
+	'b': 'baseline'
+}
+as_props = {
+	'a': 'auto',
+	's': 'stretch',
+	'c': 'center',
+	'fs': 'flex-start',
+	'fe': 'flex-end',
+	'b': 'baseline'
+}
+fd_props = {
+	'r': 'row',
+	'rr': 'row-reverse',
+	'c': 'column',
+	'cr': 'column-reverse'
+}
+fw_props = {
+	'n': 'nowrap',
+	'w': 'wrap',
+	'wr': 'wrap-reverse'
+}
+jc_props = {
+	'c': 'center',
+	'fs': 'flex-start',
+	'fe': 'flex-end',
+	'sb': 'space-between',
+	'sa': 'space-around'
+}
+endglobal
+
+# align-content:
+snippet ac "align-content: _" b
+align-content: $0
+endsnippet
+# align-content: {prop}
+snippet /ac;(c|f[se]|s[ba]?)/ "ac;(s|c|fs|fe|sb|sa) => align-content: (stretch|center|flex-start|flex-end|space-between|space-around)" rb
+align-content: `!p snip.rv = ac_props[match.group(1)]`
+$0
+endsnippet
+
+# align-items:
+snippet ai "align-items: _" b
+align-items: $0
+endsnippet
+# align-items: {prop}
+snippet /ai;(s|c|f[se]|b)/ "ai;(s|c|fs|fe|b) => align-items: (stretch|center|flex-start|flex-end|baseline)" rb
+align-items: `!p snip.rv = ai_props[match.group(1)]`
+$0
+endsnippet
+
+# align-self:
+snippet as "align-self: _" b
+align-self: $0
+endsnippet
+# align-self: {prop}
+snippet /as;(a|s|c|f[se]|b)/ "as;(a|s|c|fs|fe|b) => align-self: (auto|stretch|center|flex-start|flex-end|baseline)" rb
+align-self: `!p snip.rv = as_props[match.group(1)]`
+$0
+endsnippet
+
+# flex:
+snippet f "flex: _" b
+flex: ${0:<grow> <shrink> <basis>}
+endsnippet
+
+# flex-basis:
+snippet fb "flex-basis: _" b
+flex-basis: $0
+endsnippet
+# flex-basis: {number}{unit}
+snippet /fb((?:\d*\.)?\d+)(\w+|%)?/ "fb.5, fb100p, etc." rb
+flex-basis: `!p snip.rv = snippets.unit(*match.group(1, 2))`
+$0
+endsnippet
+
+# flex-direction:
+snippet fd "flex-direction: _" b
+flex-direction: $0
+endsnippet
+# flex-direction: {prop}
+snippet /fd;(rr?|cr?)/ "fd;(r|rr|c|cr) => flex-direction: (row|row-reverse|column|column-reverse)" rb
+flex-direction: `!p snip.rv = fd_props[match.group(1)]`
+endsnippet
+
+# flex-flow:
+snippet ff "flex-flow: _" b
+flex-flow: ${0:<direction> <wrap>}
+endsnippet
+
+# flex-grow:
+snippet fg "flex-grow: _" b
+flex-grow: $0
+endsnippet
+
+# flex-shrink:
+snippet fs "flex-shrink: _" b
+flex-shrink: $0
+endsnippet
+
+# flex-wrap:
+snippet fw "flex-wrap: _" b
+flex-wrap: ${0:wrap}
+endsnippet
+# flex-wrap: {prop}
+snippet /fw;(n|wr?)/ "fw;(n|w|wr) => flex-wrap: (nowrap|wrap|wrap-reverse)" rb
+flex-wrap: `!p snip.rv = fw_props[match.group(1)]`
+endsnippet
+
+# justify-content:
+snippet jc "justify-content: _" b
+justify-content: $0
+endsnippet
+# justify-content: {prop}
+snippet /jc;(c|f[se]|s[ba])/ "jc;(c|fs|fe|sb|sa) => justify-content: (center|flex-start|flex-end|space-between|space-around)" rb
+justify-content: `!p snip.rv = jc_props[match.group(1)]`
+$0
+endsnippet
+
+# order:
+snippet o "order: _" b
+order: $0
+endsnippet
+# order: {number}
+snippet /o(-?\d+)/ "o2, o-1, etc" rb
+order: `!p snip.rv = match.group(1)`
+$0
+endsnippet

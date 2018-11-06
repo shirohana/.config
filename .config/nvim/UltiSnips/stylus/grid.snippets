@@ -1,0 +1,138 @@
+global !p
+import snippets
+gac_props = {
+	'a': 'auto',
+	'm': 'max-content',
+	'n': 'min-content'
+}
+gaf_props = {
+	'd': 'dense',
+	'r': 'row',
+	'rd': 'row dense',
+	'c': 'column',
+	'cd': 'column dense'
+}
+gar_props = {
+	'a': 'auto',
+	'm': 'max-content',
+	'n': 'min-content'
+}
+endglobal
+
+# grid:
+snippet g "grid: _" b
+grid: ${0:<template-rows> / <template-columns> <template-areas> <auto-rows> / <auto-columns> <auto-flow>}
+endsnippet
+
+# grid-area:
+snippet gaa "grid-area: _" b
+grid-area: ${0:<row-start> / <column-start> / <row-end> / <column-end>}
+endsnippet
+
+# grid-auto-columns:
+snippet gac "grid-auto-columns: _" b
+grid-auto-columns: ${0:<row-start> / <column-start> / <row-end> / <column-end>}
+endsnippet
+# grid-auto-columns: {prop}
+snippet /gac;(a|m|n)/ "gac;(a|m|n) => grid-auto-columns: (auto|max-content|min-content)" rb
+grid-auto-columns: `!p snip.rv = gac_props[match.group(1)]`
+endsnippet
+# grid-auto-columns: {number}{unit}
+snippet /gac((?:\d*\.)?\d+)(\w+|%)?/ "gac1.5, gac5p, etc." rb
+grid-auto-columns: `!p snip.rv = snippets.unit(*match.group(1, 2))`
+endsnippet
+
+# grid-auto-flow:
+snippet gaf "grid-auto-flow: _" b
+grid-auto-flow: $0
+endsnippet
+# grid-auto-flow: {prop}
+snippet /gaf;(d|rd?|cd?)/ "gaf;(d|r|rd|c|cd) => grid-auto-flow: (dense|row|row dense|column|column dense)" rb
+grid-auto-flow: `!p snip.rv = gaf_props[match.group(1)]`
+endsnippet
+
+# grid-auto-rows:
+snippet gar "grid-auto-rows: _" b
+grid-auto-rows: $0
+endsnippet
+# grid-auto-rows: {prop}
+snippet /gar;(a|m|n)/ "gar;(a|m|n) => grid-auto-rows: (auto|max-content|min-content)" rb
+grid-auto-rows: `!p snip.rv = gar_props[match.group(1)]`
+endsnippet
+# grid-auto-rows: {number}{unit}
+snippet /gar((?:\d*\.)?\d+)(\w+|%)?/ "gar1.5, gar5p, etc." rb
+grid-auto-rows: `!p snip.rv = snippets.unit(*match.group(1, 2))`
+endsnippet
+
+# grid-column:
+snippet gc "grid-column: _" b
+grid-column: ${0:<column-start> /<column-end>}
+endsnippet
+
+# grid-column-end:
+snippet gce "grid-column-end: _" b
+grid-column-end: ${0:auto|<column-line>|span <number>}
+endsnippet
+
+# grid-column-gap:
+snippet gcp "grid-column-gap: _" b
+grid-column-gap: $0
+endsnippet
+# grid-column-gap: {number}{unit}
+snippet /gcp(-?(?:\d*\.)?\d+)(\w+|%)?/ "gcp1.5, gcp-5p, etc." rb
+grid-column-gap: `!p snip.rv = snippets.unit(*match.group(1, 2))`
+endsnippet
+
+# grid-column-start:
+snippet gcs "grid-column-start: _" b
+grid-column-start: ${0:auto|<column-line>|span <number>}
+endsnippet
+
+# grid-gap:
+snippet gg "grid-gap: _" b
+grid-gap: ${0:<row-gap> <column-gap>}
+endsnippet
+
+# grid-row:
+snippet gw "grid-row: _" b
+grid-row: ${0:<row-start> <row-end>}
+endsnippet
+
+# grid-row-end:
+snippet gwe "grid-row-end: _" b
+grid-row-end: ${0:auto|<column-line>|span <number>}
+endsnippet
+
+# grid-row-gap:
+snippet grp "grid-row-gap: _" b
+grid-row-gap: $0
+endsnippet
+# grid-row-gap: {number}{unit}
+snippet /grp(-?(?:\d*\.)?\d+)(\w+|%)?/ "grp1.5, grp-5p, etc." rb
+grid-row-gap: `!p snip.rv = snippets.unit(*match.group(1, 2))`
+endsnippet
+
+# grid-row-start:
+snippet gws "grid-row-start: _" b
+grid-row-start: ${0:auto|<column-line>|span <number>}
+endsnippet
+
+# grid-template
+snippet gt "grid-template: _" b
+grid-template: $0
+endsnippet
+
+# grid-template-areas
+snippet gta "grid-template-areas: _" b
+grid-template-areas: $0
+endsnippet
+
+# grid-template-columns
+snippet gtc "grid-template-columns: _" b
+grid-template-columns: $0
+endsnippet
+
+# grid-template-rows
+snippet gtr "grid-template-rows: _" b
+grid-template-rows: $0
+endsnippet

@@ -6,7 +6,11 @@ directions = {
   'b': 'bottom',
   'l': 'left'
 }
-bds_props = {
+bdcl_props = {
+  's': 'separate',
+  'c': 'collapse'
+}
+bdst_props = {
   'n': 'none',
   'h': 'hidden',
   'dt': 'dotted',
@@ -21,95 +25,158 @@ bds_props = {
 endglobal
 
 # border:
-snippet bd "bd => border: " b
+snippet bd "border: _" b
 border: $0
 endsnippet
 
-# border-{direction}:
-snippet /bd([trbl])/ "/bd[trbl]/ => border-[top|right|bottom|left]: " rb
-border-`!p snip.rv = directions[match.group(1)]`: $0
-endsnippet
-
-# border-width:
-snippet bdw "bdw => border-width: " b
-border-width: $0
-endsnippet
-
-# border-width: {number}{unit}
-snippet /bdw(-?\d+(?:\.\d+)?)(\w+|%)?/ "bdw20, bdw5%, bdw-2em, ..." rb
-border-width: `!p snip.rv = snippets.unit(*match.group(1, 2))`
+# border-collpase:
+snippet bdcl "border-collapse: _" b
+border-collapse: ${1:collapse}
 $0
 endsnippet
-
-# border-{direction}-width: {number}{unit}
-snippet /bd([trbl])w(-?\d+(?:\.\d+)?)(\w+|%)?/ "bdtw20, bdbw5%, bdlw-2em, ..." rb
-border-`!p snip.rv = directions[match.group(1)]`-width: `!p snip.rv = snippets.unit(*match.group(2, 3))`
-$0
-endsnippet
-
-# border-style:
-snippet bds "bds => border-style: " b
-border-style: $0
-endsnippet
-
-# border-style: {prop}
-snippet /bds:([nhsgrio]|d[tsb])/ "bds:(n|h|dt|ds|s|db|g|r|i|o)/ => border-style: (none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset)" rb
-border-style: `!p snip.rv = bds_props[match.group(1)]`
-$0
-endsnippet
-
-# border-{direction}-style: {prop}
-snippet /bd([trbl])s:([nhsgrio]|d[tsb])/ "bd[trbl]s:(n|h|dt|ds|s|db|g|r|i|o)/ => border-(top|right|bottom|left)-style: (none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset)" rb
-border-`!p snip.rv = directions[match.group(1)]`-style: `!p snip.rv = bds_props[match.group(2)]`
+# border-collpase: {prop}
+snippet /bdcl;(c|s)/ "bdcl;(c|s) => border-collapse: (collapse|separate)" rb
+border-collapse: `!p snip.rv = bdcl_props[match.group(1)]`
 $0
 endsnippet
 
 # border-color:
-snippet bdc "bdc => border-color: " b
+snippet bdc "border-color: _" b
 border-color: $0
 endsnippet
-
 # border-color: {prop}
-snippet bdc:t "bdc:t => border-color: transparent" b
+snippet /bdc;t/ "bdc;(t) => border-color: (transparent)" rb
 border-color: transparent
 $0
 endsnippet
 
-# border-{direction}-color:
-snippet /bd([trbl])c/ "/bd[trbl]c/ => border-(top|right|bottom|left)-color: " rb
-border-`!p snip.rv = directions[match.group(1)]`-color: $0
+# border-image:
+snippet bdi "border-image: _" b
+border-image: $0
 endsnippet
-
-# border-{direction}-color: {prop}
-snippet /bd([trbl])c:t/ "/bd[trbl]c:t/ => border-(top|right|bottom|left)-color: transparent" rb
-border-`!p snip.rv = directions[match.group(1)]`-color: transparent
-$0
+# border-image-outset:
+snippet bdio "border-image-outset: _" b
+border-image-outset: $0
 endsnippet
-
-# border-spacing:
-snippet bdsp "bdsp => border-spacing: " b
-border-spacing: $0
+# border-image-repeat:
+snippet bdir "border-image-repeat: _" b
+border-image-repeat: $0
 endsnippet
-
-# border-spacing: {number}{unit}
-snippet /bdsp(\d+(?:\.\d+)?)(\w+|%)?/ "bdsp20, bdsp1em, bdsp5%, ..." rb
-border-spacing: `!p snip.rv = snippets.unit(*match.group(1, 2))`
-$0
+# border-image-slice:
+snippet bdis "border-image-slice: _" b
+border-image-slice: $0
+endsnippet
+# border-image-source:
+snippet bdiso "border-image-source: _" b
+border-image-source: $0
+endsnippet
+# border-image-width:
+snippet bdiw "border-image-width: _" b
+border-image-width: $0
 endsnippet
 
 # border-radius:
-snippet bdrs "bdrs => border-radius: " b
+snippet bdrs "border-radius: _" b
 border-radius: $0
 endsnippet
-
 # border-radius: {number}{unit}
-snippet /bdrs(\d+(?:\.\d+)?)(\w+|%)?/ "bdrs20, bdrs10%, bdrs2em, ..." rb
+snippet /bdrs((?:\d*\.)?\d+)(\w+|%)?/ "bdrs.5, bdrs100%, bdrs1.5e, etc." rb
 border-radius: `!p snip.rv = snippets.unit(*match.group(1, 2))`
 $0
 endsnippet
 
-# border-{direction}-radius: {number}{unit}
-snippet /bd([tb])([lr])rs(\d+(?:\.\d+)?)(\w+|%)?/ "bdtlrs20, bdblrs10%, bdtrrs2em, ..." rb
+# border-spacing:
+snippet bdsp "border-spacing: _" b
+border-spacing: $0
+endsnippet
+
+# border-style:
+snippet bdst "border-style: _" b
+border-style: $0
+endsnippet
+# border-style: {prop}
+snippet /bdst;([nhsgrio]|d[tsb])/ "bdst;(n|h|dt|ds|s|db|g|r|i|o)/ => border-style: (none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset)" rb
+border-style: `!p snip.rv = bdst_props[match.group(1)]`
+$0
+endsnippet
+
+# border-width:
+snippet bdw "border-width: _" b
+border-width: $0
+endsnippet
+# border-width: {number}{unit}
+snippet /bdw((?:\d*\.)?\d+)(\w+|%)?/ "bdw.5, bdw5%, bdw2e, etc." rb
+border-width: `!p snip.rv = snippets.unit(*match.group(1, 2))`
+$0
+endsnippet
+
+# DIRECTIONS
+
+# border-{direction}:
+snippet /bd([trbl])/ "bd(t|r|b|l) => border-(top|right|bottom|left): _" rb
+border-`!p snip.rv = directions[match.group(1)]`: $0
+endsnippet
+
+# border-{direction}-color:
+snippet /bd([trbl])c/ "bd(t|r|b|l)c => border-(top|right|bottom|left)-color: _" rb
+border-`!p snip.rv = directions[match.group(1)]`-color: $0
+endsnippet
+# border-{direction}-color: {prop}
+snippet /bd([trbl])c;t/ "bd(t|r|b|l)c;(t) => border-(top|right|bottom|left)-color: (transparent)" rb
+border-`!p snip.rv = directions[match.group(1)]`-color: transparent
+$0
+endsnippet
+
+# border-{v-direction}-radius:
+snippet /bd([tb])rs/ "bd(t|b)rs => border-(top|bottom)-{left|right}-radius: _" rb
+border-`!p snip.rv = directions[match.group(1)]`-left-radius: $1
+border-`!p snip.rv = directions[match.group(1)]`-right-radius: $1
+$0
+endsnippet
+# border-{h-direction}-radius:
+snippet /bd([lr])rs/ "bd(l|r)rs => border-{top|bottom}-(left|right)-radius: _ " rb
+border-top-`!p snip.rv = directions[match.group(1)]`-radius: $1
+border-bottom-`!p snip.rv = directions[match.group(1)]`-radius: $1
+$0
+endsnippet
+# border-{v-direction}-radius: {number}{unit}
+snippet /bd([tb])rs((?:\d*\.)?\d+)(\w+|%)?/ "bdtrs.5, bdbrs10p, etc." rb
+border-`!p snip.rv = directions[match.group(1)]`-left-radius: `!p snip.rv = snippets.unit(*match.group(2, 3))`
+border-`!p snip.rv = directions[match.group(1)]`-right-radius: `!p snip.rv = snippets.unit(*match.group(2, 3))`
+$0
+endsnippet
+# border-{h-direction}-radius: {number}{unit}
+snippet /bd([lr])rs((?:\d*\.)?\d+)(\w+|%)?/ "bdlrs.5, bdrrs10p, etc." rb
+border-top-`!p snip.rv = directions[match.group(1)]`-radius: `!p snip.rv = snippets.unit(*match.group(2, 3))`
+border-bottom-`!p snip.rv = directions[match.group(1)]`-radius: `!p snip.rv = snippets.unit(*match.group(2, 3))`
+$0
+endsnippet
+# border-{v-direction}-{h-direction}-radius:
+snippet /bd([tb])([lr])rs/ "bd(t|b)(l|r)rs => border-(top|bottom)=(left|right)-radius: _" rb
+border-`!p snip.rv = directions[match.group(1)] + '-' + directions[match.group(2)]`-radius: $0
+endsnippet
+# border-{v-direction}-{h-direction}-radius: {number}{unit}
+snippet /bd([tb])([lr])rs((?:\d*\.)?\d+)(\w+|%)?/ "bdtlrs.5, bdbrrs10p, etc." rb
 border-`!p snip.rv = directions[match.group(1)] + '-' + directions[match.group(2)]`-radius: `!p snip.rv = snippets.unit(*match.group(3, 4))`
+$0
+endsnippet
+
+# border-{direction}-style:
+snippet /bd([trbl])st/ "bd(t|r|b|l)st => border-(top|right|bottom|left)-style: _" rb
+border-`!p snip.rv = directions[match.group(1)]`-style: $0
+endsnippet
+# border-{direction}-style: {prop}
+snippet /bd([trbl])st;([nhsgrio]|d[tsb])/ "bd(t|r|b|l)st;(n|h|dt|ds|s|db|g|r|i|o) => border-(top|right|bottom|left)-style: (none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset)" rb
+border-`!p snip.rv = directions[match.group(1)]`-style: `!p snip.rv = bdst_props[match.group(2)]`
+$0
+endsnippet
+
+# border-{direction}-width:
+snippet /bd([trbl])w/ "bd(t|r|b|l)w => border-(top|right|bottom|left)-width: _" rb
+border-`!p snip.rv = directions[match.group(1)]`-width: $0
+endsnippet
+# border-{direction}-width: {number}{unit}
+snippet /bd([trbl])w((?:\d*\.)?\d+)(\w+|%)?/ "bdtw.125, bdbw5p, etc." rb
+border-`!p snip.rv = directions[match.group(1)]`-width: `!p snip.rv = snippets.unit(*match.group(2, 3))`
 $0
 endsnippet
