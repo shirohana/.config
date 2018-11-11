@@ -23,12 +23,12 @@ padding: `!p snip.rv = p_props[match.group(1)]`
 $0
 endsnippet
 # padding: {number}{unit}
-snippet /p(-?(?:\d*\.)?\d+)([a-z]+|%)?/ "p.75, p20p, etc." rb
+snippet /p(-?(?:\d*\.)?\d+)([a-z]+|%)?/ "p.75, p20.5p, etc." rb
 padding: `!p snip.rv = snippets.unit(*match.group(1, 2))`
 $0
 endsnippet
 # padding: {number}{unit} {number}{unit}
-snippet /p(-?(?:\d*\.)?\d+)(%|[a-z]+?|(?=\.|-|;));?(-?(?:\d*\.)?\d+)([a-z]+?|%)?/ "p1.5.75, p20p40p, etc." rb
+snippet /p;(-?(?:\d*\.)?\d+)(%|[a-z]+?|(?=\.|-|;));?(-?(?:\d*\.)?\d+)([a-z]+?|%)?/ "p;1.5.75, p;20p40p, etc." rb
 padding: `!p
 v = snippets.unit(*match.group(1, 2))
 h = snippets.unit(*match.group(3, 4))
@@ -36,7 +36,7 @@ snip.rv = ' '.join((v, h))`
 $0
 endsnippet
 # padding: {number}{unit} {number}{unit} {number}{unit}
-snippet /p;(-?(?:\d*\.)?\d+)(%|[a-z]+?|(?=\.|-|;));?(-?(?:\d*\.)?\d+)(%|[a-z]+?|(?=\.|-|;));?(-?(?:\d*\.)?\d+)([a-z]+|%)?/ "p1.5.75;3, p20p15p30p, etc." rb
+snippet /p;;(-?(?:\d*\.)?\d+)(%|[a-z]+?|(?=\.|-|;));?(-?(?:\d*\.)?\d+)(%|[a-z]+?|(?=\.|-|;));?(-?(?:\d*\.)?\d+)([a-z]+|%)?/ "p;;1.5.75;3, p;;20p15p30p, etc." rb
 padding: `!p
 t = snippets.unit(*match.group(1, 2))
 h = snippets.unit(*match.group(3, 4))

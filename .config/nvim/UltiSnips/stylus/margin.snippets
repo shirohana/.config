@@ -28,7 +28,7 @@ margin: `!p snip.rv = snippets.unit(*match.group(1, 2))`
 $0
 endsnippet
 # margin: {number}{unit} {number}{unit}
-snippet /m(-?(?:\d*\.)?\d+)(%|[a-z]+?|(?=\.|-|;));?(-?(?:\d*\.)?\d+)([a-z]+?|%)?/ "m1.5.75, m20p40p, etc." rb
+snippet /m;(-?(?:\d*\.)?\d+)(%|[a-z]+?|(?=\.|-|;));?(-?(?:\d*\.)?\d+)([a-z]+?|%)?/ "m;1.5.75, m;20p40p, etc." rb
 margin: `!p
 v = snippets.unit(*match.group(1, 2))
 h = snippets.unit(*match.group(3, 4))
@@ -36,7 +36,7 @@ snip.rv = ' '.join((v, h))`
 $0
 endsnippet
 # margin: {number}{unit} {number}{unit} {number}{unit}
-snippet /m;(-?(?:\d*\.)?\d+)(%|[a-z]+?|(?=\.|-|;));?(-?(?:\d*\.)?\d+)(%|[a-z]+?|(?=\.|-|;));?(-?(?:\d*\.)?\d+)([a-z]+|%)?/ "m1.5.75;3, m20p15p30p, etc." rb
+snippet /m;;(-?(?:\d*\.)?\d+)(%|[a-z]+?|(?=\.|-|;));?(-?(?:\d*\.)?\d+)(%|[a-z]+?|(?=\.|-|;));?(-?(?:\d*\.)?\d+)([a-z]+|%)?/ "m;;1.5.75;3, m;;20p15p30p, etc." rb
 margin: `!p
 t = snippets.unit(*match.group(1, 2))
 h = snippets.unit(*match.group(3, 4))
