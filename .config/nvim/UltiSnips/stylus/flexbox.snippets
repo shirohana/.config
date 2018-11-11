@@ -1,27 +1,48 @@
 global !p
 import snippets
 ac_props = {
-	's': 'stretch',
+	'n': 'normal',
+	'st': 'stretch',
   'c': 'center',
+	's': 'start',
+	'e': 'end',
 	'fs': 'flex-start',
 	'fe': 'flex-end',
+	'b': 'baseline',
+	'fb': 'first baseline',
+	'lb': 'last baseline',
 	'sb': 'space-between',
-	'sa': 'space-around'
+	'sa': 'space-around',
+	'se': 'space-evenly'
 }
 ai_props = {
-	's': 'stretch',
+	'n': 'normal',
+	'st': 'stretch',
 	'c': 'center',
+	's': 'start',
+	'e': 'end',
 	'fs': 'flex-start',
 	'fe': 'flex-end',
-	'b': 'baseline'
+	'ss': 'self-start',
+	'se': 'self-end',
+	'b': 'baseline',
+	'fb': 'first baseline',
+	'lb': 'last baseline'
 }
 as_props = {
 	'a': 'auto',
-	's': 'stretch',
+	'n': 'normal',
+	'st': 'stretch',
 	'c': 'center',
+	's': 'start',
+	'e': 'end',
 	'fs': 'flex-start',
 	'fe': 'flex-end',
-	'b': 'baseline'
+	'ss': 'self-start',
+	'se': 'self-end',
+	'b': 'baseline',
+	'fb': 'first baseline',
+	'lb': 'last baseline'
 }
 fd_props = {
 	'r': 'row',
@@ -35,11 +56,51 @@ fw_props = {
 	'wr': 'wrap-reverse'
 }
 jc_props = {
+	'st': 'stretch',
 	'c': 'center',
+	's': 'start',
+	'e': 'end',
 	'fs': 'flex-start',
 	'fe': 'flex-end',
+	'l': 'left',
+	'r': 'right',
 	'sb': 'space-between',
-	'sa': 'space-around'
+	'sa': 'space-around',
+	'se': 'space-evenly'
+}
+ji_props = {
+	'a': 'auto',
+	'n': 'normal',
+	'st': 'stretch',
+	'c': 'center',
+	's': 'start',
+	'e': 'end',
+	'fs': 'flex-start',
+	'fe': 'flex-end',
+	'ss': 'self-start',
+	'se': 'self-end',
+	'l': 'left',
+	'r': 'right',
+	'b': 'baseline',
+	'fb': 'first baseline',
+	'lb': 'last baseline'
+}
+js_props = {
+	'a': 'auto',
+	'n': 'normal',
+	'st': 'stretch',
+	'c': 'center',
+	's': 'start',
+	'e': 'end',
+	'fs': 'flex-start',
+	'fe': 'flex-end',
+	'ss': 'self-start',
+	'se': 'self-end',
+	'l': 'left',
+	'r': 'right',
+	'b': 'baseline',
+	'fb': 'first baseline',
+	'lb': 'last baseline'
 }
 endglobal
 
@@ -48,7 +109,7 @@ snippet ac "align-content: _" b
 align-content: $0
 endsnippet
 # align-content: {prop}
-snippet /ac;(c|f[se]|s[ba]?)/ "ac;(s|c|fs|fe|sb|sa) => align-content: (stretch|center|flex-start|flex-end|space-between|space-around)" rb
+snippet /ac;(b|e|f[bes]|lb|n|s[abet]?|c)/ "ac;(n|st|c|s|e|fs|fe|b|fb|lb|sb|sa|se) => align-content: (normal|stretch|center|start|end|flex-start|flex-end|baseline|first baseline|last baseline|space-between|space-around|space-evenly)" rb
 align-content: `!p snip.rv = ac_props[match.group(1)]`
 $0
 endsnippet
@@ -58,7 +119,7 @@ snippet ai "align-items: _" b
 align-items: $0
 endsnippet
 # align-items: {prop}
-snippet /ai;(s|c|f[se]|b)/ "ai;(s|c|fs|fe|b) => align-items: (stretch|center|flex-start|flex-end|baseline)" rb
+snippet /ai;(b|c|e|f[bes]|lb|n|s[est]?)/ "ai;(n|st|c|s|e|fs|fe|ss|se|b|fb|lb) => align-items: (normal|stretch|center|start|end|flex-start|flex-end|self-start|self-end|baseline|first baseline|last baseline)" rb
 align-items: `!p snip.rv = ai_props[match.group(1)]`
 $0
 endsnippet
@@ -68,7 +129,7 @@ snippet as "align-self: _" b
 align-self: $0
 endsnippet
 # align-self: {prop}
-snippet /as;(a|s|c|f[se]|b)/ "as;(a|s|c|fs|fe|b) => align-self: (auto|stretch|center|flex-start|flex-end|baseline)" rb
+snippet /as;(a|b|c|e|f[bes]|lb|n|s[est]?)/ "as;(a|n|st|c|s|e|fs|fe|ss|se|b|fb|lb) => align-self: (auto|normal|stretch|center|start|end|flex-start|flex-end|self-start|self-end|baseline|first baseline|last baseline)" rb
 align-self: `!p snip.rv = as_props[match.group(1)]`
 $0
 endsnippet
@@ -76,6 +137,11 @@ endsnippet
 # flex:
 snippet f "flex: _" b
 flex: ${0:<grow> <shrink> <basis>}
+endsnippet
+# flex: {number}
+snippet /f((?:\d*\.)?\d+)/ "f1, f.6, etc." rb
+flex: `!p snip.rv = snippets.unit(match.group(1), None, '')`
+$0
 endsnippet
 
 # flex-basis:
@@ -95,6 +161,7 @@ endsnippet
 # flex-direction: {prop}
 snippet /fd;(rr?|cr?)/ "fd;(r|rr|c|cr) => flex-direction: (row|row-reverse|column|column-reverse)" rb
 flex-direction: `!p snip.rv = fd_props[match.group(1)]`
+$0
 endsnippet
 
 # flex-flow:
@@ -119,6 +186,7 @@ endsnippet
 # flex-wrap: {prop}
 snippet /fw;(n|wr?)/ "fw;(n|w|wr) => flex-wrap: (nowrap|wrap|wrap-reverse)" rb
 flex-wrap: `!p snip.rv = fw_props[match.group(1)]`
+$0
 endsnippet
 
 # justify-content:
@@ -126,8 +194,28 @@ snippet jc "justify-content: _" b
 justify-content: $0
 endsnippet
 # justify-content: {prop}
-snippet /jc;(c|f[se]|s[ba])/ "jc;(c|fs|fe|sb|sa) => justify-content: (center|flex-start|flex-end|space-between|space-around)" rb
+snippet /jc;(c|e|f[es]|l|r|s[abet]?)/ "jc;(st|c|s|e|fs|fe|l|r|sb|sa|se) => justify-content: (stretch|center|start|end|flex-start|flex-end|left|right|space-between|space-around|space-evenly)" rb
 justify-content: `!p snip.rv = jc_props[match.group(1)]`
+$0
+endsnippet
+
+# justify-items:
+snippet ji "justify-items: _" b
+justify-items: $0
+endsnippet
+# justify-items: {prop}
+snippet /ji;(a|b|c|e|f[bes]|lb?|n|r|s[est]?)/ "ji;(a|n|st|c|s|e|fs|fe|ss|se|l|r|b|fb|lb) => justify-items: (auto|normal|stretch|center|start|end|flex-start|flex-end|self-start|self-end|left|right|baseline|first baseline|last baseline)" rb
+justify-items: `!p snip.rv = ji_props[match.group(1)]`
+$0
+endsnippet
+
+# justify-self:
+snippet js "justify-self: _" b
+justify-self: $0
+endsnippet
+# justify-self: {prop}
+snippet /js;(a|b|c|e|f[bes]|lb?|n|r|s[est]?)/ "js;(a|n|st|c|s|e|fs|fe|ss|se|l|r|b|fb|lb) => justify-self: (auto|normal|stretch|center|start|end|flex-start|flex-end|self-start|self-end|left|right|baseline|first baseline|last baseline)" rb
+justify-self: `!p snip.rv = js_props[match.group(1)]`
 $0
 endsnippet
 
