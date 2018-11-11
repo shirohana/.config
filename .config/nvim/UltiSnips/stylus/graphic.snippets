@@ -186,7 +186,7 @@ snippet z "z-index: _" b
 z-index: $0
 endsnippet
 # z-index: {number}
-snippet /z(\d+)/ "z10, etc." rb
+snippet /z(-?\d+)/ "z10, z-1, etc." rb
 z-index: `!p snip.rv = match.group(1)`
 $0
 endsnippet
