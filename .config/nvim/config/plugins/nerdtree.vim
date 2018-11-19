@@ -14,19 +14,24 @@ let g:NERDTreeIgnore += [
       \ '\.swp$',
       \ '^\.DS_Store$',
       \ ]
-" Ignore Node.js related files
-let g:NERDTreeIgnore += [
-      \ '^node_modules$[[dir]]',
-      \ '^yarn\.lock$',
-      \ '^package-lock\.json$',
-      \ '^coverage$[[dir]]',
-      \ '^\.nyc_output[[dir]]$',
-      \ '^\.changelog$[[dir]]',
-      \ '^\.nuxt$[[dir]]',
-      \ ]
 " Ignore VCS files
 let g:NERDTreeIgnore += [
       \ '^\.git$[[dir]]',
+      \ ]
+" Ignore Node.js related files
+let g:NERDTreeIgnore += [
+      \ '^\.changelog$[[dir]]',
+      \ '^\.docker-sync$[[dir]]',
+      \ '^\.node-version$',
+      \ '^\.nuxt$[[dir]]',
+      \ '^\.nyc_output[[dir]]$',
+      \ '^coverage$[[dir]]',
+      \ '^dist$[[dir]]',
+      \ '^log$[[dir]]',
+      \ '^node_modules$[[dir]]',
+      \ '^package-lock\.json$',
+      \ '^vim-markdown-preview\.html$',
+      \ '^yarn\.lock$',
       \ ]
 
 autocmd MyAutoCmd StdinReadPre * let s:std_in = 1
@@ -34,3 +39,10 @@ autocmd MyAutoCmd VimEnter *
       \ if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") |
       \   bw # | exe 'NERDTree' argv()[0] |
       \ endif
+
+function! NERDTreeYankCurrentNode()
+  let selected = g:NERDTreeFileNode.GetSelected()
+  if selected != {}
+    call setreg(v:register, selected.path.str())
+  endif
+endfunction
