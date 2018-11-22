@@ -159,7 +159,7 @@ snippet fd "flex-direction: _" b
 flex-direction: $0
 endsnippet
 # flex-direction: {prop}
-snippet /fd;(rr?|cr?)/ "fd;(r|rr|c|cr) => flex-direction: (row|row-reverse|column|column-reverse)" rb
+snippet /fd;(cr?|rr?)/ "fd;(r|rr|c|cr) => flex-direction: (row|row-reverse|column|column-reverse)" rb
 flex-direction: `!p snip.rv = fd_props[match.group(1)]`
 $0
 endsnippet
@@ -167,6 +167,16 @@ endsnippet
 # flex-flow:
 snippet ff "flex-flow: _" b
 flex-flow: ${0:<direction> <wrap>}
+endsnippet
+# flex-flow: {prop}
+snippet /ff;(cr?|n|rr?|wr?)/ "ff;(r|rr|c|cr|n|w|wr) => flex-flow: (row|row-reverse|column|column-reverse|nowrap|wrap|wrap-reverse)" rb
+flex-flow: `!p snip.rv = fd_props.get(match.group(1), fw_props.get(match.group(1)))`
+$0
+endsnippet
+# flex-flow: {prop} {prop}
+snippet /ff;(cr?|rr?)(n|wr?)/ "ff;(r|rr|c|cr)(n|w|wr) => flex-flow: (row|row-reverse|column|column-reverse) (nowrap|wrap|wrap-reverse)" rb
+flex-flow: `!p snip.rv = fd_props[match.group(1)] + ' ' + fw_props[match.group(2)]`
+$0
 endsnippet
 
 # flex-grow:
