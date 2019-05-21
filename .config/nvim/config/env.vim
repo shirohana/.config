@@ -14,6 +14,7 @@ nnoremap ;       <Nop>
 " ======== Editor Config ======== {{{
 " Always use utf-8
 set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,shift_jis,default,latin1
 
 " Use space
 set tabstop=2

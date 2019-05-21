@@ -145,7 +145,9 @@ endif
 " ======== NERDTree ======== {{{
 if dein#tap('nerdtree')
   " Toggle NERDTree, using `Opt-;`
-  nmap … :NERDTreeToggle<CR>
+  nmap … :<C-u>NERDTreeToggle<CR>
+  " Find current file in NERDTree, using `Opt-Shift-;`
+  nmap Ú :<C-u>NERDTreeFind<CR>
 endif
 " }}}
 
@@ -161,6 +163,8 @@ endif
 if dein#tap('splitjoin.vim')
   nmap gS <Plug>SplitjoinSplit
   nmap gJ <Plug>SplitjoinJoin
+  nnoremap gs :<C-u>exe "SplitjoinJoin" <bar> exe "SplitjoinSplit"<CR>
+  nnoremap gj :<C-u>exe "SplitjoinSplit" <bar> exe "SplitjoinJoin"<CR>
 endif
 " }}}
 
@@ -183,7 +187,7 @@ if dein#tap('ultisnips')
   let g:UltiSnipsExpandTrigger = '<Tab>'
   let g:UltiSnipsJumpForwardTrigger = '<Tab>'
   let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
-  autocmd MyAutoCmd FileType stylus inoremap <CR> <C-R>=(helper#ultisnips#ExpandOrJump() > 0) ? '' : "\n"<CR>
+  autocmd MyAutoCmd FileType stylus,vue inoremap <CR> <C-R>=(helper#ultisnips#ExpandOrJump() > 0) ? '' : "\n"<CR>
 endif
 " }}}
 

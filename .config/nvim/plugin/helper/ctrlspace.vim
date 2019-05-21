@@ -30,7 +30,7 @@ function! helper#ctrlspace#RenameTabLabelPrompt (...)
   else
     let tabnr = tabpagenr()
     let label = ctrlspace#util#Gettabvar(tabnr, "CtrlSpaceLabel")
-    let label = input('⌗  Label for tab '.tabnr.': ', label)
+    let label = input('⌗  Label for tab '.tabnr.': ')
     redraw
   endif
 

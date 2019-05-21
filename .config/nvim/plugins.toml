@@ -18,6 +18,7 @@ repo = 'vim-airline/vim-airline-themes'
 on_source = 'vim-airline'
 [[plugins]]
 repo = 'vim-airline/vim-airline'
+rev = 'v0.10'
 depends = 'vim-airline-themes'
 lazy = 0
 hook_add = 'source $NVIM_PLUGINS/airline.vim'
@@ -118,6 +119,7 @@ on_event = 'BufEnter'
 hook_add = '''
   let g:better_whitespace_operator = 0
   let g:show_spaces_that_precede_tabs = 1
+  let g:strip_whitespace_confirm = 0
 '''
 hook_source = '''
   autocmd MyAutoCmd BufEnter * EnableStripWhitespaceOnSave
@@ -175,11 +177,17 @@ hook_add = '''
 # https://github.com/junegunn/vim-peekaboo
 [[plugins]]
 repo = 'junegunn/vim-peekaboo'
-lazy = 0
+lazy = 1
 hook_add = '''
   autocmd MyAutoCmd BufEnter * let b:peekaboo_on = 1
-  let g:peekaboo_delay = 250
+  let g:peekaboo_delay = 1750
 '''
+
+# Signature
+# https://github.com/kshenoy/vim-signature
+[[plugins]]
+repo = 'kshenoy/vim-signature'
+on_event = 'BufEnter'
 
 # SplitJoin
 # https://github.com/AndrewRadev/splitjoin.vim
@@ -220,6 +228,7 @@ on_ft = 'snippets'
 hook_add = '''
   let g:UltiSnipsSnippetDirectories = [$NVIM_SNIPPETS]
   let g:UltiSnipsEnableSnipMate = 0
+  autocmd MyAutoCmd BufWritePost *.snippets call UltiSnips#RefreshSnippets()
 '''
 
 # Undotree
@@ -243,6 +252,12 @@ lazy = 1
 # Language
 # ================================
 
+# AppleScript .applescript
+# https://github.com/dearrrfish/vim-applescript
+[[plugins]]
+repo = 'dearrrfish/vim-applescript'
+on_ft = 'applescript'
+
 # CSS3 .css
 # https://github.com/hail2u/vim-css3-syntax
 # https://github.com/ap/vim-css-color
@@ -254,7 +269,7 @@ hook_add = '''
 '''
 [[plugins]]
 repo = 'ap/vim-css-color'
-on_ft = ['css', 'stylus']
+on_ft = ['css', 'stylus', 'html', 'javascript']
 
 # Dockerfile docker-compose.yml
 # https://github.com/ekalinin/Dockerfile.vim
@@ -281,7 +296,7 @@ hook_add = '''
 # https://github.com/Quramy/vim-js-pretty-template
 [[plugins]]
 repo = 'pangloss/vim-javascript'
-on_ft = 'javascript'
+lazy = 0 # on_ft = 'javascript'
 hook_add = '''
   let g:javascript_plugin_flow = 1
 '''
@@ -291,15 +306,15 @@ depends = 'vim-javascript'
 on_ft = 'javascript'
 [[plugins]]
 repo = 'mxw/vim-jsx'
-depends = 'vim-javascript'
-on_ft = 'javascript'
+depends = ['vim-javascript', 'splitjoin.vim']
+lazy = 1 # on_ft = 'javascript'
 [[plugins]]
 repo = 'Quramy/vim-js-pretty-template'
 depends = ['vim-pug', 'vim-jsx']
 on_ft = 'javascript'
 hook_source = '''
   call jspretmpl#register_tag('pug', 'pug')
-  autocmd MyAutoCmd FileType javascript* JsPreTmpl jsx
+  autocmd MyAutoCmd FileType javascript.* JsPreTmpl
 '''
 
 # Markdown .md

@@ -22,9 +22,10 @@ let g:NERDTreeIgnore += [
 let g:NERDTreeIgnore += [
       \ '^\.changelog$[[dir]]',
       \ '^\.docker-sync$[[dir]]',
+      \ '^\.expo$[[dir]]',
       \ '^\.node-version$',
       \ '^\.nuxt$[[dir]]',
-      \ '^\.nyc_output[[dir]]$',
+      \ '^\.nyc_output$[[dir]]',
       \ '^coverage$[[dir]]',
       \ '^dist$[[dir]]',
       \ '^log$[[dir]]',

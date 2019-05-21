@@ -3,6 +3,7 @@ nmap s <Nop>
 nmap Q <Nop>
 nmap K <Nop>
 vmap s <Nop>
+nmap <F1> <Nop>
 
 " ======== Generic ========
 " Better <Esc>
@@ -33,6 +34,8 @@ inoremap <C-a> <C-o>I
 inoremap <C-e> <C-o>A
 " Clone paragraph
 nnoremap yp yap<S-}>p
+" Sort lines
+vnoremap so<Space> :<C-u>'<,'>:sort<CR>
 
 " ======== Command ========
 " Go to start/end of current command
