@@ -36,6 +36,16 @@ inoremap <C-e> <C-o>A
 nnoremap yp yap<S-}>p
 " Sort lines
 vnoremap so<Space> :<C-u>'<,'>:sort<CR>
+" Alias q -> '
+vnoremap iq i'
+vnoremap aq a'
+onoremap iq i'
+onoremap aq a'
+" Alias Q -> "
+vnoremap iQ i"
+vnoremap aQ a"
+onoremap iQ i"
+onoremap aQ a"
 
 " ======== Command ========
 " Go to start/end of current command
@@ -105,5 +115,5 @@ nnoremap ª :<C-u>9tabn<CR>
 " Enter -- NORMAL --
 tnoremap <C-k> <C-\><C-n>
 
-" ======== Temporary ========
+" ======== Maintain ========
 nnoremap <F5> :so ~/.config/nvim/init.vim<CR>
