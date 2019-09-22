@@ -7,6 +7,9 @@ let g:NERDTreeBookmarksFile = expand('$CACHE_DIR/bookmarks')
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeCascadeOpenSingleChildDir = 0
 
+" Change e->E
+let g:NERDTreeMapOpenExpl = ''
+
 " Ignore default pattern
 let g:NERDTreeIgnore = ['\~$']
 " Ignore system generated files
