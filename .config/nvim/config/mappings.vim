@@ -1,8 +1,10 @@
 " ======== Defaults ========
-nmap s <Nop>
-nmap Q <Nop>
-nmap K <Nop>
-vmap s <Nop>
+nmap K    <Nop>
+nmap Q    <Nop>
+nmap ZQ   <Nop>
+nmap ZZ   <Nop>
+nmap s    <Nop>
+vmap s    <Nop>
 nmap <F1> <Nop>
 
 " ======== Generic ========
