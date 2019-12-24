@@ -344,6 +344,12 @@ hook_add = '''
 repo = 'chr4/nginx.vim'
 on_ft = 'nginx'
 
+# PlantUML .uml
+# https://github.com/aklt/plantuml-syntax
+[[plugins]]
+repo = 'aklt/plantuml-syntax'
+on_ft = ['uml', 'plantuml']
+
 # Pug .pug
 # https://github.com/digitaltoad/vim-pug
 [[plugins]]
