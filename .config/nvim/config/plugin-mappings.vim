@@ -106,8 +106,8 @@ endif
 " ======== GitGutter ======== {{{
 if dein#tap('vim-gitgutter')
   " Hunk Navigating
-  nmap sj <Plug>GitGutterNextHunk
-  nmap sk <Plug>GitGutterPrevHunk
+  nmap sj <Plug>(GitGutterNextHunk)
+  nmap sk <Plug>(GitGutterPrevHunk)
   " Refresh Gutter
   nnoremap <silent> <LocalLeader>sa :<C-u>GitGutterAll<CR>
   " Stage Current Hunk
