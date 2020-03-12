@@ -36,6 +36,12 @@ function! helper#tab#ContainsBuffer (tabnr, bufnr)
   endif
 endfunction
 
+function! helper#tab#Jump (tabnr)
+  if a:tabnr != tabpagenr()
+    execute a:tabnr.'tabnext'
+  endif
+endfunction
+
 function! helper#tab#SwitchWindowsByBufnr (tabnr, from_bufnr, to_bufnr) abort
   let bufnr_of_windows = tabpagebuflist(a:tabnr)
 
@@ -52,10 +58,4 @@ function! helper#tab#SwitchWindowsByBufnr (tabnr, from_bufnr, to_bufnr) abort
 
   call helper#window#Jump(original_winnr)
   call helper#tab#Jump(original_tabnr)
-endfunction
-
-function! helper#tab#Jump (tabnr)
-  if a:tabnr != tabpagenr()
-    execute a:tabnr.'tabnext'
-  endif
 endfunction

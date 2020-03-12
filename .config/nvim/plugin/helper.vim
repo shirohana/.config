@@ -13,6 +13,18 @@ command! NextBuffer
 command! PrevBuffer
       \ call helper#buffer#PreviousBuffer()
 
+command! WindowSwapLeft
+      \ call helper#window#SwapTo('h')
+
+command! WindowSwapDown
+      \ call helper#window#SwapTo('j')
+
+command! WindowSwapUp
+      \ call helper#window#SwapTo('k')
+
+command! WindowSwapRight
+      \ call helper#window#SwapTo('l')
+
 command! ToggleZoomWindow
       \ call helper#window#ToggleZoom()
 

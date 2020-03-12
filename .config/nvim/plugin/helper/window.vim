@@ -6,6 +6,24 @@ function! helper#window#Jump (winnr)
   endif
 endfunction
 
+function! helper#window#SwitchBufferOfTwoWindows (a_winnr, b_winnr) abort
+  let original_winnr = winnr()
+
+  let a_bufnr = winbufnr(a:a_winnr)
+  let b_bufnr = winbufnr(a:b_winnr)
+
+  execute a:a_winnr.'windo '.b_bufnr.'buffer | '.a:b_winnr.'windo '.a_bufnr.'buffer'
+
+  call helper#window#Jump(original_winnr)
+endfunction
+
+function! helper#window#SwapTo (direction)
+  let a_winnr = winnr()
+  execute 'wincmd '.a:direction
+  let b_winnr = winnr()
+  call helper#window#SwitchBufferOfTwoWindows(a_winnr, b_winnr)
+endfunction
+
 function! helper#window#ToggleZoom ()
   let key = 'is_zoomed'
   let winnr = winnr()

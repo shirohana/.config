@@ -83,6 +83,11 @@ nnoremap <silent> ˙ <C-w>h
 nnoremap <silent> ∆ <C-w>j
 nnoremap <silent> ˚ <C-w>k
 nnoremap <silent> ¬ <C-w>l
+" Window Navigating with Swap, using `Opt+Shift+[hjkl]`
+nnoremap <silent> Ó :<C-u>WindowSwapLeft<CR>
+nnoremap <silent> Ô :<C-u>WindowSwapDown<CR>
+nnoremap <silent>  :<C-u>WindowSwapUp<CR>
+nnoremap <silent> Ò :<C-u>WindowSwapRight<CR>
 " Window Resize, using arrow keys
 nnoremap <silent> <Up>    :<C-u>resize -2<CR>
 nnoremap <silent> <Down>  :<C-u>resize +2<CR>
