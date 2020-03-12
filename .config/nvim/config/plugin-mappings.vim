@@ -111,11 +111,11 @@ if dein#tap('vim-gitgutter')
   " Refresh Gutter
   nnoremap <silent> <LocalLeader>sa :<C-u>GitGutterAll<CR>
   " Stage Current Hunk
-  nmap <LocalLeader>ss <Plug>GitGutterStageHunk
+  nmap <LocalLeader>ss <Plug>(GitGutterStageHunk)
   " Unstage Current File
   nnoremap <silent> <LocalLeader>su :<C-u>call system('git reset '.expand('%')) <bar> GitGutterAll<CR>
   " Hard Reset Current Hunk
-  nmap <LocalLeader>sr <Plug>GitGutterUndoHunk
+  nmap <LocalLeader>sr <Plug>(GitGutterUndoHunk)
   " Toggle Hunk Preview
   nmap <silent> <LocalLeader>s<Space> <Plug>(helper-gitgutter-toggle-preview)
 endif
