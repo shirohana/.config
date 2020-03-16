@@ -68,6 +68,16 @@ nnoremap <silent> <Leader>W :<C-u>write <bar> exec "normal \<Plug>(close-buffer-
 " Buffer Navigating, using `Opt+[` & `Opt+]`
 nnoremap <silent> “ :<C-u>PrevBuffer<CR>
 nnoremap <silent> ‘ :<C-u>NextBuffer<CR>
+" Buffer Navigating with Index
+nnoremap <silent> <Leader>1 :<C-u>call helper#buffer#GoNthBuffer(0)<CR>
+nnoremap <silent> <Leader>2 :<C-u>call helper#buffer#GoNthBuffer(1)<CR>
+nnoremap <silent> <Leader>3 :<C-u>call helper#buffer#GoNthBuffer(2)<CR>
+nnoremap <silent> <Leader>4 :<C-u>call helper#buffer#GoNthBuffer(3)<CR>
+nnoremap <silent> <Leader>5 :<C-u>call helper#buffer#GoNthBuffer(4)<CR>
+nnoremap <silent> <Leader>6 :<C-u>call helper#buffer#GoNthBuffer(5)<CR>
+nnoremap <silent> <Leader>7 :<C-u>call helper#buffer#GoNthBuffer(6)<CR>
+nnoremap <silent> <Leader>8 :<C-u>call helper#buffer#GoNthBuffer(7)<CR>
+nnoremap <silent> <Leader>9 :<C-u>call helper#buffer#GoNthBuffer(8)<CR>
 
 " ======== Window ========
 " Create Vertical Split, using `<Space>[hl]`

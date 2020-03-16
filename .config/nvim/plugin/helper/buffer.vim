@@ -1,23 +1,20 @@
-function! helper#buffer#NextBuffer ()
+function! helper#buffer#GoNthBuffer (index)
   let buffers = helper#tab#BufnrList(tabpagenr())
-  if len(buffers) == 0 | return | endif
+  let buf_len = len(buffers)
 
-  let buf_index = index(buffers, bufnr(''))
-  let next_buf_index = buf_index == -1
-        \ ? 0
-        \ : (buf_index + 1) % len(buffers)
+  if buf_len == 0 | return | endif
 
-  execute buffers[next_buf_index].'buffer'
+  let buf_index = type(a:index) == v:t_number
+        \ ? (a:index < 0 ? 0 : (a:index < buf_len ? a:index : buf_len - 1))
+        \ : (buf_len + (index(buffers, bufnr('')) + str2nr(a:index)) % buf_len) % buf_len
+
+  execute buffers[buf_index].'buffer'
+endfunction
+
+function! helper#buffer#NextBuffer ()
+  call helper#buffer#GoNthBuffer('+1')
 endfunction
 
 function! helper#buffer#PreviousBuffer ()
-  let buffers = helper#tab#BufnrList(tabpagenr())
-  if len(buffers) == 0 | return | endif
-
-  let buf_index = index(buffers, bufnr(''))
-  let prev_buf_index = buf_index == -1
-        \ ? -1
-        \ : buf_index - 1
-
-  execute buffers[prev_buf_index].'buffer'
+  call helper#buffer#GoNthBuffer('-1')
 endfunction
