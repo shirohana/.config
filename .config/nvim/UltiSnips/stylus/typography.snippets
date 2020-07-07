@@ -162,6 +162,12 @@ snippet fos "font-size: _" b
 font-size: $0
 endsnippet
 
+# font-size: {number}{unit}
+snippet /fos(-?(?:\d*\.)?\d+)(\w+)?/ "fos2.5, fos50p, etc." rb
+font-size: `!p snip.rv = snippets.unit(*match.group(1, 2), 'em')`
+$0
+endsnippet
+
 # font-size-adjust:
 snippet fosa "font-size-adjust: _" b
 font-size-adjust: $0
