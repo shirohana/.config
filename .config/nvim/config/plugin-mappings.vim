@@ -207,3 +207,10 @@ if dein#tap('vim-markdown-preview')
         \ nnoremap <buffer> <silent> <CR> :<C-u>call Vim_Markdown_Preview_Local()<CR>
 endif
 " }}}
+
+" ======== FileType:PlantUML ======== {{{
+if dein#tap('plantuml-previewer.vim')
+  autocmd MyAutoCmd FileType plantuml
+        \ nnoremap <buffer> <silent> <CR> :<C-u>PlantumlOpen<CR>
+endif
+" }}}

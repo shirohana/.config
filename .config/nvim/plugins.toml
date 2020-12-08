@@ -314,6 +314,7 @@ depends = ['vim-pug', 'vim-jsx']
 on_ft = 'javascript'
 hook_source = '''
   call jspretmpl#register_tag('pug', 'pug')
+  call jspretmpl#register_tag('yaml', 'yaml')
   autocmd MyAutoCmd FileType javascript.* JsPreTmpl
 '''
 
@@ -346,9 +347,22 @@ on_ft = 'nginx'
 
 # PlantUML .uml
 # https://github.com/aklt/plantuml-syntax
+# https://github.com/tyru/open-browser.vim
+# https://github.com/weirongxu/plantuml-previewer.vim
 [[plugins]]
 repo = 'aklt/plantuml-syntax'
 on_ft = ['uml', 'plantuml']
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+hook_add = '''
+  let g:openbrowser_browser_commands = [
+    \ {'name': 'open', 'args': ['{browser}', '-a', 'Safari', '{uri}'], 'background': 0}
+    \ ]
+'''
+[[plugins]]
+repo = 'weirongxu/plantuml-previewer.vim'
+depends = 'open-browser.vim'
+on_cmd = 'PlantumlOpen'
 
 # Pug .pug
 # https://github.com/digitaltoad/vim-pug

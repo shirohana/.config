@@ -15,6 +15,8 @@ vnoremap <C-l> <Esc>
 nnoremap <C-l> <Esc>
 " Cancel highlight search
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
+" Highlight search on current word
+nnoremap <silent> zx :let @/='\<'.expand('<cword>').'\>'<bar>set hlsearch<CR>
 
 " ======== Moving ========
 " Move screen horizontally
@@ -31,6 +33,9 @@ noremap ≥ ;
 " ======== Editing ========
 " Insert one line above current line in -- INSERT --
 inoremap OO <C-o>O
+" Paste register in newline
+nnoremap gp o<C-r>"<Esc>
+nnoremap gP O<C-r>"<Esc>
 " Go to start/end of current line in -- INSERT --
 inoremap <C-a> <C-o>I
 inoremap <C-e> <C-o>A
@@ -134,3 +139,10 @@ tnoremap <C-k> <C-\><C-n>
 
 " ======== Maintain ========
 nnoremap <F5> :so ~/.config/nvim/init.vim<CR>
+
+" ======== Diffmode ========
+if &diff
+  nnoremap s<Space> :<C-u>diffupdate<CR>
+  nnoremap sh       :<C-u>diffget LOCAL<CR>
+  nnoremap sl       :<C-u>diffget REMOTE<CR>
+endif
