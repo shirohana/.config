@@ -110,6 +110,8 @@ nnoremap <silent> <Left>  :<C-u>vertical resize -4<CR>
 nnoremap <silent> <Right> :<C-u>vertical resize +4<CR>
 " Toggle Zoom
 nnoremap <silent> <Leader>z :<C-u>ToggleZoomWindow<CR>
+" Enter Terminal
+nnoremap <silent> <Leader>t :<C-u>terminal<CR>
 
 " ======== Tabpage ========
 " Create New Tab, using `Opt-Shift-t`
