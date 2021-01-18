@@ -36,6 +36,7 @@ autocmd MyAutoCmd FileType markdown set wrap
 
 " Editor padding
 set scrolloff=2
+autocmd MyAutoCmd TermOpen * setlocal scrolloff=0
 
 " Rendering
 set nolazyredraw
