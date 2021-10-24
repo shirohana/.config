@@ -121,6 +121,11 @@ endsnippet
 snippet gg "grid-gap: _" b
 grid-gap: ${0:<row-gap> <column-gap>}
 endsnippet
+# grid-gap: {number}{unit}
+snippet /gg((?:\d*\.)?\d+)(\w+|%)?/ "gg1.5, gg2x, etc." rb
+grid-gap: `!p snip.rv = snippets.unit(*match.group(1, 2))`
+$0
+endsnippet
 
 # grid-row:
 snippet gr "grid-row: _" b

@@ -37,6 +37,18 @@ let g:NERDTreeIgnore += [
       \ '^vim-markdown-preview\.html$',
       \ '^yarn\.lock$',
       \ ]
+" Ignore Python related files
+let g:NERDTreeIgnore += [
+      \ '^__pycache__$[[dir]]',
+      \ ]
+" Ignore single project related files
+let g:NERDTreeIgnore += [
+      \ '^static$[[dir]]',
+      \ ]
+" Ignore TypeScript related files
+let g:NERDTreeIgnore += [
+      \ '\.styl\.d\.ts$',
+      \ ]
 
 autocmd MyAutoCmd StdinReadPre * let s:std_in = 1
 autocmd MyAutoCmd VimEnter *

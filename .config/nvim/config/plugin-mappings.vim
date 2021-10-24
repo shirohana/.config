@@ -1,3 +1,20 @@
+" ======== ALE ======== {{{
+if dein#tap('ale')
+  map <LocalLeader>q<Space> <Plug>(ale_detail)
+  map  zj       <Plug>(ale_next)
+  map  zk       <Plug>(ale_previous)
+  nmap d<Space> <Plug>(ale_hover)
+  map  zi       <Plug>(ale_import)
+  nmap gd       <Plug>(ale_go_to_definition)
+  nmap gD       <Plug>(ale_go_to_type_definition)
+  nmap <silent> gu :<C-u>ALEFindReferences -relative<CR>
+  nnoremap <silent> ® :<C-u>ALERename<CR>
+  inoremap <silent> <C-k> <C-\><C-O>:ALEComplete<CR>
+  autocmd MyAutoCmd FileType ale-preview-selection
+        \ nnoremap <buffer> <CR> :<C-u>call helper#ale#OpenSelection()<CR>
+endif
+" }}}
+
 " ======== AutoPairs ======== {{{
 if dein#tap('auto-pairs')
   let g:AutoPairsShortcutBackInsert = '<C-b>'
@@ -89,6 +106,29 @@ if dein#tap('vim-easymotion')
     omap t <Plug>(easymotion-tl)
     omap T <Plug>(easymotion-Tl)
   endif
+endif
+" }}}
+
+" ======== Emmet ======== {{{
+if dein#tap('emmet-vim')
+  imap <C-q>j <Plug>(emmet-expand-abbr)
+  nmap <C-q>j <Plug>(emmet-expand-abbr)
+  vmap <C-q>j <Plug>(emmet-expand-abbr)
+  " imap <C-q>[ <Plug>(emmet-balance-tag-inward)
+  " nmap <C-q>[ <Plug>(emmet-balance-tag-inward)
+  " vmap <C-q>[ <Plug>(emmet-balance-tag-inward)
+  " imap <C-q>] <Plug>(emmet-balance-tag-outward)
+  " nmap <C-q>] <Plug>(emmet-balance-tag-outward)
+  " vmap <C-q>] <Plug>(emmet-balance-tag-outward)
+  imap <C-q><C-n> <Plug>(emmet-move-next)
+  nmap <C-q><C-n> <Plug>(emmet-move-next)
+  vmap <C-q><C-n> <Plug>(emmet-move-next)
+  imap <C-q><C-l> <Plug>(emmet-move-prev)
+  nmap <C-q><C-l> <Plug>(emmet-move-prev)
+  vmap <C-q><C-l> <Plug>(emmet-move-prev)
+  imap <C-q>k <Plug>(emmet-split-join-tag)
+  nmap <C-q>k <Plug>(emmet-split-join-tag)
+  vmap <C-q>k <Plug>(emmet-split-join-tag)
 endif
 " }}}
 

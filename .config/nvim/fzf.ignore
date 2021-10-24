@@ -1,9 +1,12 @@
 *.scpt
 .git
 .nyc_output
-coverage
-coverage
+*.pyc
+__pycache__/
+coverage/
 coverage.lcov
 node_modules
 package-lock.json
 yarn.lock
+
+backstage/static

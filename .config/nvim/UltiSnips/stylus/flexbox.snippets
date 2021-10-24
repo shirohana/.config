@@ -188,6 +188,11 @@ endsnippet
 snippet fs "flex-shrink: _" b
 flex-shrink: $0
 endsnippet
+# flex-shrink: {number}
+snippet /fs((?:\d*\.)?\d+)/ "fs0, etc." rb
+flex-shrink: `!p snip.rv = snippets.unit(match.group(1), None, '')`
+$0
+endsnippet
 
 # flex-wrap:
 snippet fw "flex-wrap: _" b

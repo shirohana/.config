@@ -7,6 +7,8 @@ let $NVIM = fnamemodify(expand('<sfile>'), ':h')
 let $NVIM_CONFIG = expand('$NVIM/config')
 let $NVIM_PLUGINS = expand('$NVIM/config/plugins')
 let $NVIM_SNIPPETS = expand('$NVIM/UltiSnips')
+let g:python_host_prog = expand('/Users/hanawu/.pyenv/versions/neovim2/bin/python')
+let g:python3_host_prog = expand('/Users/hanawu/.pyenv/versions/neovim3/bin/python')
 
 function! s:source_file (path)
   execute 'source' expand('$NVIM/'.a:path)
@@ -15,6 +17,8 @@ endfunction
 augroup MyAutoCmd
   autocmd!
   autocmd CursorHold *? syntax sync minlines=300
+  autocmd BufRead,BufNewFile *.ts,*.tsx set filetype=typescript
+  autocmd BufRead,BufNewFile *.ts,*.tsx set syntax=javascript
 augroup END
 
 " Initialize environment -- {{{

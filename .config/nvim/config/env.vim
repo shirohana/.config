@@ -6,9 +6,9 @@ let g:mapleader = "\<Space>"
 let g:maplocalleader = ';'
 
 " Disable default behavior
-nnoremap <Space> <Nop>
-nnoremap ,       <Nop>
-nnoremap ;       <Nop>
+nmap <Space> <Nop>
+nmap ,       <Nop>
+nmap ;       <Nop>
 " }}}
 
 " ======== Editor Config ======== {{{

@@ -44,15 +44,15 @@ nnoremap yp yap<S-}>p
 " Sort lines
 vnoremap so<Space> :<C-u>'<,'>:sort<CR>
 " Alias q -> '
-vnoremap iq i'
-vnoremap aq a'
-onoremap iq i'
-onoremap aq a'
+" vnoremap iq i'
+" vnoremap aq a'
+" onoremap iq i'
+" onoremap aq a'
 " Alias Q -> "
-vnoremap iQ i"
-vnoremap aQ a"
-onoremap iQ i"
-onoremap aQ a"
+vnoremap iq i"
+vnoremap aq a"
+onoremap iq i"
+onoremap aq a"
 
 " ======== Command ========
 " Go to start/end of current command

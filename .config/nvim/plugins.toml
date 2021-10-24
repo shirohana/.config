@@ -166,7 +166,8 @@ hook_add = '''
 # https://github.com/terryma/vim-multiple-cursors
 [[plugins]]
 repo = 'terryma/vim-multiple-cursors'
-on_event = 'BufEnter'
+lazy = 1
+# on_event = 'BufEnter'
 hook_add = '''
   let g:multi_cursor_use_default_mapping = 0
   let g:multi_cursor_exit_from_visual_mode = 0
@@ -238,6 +239,13 @@ repo = 'mbbill/undotree'
 on_cmd = 'UndotreeToggle'
 hook_add = 'source $NVIM_PLUGINS/undotree.vim'
 
+# VisualMulti
+# https://github.com/mg979/vim-visual-multi
+[[plugins]]
+repo = 'mg979/vim-visual-multi'
+on_event = 'BufEnter'
+hook_add = 'source $NVIM_PLUGINS/visual-multi.vim'
+
 # ================================
 # Utility
 # ================================
@@ -247,6 +255,56 @@ hook_add = 'source $NVIM_PLUGINS/undotree.vim'
 [[plugins]]
 repo = 'tpope/vim-repeat'
 lazy = 1
+
+# Syntax checking
+# https://github.com/vim-syntastic/syntastic
+# https://github.com/dense-analysis/ale
+[[plugins]]
+repo = 'vim-syntastic/syntastic'
+on_ft = ['javascript', 'typescript', 'python']
+hook_add = '''
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_loc_list_height = 4
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 0
+  let g:syntastic_cursor_column = 0
+  let g:syntastic_check_on_wq = 0
+  let g:syntastic_python_checkers = ['pylint']
+  let g:syntastic_javascript_checkers = []
+  let g:syntastic_javascript_eslint_exe = '$(yarn global bin)/eslint'
+  let g:syntastic_javascript_eslint_args = '--cache'
+  let g:syntastic_javascript_flow_exe = '$(yarn global bin)/flow'
+'''
+[[plugins]]
+repo = 'dense-analysis/ale'
+on_ft = ['javascript', 'typescript', 'stylus']
+on_cmd = 'ALE'
+on_map = '<Plug>(ale_'
+hook_add = '''
+  let g:ale_hover_cursor = 0
+  let g:ale_cursor_detail = 0
+  let g:ale_floating_preview = 1
+  let g:ale_hover_to_floating_preview = 0
+  let g:ale_detail_to_floating_preview = 0
+  let g:ale_close_preview_on_insert = 1
+  let g:ale_lint_on_insert_leave = 1
+  let g:ale_lint_on_text_changed = 'never'
+
+  let g:ale_json_jsonlint_use_global = 1
+  let g:ale_json_spectral_use_global = 1
+
+  let g:ale_completion_autoimport = 1
+  let g:ale_completion_enabled = 1
+
+  " 'json': ['jsonlint', 'spectral'],
+  let g:ale_linters = {
+    \ 'javascript': ['flow', 'eslint'],
+    \ 'json': ['jsonlint'],
+    \ 'stylus': ['stylelint'],
+    \ 'typescript': ['eslint', 'tslint', 'tsserver'],
+    \ }
+  let g:ale_stylus_stylelint_options = '--custom-syntax stylelint-plugin-stylus/custom-syntax'
+'''
 
 # ================================
 # Language
@@ -269,7 +327,7 @@ hook_add = '''
 '''
 [[plugins]]
 repo = 'ap/vim-css-color'
-on_ft = ['css', 'stylus', 'html', 'javascript']
+on_ft = ['css', 'stylus', 'html', 'javascript', 'typescript']
 
 # Dockerfile docker-compose.yml
 # https://github.com/ekalinin/Dockerfile.vim
@@ -279,6 +337,7 @@ on_ft = ['Dockerfile', 'docker-compose']
 
 # HTML5 .html .htm
 # https://github.com/othree/html5.vim
+# https://github.com/mattn/emmet-vim
 [[plugins]]
 repo = 'othree/html5.vim'
 on_ft = 'html'
@@ -288,11 +347,24 @@ hook_add = '''
   let g:html5_microdata_attributes_complete = 0
   let g:html5_aria_attributes_complete = 0
 '''
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_cmd = 'Emmet'
+# on_ft = ['html', 'javascript']
+# on_map = '<Plug>(emmet-'
+hook_add = '''
+  let g:user_emmet_install_global = 1
+  let g:user_emmet_leader_key = '<C-q>'
+  " autocmd FileType javascript EmmetInstall
+'''
 
 # JavaScript .js
+# TypeScript .ts
 # https://github.com/pangloss/vim-javascript
+# https://github.com/leafgarland/typescript-vim
 # https://github.com/gavocanov/vim-js-indent
 # https://github.com/mxw/vim-jsx
+# https://github.com/MaxMEllon/vim-jsx-pretty
 # https://github.com/Quramy/vim-js-pretty-template
 [[plugins]]
 repo = 'pangloss/vim-javascript'
@@ -301,17 +373,31 @@ hook_add = '''
   let g:javascript_plugin_flow = 1
 '''
 [[plugins]]
+repo = 'leafgarland/typescript-vim'
+on_ft = ['typescript']
+hook_add = '''
+  let g:typescript_indent_disable = 1
+'''
+[[plugins]]
 repo = 'gavocanov/vim-js-indent'
-depends = 'vim-javascript'
-on_ft = 'javascript'
+depends = ['vim-javascript']
+on_ft = ['javascript', 'typescript']
 [[plugins]]
 repo = 'mxw/vim-jsx'
 depends = ['vim-javascript', 'splitjoin.vim']
 lazy = 1 # on_ft = 'javascript'
 [[plugins]]
+repo = 'MaxMEllon/vim-jsx-pretty'
+depends = 'vim-javascript'
+on_ft = ['javascript', 'typescript']
+hook_add = '''
+  let g:vim_jsx_pretty_colorful_config = 0
+  let g:vim_jsx_pretty_highlight_close_tag = 0
+'''
+[[plugins]]
 repo = 'Quramy/vim-js-pretty-template'
 depends = ['vim-pug', 'vim-jsx']
-on_ft = 'javascript'
+on_ft = ['javascript', 'typescript']
 hook_source = '''
   call jspretmpl#register_tag('pug', 'pug')
   call jspretmpl#register_tag('yaml', 'yaml')
@@ -370,6 +456,18 @@ on_cmd = 'PlantumlOpen'
 repo = 'digitaltoad/vim-pug'
 depends = ['html5.vim', 'vim-javascript', 'vim-css3-syntax']
 on_ft = 'pug'
+
+# Python .py
+# https://github.com/davidhalter/jedi-vim
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+on_ft = 'python'
+on_cmd = 'Pyimport'
+on_func = 'jedi#'
+hook_add = 'source $NVIM_PLUGINS/jedi.vim'
+# hook_source = '''
+#   # call jedi#configure_call_signatures()
+# '''
 
 # Stylus .styl
 # https://github.com/shirohana/vim-stylus
