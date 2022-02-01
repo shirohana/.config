@@ -6,4 +6,9 @@ if executable('ag')
         \ <q-args>,
         \ '--hidden --path-to-ignore $NVIM/fzf.ignore',
         \ <bang>0)
+  " command! -bang -nargs=* FzfAg2
+  "       \ call fzf#vim#ag(
+  "       \ <q-args>,
+  "       \ '--hidden -m1 --path-to-ignore $NVIM/fzf.ignore',
+  "       \ <bang>0)
 endif

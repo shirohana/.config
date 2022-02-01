@@ -19,6 +19,8 @@ augroup MyAutoCmd
   autocmd CursorHold *? syntax sync minlines=300
   autocmd BufRead,BufNewFile *.ts,*.tsx set filetype=typescript
   autocmd BufRead,BufNewFile *.ts,*.tsx set syntax=javascript
+  " autocmd BufRead,BufNewFile *.json setlocal foldmethod=syntax
+  autocmd FileType plantuml set iskeyword+=$
 augroup END
 
 " Initialize environment -- {{{

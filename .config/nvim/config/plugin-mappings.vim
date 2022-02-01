@@ -4,6 +4,7 @@ if dein#tap('ale')
   map  zj       <Plug>(ale_next)
   map  zk       <Plug>(ale_previous)
   nmap d<Space> <Plug>(ale_hover)
+  nmap d,       <Plug>(ale_documentation)
   map  zi       <Plug>(ale_import)
   nmap gd       <Plug>(ale_go_to_definition)
   nmap gD       <Plug>(ale_go_to_type_definition)
@@ -135,11 +136,13 @@ endif
 " ======== FZF ======== {{{
 if dein#tap('fzf.vim')
   if mapcheck('<C-o>', 'n') == ''
-    nnoremap <C-o> :<C-u>Buffers<CR>
+    nnoremap <silent> <C-o> :<C-u>Buffers<CR>
   endif
-  nnoremap <C-p> :<C-u>Files<CR>
+  nnoremap <silent> <C-p> :<C-u>Files<CR>
   " `Opt-f` to search file contents
   nnoremap ƒ :<C-u>Ag<Space>
+  " `Opt-Shift-f` to search file contents with only 1 match per file
+  " nnoremap Ï :<C-u>FzfAg2<Space>
 endif
 " }}}
 

@@ -72,7 +72,7 @@ merged = 0
 lazy = 1
 [[plugins]]
 repo = 'junegunn/fzf.vim'
-on_cmd = ['Files', 'GFiles', 'Buffers', 'Ag', 'Tags', 'BTags', 'Marks', 'Windows', 'History:', 'Maps', 'Filetypes']
+on_cmd = ['FzfAg', 'Files', 'GFiles', 'Buffers', 'Ag', 'Tags', 'BTags', 'Marks', 'Windows', 'History:', 'Maps', 'Filetypes']
 hook_source = 'source $NVIM_PLUGINS/fzf.vim'
 
 # ================================
