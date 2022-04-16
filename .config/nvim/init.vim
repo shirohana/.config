@@ -17,9 +17,7 @@ endfunction
 augroup MyAutoCmd
   autocmd!
   autocmd CursorHold *? syntax sync minlines=300
-  autocmd BufRead,BufNewFile *.ts set filetype=typescript
-  autocmd BufRead,BufNewFile *.tsx set filetype=typescript.tsx
-  autocmd BufRead,BufNewFile *.ts,*.tsx set syntax=javascript
+  autocmd BufRead,BufNewFile *.tsx setf typescriptreact
   " autocmd BufRead,BufNewFile *.json setlocal foldmethod=syntax
   autocmd FileType plantuml set iskeyword+=$
 augroup END

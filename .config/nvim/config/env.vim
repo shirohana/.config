@@ -39,8 +39,7 @@ set scrolloff=2
 autocmd MyAutoCmd TermOpen * setlocal scrolloff=0
 
 " Rendering
-set nolazyredraw
-set ttyfast
+set lazyredraw
 " }}}
 
 " ======== Behavior ======== {{{

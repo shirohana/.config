@@ -175,6 +175,22 @@ if dein#tap('incsearch-easymotion.vim')
 endif
 " }}}
 
+" ======== LSP Saga ======== {{{
+if dein#tap('lspsaga.nvim')
+  nnoremap <silent> d<Space> <Cmd>Lspsaga hover_doc<CR>
+  nnoremap <silent> <Space>d <Cmd>Lspsaga preview_definition<CR>
+  nnoremap <silent> <C-k>    <Cmd>Lspsaga signature_help<CR>
+  inoremap <silent> <C-k>    <Cmd>Lspsaga signature_help<CR>
+  nnoremap <silent> gu       <Cmd>Lspsaga lsp_finder<CR>
+  nnoremap <silent> zi       <Cmd>Lspsaga code_action<CR>
+  xnoremap <silent> zi       <Cmd>Lspsaga range_code_action<CR>
+  nnoremap <silent> zo       <Cmd>Lspsaga show_line_diagnostics<CR>
+  nnoremap <silent> zj       <Cmd>Lspsaga diagnostic_jump_next<CR>
+  nnoremap <silent> zk       <Cmd>Lspsaga diagnostic_jump_prev<CR>
+  nnoremap <silent> ®        <Cmd>Lspsaga rename<CR>
+endif
+" }}}
+
 " ======== MultipleCursors ======== {{{
 if dein#tap('vim-multiple-cursors')
   let g:multi_cursor_start_word_key = '<C-n>'
