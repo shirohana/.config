@@ -16,7 +16,7 @@ nnoremap <C-l> <Esc>
 " Cancel highlight search
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 " Highlight search on current word
-nnoremap <silent> zx :let @/='\<'.expand('<cword>').'\>'<bar>set hlsearch<CR>
+nnoremap <silent> zx :let @/='\<'.expand('<cword>').'\>'<bar>call histadd('search', @/)<bar>set hlsearch<CR>
 
 " ======== Moving ========
 " Move screen horizontally
@@ -41,6 +41,8 @@ inoremap <C-a> <C-o>I
 inoremap <C-e> <C-o>A
 " Clone paragraph
 nnoremap yp yap<S-}>p
+" Join line without space
+nnoremap <silent> <C-j> :<C-u>call helper#edit#join_spaceless()<CR>
 " Sort lines
 vnoremap so<Space> :<C-u>'<,'>:sort<CR>
 " Alias q -> '

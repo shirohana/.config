@@ -303,6 +303,11 @@ hook_add = '''
     \ 'stylus': ['stylelint'],
     \ 'typescript': ['eslint', 'tslint', 'tsserver'],
     \ }
+  " WIP
+  let g:ale_linter_aliases = {
+    \ 'mdx': 'typescript',
+    \ }
+
   let g:ale_stylus_stylelint_options = '--custom-syntax stylelint-plugin-stylus/custom-syntax'
 '''
 
@@ -425,6 +430,12 @@ hook_add = '''
   let g:vim_markdown_preview_browser = 'Safari'
 '''
 
+# MDX .mdx
+# https://github.com/jxnblk/vim-mdx-js
+# [[plugins]]
+# repo = 'jxnblk/vim-mdx-js'
+# on_ft = 'mdx'
+
 # Nginx conf
 # https://github.com/chr4/nginx.vim
 [[plugins]]
@@ -448,7 +459,14 @@ hook_add = '''
 [[plugins]]
 repo = 'weirongxu/plantuml-previewer.vim'
 depends = 'open-browser.vim'
-on_cmd = 'PlantumlOpen'
+on_cmd = 'Plantuml'
+hook_add = '''
+  let g:plantuml_previewer#plantuml_jar_path = get(
+    \  matchlist(system('cat `which plantuml` | grep plantuml.jar'), '\v.*\s[''"]?(\S+plantuml\.jar).*'),
+    \  1,
+    \  0
+    \)
+'''
 
 # Pug .pug
 # https://github.com/digitaltoad/vim-pug
