@@ -86,7 +86,12 @@ hook_source = 'source $NVIM_PLUGINS/fzf.vim'
 [[plugins]]
 repo = 'easymotion/vim-easymotion'
 hook_add = 'source $NVIM_PLUGINS/easymotion.vim'
-lazy = 0
+
+# Hop
+# https://github.com/phaazon/hop.nvim
+[[plugins]]
+repo = 'phaazon/hop.nvim'
+hook_add = 'source $NVIM_PLUGINS/hop.rc.lua'
 
 # Incsearch
 # https://github.com/haya14busa/incsearch.vim
@@ -152,6 +157,13 @@ hook_add = '''
     \ 'trim_trailing_whitespace',
     \ ]
 '''
+
+# Fugitive
+# https://github.com/tpope/vim-fugitive
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+on_cmd = 'Git'
+on_event = 'BufEnter'
 
 # GitGutter
 # https://github.com/airblade/vim-gitgutter
@@ -270,30 +282,41 @@ hook_add = 'source $NVIM_PLUGINS/lspsaga.rc.lua'
 repo = 'onsails/lspkind-nvim'
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
-depends = ['lspsaga.nvim', 'lspkind-nvim', 'nvim-cmp']
-on_ft = ['javascript', 'typescript', 'typescriptreact', 'typescript.tsx' 'python']
+depends = ['lspsaga.nvim', 'lspkind-nvim']
+# on_ft = ['javascript', 'typescript', 'typescriptreact', 'typescript.tsx' 'python']
 hook_add = 'source $NVIM_PLUGINS/lspconfig.rc.lua'
 [[plugins]]
 repo = 'williamboman/nvim-lsp-installer'
-hook_source = 'source $NVIM_PLUGINS/lsp-installer.rc.lua'
+depends = []
+# hook_add = 'source $NVIM_PLUGINS/lsp-installer.rc.lua'
 
 # CMP Completion
 # https://github.com/hrsh7th/nvim-cmp
 # https://github.com/hrsh7th/cmp-buffer
 # https://github.com/hrsh7th/cmp-nvim-lsp
 # https://github.com/L3MON4D3/LuaSnip
+# https://github.com/ray-x/cmp-treesitter
+# https://github.com/quangnguyen30192/cmp-nvim-ultisnips
 [[plugins]]
 repo = 'hrsh7th/cmp-buffer'
+[[plugins]]
+repo = 'ray-x/cmp-treesitter'
+[[plugins]]
+repo = 'quangnguyen30192/cmp-nvim-ultisnips'
+hook_source = '''
+  lua <<EOF
+  require('cmp_nvim_ultisnips').setup()
+  EOF
+'''
 [[plugins]]
 repo = 'L3MON4D3/LuaSnip'
 [[plugins]]
 repo = 'hrsh7th/nvim-cmp'
-# depends = ['cmp-buffer', 'L3MON4D3/LuaSnip']
-depends = ['cmp-buffer', 'lspkind-nvim']
+depends = ['cmp-buffer', 'cmp-treesitter', 'cmp-nvim-ultisnips', 'lspkind-nvim', 'nvim-lspconfig', 'L3MON4D3/LuaSnip']
 # on_ft = ['javascript', 'typescript', 'typescriptreact', 'typescript.tsx' 'python']
 hook_add = '''
   source $NVIM_PLUGINS/cmp.rc.lua
-  " set completeopt=menuone,noinsert,noselect
+  set completeopt=menuone,noinsert,noselect
 '''
 [[plugins]]
 repo = 'hrsh7th/cmp-nvim-lsp'
@@ -421,6 +444,7 @@ on_ft = ['css', 'stylus', 'html', 'javascript', 'typescript']
 # https://github.com/mxw/vim-jsx
 # https://github.com/MaxMEllon/vim-jsx-pretty
 # https://github.com/Quramy/vim-js-pretty-template
+# https://github.com/windwp/nvim-ts-autotag
 # [[plugins]]
 # repo = 'pangloss/vim-javascript'
 # lazy = 0 # on_ft = 'javascript'
@@ -458,6 +482,14 @@ on_ft = ['css', 'stylus', 'html', 'javascript', 'typescript']
 #   call jspretmpl#register_tag('yaml', 'yaml')
 #   autocmd MyAutoCmd FileType javascript.* JsPreTmpl
 # '''
+[[plugins]]
+repo = 'windwp/nvim-ts-autotag'
+on_ft = ['javascript', 'typescriptreact', 'typescript.tsx']
+hook_source = '''
+  lua <<EOF
+  require('nvim-ts-autotag').setup()
+  EOF
+'''
 
 # Markdown .md
 # https://github.com/plasticboy/vim-markdown
@@ -509,7 +541,7 @@ hook_add = '''
 [[plugins]]
 repo = 'weirongxu/plantuml-previewer.vim'
 depends = 'open-browser.vim'
-on_cmd = 'Plantuml'
+on_cmd = ['PlantumlOpen', 'PlantumlSave']
 hook_add = '''
   let g:plantuml_previewer#plantuml_jar_path = get(
     \  matchlist(system('cat `which plantuml` | grep plantuml.jar'), '\v.*\s[''"]?(\S+plantuml\.jar).*'),

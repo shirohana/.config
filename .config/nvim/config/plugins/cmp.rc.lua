@@ -1,18 +1,18 @@
 local cmp = require 'cmp'
 local lspkind = require 'lspkind'
--- local luasnip = require 'luasnip'
+local luasnip = require 'luasnip'
 
 cmp.setup {
   snippet = {
     expand = function(args)
-      vim.fn['vsnip#anonymous'](args.body)
-      -- luasnip.lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
   mapping = {
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
@@ -21,15 +21,15 @@ cmp.setup {
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
+    { name = 'luasnip' },
     { name = 'treesitter' },
-    -- { name = 'ultisnips' },
-    -- { name = 'luasnip' },
+    { name = 'ultisnips' },
   }, {
     { name = 'buffer' },
   }),
   formatting = {
     format = lspkind.cmp_format({
-      -- mode = '',
+      mode = 'symbol_text',
       maxwidth = 50,
       symbol_map = {
         Text = '',
@@ -61,9 +61,3 @@ cmp.setup {
     }),
   },
 }
-
--- vim.cmd [[highlight! default link CmpItemAbbr CmpItemMenuDefault]]
--- vim.cmd [[highlight! default link CmpItemKind CmpItemMenuDefault]]
--- vim.cmd [[highlight! link CmpItemAbbr Pmenu]]
--- vim.cmd [[highlight! link CmpItemKind Pmenu]]
--- vim.cmd [[highlight! link CmpItemMenu Pmenu]]

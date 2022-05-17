@@ -18,6 +18,8 @@ augroup MyAutoCmd
   autocmd!
   autocmd CursorHold *? syntax sync minlines=300
   autocmd BufRead,BufNewFile *.tsx setf typescriptreact
+  autocmd BufRead,BufNewFile * if !did_filetype() && getline(1) =~# '@startuml\>'| setfiletype plantuml | endif
+  autocmd BufRead,BufNewFile *.pu,*.uml,*.plantuml,*.puml,*.iuml set filetype=plantuml
   " autocmd BufRead,BufNewFile *.json setlocal foldmethod=syntax
   autocmd FileType plantuml set iskeyword+=$
 augroup END

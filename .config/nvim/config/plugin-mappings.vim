@@ -65,16 +65,16 @@ endif
 " ======== EasyMotion ======== {{{
 if dein#tap('vim-easymotion')
   " Line Navigating
-  map <LocalLeader>j <Plug>(easymotion-sol-j)
-  map <LocalLeader>J <Plug>(easymotion-j)
-  map <LocalLeader>k <Plug>(easymotion-sol-k)
-  map <LocalLeader>K <Plug>(easymotion-k)
-  map <LocalLeader>a <Plug>(easymotion-linebackward)
-  map <LocalLeader>d <Plug>(easymotion-lineforward)
+  " map <LocalLeader>j <Plug>(easymotion-sol-j)
+  " map <LocalLeader>J <Plug>(easymotion-j)
+  " map <LocalLeader>k <Plug>(easymotion-sol-k)
+  " map <LocalLeader>K <Plug>(easymotion-k)
+  " map <LocalLeader>a <Plug>(easymotion-linebackward)
+  " map <LocalLeader>d <Plug>(easymotion-lineforward)
   " Word Navigating
-  map <LocalLeader>w  <Plug>(easymotion-w)
+  " map <LocalLeader>w  <Plug>(easymotion-w)
   map <LocalLeader>W  <Plug>(easymotion-W)
-  map <LocalLeader>b  <Plug>(easymotion-b)
+  " map <LocalLeader>b  <Plug>(easymotion-b)
   map <LocalLeader>B  <Plug>(easymotion-B)
   map <LocalLeader>e  <Plug>(easymotion-e)
   map <LocalLeader>E  <Plug>(easymotion-E)
@@ -146,6 +146,12 @@ if dein#tap('fzf.vim')
 endif
 " }}}
 
+" ======== FZF ======== {{{
+if dein#tap('vim-fugitive')
+  nnoremap <silent> gb <Cmd>Git blame<CR>
+endif
+" }}}
+
 " ======== GitGutter ======== {{{
 if dein#tap('vim-gitgutter')
   " Hunk Navigating
@@ -161,6 +167,23 @@ if dein#tap('vim-gitgutter')
   nmap <LocalLeader>sr <Plug>(GitGutterUndoHunk)
   " Toggle Hunk Preview
   nmap <silent> <LocalLeader>s<Space> <Plug>(helper-gitgutter-toggle-preview)
+endif
+" }}}
+
+" ======== Hop ======== {{{
+if dein#tap('hop.nvim')
+  " Line Navigating
+  map <LocalLeader>j <Cmd>HopLineAC<CR>
+  map <LocalLeader>J <Cmd>HopLineStartAC<CR>
+  map <LocalLeader>k <Cmd>HopLineBC<CR>
+  map <LocalLeader>K <Cmd>HopLineStartBC<CR>
+  map <LocalLeader>a <Cmd>HopWordCurrentLineBC<CR>
+  map <LocalLeader>d <Cmd>HopWordCurrentLineAC<CR>
+  " Word Navigating
+  map <LocalLeader>w  <Cmd>HopWordAC<CR>
+  map <LocalLeader>b  <Cmd>HopWordBC<CR>
+  " Word Searching
+  " nmap ss <Cmd>HopPattern<CR>
 endif
 " }}}
 

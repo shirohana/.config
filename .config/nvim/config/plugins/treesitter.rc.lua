@@ -1,14 +1,20 @@
 require('nvim-treesitter.configs').setup {
   ensure_installed = {
-    "html",
-    "json",
-    "toml",
-    "tsx",
-    "yaml",
+    'html',
+    'javascript',
+    'json',
+    'python',
+    'toml',
+    'tsx',
+    'typescript',
+    'yaml',
   },
   highlight = {
     enable = true,
-    disable = {},
+    disable = {
+      'plantuml',
+      'stylus',
+    },
   },
   indent = {
     enable = true,
@@ -19,5 +25,8 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
--- local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
--- parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
+local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
+parser_config.tsx.filetype_to_parsername = {
+  'javascript',
+  'typescript.tsx',
+}

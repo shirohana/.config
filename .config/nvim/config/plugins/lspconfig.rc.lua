@@ -1,4 +1,5 @@
-local protocol = require 'vim.lsp.protocol'
+vim.lsp.set_log_level('debug')
+
 local cmp_lsp = require 'cmp_nvim_lsp'
 local nvim_lsp = require 'lspconfig'
 
@@ -10,7 +11,6 @@ local on_attach = function(client, bufnr)
 
   -- Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-  buf_set_option('completefunc', 'v:lua.vim.lsp.completefunc')
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
@@ -32,14 +32,17 @@ local on_attach = function(client, bufnr)
   -- buf_set_keymap('n', '®', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
   -- buf_set_keymap('n', '<space>ca', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   -- buf_set_keymap('n', '<space>e', '<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  -- buf_set_keymap('n', '<space>f', '<Cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-
-  -- formatting
-  if client.name == 'tsserver' then
-    client.resolved_capabilities.document_formatting = false
-  end
+  buf_set_keymap('n', '<space>f', '<Cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
   if client.resolved_capabilities.document_formatting then
+    -- local augroup_id = vim.api.nvim_create_augroup('Format', {
+    --   clear = true,
+    -- })
+    -- vim.api.nvim_create_autocmd({'BufWritePre'}, {
+    --   group = augroup_id,
+    --   buffer = bufnr,
+    --   command = 'lua vim.lsp.buf.formatting_seq_sync()',
+    -- })
     vim.api.nvim_command [[augroup Format]]
     vim.api.nvim_command [[autocmd! * <buffer>]]
     vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
@@ -47,7 +50,7 @@ local on_attach = function(client, bufnr)
   end
 
   -- protocol.SymbolKind = { }
-  protocol.CompletionItemKind = {
+  vim.lsp.protocol.CompletionItemKind = {
     '', -- Text
     '', -- Method
     '', -- Function
@@ -83,23 +86,30 @@ local capabilities = cmp_lsp.update_capabilities(
 
 nvim_lsp.flow.setup {
   on_attach = on_attach,
-}
-
-nvim_lsp.flow.setup {
   capabilities = capabilities,
 }
 
-nvim_lsp.tsserver.setup {
+nvim_lsp.eslint.setup {
   on_attach = on_attach,
   filetypes = {
+    'javascript',
+    -- 'json',
     'typescript',
-    'typescript.tsx',
     'typescriptreact',
   },
 }
 
 nvim_lsp.tsserver.setup {
+  on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = false
+    on_attach(client, bufnr)
+  end,
   capabilities = capabilities,
+  filetypes = {
+    'typescript',
+    'typescript.tsx',
+    'typescriptreact',
+  },
 }
 
 nvim_lsp.diagnosticls.setup {
@@ -112,34 +122,34 @@ nvim_lsp.diagnosticls.setup {
     'typescriptreact',
   },
   init_options = {
-    linters = {
-      eslint = {
-        command = 'eslint_d',
-        rootPatterns = { '.git' },
-        debounce = 100,
-        args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
-        sourceName = 'eslint_d',
-        parseJson = {
-          errorsRoot = '[0].messages',
-          line = 'line',
-          column = 'column',
-          endLine = 'endLine',
-          endColumn = 'endColumn',
-          message = '[eslint] ${message} [${ruleId}]',
-          security = 'severity',
-        },
-        securities = {
-          [2] = 'error',
-          [1] = 'warning',
-        }
-      },
-    },
-    filetypes = {
-      javascript = 'eslint',
-      javascriptreact = 'eslint',
-      typescript = 'eslint',
-      typescriptreact = 'eslint',
-    },
+    -- linters = {
+    --   eslint = {
+    --     command = 'eslint_d',
+    --     rootPatterns = { '.git' },
+    --     debounce = 100,
+    --     args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
+    --     sourceName = 'eslint_d',
+    --     parseJson = {
+    --       errorsRoot = '[0].messages',
+    --       line = 'line',
+    --       column = 'column',
+    --       endLine = 'endLine',
+    --       endColumn = 'endColumn',
+    --       message = '[eslint] ${message} [${ruleId}]',
+    --       security = 'severity',
+    --     },
+    --     securities = {
+    --       [2] = 'error',
+    --       [1] = 'warning',
+    --     }
+    --   },
+    -- },
+    -- filetypes = {
+    --   javascript = 'eslint',
+    --   javascriptreact = 'eslint',
+    --   typescript = 'eslint',
+    --   typescriptreact = 'eslint',
+    -- },
     formatters = {
       eslint_d = {
         command = 'eslint_d',
@@ -147,24 +157,25 @@ nvim_lsp.diagnosticls.setup {
         args = { '--stdin', '--stdin-filename', '%filename', '--fix-to-stdout' },
         rootPatterns = { '.git' },
       },
-      -- prettier = {
-      --   command = 'prettier_d_slim',
-      --   rootPatterns = { '.git' },
-      --   -- requiredFiles: { 'prettier.config.js' },
-      --   args = { '--stdin', '--stdin-filepath', '%filename' },
-      -- },
+      prettier = {
+        command = 'prettier_d_slim',
+        rootPatterns = { '.git' },
+        requiredFiles = { 'prettier.config.js' },
+        args = { '--stdin', '--stdin-filepath', '%filename' },
+      },
     },
-    -- formatFiletypes = {
-    --   css = 'prettier',
-    --   javascript = 'prettier',
-    --   javascriptreact = 'prettier',
-    --   json = 'prettier',
-    --   typescript = 'prettier',
-    --   typescriptreact = 'prettier',
-    --   json = 'prettier',
-    -- },
+    formatFiletypes = {
+      -- css = 'prettier',
+      javascript = 'prettier',
+      javascriptreact = 'prettier',
+      -- json = 'prettier',
+      typescript = 'prettier',
+      typescriptreact = 'prettier',
+    },
   },
 }
+
+nvim_lsp.tailwindcss.setup {}
 
 -- icon
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
