@@ -32,7 +32,7 @@ autocmd OptionSet guicursor noautocmd set guicursor=
 set colorcolumn=80,120
 set cursorline
 set nowrap
-autocmd MyAutoCmd FileType markdown set wrap
+" autocmd MyAutoCmd FileType markdown set wrap
 
 " Editor padding
 set scrolloff=2

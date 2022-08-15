@@ -1,4 +1,4 @@
-vim.lsp.set_log_level('debug')
+vim.lsp.set_log_level('warn')
 
 local cmp_lsp = require 'cmp_nvim_lsp'
 local nvim_lsp = require 'lspconfig'
@@ -84,34 +84,6 @@ local capabilities = cmp_lsp.update_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
-nvim_lsp.flow.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-nvim_lsp.eslint.setup {
-  on_attach = on_attach,
-  filetypes = {
-    'javascript',
-    -- 'json',
-    'typescript',
-    'typescriptreact',
-  },
-}
-
-nvim_lsp.tsserver.setup {
-  on_attach = function(client, bufnr)
-    client.resolved_capabilities.document_formatting = false
-    on_attach(client, bufnr)
-  end,
-  capabilities = capabilities,
-  filetypes = {
-    'typescript',
-    'typescript.tsx',
-    'typescriptreact',
-  },
-}
-
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
   filetypes = {
@@ -153,15 +125,14 @@ nvim_lsp.diagnosticls.setup {
     formatters = {
       eslint_d = {
         command = 'eslint_d',
-        rootPatterns = { '.git' },
         args = { '--stdin', '--stdin-filename', '%filename', '--fix-to-stdout' },
         rootPatterns = { '.git' },
       },
       prettier = {
         command = 'prettier_d_slim',
+        args = { '--stdin', '--stdin-filepath', '%filename' },
         rootPatterns = { '.git' },
         requiredFiles = { 'prettier.config.js' },
-        args = { '--stdin', '--stdin-filepath', '%filename' },
       },
     },
     formatFiletypes = {
@@ -175,7 +146,37 @@ nvim_lsp.diagnosticls.setup {
   },
 }
 
+nvim_lsp.eslint.setup {
+  on_attach = on_attach,
+  filetypes = {
+    'javascript',
+    -- 'json',
+    'typescript',
+    'typescriptreact',
+  },
+}
+
+nvim_lsp.flow.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+nvim_lsp.prismals.setup {}
+
 nvim_lsp.tailwindcss.setup {}
+
+nvim_lsp.tsserver.setup {
+  on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = false
+    on_attach(client, bufnr)
+  end,
+  capabilities = capabilities,
+  filetypes = {
+    'typescript',
+    'typescript.tsx',
+    'typescriptreact',
+  },
+}
 
 -- icon
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(

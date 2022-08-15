@@ -303,16 +303,13 @@ repo = 'hrsh7th/cmp-buffer'
 repo = 'ray-x/cmp-treesitter'
 [[plugins]]
 repo = 'quangnguyen30192/cmp-nvim-ultisnips'
-hook_source = '''
-  lua <<EOF
-  require('cmp_nvim_ultisnips').setup()
-  EOF
-'''
+depends = ['nvim-cmp']
+hook_add = 'source $NVIM_PLUGINS/cmp-nvim-ultisnips.rc.lua'
 [[plugins]]
 repo = 'L3MON4D3/LuaSnip'
 [[plugins]]
 repo = 'hrsh7th/nvim-cmp'
-depends = ['cmp-buffer', 'cmp-treesitter', 'cmp-nvim-ultisnips', 'lspkind-nvim', 'nvim-lspconfig', 'L3MON4D3/LuaSnip']
+depends = ['cmp-buffer', 'cmp-treesitter', 'lspkind-nvim', 'nvim-lspconfig', 'L3MON4D3/LuaSnip']
 # on_ft = ['javascript', 'typescript', 'typescriptreact', 'typescript.tsx' 'python']
 hook_add = '''
   source $NVIM_PLUGINS/cmp.rc.lua
@@ -503,14 +500,14 @@ hook_source = '''
 #   let g:vim_markdown_folding_disabled = 1
 #   let g:vim_markdown_conceal = 0
 # '''
-# [[plugins]]
-# repo = 'JamshedVesuna/vim-markdown-preview'
-# on_ft = 'markdown'
-# hook_add = '''
-#   let g:vim_markdown_preview_toggle = -1
-#   let g:vim_markdown_preview_github = 1
-#   let g:vim_markdown_preview_browser = 'Safari'
-# '''
+[[plugins]]
+repo = 'JamshedVesuna/vim-markdown-preview'
+on_ft = 'markdown'
+hook_add = '''
+  let g:vim_markdown_preview_toggle = -1
+  let g:vim_markdown_preview_github = 1
+  let g:vim_markdown_preview_browser = 'Safari'
+'''
 
 # MDX .mdx
 # https://github.com/jxnblk/vim-mdx-js
@@ -549,6 +546,12 @@ hook_add = '''
     \  0
     \)
 '''
+
+# Prisma .prisma
+# https://github.com/pantharshit00/vim-prisma
+[[plugins]]
+repo = 'pantharshit00/vim-prisma'
+on_ft = 'prisma'
 
 # Pug .pug
 # https://github.com/digitaltoad/vim-pug

@@ -22,6 +22,8 @@ augroup MyAutoCmd
   autocmd BufRead,BufNewFile *.pu,*.uml,*.plantuml,*.puml,*.iuml set filetype=plantuml
   " autocmd BufRead,BufNewFile *.json setlocal foldmethod=syntax
   autocmd FileType plantuml set iskeyword+=$
+  autocmd FileType prisma setlocal commentstring=//\ %s
+  autocmd FileType typescriptreact setlocal
 augroup END
 
 " Initialize environment -- {{{
