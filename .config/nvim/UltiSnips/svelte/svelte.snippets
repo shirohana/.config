@@ -1,0 +1,25 @@
+snippet /([a-zA-Z][a-zA-Z0-9]*)'\// "<Tag ONELINE />" rA
+<`!p snip.rv = match.group(1)`$0 />
+endsnippet
+
+snippet /([a-zA-Z][a-zA-Z0-9]*)';/ "<Tag> ONELINE </Tag>" rA
+<`!p snip.rv = match.group(1)`>$0</`!p snip.rv = match.group(1)`>
+endsnippet
+
+snippet /([a-zA-Z][a-zA-Z0-9]*);;/ "<Tag> ONELINE </Tag>" rA
+<`!p snip.rv = match.group(1)`$0></`!p snip.rv = match.group(1)`>
+endsnippet
+
+priority 1
+
+snippet style'; "<style lang='postcss'> ONELINE </style>" A
+<style lang="postcss">$0</style>
+endsnippet
+
+snippet script'; "<script lang='ts'> ONELINE </script>" A
+<script lang="ts">$0</script>
+endsnippet
+
+snippet cscript'; "<script lang='ts' module='context'> ONELINE </script>" A
+<script lang="ts" module="context">$0</script>
+endsnippet

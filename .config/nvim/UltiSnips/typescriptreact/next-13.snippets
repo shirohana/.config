@@ -1,0 +1,56 @@
+global !p
+endglobal
+
+snippet ;layout "Layout of AppRouter" b
+import { NextLayout } from 'next'
+
+const ${1:Layout}: NextLayout = ({ children }) => (
+	<>
+		<div>${0:$1}</div>
+		{children}
+	</>
+)
+
+export default $1
+endsnippet
+
+snippet ;page "Page of AppRouter" b
+import { Metadata, NextPage } from 'next'
+import Container from '~layouts/container'
+
+export const metadata: Metadata = {
+}
+
+const ${1:Page}: NextPage = () => (
+	<Container>${0:$1}</Container>
+)
+
+export default $1
+endsnippet
+
+snippet ;redirect "RedirectPage of AppRouter" b
+import { redirect } from 'next/navigation'
+import { LinkRoute } from '~features/routing/link-route'
+
+const ${1:Page}: NextPage = () => {
+  redirect(LinkRoute.Posts)
+}
+
+export default $1
+endsnippet
+
+snippet ;loading "LoadingPage of AppRouter" b
+const Loading: React.FC = () => (
+	<div>[[LOADING $0]]</div>
+)
+
+export default Loading
+endsnippet
+
+snippet ;notfound "NotFoundPage of AppRouter" b
+const NotFound: React.FC = () => (
+	<div>[[NOT_FOUND $0]]</div>
+)
+
+export default NotFound
+endsnippet

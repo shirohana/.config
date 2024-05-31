@@ -1,0 +1,11 @@
+snippet /([a-zA-Z][a-zA-Z0-9]*)'\// "<Tag ONELINE />" rbA
+<`!p snip.rv = match.group(1)`$0 />
+endsnippet
+
+snippet /([a-zA-Z][a-zA-Z0-9]*)';/ "<Tag> ONELINE </Tag>" rbA
+<`!p snip.rv = match.group(1)`>$0</`!p snip.rv = match.group(1)`>
+endsnippet
+
+snippet /([a-zA-Z][a-zA-Z0-9]*);;/ "<Tag> ONELINE </Tag>" rbA
+<`!p snip.rv = match.group(1)`$0></`!p snip.rv = match.group(1)`>
+endsnippet

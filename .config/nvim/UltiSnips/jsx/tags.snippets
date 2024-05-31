@@ -1,34 +1,34 @@
 global !p
 endglobal
 
-snippet /([a-zA-Z][a-zA-Z0-9]*)'\// "<Tag ONELINE />" rbA
+snippet /([a-zA-Z][a-zA-Z0-9]*)'\// "<Tag ONELINE />" rA
 <`!p snip.rv = match.group(1)`$0 />
 endsnippet
 
-snippet /([a-zA-Z][a-zA-Z0-9]*)' \// "<Tag MULTILINE />" rbA
-<`!p snip.rv = match.group(1)`
-	$0
-/>
-endsnippet
+# snippet /([a-zA-Z][a-zA-Z0-9]*)' \// "<Tag MULTILINE />" rA
+# <`!p snip.rv = match.group(1)`
+# 	$0
+# />
+# endsnippet
 
-snippet /([a-zA-Z][a-zA-Z0-9]*)';/ "<Tag> ONELINE </Tag>" rbA
+snippet /([a-zA-Z][a-zA-Z0-9]*)';/ "<Tag> ONELINE </Tag>" rA
 <`!p snip.rv = match.group(1)`>$0</`!p snip.rv = match.group(1)`>
 endsnippet
 
-snippet /([a-zA-Z][a-zA-Z0-9]*);;/ "<Tag> ONELINE </Tag>" rbA
+snippet /([a-zA-Z][a-zA-Z0-9]*);;/ "<Tag> ONELINE </Tag>" rA
 <`!p snip.rv = match.group(1)`$0></`!p snip.rv = match.group(1)`>
 endsnippet
 
-snippet /([a-zA-Z][a-zA-Z0-9]*)' ;/ "<Tag> MULTILINE </Tag>" rbsA
-<`!p snip.rv = match.group(1)`>
-	$0
-</`!p snip.rv = match.group(1)`>
-endsnippet
+# snippet /([a-zA-Z][a-zA-Z0-9]*)' ;/ "<Tag> MULTILINE </Tag>" rsA
+# <`!p snip.rv = match.group(1)`>
+# 	$0
+# </`!p snip.rv = match.group(1)`>
+# endsnippet
 
-snippet /([a-zA-Z][a-zA-Z0-9]*); ;/ "<Tag> MULTILINE </Tag>" rbsA
-<`!p snip.rv = match.group(1)`$0>
-</`!p snip.rv = match.group(1)`>
-endsnippet
+# snippet /([a-zA-Z][a-zA-Z0-9]*); ;/ "<Tag> MULTILINE </Tag>" rsA
+# <`!p snip.rv = match.group(1)`$0>
+# </`!p snip.rv = match.group(1)`>
+# endsnippet
 
 snippet <> "<></>" bA
 <>$0

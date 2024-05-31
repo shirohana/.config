@@ -1,3 +1,3 @@
-Hana's User Environment
-=======================
-I loot many configs from [Craftzdog's dotfile](https://github.com/craftzdog/dotfiles-public).
+Hana's config.nvim
+==================
+Move on Neovim 8 with Lua, shipped from [shirohana/environment](https://github.com/shirohana/environment)

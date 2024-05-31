@@ -21,7 +21,7 @@ endfunction
 function! helper#tab#BufnrList (tabnr)
   if get(g:, 'CtrlSpaceLoaded', 0)
     return map(ctrlspace#api#BufferList(a:tabnr), 'v:val["index"]')
-  else if exists('*nvim_list_bufs')
+  elseif exists('*nvim_list_bufs')
     return filter(nvim_list_bufs(), 'buflisted(v:val)')
   else
     return filter(range(1, bufnr('$')), 'buflisted(v:val)')
