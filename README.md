@@ -1,3 +1,11 @@
-Hana's config.nvim
-==================
-Move on Neovim 8 with Lua, shipped from [shirohana/environment](https://github.com/shirohana/environment)
+.config
+=======
+
+```sh
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+```sh
+tmux
+<C-b>I # install TPM
+```

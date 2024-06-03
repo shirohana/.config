@@ -1,0 +1,12 @@
+[shell]
+program = 'wsl.exe'
+args = ['-d', 'Alpine', '--cd', '~']
+
+[[hints.enabled]]
+command = { program = 'cmd', args = [ '/c', 'start', '' ] }
+hyperlinks = true
+post_processing = true
+persist = false
+mouse = { enabled = true, mods = 'Control' }
+binding = { key = 'u', mods = 'Control|Shift' }
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
