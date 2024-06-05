@@ -126,3 +126,144 @@ setopt share_history          # share command history data
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
+
+
+# ------------------------------
+# Git (moving from my previous .zshrc)
+# ------------------------------
+
+# function git_list_no_merged() {
+#   git for-each-ref --sort=-committerdate refs/ --format="%(refname:short)|%(committerdate:relative)|%(authorname)" | while IFS='|' read -r branch date author; do
+#     if [ -n "$(git branch --all --no-merged master | grep -w $branch)" ]; then
+#       echo "$date | $author | $branch"
+#     fi
+#   done
+# }
+
+# function git_remotes() {
+#   git remote -v | awk '{print $1}' | sort | uniq
+# }
+
+# function git_is_remote_branch() {
+#   # if input starts with remotes/, it's a remote branch
+#   # if input starts with a remote name, it's a remote branch
+#   # otherwise, it's a local branch
+#   if [[ "$1" == remotes/* ]]; then
+#     return 0
+#   fi
+#   if git_remotes | grep -q "^$1$"; then
+#     return 0
+#   fi
+#   return 1
+# }
+
+# function gbd() {
+#   for branch in "$@"; do
+#     if git_is_remote_branch "$branch"; then
+#       remote=${branch%%/*}
+#       git push "$remote" ":${branch#$remote/}"
+#       # if there's a matched local branch, delete it
+#       if git branch -a | grep -q "$branch"; then
+#         git branch -d "${branch#$remote/}"
+#       fi
+#     else
+#       git branch -d "$branch"
+#     fi
+#   done
+# }
+
+function gbdo() {
+  git branch -d "$@";
+  git push origin ":$@";
+}
+
+function gcnm() {
+  now=$(TZ='Asia/Taipei' date +"%Y-%m-%d %H:%M:%S")
+  gitstat=$(git diff --cached --shortstat)
+  git commit --no-verify -m "$now ->$gitstat"
+}
+
+function gcanm() {
+  git add .
+  gcnm
+}
+
+function gccb() {
+  # Copy current branch name to clipboard
+  git_branch=$(git_current_branch | tr -d '\n')
+  echo -n "$git_branch" | pbcopy
+  echo "Copied '$git_branch'"
+}
+
+function gbl() {
+  git branch --list "$1" | sed -e 's/^[* ]*//' | sort
+}
+
+function git_remove_all_merged_local_branches() {
+  git branch --merged | grep -v "^\*" | grep -v $(git_main_branch) | xargs git branch -d
+}
+
+# alias  gcanm='git commit --no-verify -m="$(git diff --cached --numstat | wc -l)"'
+
+alias ga='git add'
+alias gau='git add --update'
+alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message "--wip-- [skip ci]"'
+alias gbs='git bisect'
+alias gbsb='git bisect bad'
+alias gbsg='git bisect good'
+alias gbsn='git bisect new'
+alias gbso='git bisect old'
+alias gbsr='git bisect reset'
+alias gbss='git bisect start'
+alias gb='git branch'
+alias gba='git branch --all'
+alias gbd='git branch --delete'
+alias gbD='git branch --delete --force'
+
+alias      g='git status'
+alias     gs='git status'
+alias    gbf='git branch -f'
+alias    gbm='git branch -m'
+alias    gms='git branch --merged | grep -v "^\*" | grep -v $(git_main_branch)'
+alias    gcn='git commit -v --no-verify'
+alias    gcs='git commit -vS'
+alias    gdh='git checkout HEAD --detach'
+alias     gl='git log --graph --abbrev-commit --decorate --date=relative --format=format:"%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)"'
+alias    gla='git log --graph --abbrev-commit --decorate --date=relative --format=format:"%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)" --all'
+alias     gz='git log --graph --abbrev-commit --decorate --date=relative --format=format:"%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)" --all'
+alias    glp='git log --abbrev-commit --decorate --date=relative --format=format:"%C(yellow)%h%C(reset) %C(bold green)%as%C(reset) - %C(dim white)%s%C(reset) %C(reset)%C(bold yellow)%d%C(reset)" --first-parent'
+alias  glpom='git log --abbrev-commit --decorate --date=relative --format=format:"%C(yellow)%h%C(reset) %C(bold green)%as%C(reset) - %C(dim white)%s%C(reset) %C(reset)%C(bold yellow)%d%C(reset)" --first-parent origin/$(git_main_branch)'
+alias    gmb='git merge-base'
+alias   gmbm='git merge-base $(git_main_branch)'
+alias   gmbh='git merge-base $(git_main_branch) HEAD'
+alias  gmbom='git merge-base origin/$(git_main_branch)'
+alias    gmt='git mergetool --no-prompt'
+alias    gpl='git push local'
+alias   gplf='git push local --force-with-lease'
+alias   gplh='git push local HEAD'
+alias  gplhf='git push local HEAD --force-with-lease'
+alias    gpo='git push origin'
+alias   gpof='git push origin --force-with-lease'
+alias   gpoh='git push origin HEAD'
+alias  gpohf='git push origin HEAD --force-with-lease'
+alias    grh='git reset'
+alias    grp='git remote prune'
+alias    gtv='git tag -l'
+alias   gbfm='git branch -f $(git_main_branch) origin/$(git_main_branch)'
+alias   gcn!='git commit -v --no-verify --amend'
+alias   gcom='git checkout $(git_main_branch)'
+alias   grhb='git reset --soft HEAD~'
+# alias  gboum='git for-each-ref --format="%(refname:short), %(authorname), %(committerdate:relative), %(contents:subject)" --sort=-committerdate refs/remotes/ --no-merged | column -ts,'
+alias  gboum='git for-each-ref --format="%(committerdate:relative) | %(authorname) | %(refname:short) | %(contents:subject)" --sort=-committerdate refs/remotes/ --no-merged'
+alias  gcnn!='git commit --no-edit --no-verify --amend --allow-empty'
+alias  gcoom='git checkout origin/$(git_main_branch)'
+alias  gmnff='git merge --no-ff'
+alias  grbim='git rebase -i $(git merge-base $(git_main_branch) HEAD)'
+alias  grbom='git rebase origin/$(git_main_branch)'
+alias  grhbn='git reset --soft HEAD~ && git reset'
+alias  gstai='git stash push --include-untracked'
+alias gmnffs='git merge --no-ff -S'
+alias   grev='git rev-parse --abbrev-ref HEAD'
+
+alias  gclone='git clone'
+alias gclone1='git clone --depth=1'
