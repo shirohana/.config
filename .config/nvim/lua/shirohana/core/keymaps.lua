@@ -32,8 +32,8 @@ keymap('n', '<Leader>e', '<Cmd>edit<CR>', { desc = 'Reload buffer' })
 keymap('n', '<Leader>q', '<Plug>(close-buffer-keep-layout)', { desc = 'Wipe buffer' })
 -- -- Save & wipe buffer
 -- -- keymap('n', '<Leader>W', ':<C-u>write<Bar>exec "normal \\<Plug>(close-buffer-keep-layout)"<CR>')
-keymap('n', 'M-[', '<Cmd>PrevBuffer<CR>', { desc = 'Go to previous buffer' })
-keymap('n', 'M-]', '<Cmd>NextBuffer<CR>', { desc = 'Go to next buffer' })
+keymap('n', '<C-j>', '<Cmd>PrevBuffer<CR>', { desc = 'Go to previous buffer' })
+keymap('n', '<C-k>', '<Cmd>NextBuffer<CR>', { desc = 'Go to next buffer' })
 if IS_OSX then
   keymap('n', '“', '<Cmd>PrevBuffer<CR>')
   keymap('n', '‘', '<Cmd>NextBuffer<CR>')

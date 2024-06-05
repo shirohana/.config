@@ -1,16 +1,19 @@
-tap "homebrew/cask-fonts"
-tap "homebrew/cask-versions"
+tap "oven-sh/bun"
 
+brew "eza"
+brew "fnm"
+brew "fzf"
+brew "neovim"
 brew "powerlevel10k"
 brew "ripgrep"
 brew "zoxide"
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
 
 cask "alfred"
 cask "polypane"
 
 # Migrating...
-#
-# tap "oven-sh/bun"
 #
 # brew "ansible"
 # brew "asimov"

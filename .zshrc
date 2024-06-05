@@ -45,10 +45,11 @@ else
   eval "$(/usr/local/bin/brew shellenv)"
 fi
 
-if [[ -f ~/.p10k.zsh ]]; then
-  source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
-  source ~/.p10k.zsh
-fi
+source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 if command -v fnm &> /dev/null; then
   eval "$(fnm env --use-on-cd)"
@@ -108,6 +109,19 @@ if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
   alias cd='z'
 fi
+
+## History file configuration
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
+[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
+
+## History command configuration
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt share_history          # share command history data
 
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
