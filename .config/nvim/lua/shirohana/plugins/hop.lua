@@ -3,6 +3,7 @@ local Hop = {
   -- https://github.com/phaazon/hop.nvim
   'phaazon/hop.nvim',
   commit = 'caaccee',
+  event = 'BufEnter',
   config = true,
   keys = {
     { '<LocalLeader>j', '<Cmd>HopLineAC<CR>', { mode = '' } },

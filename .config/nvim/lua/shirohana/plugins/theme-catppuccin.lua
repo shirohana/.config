@@ -3,6 +3,7 @@ local Catppuccin = {
   -- https://github.com/catppuccin/nvim
   'catppuccin/nvim',
   name = 'catppuccin',
+  enabled = 'catppuccin' == require('shirohana.config').colorscheme,
   priority = 1000,
   opts = {
     flavour = 'macchiato',

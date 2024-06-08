@@ -1,3 +1,5 @@
+local Keys = require('shirohana.core.constants').Keys
+
 ---@type LazyPluginSpec
 local SymbolsOutline = {
   -- https://github.com/simrat39/symbols-outline.nvim
@@ -12,8 +14,8 @@ local SymbolsOutline = {
       goto_location = 'o',
       focus_location = 'p',
       hover_symbol = 'd<Space>',
-      toggle_preview = '<Cr>',
-      rename_symbol = '®', -- <Opt+r>
+      toggle_preview = '<CR>',
+      rename_symbol = Keys['<M-r>'],
       code_actions = 'zi',
       fold = { 'h', 'x' },
       -- unfold = 'l',

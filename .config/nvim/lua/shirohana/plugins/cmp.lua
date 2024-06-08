@@ -1,3 +1,13 @@
+local function get_document_color(entry, vim_item)
+  if vim_item.kind == 'Color' and entry.completion_item.documentation then
+    local _, _, r, g, b =
+      string.find(entry.completion_item.documentation, '^rgb%((%d+), (%d+), (%d+)')
+    if r then
+      return string.format('%02x%02x%02x', r, g, b)
+    end
+  end
+end
+
 ---@type LazyPluginSpec
 local Cmp = {
   -- https://github.com/hrsh7th/nvim-cmp

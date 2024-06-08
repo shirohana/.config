@@ -3,10 +3,13 @@ local Notify = {
   -- https://github.com/rcarriga/nvim-notify
   'rcarriga/nvim-notify',
   lazy = true,
-  opts = {
-    fps = 60,
-    -- stages = 'static',
-  },
+}
+
+---@type LazyPluginSpec
+local Nui = {
+  -- https://github.com/MunifTanjim/nui.nvim
+  'MunifTanjim/nui.nvim',
+  lazy = true,
 }
 
 ---@type LazyPluginSpec
@@ -23,4 +26,4 @@ local WebDevIcons = {
   lazy = true,
 }
 
-return { Notify, Plenary, WebDevIcons }
+return { Notify, Nui, Plenary, WebDevIcons }

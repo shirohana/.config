@@ -3,7 +3,10 @@ local TreeSitter = {
   -- https://github.com/nvim-treesitter/nvim-treesitter
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
-  event = { 'BufNewFile', 'BufReadPost' },
+  event = {
+    'BufNewFile',
+    'BufReadPost',
+  },
   dependencies = {
     -- Plugins.TreeSitterIndentObject,
     -- Plugins.TreeSitterRainbow,
@@ -13,6 +16,7 @@ local TreeSitter = {
   opts = {
     ensure_installed = {
       -- 'markdown',
+      -- 'markdown_inline',
       'dockerfile',
       'json',
       'lua',

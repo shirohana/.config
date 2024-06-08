@@ -29,14 +29,13 @@ opt.backspace = 'indent,eol,start'
 
 -- Appearance
 
+opt.background = 'dark'
 opt.colorcolumn = '80,100,120'
 opt.cursorline = true
 opt.guicursor = nil
--- opt.scrolloff = 2
-opt.wrap = false
+opt.signcolumn = 'yes'
 opt.termguicolors = true
-opt.background = 'dark'
--- opt.signcolumn = 'yes'
+opt.wrap = false
 
 vim.cmd [[
 augroup HanaEnv

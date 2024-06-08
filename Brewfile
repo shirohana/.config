@@ -1,6 +1,7 @@
 tap "oven-sh/bun"
 
 brew "eza"
+brew "fd"
 brew "fnm"
 brew "fzf"
 brew "neovim"

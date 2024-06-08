@@ -11,6 +11,7 @@ local AutoSession = {
   },
   config = function(_, opts)
     require('auto-session').setup(opts)
+
     local session_save = function()
       vim.cmd 'SessionSave'
       require('notify').notify('Session saved', vim.log.levels.INFO, {
@@ -18,6 +19,7 @@ local AutoSession = {
         render = 'compact',
       })
     end
+
     local session_restore = function()
       vim.cmd 'SessionRestore'
       require('notify').notify('Session restored', vim.log.levels.INFO, {
@@ -25,9 +27,11 @@ local AutoSession = {
         render = 'compact',
       })
     end
-    local keymap = vim.keymap
-    keymap.set('n', '<M-s>', session_save, { desc = 'Save session' })
-    keymap.set('n', '<M-w>', session_restore, { desc = 'Restore session' })
+
+    local keymap = vim.keymap.set
+
+    keymap('n', '<M-s>', session_save, { desc = 'Save session' })
+    keymap('n', '<M-w>', session_restore, { desc = 'Restore session' })
   end,
 }
 

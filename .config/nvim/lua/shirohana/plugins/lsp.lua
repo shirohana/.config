@@ -1,60 +1,4 @@
--- stylua: ignore
-local NavicTheme = {
-  NavicIconsField         = { fg = '#B5585F', bg = 'NONE' },
-  NavicIconsProperty      = { fg = '#B5585F', bg = 'NONE' },
-  NavicIconsEvent         = { fg = '#B5585F', bg = 'NONE' },
-
-  NavicText               = { fg = '#82AAFF', bg = 'NONE' },
-  NavicIconsEnum          = { fg = '#C3E88D', bg = 'NONE' },
-  NavicIconsKey           = { fg = '#C3E88D', bg = 'NONE' },
-
-  NavicIconsConstant      = { fg = '#FFE082', bg = 'NONE' },
-  NavicIconsConstructor   = { fg = '#FFE082', bg = 'NONE' },
-
-  NavicIconsFunction      = { fg = '#A377BF', bg = 'NONE' },
-  NavicIconsStruct        = { fg = '#A377BF', bg = 'NONE' },
-  NavicIconsClass         = { fg = '#A377BF', bg = 'NONE' },
-  NavicIconsModule        = { fg = '#A377BF', bg = 'NONE' },
-  NavicIconsOperator      = { fg = '#A377BF', bg = 'NONE' },
-
-  NavicIconsVariable      = { fg = '#7E8294', bg = 'NONE' },
-  NavicIconsFile          = { fg = '#7E8294', bg = 'NONE' },
-
-  NavicIconsMethod        = { fg = '#6C8ED4', bg = 'NONE' },
-  NavicIconsEnumMember    = { fg = '#6C8ED4', bg = 'NONE' },
-
-  NavicIconsInterface     = { fg = '#58B5A8', bg = 'NONE' },
-  NavicIconsTypeParameter = { fg = '#58B5A8', bg = 'NONE' },
-
-  NavicIconsNamespace     = { fg = '#0087ff', bg = 'NONE' },
-  NavicIconsPackage       = { fg = '#0087ff', bg = 'NONE' },
-  NavicIconsString        = { fg = '#0087ff', bg = 'NONE' },
-  NavicIconsNumber        = { fg = '#0087ff', bg = 'NONE' },
-  NavicIconsBoolean       = { fg = '#0087ff', bg = 'NONE' },
-  NavicIconsArray         = { fg = '#0087ff', bg = 'NONE' },
-  NavicIconsObject        = { fg = '#0087ff', bg = 'NONE' },
-  NavicIconsNull          = { fg = '#0087ff', bg = 'NONE' },
-  NavicSeparator          = { fg = '#004657', bg = 'NONE' },
-}
-
--- local util = require 'lspconfig.util'
-
-local Icons = require('shirohana.variables').Icons
-
----@type LazyPluginSpec
-local DocumentColor = {
-  -- https://github.com/mrshmllow/document-color.nvim
-  'mrshmllow/document-color.nvim',
-  opts = { mode = 'background' },
-}
-
----@type LazyPluginSpec
-local Fidget = {
-  -- https://github.com/j-hui/fidget.nvim
-  'j-hui/fidget.nvim',
-  tag = 'legacy',
-  opts = { text = { spinner = 'dots' } },
-}
+local Icons = require('shirohana.core.constants').Icons
 
 ---@type LazyPluginSpec
 local LspKind = {
@@ -86,8 +30,8 @@ local LspSaga = {
     { 'zj', '<Cmd>Lspsaga diagnostic_jump_next<CR>' },
     { 'zk', '<Cmd>Lspsaga diagnostic_jump_prev<CR>' },
     -- Rename symbols, using <Opt-r>
-    { '<A-r>',  '<Cmd>Lspsaga rename<CR>' },
-    { '®',  '<Cmd>Lspsaga rename<CR>' },
+    { '<A-r>', '<Cmd>Lspsaga rename<CR>' },
+    { '®', '<Cmd>Lspsaga rename<CR>' },
     -- { '<Space>k', '<Cmd>Lspsaga signature_help<CR>' },
     -- { '<Space>u', '<Cmd>Lspsaga show_line_diagnostics<CR>' },
     -- { '<Space>o', '<Cmd>Lspsaga diagnostic_jump_next<CR>' },
@@ -264,43 +208,41 @@ local LspConfig = {
         },
       },
 
-      -- volar = {
-      --   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#volar
-      --   -- Take Over Mode
-      --   -- Volar (prior to 2.0.0), can serve as a language server for both Vue and TypeScript via Take Over Mode.
-      --   -- To enable Take Over Mode, override the default filetypes in setup{} as follows:
-      --   filetypes = {
-      --     'typescript',
-      --     'javascript',
-      --     'javascriptreact',
-      --     'typescriptreact',
-      --     'vue',
-      --     'json',
-      --   },
-      --   -- Overriding the default TypeScript Server used by Volar
-      --   -- The default config looks for TS in the local node_modules. This can lead to issues e.g. when working on a monorepo.
-      --   on_new_config = function(new_config, new_root_dir)
-      --     local function get_typescript_server_path(root_dir)
-      --       local global_ts =
-      --         '/Users/shirohana/Library/pnpm/global/5/node_modules/typescript/lib'
-      --       local found_ts = ''
-      --       local function check_dir(path)
-      --         found_ts =
-      --           util.path.join(path, 'node_modules', 'typescript', 'lib')
-      --         if util.path.exists(found_ts) then
-      --           return path
-      --         end
-      --       end
-      --       if util.search_ancestors(root_dir, check_dir) then
-      --         return found_ts
-      --       else
-      --         return global_ts
-      --       end
-      --     end
-      --     new_config.init_options.typescript.tsdk =
-      --       get_typescript_server_path(new_root_dir)
-      --   end,
-      -- },
+      volar = {
+        -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#volar
+        -- Take Over Mode
+        -- Volar (prior to 2.0.0), can serve as a language server for both Vue and TypeScript via Take Over Mode.
+        -- To enable Take Over Mode, override the default filetypes in setup{} as follows:
+        filetypes = {
+          'typescript',
+          'javascript',
+          'javascriptreact',
+          'typescriptreact',
+          'vue',
+          'json',
+        },
+        -- Overriding the default TypeScript Server used by Volar
+        -- The default config looks for TS in the local node_modules. This can lead to issues e.g. when working on a monorepo.
+        on_new_config = function(new_config, new_root_dir)
+          local util = require 'lspconfig.util'
+          local function get_typescript_server_path(root_dir)
+            local global_ts = '/Users/shirohana/Library/pnpm/global/5/node_modules/typescript/lib'
+            local found_ts = ''
+            local function check_dir(path)
+              found_ts = util.path.join(path, 'node_modules', 'typescript', 'lib')
+              if util.path.exists(found_ts) then
+                return path
+              end
+            end
+            if util.search_ancestors(root_dir, check_dir) then
+              return found_ts
+            else
+              return global_ts
+            end
+          end
+          new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+        end,
+      },
     },
     setups = {},
   },
@@ -308,13 +250,13 @@ local LspConfig = {
   init = function()
     vim.lsp.set_log_level 'warn'
     vim.lsp.handlers['textDocument/publishDiagnostics'] =
-        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-          underline = true,
-          virtual_text = {
-            spacing = 4,
-            prefix = '',
-          },
-        })
+      vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+        underline = true,
+        virtual_text = {
+          spacing = 4,
+          prefix = '',
+        },
+      })
   end,
 
   config = function(_, opts)
@@ -335,10 +277,7 @@ local LspConfig = {
 
       if client.name == 'svelte' then
         vim.api.nvim_create_autocmd('BufWritePost', {
-          group = vim.api.nvim_create_augroup(
-            'svelte_ondidchangetsorjsfile',
-            { clear = true }
-          ),
+          group = vim.api.nvim_create_augroup('svelte_ondidchangetsorjsfile', { clear = true }),
           pattern = { '*.js', '*.ts' },
           callback = function(ctx)
             client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
@@ -384,10 +323,7 @@ local LspConfig = {
         on_attach = on_attach,
         capabilities = capabilities,
       }, opts.servers[server_name] or {})
-      if
-          opts.setups[server_name]
-          and opts.setups[server_name](server_name, server_opts)
-      then
+      if opts.setups[server_name] and opts.setups[server_name](server_name, server_opts) then
         return
       end
       if opts.setups['*'] and opts.setups['*'](server_name, server_opts) then
@@ -400,30 +336,6 @@ local LspConfig = {
       if not server_opts or not server_opts.mason then
         server_setup(server_name)
       end
-    end
-  end,
-}
-
----@type LazyPluginSpec
-local Navic = {
-  -- https://github.com/SmiteshP/nvim-navic
-  'SmiteshP/nvim-navic',
-  dependencies = {
-    'neovim/nvim-lspconfig',
-  },
-  opts = {
-    depth_limit = 0,
-    depth_limit_indicator = '..',
-    highlight = true,
-    icons = vim.tbl_map(function(v)
-      return string.format('%s ', v)
-    end, Icons),
-    safe_output = true,
-    separator = '  ',
-  },
-  init = function()
-    for name, opts in pairs(NavicTheme) do
-      vim.api.nvim_set_hl(0, name, opts)
     end
   end,
 }
@@ -443,13 +355,10 @@ local Trouble = {
 }
 
 return {
-  DocumentColor,
-  Fidget,
   LspConfig,
   LspKind,
   LspSaga,
   LuaDev,
   Mason,
-  Navic,
   Trouble,
 }

@@ -3,17 +3,18 @@ local Telescope = {
   -- https://github.com/nvim-telescope/telescope.nvim
   'nvim-telescope/telescope.nvim',
   tag = '0.1.6',
+
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-telescope/telescope-fzf-native.nvim',
     'nvim-tree/nvim-web-devicons',
     'nvim-treesitter/nvim-treesitter',
   },
+
   opts = {
     defaults = {
       scroll_strategy = 'limit',
-      path_display = { 'smart' },
-      -- path_display = { 'filename_first' },
+      path_display = { 'filename_first' },
       layout_strategy = 'flex',
       sorting_strategy = 'ascending',
       layout_config = {
@@ -41,21 +42,27 @@ local Telescope = {
       },
     },
   },
+
   config = function(_, opts)
-    local telescope = require('telescope')
+    local telescope = require 'telescope'
+    local builtin = require 'telescope.builtin'
+    local Keys = require('shirohana.core.constants').Keys
+
     telescope.setup(opts)
     telescope.load_extension 'fzf'
-    local builtin = require('telescope.builtin')
-    local keymap = vim.keymap
-    keymap.set('n', '<C-p>', builtin.find_files, { desc = 'Find files' })
-    keymap.set('n', '<C-o>', builtin.buffers, { desc = 'Find files in buffers' })
-    keymap.set('n', '<M-f>', builtin.live_grep, { desc = 'Live grep' })
-    keymap.set('v', '<M-f>', builtin.grep_string, { desc = 'Grep string from visual selection' })
-    keymap.set('n', 'ss', builtin.current_buffer_fuzzy_find, { desc = 'Current buffer fuzzy find' })
+
+    local keymap = vim.keymap.set
+
+    keymap('n', 'ss', builtin.current_buffer_fuzzy_find, { desc = 'Current buffer fuzzy find' })
+
+    if 'Telescope' == require('shirohana.config').FILE_EXPLORER then
+      keymap('n', '<C-p>', builtin.find_files, { desc = 'Find files' })
+      keymap('n', '<C-o>', builtin.buffers, { desc = 'Find files in buffers' })
+      keymap('n', Keys['<M-f>'], builtin.live_grep, { desc = 'Live grep' })
+      keymap('v', Keys['<M-f>'], builtin.grep_string, { desc = 'Grep string' })
+    end
   end,
 }
-
-
 
 ---@type LazyPluginSpec
 local TelescopeFzfNative = {

@@ -1,4 +1,3 @@
-
 ---@type LazyPluginSpec
 local Oil = {
   -- https://github.com/stevearc/oil.nvim
@@ -23,7 +22,7 @@ local Oil = {
     keymaps = {
       ['g?'] = 'actions.show_help',
       ['>'] = 'actions.select',
-      ['<Cr>'] = 'actions.select_vsplit',
+      ['<CR>'] = 'actions.select_vsplit',
       -- ['<C-h>'] = 'actions.select_split',
       -- ['<C-t>'] = 'actions.select_tab',
       ['zp'] = 'actions.preview',

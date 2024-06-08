@@ -46,13 +46,13 @@ local CtrlSpace = {
       require('telescope.pickers').new(picker_opts, picker_defaults):find()
     end
 
-    local keymap = vim.keymap
+    local keymap = vim.keymap.set
 
-    keymap.set('n', '<LocalLeader>c', '<Cmd>CtrlSpace<CR>', { desc = 'Show CtrlSpace menu' })
-    keymap.set('n', '<M-w>', load_workspace, { desc = 'Load workspace' })
-    keymap.set('n', '<M-s>', '<Cmd>SaveWorkspace<CR>', { desc = 'Save workspace' })
-    keymap.set('n', '<M-S>', '<Cmd>SaveWorkspacePrompt<CR>', { desc = 'Save-as workspace' })
-    keymap.set('n', '<LocalLeader>=', '<Cmd>RenameTabLabel<CR>', { desc = 'Rename tab' })
+    keymap('n', '<LocalLeader>c', '<Cmd>CtrlSpace<CR>', { desc = 'Show CtrlSpace menu' })
+    keymap('n', '<M-w>', load_workspace, { desc = 'Load workspace' })
+    keymap('n', '<M-s>', '<Cmd>SaveWorkspace<CR>', { desc = 'Save workspace' })
+    keymap('n', '<M-S>', '<Cmd>SaveWorkspacePrompt<CR>', { desc = 'Save-as workspace' })
+    keymap('n', '<LocalLeader>=', '<Cmd>RenameTabLabel<CR>', { desc = 'Rename tab' })
   end,
 }
 

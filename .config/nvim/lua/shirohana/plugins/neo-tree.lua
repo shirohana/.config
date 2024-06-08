@@ -1,16 +1,21 @@
+local Keys = require('shirohana.core.constants').Keys
+
 ---@type LazyPluginSpec
 local NeoTree = {
   -- https://github.com/nvim-neo-tree/neo-tree.nvim
   'nvim-neo-tree/neo-tree.nvim',
+
   dependencies = {
     'MunifTanjim/nui.nvim',
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
   },
+
   keys = {
-    { '<M-;>', '<Cmd>Neotree toggle<CR>', { desc = 'Toggle NeoTree' }},
-    { '<M-:>', '<Cmd>Neotree reveal<CR>', { desc = 'Find current file in NeoTree' }},
+    { Keys['<M-;>'], '<Cmd>Neotree toggle<CR>', { desc = 'Toggle NeoTree' } },
+    { Keys['<M-:>'], '<Cmd>Neotree reveal<CR>', { desc = 'Find current file in NeoTree' } },
   },
+
   opts = {
     use_default_mappings = false,
     window = {
@@ -48,8 +53,7 @@ local NeoTree = {
       window = {
         mappings = {
           ['i'] = 'toggle_hidden',
-          ['<M-f>'] = 'fuzzy_finder',
-          ['ƒ'] = 'fuzzy_finder',
+          [Keys['<M-f>']] = 'fuzzy_finder',
           ['fd'] = 'fuzzy_finder_directory',
           ['ff'] = 'filter_on_submit',
           ['<C-x>'] = 'clear_filter',

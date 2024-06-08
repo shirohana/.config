@@ -2,8 +2,7 @@
 local Bufferline = {
   -- https://github.com/akinsho/bufferline.nvim
   'akinsho/bufferline.nvim',
-  ---@todo wip
-  enabled = false,
+  enabled = require('shirohana.config').USE_BUFFERLINE,
   version = '*',
   dependencies = {
     'nvim-tree/nvim-web-devicons',

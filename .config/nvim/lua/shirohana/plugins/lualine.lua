@@ -2,10 +2,8 @@
 local Lualine = {
   -- https://github.com/nvim-lualine/lualine.nvim
   'nvim-lualine/lualine.nvim',
-  ---@todo wip
-  enabled = false,
+  enabled = require('shirohana.config').USE_LUALINE,
   dependencies = {
-    'catppuccin/nvim',
     'nvim-tree/nvim-web-devicons',
   },
   opts = {
@@ -20,10 +18,6 @@ local Lualine = {
       'trouble',
     },
   },
-  config = function(_, opts)
-    local macchiato = require("catppuccin.palettes").get_palette "macchiato"
-    require("lualine").setup(opts)
-  end,
 }
 
 return Lualine

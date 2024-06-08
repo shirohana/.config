@@ -4,7 +4,7 @@ local Undotree = {
   'mbbill/undotree',
   cmd = 'UndotreeToggle',
   keys = {
-    { 'U', '<Cmd>UndotreeToggle<Bar>wincmd p<CR>', { desc = 'Toggle Undotree' }},
+    { 'U', '<Cmd>UndotreeToggle<Bar>wincmd p<CR>', { desc = 'Toggle Undotree' } },
   },
   init = function()
     vim.g.undotree_WindowLayout = 4

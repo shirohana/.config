@@ -5,3 +5,6 @@
 __pycache__/
 vim-markdown-preview.html
 ~$
+.git
+.next
+node_modules

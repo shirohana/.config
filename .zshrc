@@ -22,8 +22,8 @@ bindkey '\C-x\C-e' edit-command-line
 # bindkey '\C-n'   down-line-or-search
 # bindkey '\C-p'   up-line-or-search
 # bindkey '\C-r'   history-incremental-search-backward
-# bindkey '^[[B' history-search-forward
-# bindkey '^[[A' history-search-backward
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward
 
 export LANG=en_US.UTF-8
 export EDITOR='nvim'
@@ -54,6 +54,14 @@ source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 if command -v fnm &> /dev/null; then
   eval "$(fnm env --use-on-cd)"
   source <(fnm completions --shell zsh)
+fi
+
+if command -v fzf &> /dev/null; then
+  source <(fzf --zsh)
+  if command -v fd &> /dev/null; then
+    export FZF_DEFAULT_COMMAND='fd --hidden --strip-cwd-prefix'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  fi
 fi
 
 if command -v pnpm &> /dev/null; then
@@ -267,3 +275,5 @@ alias   grev='git rev-parse --abbrev-ref HEAD'
 
 alias  gclone='git clone'
 alias gclone1='git clone --depth=1'
+
+alias gfa='git fetch --all'

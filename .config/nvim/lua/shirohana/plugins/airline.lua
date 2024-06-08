@@ -2,21 +2,19 @@
 local Airline = {
   -- https://github.com/vim-airline/vim-airline
   'vim-airline/vim-airline',
+  enabled = require('shirohana.config').USE_AIRLINE,
   dependencies = {
     'nvim-tree/nvim-web-devicons',
+    'vim-airline/vim-airline-themes',
     'vim-ctrlspace/vim-ctrlspace',
   },
   init = function()
     local g = vim.g
-    -- Theme
-    g.airline_theme = 'catppuccin'
-    g.airline_disabled = true
-    -- g.airline_solarized_bg = 'dark'
 
-    -- Use unicode characters
+    g.airline_theme = 'solarized'
+    g.airline_solarized_bg = 'dark'
     g.airline_powerline_fonts = 1
 
-    -- airline # extensions # airline
     g['airline#extensions#tabline#enabled'] = 1
 
     g['airline#extensions#tabline#show_buffers'] = 1
@@ -27,15 +25,20 @@ local Airline = {
 
     g['airline#extensions#tabline#tab_nr_type'] = 0
 
-    -- Buffer name formmatter
     g['airline#extensions#tabline#formatter'] = 'unique_tail_improved'
     g['airline#extensions#tabline#fnamemod'] = ':t'
     g['airline#extensions#tabline#fnamecollapse'] = 0
     g['airline#extensions#tabline#fnametruncate'] = 12
 
-    -- airline # extensions # ctrlspace
     g['airline#extensions#ctrlspace#enabled'] = 1
   end,
 }
 
-return Airline
+---@type LazyPluginSpec
+local AirlineThemes = {
+  -- https://github.com/vim-airline/vim-airline-themes
+  'vim-airline/vim-airline-themes',
+  lazy = true,
+}
+
+return { Airline, AirlineThemes }

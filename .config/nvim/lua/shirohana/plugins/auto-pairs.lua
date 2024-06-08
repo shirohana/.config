@@ -2,7 +2,7 @@
 local AutoPairs = {
   -- https://github.com/jiangmiao/auto-pairs
   'jiangmiao/auto-pairs',
-  init = function ()
+  init = function()
     local g = vim.g
     g.AutoPairsCenterLine = 0
     g.AutoPairsFlyMode = 1

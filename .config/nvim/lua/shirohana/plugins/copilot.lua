@@ -2,8 +2,9 @@
 local Copilot = {
   -- https://github.com/github/copilot.vim
   'github/copilot.vim',
+  enabled = 'Copilot' == require('shirohana.config').CODE_COMPLETION_AI,
   cmd = 'Copilot',
-  event = 'InsertEnter',
+  event = 'BufEnter',
   init = function()
     vim.g.copilot_filetypes = {
       gitcommit = true,
