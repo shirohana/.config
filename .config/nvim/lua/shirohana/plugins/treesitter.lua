@@ -3,25 +3,25 @@ local TreeSitter = {
   -- https://github.com/nvim-treesitter/nvim-treesitter
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
-  event = {
-    'BufNewFile',
-    'BufReadPost',
-  },
   dependencies = {
     -- Plugins.TreeSitterIndentObject,
     -- Plugins.TreeSitterRainbow,
     -- Plugins.TreeSitterTextobjects,
   },
+  event = { 'BufNewFile', 'BufReadPost' },
   ---@type TSConfig
   opts = {
     ensure_installed = {
-      -- 'markdown',
-      -- 'markdown_inline',
+      'css',
       'dockerfile',
+      'html',
       'json',
       'lua',
+      'markdown',
+      'markdown_inline',
       'python',
       'query',
+      'scss',
       'svelte',
       'toml',
       'tsx',
@@ -85,7 +85,9 @@ local TreeSitterContext = {
   dependencies = {
     'nvim-treesitter/nvim-treesitter',
   },
-  config = true,
+  opts = {
+    max_lines = 6,
+  },
 }
 
 return { TreeSitter, TreeSitterContext }

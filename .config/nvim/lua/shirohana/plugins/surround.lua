@@ -3,7 +3,7 @@ local Surround = {
   -- https://github.com/kylechui/nvim-surround
   'kylechui/nvim-surround',
   version = '*',
-  event = 'VeryLazy',
+  event = 'BufEnter',
   config = true,
 }
 

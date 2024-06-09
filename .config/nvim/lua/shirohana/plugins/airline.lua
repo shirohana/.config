@@ -31,6 +31,7 @@ local Airline = {
     g['airline#extensions#tabline#fnametruncate'] = 12
 
     g['airline#extensions#ctrlspace#enabled'] = 1
+    g['CtrlSpaceStatuslineFunction'] = 'airline#extensions#ctrlspace#statusline()'
   end,
 }
 

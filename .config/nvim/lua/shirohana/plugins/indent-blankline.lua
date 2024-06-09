@@ -3,7 +3,6 @@ local IndentBlankline = {
   -- https://github.com/lukas-reineke/indent-blankline.nvim
   'lukas-reineke/indent-blankline.nvim',
   version = '2',
-  event = 'BufReadPre',
   opts = {
     space_char_blankline = ' ',
     show_current_context = true,

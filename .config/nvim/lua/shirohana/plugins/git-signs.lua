@@ -2,10 +2,7 @@
 local GitSigns = {
   -- https://github.com/lewis6991/gitsigns.nvim
   'lewis6991/gitsigns.nvim',
-  event = {
-    'BufReadPre',
-    'BufNewFile',
-  },
+  event = { 'BufReadPre', 'BufNewFile' },
   opts = {
     current_line_blame_formatter = '<summary> | <author>, <author_time:%Y-%m-%d>',
     current_line_blame_opts = {

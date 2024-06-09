@@ -15,6 +15,9 @@ vim.opt.rtp:prepend(LAZY_PATH)
 
 require('lazy').setup({
   { import = 'shirohana.plugins' },
+  { import = 'shirohana.plugins.lang' },
+  { import = 'shirohana.plugins.lsp' },
+  { import = 'shirohana.plugins.completion' },
 }, {
   change_detection = { notify = false },
   checker = { enabled = true, notify = false },

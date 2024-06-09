@@ -25,6 +25,16 @@ bindkey '\C-x\C-e' edit-command-line
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 
+setopt complete_in_word
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|=*' 'l:|=* r:|=*'
+
+my-backward-delete-word() {
+    local WORDCHARS=${WORDCHARS/\//}
+    zle backward-delete-word
+}
+zle -N my-backward-delete-word
+bindkey '\C-w' my-backward-delete-word
+
 export LANG=en_US.UTF-8
 export EDITOR='nvim'
 export GPG_TTY=$TTY
@@ -180,6 +190,21 @@ fi
 #   done
 # }
 
+function git_main_branch() {
+  command git rev-parse --git-dir &>/dev/null || return
+  local ref
+  for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk,mainline,default,stable,master}; do
+    if command git show-ref -q --verify $ref; then
+      echo ${ref:t}
+      return 0
+    fi
+  done
+
+  # If no main branch was found, fall back to master but return error
+  echo master
+  return 1
+}
+
 function gbdo() {
   git branch -d "$@";
   git push origin ":$@";
@@ -259,6 +284,7 @@ alias    grp='git remote prune'
 alias    gtv='git tag -l'
 alias   gbfm='git branch -f $(git_main_branch) origin/$(git_main_branch)'
 alias   gcn!='git commit -v --no-verify --amend'
+alias    gcm='git checkout $(git_main_branch)'
 alias   gcom='git checkout $(git_main_branch)'
 alias   grhb='git reset --soft HEAD~'
 # alias  gboum='git for-each-ref --format="%(refname:short), %(authorname), %(committerdate:relative), %(contents:subject)" --sort=-committerdate refs/remotes/ --no-merged | column -ts,'
@@ -277,3 +303,7 @@ alias  gclone='git clone'
 alias gclone1='git clone --depth=1'
 
 alias gfa='git fetch --all'
+
+alias ta='tig --all'
+alias gco='git checkout'
+alias grt='cd "$(git rev-parse --show-toplevel || echo .)"'

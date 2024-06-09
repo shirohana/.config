@@ -7,6 +7,7 @@ local Scrollbar = {
   dependencies = {
     'kevinhwang91/nvim-hlslens',
   },
+  event = 'BufReadPre',
   opts = {
     handle = { text = ' ', color = '#0b4f60' },
     marks = {
@@ -22,7 +23,7 @@ local Scrollbar = {
       GitDelete = { text = '▏', priority = 7, color = Colors.red },
     },
     excluded_buftypes = { 'nofile', 'terminal' },
-    excluded_filetypes = { 'LspsagaHover', 'noice', 'prompt' },
+    excluded_filetypes = { 'LspsagaHover', 'noice', 'prompt', 'Telescope' },
     autocmd = {
       render = {
         'BufWinEnter',

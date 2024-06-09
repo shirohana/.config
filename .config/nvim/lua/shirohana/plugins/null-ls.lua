@@ -8,7 +8,7 @@ local NoneLs = {
   config = function()
     local nls = require 'null-ls'
     local formatter = nls.builtins.formatting
-    -- local action = nls.builtins.code_actions
+    local action = nls.builtins.code_actions
     local diag = nls.builtins.diagnostics
     nls.setup {
       sources = {
@@ -16,9 +16,7 @@ local NoneLs = {
         -- diag.eslint_d.with { diagnostics_format = '[eslint] #{m}\n(#{c})' },
         diag.hadolint,
         formatter.blackd,
-        formatter.prettierd.with {
-          -- filetypes = { 'javascript', 'typescript', 'typescriptreact' },
-        },
+        formatter.prettierd,
         formatter.stylua,
       },
     }

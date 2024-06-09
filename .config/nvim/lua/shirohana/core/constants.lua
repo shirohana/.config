@@ -88,6 +88,7 @@ M.Keys = {
   ['<M-J>'] = opt and 'Ô' or '<M-J>',
   ['<M-K>'] = opt and '' or '<M-K>',
   ['<M-L>'] = opt and 'Ò' or '<M-L>',
+  ['<M-S>'] = opt and 'Í' or '<M-S>',
   ['<M-[>'] = opt and '“' or nil,
   ['<M-]>'] = opt and '‘' or nil,
   ['<M-f>'] = opt and 'ƒ' or '<M-f>',
@@ -96,7 +97,9 @@ M.Keys = {
   ['<M-k>'] = opt and '˚' or '<M-k>',
   ['<M-l>'] = opt and '¬' or '<M-l>',
   ['<M-r>'] = opt and '®' or '<M-r>',
+  ['<M-s>'] = opt and 'ß' or '<M-s>',
   ['<M-t>'] = opt and '†' or '<M-t>',
+  ['<M-w>'] = opt and '∑' or '<M-w>',
 }
 
 return M

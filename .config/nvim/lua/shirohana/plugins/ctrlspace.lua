@@ -46,12 +46,13 @@ local CtrlSpace = {
       require('telescope.pickers').new(picker_opts, picker_defaults):find()
     end
 
+    local Keys = require('shirohana.core.constants').Keys
     local keymap = vim.keymap.set
 
     keymap('n', '<LocalLeader>c', '<Cmd>CtrlSpace<CR>', { desc = 'Show CtrlSpace menu' })
-    keymap('n', '<M-w>', load_workspace, { desc = 'Load workspace' })
-    keymap('n', '<M-s>', '<Cmd>SaveWorkspace<CR>', { desc = 'Save workspace' })
-    keymap('n', '<M-S>', '<Cmd>SaveWorkspacePrompt<CR>', { desc = 'Save-as workspace' })
+    keymap('n', Keys['<M-w>'], load_workspace, { desc = 'Load workspace' })
+    keymap('n', Keys['<M-s>'], '<Cmd>SaveWorkspace<CR>', { desc = 'Save workspace' })
+    keymap('n', Keys['<M-S>'], '<Cmd>SaveWorkspacePrompt<CR>', { desc = 'Save-as workspace' })
     keymap('n', '<LocalLeader>=', '<Cmd>RenameTabLabel<CR>', { desc = 'Rename tab' })
   end,
 }
