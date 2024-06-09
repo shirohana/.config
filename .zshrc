@@ -205,6 +205,20 @@ function git_main_branch() {
   return 1
 }
 
+function git_develop_branch() {
+  command git rev-parse --git-dir &>/dev/null || return
+  local branch
+  for branch in dev devel develop development; do
+    if command git show-ref -q --verify refs/heads/$branch; then
+      echo $branch
+      return 0
+    fi
+  done
+
+  echo develop
+  return 1
+}
+
 function gbdo() {
   git branch -d "$@";
   git push origin ":$@";
@@ -256,7 +270,7 @@ alias gbD='git branch --delete --force'
 alias      g='git status'
 alias     gs='git status'
 alias    gbf='git branch -f'
-alias    gbm='git branch -m'
+alias    gbm='git branch --move'
 alias    gms='git branch --merged | grep -v "^\*" | grep -v $(git_main_branch)'
 alias    gcn='git commit -v --no-verify'
 alias    gcs='git commit -vS'
@@ -284,26 +298,74 @@ alias    grp='git remote prune'
 alias    gtv='git tag -l'
 alias   gbfm='git branch -f $(git_main_branch) origin/$(git_main_branch)'
 alias   gcn!='git commit -v --no-verify --amend'
+alias    gcd='git checkout $(git_develop_branch)'
 alias    gcm='git checkout $(git_main_branch)'
-alias   gcom='git checkout $(git_main_branch)'
 alias   grhb='git reset --soft HEAD~'
-# alias  gboum='git for-each-ref --format="%(refname:short), %(authorname), %(committerdate:relative), %(contents:subject)" --sort=-committerdate refs/remotes/ --no-merged | column -ts,'
-alias  gboum='git for-each-ref --format="%(committerdate:relative) | %(authorname) | %(refname:short) | %(contents:subject)" --sort=-committerdate refs/remotes/ --no-merged'
+# alias  gbonm='git for-each-ref --format="%(refname:short), %(authorname), %(committerdate:relative), %(contents:subject)" --sort=-committerdate refs/remotes/ --no-merged | column -ts,'
+alias    gbr='git branch --remote'
+alias  gbonm='git for-each-ref --format="%(committerdate:relative) | %(authorname) | %(refname:short) | %(contents:subject)" --sort=-committerdate refs/remotes/ --no-merged'
+alias   gbnm='git branch --no-merged'
 alias  gcnn!='git commit --no-edit --no-verify --amend --allow-empty'
 alias  gcoom='git checkout origin/$(git_main_branch)'
 alias  gmnff='git merge --no-ff'
 alias  grbim='git rebase -i $(git merge-base $(git_main_branch) HEAD)'
-alias  grbom='git rebase origin/$(git_main_branch)'
 alias  grhbn='git reset --soft HEAD~ && git reset'
 alias  gstai='git stash push --include-untracked'
 alias gmnffs='git merge --no-ff -S'
 alias   grev='git rev-parse --abbrev-ref HEAD'
+alias  gcp='git cherry-pick'
+alias gcpa='git cherry-pick --abort'
+alias gcpc='git cherry-pick --continue'
 
 alias  gclone='git clone'
 alias gclone1='git clone --depth=1'
 
+alias gf='git fetch'
 alias gfa='git fetch --all'
 
+alias ts='tig status'
 alias ta='tig --all'
+
 alias gco='git checkout'
 alias grt='cd "$(git rev-parse --show-toplevel || echo .)"'
+alias gcb='git checkout -b'
+
+alias gc='git commit --verbose'
+alias gca='git commit --verbose --all'
+alias gca!='git commit --verbose --all --amend'
+alias gc!='git commit --verbose --amend'
+alias gcn!='git commit --verbose --no-edit --amend'
+
+alias gdca='git diff --cached'
+alias gdcw='git diff --cached --word-diff'
+alias gds='git diff --staged'
+alias gdw='git diff --word-diff'
+
+alias gm='git merge'
+alias gma='git merge --abort'
+alias gmc='git merge --continue'
+alias gms="git merge --squash"
+
+alias gp='git push'
+alias gpd='git push --dry-run'
+
+alias grb='git rebase'
+alias grba='git rebase --abort'
+alias grbc='git rebase --continue'
+alias grbi='git rebase --interactive'
+
+alias grbm='git rebase $(git_main_branch)'
+alias  grbom='git rebase origin/$(git_main_branch)'
+
+alias gst='git stash'
+alias gstall='git stash --all'
+alias gsta='git stash apply'
+alias gstc='git stash clear'
+alias gstd='git stash drop'
+alias gstl='git stash list'
+alias gstp='git stash pop'
+
+alias gsi='git submodule init'
+alias gsu='git submodule update'
+
+alias gts='git tag --sign'
