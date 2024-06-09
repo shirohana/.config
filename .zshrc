@@ -22,8 +22,16 @@ bindkey '\C-x\C-e' edit-command-line
 # bindkey '\C-n'   down-line-or-search
 # bindkey '\C-p'   up-line-or-search
 # bindkey '\C-r'   history-incremental-search-backward
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward
+# bindkey '^[[A' history-search-backward
+# bindkey '^[[B' history-search-forward
+bindkey '^[[A' history-beginning-search-backward
+bindkey '^[[B' history-beginning-search-forward
+
+# autoload -U history-search-end
+# zle -N history-beginning-search-backward-end history-search-end
+# zle -N history-beginning-search-forward-end history-search-end
+# bindkey "^[[A" history-beginning-search-backward-end
+# bindkey "^[[B" history-beginning-search-forward-end
 
 setopt complete_in_word
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|=*' 'l:|=* r:|=*'
@@ -125,7 +133,6 @@ fi
 
 if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
-  alias cd='z'
 fi
 
 ## History file configuration
