@@ -31,7 +31,7 @@ local TreeSitter = {
     },
     highlight = {
       enable = true,
-      disable = { 'help', 'plantuml', 'stylus', 'vimdoc' },
+      disable = { 'help', 'markdown', 'plantuml', 'stylus', 'vimdoc' },
     },
     indent = { enable = true, disable = {} },
     -- autotag = { enable = true },
