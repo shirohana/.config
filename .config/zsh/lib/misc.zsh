@@ -74,6 +74,9 @@ alias  :qa='exit'
 #   alias ts='tig status'
 # fi
 
+export PAGER='less'
+export LESS='-R'
+
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
