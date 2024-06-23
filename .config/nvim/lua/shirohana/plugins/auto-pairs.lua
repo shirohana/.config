@@ -3,6 +3,7 @@ local AutoPairs = {
   -- https://github.com/jiangmiao/auto-pairs
   'jiangmiao/auto-pairs',
   init = function()
+    local Keys = require('shirohana.core.constants').Keys
     local g = vim.g
     g.AutoPairsCenterLine = 0
     g.AutoPairsFlyMode = 1
@@ -11,7 +12,7 @@ local AutoPairs = {
     g.AutoPairsMapCh = 0
     g.AutoPairsMapSpace = 1
     g.AutoPairsMultilineClose = 1
-    g.AutoPairsShortcutBackInsert = '<M-b>'
+    g.AutoPairsShortcutBackInsert = Keys['<M-b>']
     g.AutoPairsShortcutFastWrap = ''
     g.AutoPairsShortcutJump = ''
     g.AutoPairsShortcutToggle = ''

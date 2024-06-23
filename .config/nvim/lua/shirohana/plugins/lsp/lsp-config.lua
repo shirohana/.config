@@ -7,7 +7,7 @@ local servers = {
   svelte = {},
   tailwindcss = {},
   tsserver = {},
-  volar = {},
+  -- volar = {},
 }
 
 ---@type LazyPluginSpec
@@ -137,18 +137,14 @@ local LspConfig = {
           km_opts.buffer = event.buf
           vim.keymap.set(mode, lhs, rhs, km_opts)
         end
-        bkeymap('n', 'd<Space>', '<Cmd>Lspsaga hover_doc<CR>')
-        bkeymap('n', 'zj', '<Cmd>Lspsaga diagnostic_jump_next<CR>')
-        bkeymap('n', 'zk', '<Cmd>Lspsaga diagnostic_jump_prev<CR>')
-        bkeymap('n', 'zi', '<Cmd>Lspsaga code_action<CR>')
-        bkeymap('n', 'zo', '<Cmd>Lspsaga show_line_diagnostics<CR>')
-        bkeymap('n', Keys['<M-r>'], '<Cmd>Lspsaga rename<CR>')
-        -- bkeymap('n', 'd<Space>', vim.lsp.buf.hover)
-        -- bkeymap('n', 'zj', vim.diagnostic.goto_next)
-        -- bkeymap('n', 'zk', vim.diagnostic.goto_prev)
-        -- bkeymap('n', 'zi', vim.lsp.buf.code_action)
-        -- bkeymap('n', 'zo', vim.diagnostic.open_float)
-        -- bkeymap('n', Keys['<M-r>'], vim.lsp.buf.rename)
+        if not require('shirohana.config').USE_LSP_SAGA_KEYMAPS then
+          bkeymap('n', 'd<Space>', vim.lsp.buf.hover)
+          bkeymap('n', 'zj', vim.diagnostic.goto_next)
+          bkeymap('n', 'zk', vim.diagnostic.goto_prev)
+          bkeymap('n', 'zi', vim.lsp.buf.code_action)
+          bkeymap('n', 'zo', vim.diagnostic.open_float)
+          bkeymap('n', Keys['<M-r>'], vim.lsp.buf.rename)
+        end
         bkeymap('i', '<C-k>', vim.lsp.buf.signature_help)
         bkeymap('n', 'gt', vim.lsp.buf.type_definition)
         bkeymap('n', 'gD', vim.lsp.buf.declaration)
@@ -247,40 +243,40 @@ servers.tsserver = {
 }
 
 ---@todo Currently Hana is not deving in Vue, and this is not tested
-servers.volar = {
-  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#volar
-  -- Take Over Mode
-  -- Volar (prior to 2.0.0), can serve as a language server for both Vue and TypeScript via Take Over Mode.
-  -- To enable Take Over Mode, override the default filetypes in setup{} as follows:
-  filetypes = {
-    'typescript',
-    'javascript',
-    'javascriptreact',
-    'typescriptreact',
-    'vue',
-    'json',
-  },
-  -- Overriding the default TypeScript Server used by Volar
-  -- The default config looks for TS in the local node_modules. This can lead to issues e.g. when working on a monorepo.
-  on_new_config = function(new_config, new_root_dir)
-    local util = require 'lspconfig.util'
-    local function get_typescript_server_path(root_dir)
-      local global_ts = '/Users/shirohana/Library/pnpm/global/5/node_modules/typescript/lib'
-      local found_ts = ''
-      local function check_dir(path)
-        found_ts = util.path.join(path, 'node_modules', 'typescript', 'lib')
-        if util.path.exists(found_ts) then
-          return path
-        end
-      end
-      if util.search_ancestors(root_dir, check_dir) then
-        return found_ts
-      else
-        return global_ts
-      end
-    end
-    new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
-  end,
-}
+-- servers.volar = {
+--   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#volar
+--   -- Take Over Mode
+--   -- Volar (prior to 2.0.0), can serve as a language server for both Vue and TypeScript via Take Over Mode.
+--   -- To enable Take Over Mode, override the default filetypes in setup{} as follows:
+--   filetypes = {
+--     'typescript',
+--     'javascript',
+--     'javascriptreact',
+--     'typescriptreact',
+--     'vue',
+--     'json',
+--   },
+--   -- Overriding the default TypeScript Server used by Volar
+--   -- The default config looks for TS in the local node_modules. This can lead to issues e.g. when working on a monorepo.
+--   on_new_config = function(new_config, new_root_dir)
+--     local util = require 'lspconfig.util'
+--     local function get_typescript_server_path(root_dir)
+--       local global_ts = '/Users/shirohana/Library/pnpm/global/5/node_modules/typescript/lib'
+--       local found_ts = ''
+--       local function check_dir(path)
+--         found_ts = util.path.join(path, 'node_modules', 'typescript', 'lib')
+--         if util.path.exists(found_ts) then
+--           return path
+--         end
+--       end
+--       if util.search_ancestors(root_dir, check_dir) then
+--         return found_ts
+--       else
+--         return global_ts
+--       end
+--     end
+--     new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+--   end,
+-- }
 
 return LspConfig

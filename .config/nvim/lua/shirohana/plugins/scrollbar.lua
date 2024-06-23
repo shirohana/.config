@@ -9,7 +9,7 @@ local Scrollbar = {
   },
   event = 'BufReadPre',
   opts = {
-    handle = { text = ' ', color = '#0b4f60' },
+    handle = { text = ' ', color = '#24273a' },
     marks = {
       Cursor = { text = '□', priority = 5, color = Colors.cyan },
       Search = { text = { '◇', '◆' }, priority = 1, color = Colors.blue },

@@ -11,9 +11,15 @@ local Airline = {
   init = function()
     local g = vim.g
 
-    g.airline_theme = 'solarized'
-    g.airline_solarized_bg = 'dark'
     g.airline_powerline_fonts = 1
+
+    if 'catppuccin' == require('shirohana.config').colorscheme then
+      g.airline_theme = 'catppuccin'
+    end
+    if 'NeoSolarized' == require('shirohana.config').colorscheme then
+      g.airline_theme = 'solarized'
+      g.airline_solarized_bg = 'dark'
+    end
 
     g['airline#extensions#tabline#enabled'] = 1
 

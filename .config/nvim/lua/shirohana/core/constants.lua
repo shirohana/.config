@@ -1,6 +1,16 @@
 local M = {}
 
 -- stylua: ignore
+local Catppuccin = {
+  yellow  = '#eed49f',
+  red     = '#ed8796',
+  magenta = '#f5bde6',
+  blue    = '#8aadf4',
+  cyan    = '#8bd5ca',
+  green   = '#a6da95',
+}
+
+-- stylua: ignore
 local NeoSolarized = {
   base03  = '#002b36',
   base02  = '#073642',
@@ -20,13 +30,17 @@ local NeoSolarized = {
   green   = '#859900',
 }
 
-M.Colors = NeoSolarized
+M.Colors = Catppuccin
+
+if 'NeoSolarized' == require('shirohana.config').colorscheme then
+  M.Colors = NeoSolarized
+end
 
 -- stylua: ignore
 M.Icons = {
   Action        = '',
   Array         = '',
-  Boolean       = '',
+  Boolean       = '◩',
   Bug           = '',
   Class         = '',
   CodeComment   = '',
@@ -91,6 +105,7 @@ M.Keys = {
   ['<M-S>'] = opt and 'Í' or '<M-S>',
   ['<M-[>'] = opt and '“' or nil,
   ['<M-]>'] = opt and '‘' or nil,
+  ['<M-b>'] = opt and '∫' or '<M-b>',
   ['<M-f>'] = opt and 'ƒ' or '<M-f>',
   ['<M-h>'] = opt and '˙' or '<M-h>',
   ['<M-j>'] = opt and '∆' or '<M-j>',
