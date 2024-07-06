@@ -4,16 +4,16 @@ local NoneLs = {
   'nvimtools/none-ls.nvim',
   dependencies = {
     'nvim-lua/plenary.nvim',
+    'nvimtools/none-ls-extras.nvim',
   },
   config = function()
     local nls = require 'null-ls'
-    local formatter = nls.builtins.formatting
-    local action = nls.builtins.code_actions
     local diag = nls.builtins.diagnostics
+    local formatter = nls.builtins.formatting
     nls.setup {
       sources = {
-        -- action.eslint_d,
-        -- diag.eslint_d.with { diagnostics_format = '[eslint] #{m}\n(#{c})' },
+        require 'none-ls.code_actions.eslint',
+        require 'none-ls.diagnostics.eslint',
         diag.hadolint,
         formatter.blackd,
         formatter.prettierd,
@@ -23,4 +23,10 @@ local NoneLs = {
   end,
 }
 
-return NoneLs
+---@type LazyPluginSpec
+local NoneLsExtras = {
+  -- https://github.com/nvimtools/none-ls-extras.nvim
+  'nvimtools/none-ls-extras.nvim',
+}
+
+return { NoneLs, NoneLsExtras }

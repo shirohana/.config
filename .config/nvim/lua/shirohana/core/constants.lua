@@ -44,6 +44,7 @@ M.Icons = {
   Bug           = '',
   Class         = '',
   CodeComment   = '',
+  Codeium       = '',
   Color         = '',
   Comment       = '',
   Constant      = '󰏿',

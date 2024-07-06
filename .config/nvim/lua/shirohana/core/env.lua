@@ -21,9 +21,9 @@ opt.smartcase = true
 
 -- Behavior
 
-opt.mouse = nil
+opt.mouse = ''
 opt.hidden = true
-opt.belloff = nil
+opt.belloff = ''
 opt.errorbells = true
 opt.backspace = 'indent,eol,start'
 
@@ -32,7 +32,7 @@ opt.backspace = 'indent,eol,start'
 opt.background = 'dark'
 opt.colorcolumn = '80,100,120'
 opt.cursorline = true
-opt.guicursor = nil
+opt.guicursor = ''
 opt.signcolumn = 'yes'
 opt.termguicolors = true
 opt.wrap = false

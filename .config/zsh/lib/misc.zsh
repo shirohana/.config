@@ -77,6 +77,10 @@ alias  :qa='exit'
 export PAGER='less'
 export LESS='-R'
 
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi

@@ -44,6 +44,8 @@ local MasonToolInstaller = {
       'pyright',
       'shellcheck',
       'stylua',
+      'tailwindcss-language-server',
+      'typescript-language-server',
     },
   },
 }

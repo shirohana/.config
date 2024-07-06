@@ -11,5 +11,5 @@ if [[ ! -f "$ZSH_CACHE_DIR/completions/_fnm" ]]; then
   _comps[fnm]=_fnm
 fi
 
-eval "$(fnm env --use-on-cd)"
+eval <(fnm env --use-on-cd)
 fnm completions --shell=zsh >&| "$ZSH_CACHE_DIR/completions/_fnm"
