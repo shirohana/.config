@@ -39,8 +39,10 @@ function! helper#ctrlspace#RenameTabLabelPrompt (...)
 endfunction
 
 function! s:refresh_tabline ()
-  call airline#extensions#tabline#ctrlspace#invalidate()
-  let &tabline = &tabline
+  if g:USE_AIRLINE
+    call airline#extensions#tabline#ctrlspace#invalidate()
+    let &tabline = &tabline
+  endif
 endfunction
 
 function! s:load_workspace (name)
