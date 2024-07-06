@@ -64,7 +64,7 @@ local Cmp = {
     },
     snippet = {
       expand = function(args)
-        require('lupsnip').lsp_expand(args.body)
+        require('luasnip').lsp_expand(args.body)
       end,
     },
     window = {
