@@ -1,6 +1,5 @@
 if ! (( $+commands[pnpm] )); then
   print "pnpm.plugin.zsh: pnpm not found" >&2
-  return 1
 fi
 
 export PNPM_HOME="$HOME/Library/pnpm"
