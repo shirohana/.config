@@ -1,6 +1,7 @@
 local servers = {
   docker_compose_language_service = {},
   dockerls = {},
+  eslint = {},
   jsonls = {},
   lua_ls = {},
   pyright = {},

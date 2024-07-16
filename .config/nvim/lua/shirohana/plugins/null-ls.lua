@@ -12,8 +12,6 @@ local NoneLs = {
     local formatter = nls.builtins.formatting
     nls.setup {
       sources = {
-        require 'none-ls.code_actions.eslint',
-        require 'none-ls.diagnostics.eslint',
         diag.hadolint,
         formatter.blackd,
         formatter.prettierd,
@@ -23,10 +21,4 @@ local NoneLs = {
   end,
 }
 
----@type LazyPluginSpec
-local NoneLsExtras = {
-  -- https://github.com/nvimtools/none-ls-extras.nvim
-  'nvimtools/none-ls-extras.nvim',
-}
-
-return { NoneLs, NoneLsExtras }
+return NoneLs
