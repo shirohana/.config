@@ -25,6 +25,8 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:
 
 my-backward-delete-word() {
     local WORDCHARS=${WORDCHARS//-}
+    local WORDCHARS=${WORDCHARS//.}
+    local WORDCHARS=${WORDCHARS//=}
     local WORDCHARS=${WORDCHARS//\/}
     zle backward-delete-word
 }
