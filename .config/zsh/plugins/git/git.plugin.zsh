@@ -229,3 +229,5 @@ alias ta='tig --all'
 alias gwl='git worktree list'
 alias gwa='git worktree add'
 alias gwd='git worktree remove'
+
+alias lg='lazygit'
