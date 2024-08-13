@@ -8,6 +8,7 @@
   "cmp-treesitter": { "branch": "master", "commit": "958fcfa0d8ce46d215e19cc3992c542f576c4123" },
   "copilot-cmp": { "branch": "master", "commit": "b6e5286b3d74b04256d0a7e3bd2908eabec34b44" },
   "copilot.vim": { "branch": "release", "commit": "0668308e68b0ac28b332b204b469fbe04601536a" },
+  "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "document-color.nvim": { "branch": "main", "commit": "74c487f0e5accfaae033755451b9e367220693fd" },
   "fidget.nvim": { "branch": "main", "commit": "0ba1e16d07627532b6cae915cc992ecac249fb97" },
   "fzf": { "branch": "master", "commit": "b02bf9b6bbf9adf2017d3c1342bde34ea9813ab5" },
