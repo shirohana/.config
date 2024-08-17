@@ -86,3 +86,6 @@ eval "$(pyenv init -)"
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
+
+export CARGO_ROOT="$HOME/.cargo"
+[[ -d $CARGO_ROOT/bin ]] && export PATH="$CARGO_ROOT/bin:$PATH"

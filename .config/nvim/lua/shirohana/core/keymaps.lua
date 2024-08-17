@@ -105,8 +105,8 @@ keymap('n', Keys['<M-,>'], ',', { desc = 'Repeat latest f, t, F or T in opposite
 
 -- Other
 
-keymap('n', 'zl', 'z8l', { desc = 'Scroll right' })
-keymap('n', 'zh', 'z8h', { desc = 'Scroll left' })
+keymap('n', 'zl', 'z20l', { desc = 'Scroll right' })
+keymap('n', 'zh', 'z20h', { desc = 'Scroll left' })
 
 -- Terminal
 

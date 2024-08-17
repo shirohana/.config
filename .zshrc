@@ -1,17 +1,24 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+function _source_if_exists() {
+  if [[ -f "$1" ]]; then
+    source "$1"
+  fi
+}
+
+ZSH="$HOME/.config/zsh"
+ZSH_CACHE_DIR="$HOME/.cache/zsh"
+
+plugins=($(command ls "$ZSH/plugins"))
+
+for plugin ($plugins); do
+  _source_if_exists "$ZSH/plugins/$plugin/$plugin.plugin.pre.zsh"
+done
+unset plugin
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 autoload -U compinit; compinit -u
-
-ZSH="$HOME/.config/zsh"
-ZSH_CACHE_DIR="$HOME/.cache/zsh"
-
-# plugins=(eza fnm fzf git)
-plugins=($(command ls "$ZSH/plugins"))
 
 mkdir -p "$ZSH_CACHE_DIR/completions"
 (( ${fpath[(Ie)"$ZSH_CACHE_DIR/completions"]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
@@ -22,6 +29,7 @@ done
 unset lib_file
 
 for plugin ($plugins); do
-  source "$ZSH/plugins/$plugin/$plugin.plugin.zsh"
+  _source_if_exists "$ZSH/plugins/$plugin/$plugin.zsh"
 done
 unset plugin
+

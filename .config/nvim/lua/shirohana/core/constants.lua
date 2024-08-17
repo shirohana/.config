@@ -106,7 +106,6 @@ M.Keys = {
   ['<M-S>'] = opt and 'Í' or '<M-S>',
   ['<M-[>'] = opt and '“' or nil,
   ['<M-]>'] = opt and '‘' or nil,
-  ['<M-b>'] = opt and '∫' or '<M-b>',
   ['<M-f>'] = opt and 'ƒ' or '<M-f>',
   ['<M-h>'] = opt and '˙' or '<M-h>',
   ['<M-j>'] = opt and '∆' or '<M-j>',

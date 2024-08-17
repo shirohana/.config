@@ -49,6 +49,11 @@ function git_main_branch() {
   return 1
 }
 
+function git_copy_current_branch() {
+  echo -n "$(git_current_branch | tr -d '\n')" | pbcopy
+  echo "Copied '$(git_current_branch)'" >&2
+}
+
 # function git_list_no_merged() {
 #   git for-each-ref --sort=-committerdate refs/ --format="%(refname:short)|%(committerdate:relative)|%(authorname)" | while IFS='|' read -r branch date author; do
 #     if [ -n "$(git branch --all --no-merged master | grep -w $branch)" ]; then

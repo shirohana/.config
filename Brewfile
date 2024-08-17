@@ -1,24 +1,29 @@
 tap "oven-sh/bun"
 
+brew "colima" # docker
+brew "docker" # docker
+brew "docker-buildx" # docker
+brew "docker-compose" # docker
+brew "docker-credential-helpers" # docker
 brew "eza"
 brew "fd"
 brew "fnm"
 brew "fzf"
-brew "neovim"
+brew "neovim" # vim
+brew "poppler"
 brew "powerlevel10k"
 brew "ripgrep"
+brew "unar"
+brew "yazi"
 brew "zoxide"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
-brew "yazi"
-brew "poppler"
-brew "unar"
 
 cask "alfred"
 cask "polypane"
 
 # Migrating...
-#
+
 # brew "ansible"
 # brew "asimov"
 # brew "bat"
@@ -54,14 +59,14 @@ cask "polypane"
 # brew "the_silver_searcher"
 # brew "tig"
 # brew "tldr"
-#
+
 # cask "android-commandlinetools"
 # cask "android-studio"
 # cask "arc"
 # cask "chatgpt"
 # cask "dash"
 # cask "discord"
-# cask "docker"
+# cask "docker" # use colima instead
 # cask "easy-move-plus-resize"
 # cask "figma"
 # cask "finicky"
