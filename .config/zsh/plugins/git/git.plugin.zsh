@@ -15,6 +15,7 @@ alias gfa='git fetch --all'
 
 alias    gp='git push'
 alias   gpd='git push --dry-run'
+alias   gpf='git push --force-with-lease'
 alias   gpo='git push origin'
 alias  gpof='git push origin --force-with-lease'
 alias  gpoh='git push origin HEAD'

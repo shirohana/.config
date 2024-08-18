@@ -29,7 +29,7 @@ done
 unset lib_file
 
 for plugin ($plugins); do
-  _source_if_exists "$ZSH/plugins/$plugin/$plugin.zsh"
+  _source_if_exists "$ZSH/plugins/$plugin/$plugin.plugin.zsh"
 done
 unset plugin
 
