@@ -1,7 +1,3 @@
-if ! (( $+commands[pnpm] )); then
-  print "pnpm.plugin.zsh: pnpm not found" >&2
-fi
-
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;

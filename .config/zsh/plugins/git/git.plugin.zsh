@@ -42,6 +42,7 @@ alias gcnn!='git commit --no-edit --no-verify --amend --allow-empty'
 alias   gcs='git commit --verbose --gpg-sign'
 alias  gcnm="git commit --no-verify --no-gpg-sign --message \"--wip-- \$(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M:%S') ->\$(git diff --cached --shortstat) [skip ci]\""
 alias  gwip="git add --all; git rm \$(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message \"--wip-- \$(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M:%S') ->\$(git diff --cached --shortstat) [skip ci]\""
+alias gcanm="git add --all; git rm \$(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message \"--wip-- \$(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M:%S') ->\$(git diff --cached --shortstat) [skip ci]\""
 
 alias    gb='git branch'
 alias   gba='git branch --all'
@@ -98,7 +99,7 @@ alias  gcp='git cherry-pick'
 alias gcpa='git cherry-pick --abort'
 alias gcpc='git cherry-pick --continue'
 
-alias    gst='git stash'
+alias    gst='git stash list'
 alias gstall='git stash --all'
 alias   gsta='git stash apply'
 alias   gstc='git stash clear'

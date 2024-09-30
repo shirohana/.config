@@ -5,7 +5,7 @@ local M = {}
 ---@type 'catppuccin' | 'NeoSolarized'
 M.colorscheme = 'catppuccin'
 
----@type nil | 'Codeium' | 'Copilot'
+---@type nil | 'Codeium' | 'Copilot' | 'Model'
 M.CODE_COMPLETION_AI = 'Copilot'
 
 ---@type 'fzf'|'Telescope'

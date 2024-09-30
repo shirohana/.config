@@ -33,3 +33,6 @@ for plugin ($plugins); do
 done
 unset plugin
 
+
+# Created by `pipx` on 2024-09-24 14:44:07
+export PATH="$PATH:/Users/shirohana/.local/bin"

@@ -13,7 +13,7 @@ local NoneLs = {
     nls.setup {
       sources = {
         diag.hadolint,
-        formatter.blackd,
+        -- formatter.blackd,
         formatter.prettierd,
         formatter.stylua,
       },

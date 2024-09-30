@@ -1,5 +1,6 @@
 require 'shirohana.core'
 require 'shirohana.lazy'
+require 'shirohana.ai'
 
 vim.cmd('colorscheme ' .. require('shirohana.config').colorscheme)
 
