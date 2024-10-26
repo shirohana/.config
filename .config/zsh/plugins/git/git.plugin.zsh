@@ -1,3 +1,9 @@
+function git_checkout_detached_rev() {
+  local ref
+  ref=$(__git_prompt_git rev-parse --short $1 2> /dev/null) || return
+  git checkout "$ref"
+}
+
 alias grt='cd "$(git rev-parse --show-toplevel || echo .)"'
 
 alias  g='git status'
@@ -74,6 +80,7 @@ alias  gcd='git checkout $(git_develop_branch)'
 alias  gcm='git checkout $(git_main_branch)'
 alias  gdh='git checkout HEAD --detach'
 alias gcom='git checkout origin/$(git_main_branch)'
+alias gcdh='git_checkout_detached_rev'
 
 alias   grb='git rebase'
 alias  grba='git rebase --abort'
@@ -83,6 +90,7 @@ alias  grbm='git rebase $(git_main_branch)'
 alias  grbd='git rebase $(git_develop_branch)'
 alias grbod='git rebase origin/$(git_develop_branch)'
 alias grbom='git rebase origin/$(git_main_branch)'
+alias grbid='git rebase --interactive $(git merge-base $(git_develop_branch) HEAD)'
 alias grbim='git rebase --interactive $(git merge-base $(git_main_branch) HEAD)'
 
 alias     gm='git merge'
@@ -100,7 +108,6 @@ alias gcpa='git cherry-pick --abort'
 alias gcpc='git cherry-pick --continue'
 
 alias    gst='git stash list'
-alias gstall='git stash --all'
 alias   gsta='git stash apply'
 alias   gstc='git stash clear'
 alias   gstd='git stash drop'

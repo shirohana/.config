@@ -85,7 +85,7 @@ local Cmp = {
     local function get_document_color(entry, vim_item)
       if vim_item.kind == 'Color' and entry.completion_item.documentation then
         local _, _, r, g, b =
-          string.find(entry.completion_item.documentation, '^rgb%((%d+), (%d+), (%d+)')
+            string.find(entry.completion_item.documentation, '^rgb%((%d+), (%d+), (%d+)')
         if r then
           return string.format('%02x%02x%02x', r, g, b)
         end
@@ -93,6 +93,20 @@ local Cmp = {
     end
 
     local cmp = require 'cmp'
+
+    local complete_next = cmp.mapping(function()
+      if not cmp.visible() then
+        cmp.complete()
+      end
+      cmp.select_next_item()
+    end, { 'i', 's' })
+
+    local complete_prev = cmp.mapping(function()
+      if not cmp.visible() then
+        cmp.complete()
+      end
+      cmp.select_prev_item()
+    end, { 'i', 's' })
 
     cmp.setup(vim.tbl_extend('error', opts, {
       sources = cmp.config.sources({
@@ -106,8 +120,8 @@ local Cmp = {
         { name = 'path' },
       }),
       mapping = {
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-n>'] = complete_next,
+        ['<C-p>'] = complete_prev,
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-e>'] = cmp.mapping.close(),

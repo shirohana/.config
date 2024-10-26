@@ -11,4 +11,4 @@ gui:
 keybinding:
   universal:
     quit: 'Q'
-    return : 'q'
+    # return : 'q'

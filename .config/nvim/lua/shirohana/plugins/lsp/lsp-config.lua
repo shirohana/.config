@@ -7,7 +7,7 @@ local servers = {
   pyright = {},
   svelte = {},
   tailwindcss = {},
-  tsserver = {},
+  ts_ls = {},
 }
 
 ---@type LazyPluginSpec
@@ -221,7 +221,7 @@ servers.pyright = {
   filetypes = { 'python' },
 }
 
-servers.tsserver = {
+servers.ts_ls = {
   cmd = { 'typescript-language-server', '--stdio' },
   filetypes = {
     'javascript',
