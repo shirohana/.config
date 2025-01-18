@@ -2,7 +2,7 @@
 local Fugitive = {
   -- https://github.com/tpope/vim-fugitive
   'tpope/vim-fugitive',
-  cmd = 'Git',
+  cmd = { 'Git', 'Gclog' },
   keys = {
     { '©', '<Cmd>Git<CR>' },
     { '<A-g>', '<Cmd>Git<CR>' },

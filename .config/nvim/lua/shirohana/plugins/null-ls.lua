@@ -9,13 +9,15 @@ local NoneLs = {
   config = function()
     local nls = require 'null-ls'
     local diag = nls.builtins.diagnostics
-    local formatter = nls.builtins.formatting
+    local fmt = nls.builtins.formatting
     nls.setup {
       sources = {
-        diag.hadolint,
         -- formatter.blackd,
-        formatter.prettierd,
-        formatter.stylua,
+        diag.hadolint,
+        fmt.prettierd,
+        fmt.shfmt,
+        fmt.stylua,
+        fmt.yamlfmt,
       },
     }
   end,

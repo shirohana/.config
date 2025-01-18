@@ -82,7 +82,7 @@ local TreeSitter = {
 local TreeSitterContext = {
   -- https://github.com/nvim-treesitter/nvim-treesitter-context
   'nvim-treesitter/nvim-treesitter-context',
-  enable = false,
+  enabled = false,
   dependencies = {
     'nvim-treesitter/nvim-treesitter',
   },

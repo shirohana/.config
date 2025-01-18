@@ -16,8 +16,9 @@ alias gwd='git worktree remove'
 alias gsi='git submodule init'
 alias gsu='git submodule update'
 
-alias  gf='git fetch'
-alias gfa='git fetch --all'
+alias   gf='git fetch'
+alias  gfa='git fetch --all'
+alias gfap='git fetch --all --prune'
 
 alias    gp='git push'
 alias   gpd='git push --dry-run'

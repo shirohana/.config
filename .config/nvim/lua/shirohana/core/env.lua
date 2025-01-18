@@ -26,6 +26,9 @@ opt.hidden = true
 opt.belloff = ''
 opt.errorbells = true
 opt.backspace = 'indent,eol,start'
+opt.spell = true
+opt.spelllang = 'en_us,cjk'
+opt.spelloptions = 'camel'
 
 -- Appearance
 
@@ -48,6 +51,7 @@ augroup HanaEnv
   autocmd FileType svelte set iskeyword+=$,-
   autocmd FileType typescript set iskeyword+=#,$,-
   autocmd FileType typescriptreact set iskeyword+=$,-
+  autocmd FileType yaml set iskeyword+=-
   autocmd BufRead,BufNewFile docker-compose*.yml set filetype=yaml.docker-compose
   autocmd BufRead,BufNewFile *.env.* set filetype=sh
   autocmd BufRead,BufNewFile * if !did_filetype() && getline(1) =~# '@startuml\>'| setfiletype plantuml | endif

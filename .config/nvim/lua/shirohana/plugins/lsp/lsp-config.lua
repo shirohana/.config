@@ -1,4 +1,5 @@
 local servers = {
+  bashls = {},
   docker_compose_language_service = {},
   dockerls = {},
   eslint = {},
@@ -8,6 +9,7 @@ local servers = {
   svelte = {},
   tailwindcss = {},
   ts_ls = {},
+  yamlls = {},
 }
 
 ---@type LazyPluginSpec
@@ -93,6 +95,7 @@ local LspConfig = {
       'force',
       vim.lsp.protocol.make_client_capabilities(),
       require('cmp_nvim_lsp').default_capabilities(),
+      require('lsp-file-operations').default_capabilities(),
       opts.capabilities or {}
     )
 

@@ -32,6 +32,7 @@ keymap('v', 'so<Space>', ":<C-u>'<,'>sort<CR>", { desc = 'Sort lines' })
 -- Buffer
 
 keymap('n', Keys['<M-t>'], '<Cmd>enew<CR>', { desc = 'Create new buffer' })
+keymap('n', '<Leader>d', '<Cmd>enew<CR>', { desc = 'Create new buffer' })
 -- todo: https://github.com/neovim/neovim/issues/19624
 keymap('n', '<Leader>w', Utils.save_with_formatting, { desc = 'Save buffer' })
 keymap('n', '<Leader>W', Utils.save_without_formatting, { desc = 'Save buffer without formatting' })
