@@ -2,13 +2,11 @@ git:
   paging:
     colorArg: always
     pager: delta --dark --paging=never
-
 gui:
-  windowSize: 'normal'
+  screenMode: "normal"
   scrollHeight: 8
   mouseEvents: false
-
 keybinding:
   universal:
-    quit: 'Q'
+    quit: "Q"
     # return : 'q'
