@@ -23,6 +23,7 @@ opt.smartcase = true
 
 opt.mouse = ''
 opt.hidden = true
+opt.laststatus = 3
 opt.belloff = ''
 opt.errorbells = true
 opt.backspace = 'indent,eol,start'

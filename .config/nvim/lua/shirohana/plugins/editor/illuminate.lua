@@ -3,6 +3,7 @@ local Illuminate = {
   -- https://github.com/RRethy/vim-illuminate
   'RRethy/vim-illuminate',
   event = 'CursorMoved',
+  enabled = false,
 }
 
 return Illuminate
