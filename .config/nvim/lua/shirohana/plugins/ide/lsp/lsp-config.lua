@@ -40,6 +40,7 @@ local LspConfig = {
   dependencies = {
     'SmiteshP/nvim-navic',
     'hrsh7th/cmp-nvim-lsp',
+    -- 'Saghen/blink.cmp',
     -- 'onsails/lspkind-nvim',
     -- 'tami5/lspsaga.nvim',
   },
@@ -101,6 +102,8 @@ local LspConfig = {
       require('lsp-file-operations').default_capabilities(),
       opts.capabilities or {}
     )
+
+    -- capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 
     local on_attach = function(client, bufnr)
       -- if client.server_capabilities.colorProvider then

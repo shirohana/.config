@@ -2,7 +2,8 @@
 local Copilot = {
   -- https://github.com/github/copilot.vim
   'github/copilot.vim',
-  enabled = 'Copilot' == require('shirohana.config').CODE_COMPLETION_AI,
+  -- enabled = 'Copilot' == require('shirohana.config').CODE_COMPLETION_AI,
+  enabled = false,
   cmd = 'Copilot',
   event = 'BufEnter',
   init = function()
