@@ -25,10 +25,15 @@ local TreeSitter = {
       },
     },
     indent = { enable = true, disable = {} },
+    spell = {
+      enable = true,
+      disable = { 'markdown' },
+    },
     ensure_installed = {
       'css',
       'dockerfile',
       'html',
+      'javascript',
       'json',
       'lua',
       'markdown',

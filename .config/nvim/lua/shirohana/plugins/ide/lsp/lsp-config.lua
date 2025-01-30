@@ -152,7 +152,8 @@ local LspConfig = {
           bkeymap('n', 'zk', vim.diagnostic.goto_prev)
           bkeymap('n', 'zi', vim.lsp.buf.code_action)
           bkeymap('n', 'zo', vim.diagnostic.open_float)
-          bkeymap('n', Keys['<M-r>'], vim.lsp.buf.rename)
+          -- bkeymap('n', Keys['<M-r>'], vim.lsp.buf.rename)
+          bkeymap('n', '<Space>r', vim.lsp.buf.rename)
         end
         bkeymap('i', '<C-k>', vim.lsp.buf.signature_help)
         bkeymap('n', 'gt', vim.lsp.buf.type_definition)
@@ -161,7 +162,7 @@ local LspConfig = {
         bkeymap('n', 'gu', vim.lsp.buf.references)
         bkeymap('n', 'gi', vim.lsp.buf.implementation)
         bkeymap('n', 'z<Space>', vim.diagnostic.setloclist)
-        bkeymap('n', '<space>f', vim.lsp.buf.format)
+        bkeymap('n', '<Space>f', vim.lsp.buf.format)
         -- bkeymap('n', 'gF', '<Cmd>Lspsaga lsp_finder<CR>')
         -- bkeymap('n', '<Nop>', vim.lsp.buf.add_workspace_folder)
         -- bkeymap('n', '<Nop>', vim.lsp.buf.remove_workspace_folder)
