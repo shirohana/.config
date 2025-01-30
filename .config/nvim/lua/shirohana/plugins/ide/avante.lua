@@ -79,11 +79,11 @@ local Colorizer = {
     mappings = {
       --- @class AvanteConflictMappings
       diff = {
-        ours = 'co',
-        theirs = 'ct',
-        all_theirs = 'ca',
-        both = 'cb',
-        cursor = 'cc',
+        ours = 'gwo',
+        theirs = 'gwt',
+        all_theirs = 'gwa',
+        both = 'gwb',
+        cursor = 'g<Space>',
         next = ']x',
         prev = '[x',
       },
