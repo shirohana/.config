@@ -4,6 +4,26 @@ function git_checkout_detached_rev() {
   git checkout "$ref"
 }
 
+function git_log_match() {
+  if [ $# -eq 0 ]; then
+    echo "Usage: $0 <pattern> [...patterns]"
+  fi
+
+  local branches=()
+  for pattern in "$@"; do
+    while IFS= read -r ref; do
+      branches+=("$ref")
+    done < <(git for-each-ref --format='%(refname:short)' "refs/heads/$pattern")
+  done
+
+  if [ -z "$branches" ]; then
+    echo "Unable to match: '$branches'"
+    return 2
+  fi
+
+  git log --graph --abbrev-commit --decorate --date=relative --format=format:"%C(bold blue)%h%C(reset) %C(bold green)(%ar)%C(reset) %C(dim white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)" "${branches[@]}"
+}
+
 alias grt='cd "$(git rev-parse --show-toplevel || echo .)"'
 
 alias  g='git status'
@@ -66,9 +86,10 @@ alias gboum='git for-each-ref --format="%(committerdate:relative) | %(authorname
 alias  gccb='git_copy_current_branch'
 
 alias    gl='git log --graph --abbrev-commit --decorate --date=relative --format=format:"%C(bold blue)%h%C(reset) %C(bold green)(%ar)%C(reset) %C(dim white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)"'
-alias    gz='git log --graph --abbrev-commit --decorate --date=relative --format=format:"%C(bold blue)%h%C(reset) %C(bold green)(%ar)%C(reset) %C(dim white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)" --all'
+# alias    gz='git log --graph --abbrev-commit --decorate --date=relative --format=format:"%C(bold blue)%h%C(reset) %C(bold green)(%ar)%C(reset) %C(dim white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)" --all'
 alias   glp='git log --abbrev-commit --decorate --date=relative --format=format:"%C(bold blue)%h%C(reset) %C(bold green)%as%C(reset) %C(dim white)%s%C(reset) %C(reset)%C(bold yellow)%d%C(reset)" --first-parent'
 alias glpom='git log --abbrev-commit --decorate --date=relative --format=format:"%C(bold blue)%h%C(reset) %C(bold green)%as%C(reset) %C(dim white)%s%C(reset) %C(reset)%C(bold yellow)%d%C(reset)" --first-parent origin/$(git_main_branch)'
+alias   glg='git_log_match'
 
 alias gdca='git diff --cached'
 alias gdcw='git diff --cached --word-diff'
@@ -94,12 +115,12 @@ alias grbom='git rebase origin/$(git_main_branch)'
 alias grbid='git rebase --interactive $(git merge-base $(git_develop_branch) HEAD)'
 alias grbim='git rebase --interactive $(git merge-base $(git_main_branch) HEAD)'
 
-alias     gm='git merge'
+alias     gm='git merge --log'
 alias    gma='git merge --abort'
 alias    gmc='git merge --continue'
-alias    gms='git merge --squash'
-alias  gmnff='git merge --no-ff'
-alias gmnffs='git merge --no-ff --gpg-sign'
+alias    gms='git merge --log --squash'
+alias  gmnff='git merge --log --no-ff'
+alias gmnffs='git merge --log --no-ff --gpg-sign'
 
 alias gtv='git tag --list'
 alias gts='git tag --sign'

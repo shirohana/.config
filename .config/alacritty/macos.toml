@@ -1,8 +1,8 @@
-[shell]
+[terminal.shell]
 program = '/bin/zsh'
 
-[window]
-option_as_alt = 'OnlyLeft'
+# [window]
+# option_as_alt = 'OnlyLeft'
 
 [scrolling]
 multiplier = 1
@@ -18,3 +18,5 @@ persist = false
 mouse = { enabled = true, mods = 'Command' }
 binding = { key = 'u', mods = 'Control|Shift' }
 regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+
+[terminal]
