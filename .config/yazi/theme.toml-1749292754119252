@@ -1,6 +1,6 @@
 # https://github.com/catppuccin/yazi/blob/main/themes/macchiato.toml
 
-[mgr]
+[manager]
 cwd = { fg = "#8bd5ca" }
 
 # Hovered
