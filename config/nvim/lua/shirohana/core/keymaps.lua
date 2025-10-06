@@ -5,11 +5,11 @@ local keymap = vim.keymap.set
 
 -- Unset Built-ins
 
+keymap('n', '<F1>', '<Nop>')
 -- keymap('n', ',', '<Nop>')
 -- keymap('n', ';', '<Nop>')
-keymap('n', '<F1>', '<Nop>')
 -- keymap('n', 'K', '<Nop>')
-keymap('n', 'Q', '<Nop>')
+-- keymap('n', 'Q', '<Nop>')
 -- keymap('n', 'ZQ', '<Nop>')
 -- keymap('n', 'ZZ', '<Nop>')
 -- keymap({ 'n', 'v' }, 's', '<Nop>')
@@ -21,17 +21,16 @@ keymap({ 'i', 'n', 'v' }, '<C-l>', '<Esc>')
 -- Editing
 
 keymap('i', 'OO', '<C-o>O', { desc = 'Insert newline above' })
-keymap('n', 'gp', 'o<C-r>"<Esc>', { desc = 'Paste register with newline' })
-keymap('n', 'gP', 'O<C-r>"<Esc>', { desc = 'Paste register above with newline' })
 keymap('i', '<C-a>', '<C-o>I', { desc = 'Go to start of line' })
 keymap('i', '<C-e>', '<C-o>A', { desc = 'Go to end of line' })
 keymap('n', 'yp', 'yap<S-}>p', { desc = 'Clone paragraph' })
+keymap('n', 'gP', 'O<C-r>"<Esc>', { desc = 'Paste register above' })
+keymap('n', 'gp', 'o<C-r>"<Esc>', { desc = 'Paste register below' })
 keymap('n', '<C-j>', '<Cmd>call helper#edit#join_spaceless()<CR>', { desc = 'Join without space' })
 keymap('v', 'so<Space>', ":<C-u>'<,'>sort<CR>", { desc = 'Sort lines' })
 
 -- Buffer
 
-keymap('n', Keys['<M-t>'], '<Cmd>enew<CR>', { desc = 'Create new buffer' })
 keymap('n', '<Leader>d', '<Cmd>enew<CR>', { desc = 'Create new buffer' })
 -- todo: https://github.com/neovim/neovim/issues/19624
 keymap('n', '<Leader>w', Utils.save_with_formatting, { desc = 'Save buffer' })

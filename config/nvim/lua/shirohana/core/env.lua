@@ -41,26 +41,6 @@ opt.signcolumn = 'yes'
 opt.termguicolors = true
 opt.wrap = false
 
-vim.cmd [[
-augroup HanaEnv
-  autocmd!
-  autocmd TermOpen * setlocal scrolloff=0
-  autocmd FileType checkhealth set nospell
-  autocmd FileType dockerfile set iskeyword+=-
-  autocmd FileType html set iskeyword+=-
-  autocmd FileType javascript set iskeyword+=$,-
-  autocmd FileType plantuml set iskeyword+=$
-  autocmd FileType svelte set iskeyword+=$,-
-  autocmd FileType typescript set iskeyword+=#,$,-
-  autocmd FileType typescriptreact set iskeyword+=$,-
-  autocmd FileType yaml set iskeyword+=-
-  autocmd BufRead,BufNewFile docker-compose*.yml set filetype=yaml.docker-compose
-  autocmd BufRead,BufNewFile *.env.* set filetype=sh
-  autocmd BufRead,BufNewFile * if !did_filetype() && getline(1) =~# '@startuml\>'| setfiletype plantuml | endif
-  autocmd BufRead,BufNewFile *.pu,*.uml,*.plantuml,*.puml,*.iuml set filetype=plantuml
-augroup END
-]]
-
 -- Others
 
 g.markdown_fenced_languages = {
@@ -78,3 +58,24 @@ g.markdown_fenced_languages = {
   'ts=typescript',
   'tsx=typescriptreact',
 }
+
+vim.cmd [[
+augroup HanaEnv
+  autocmd!
+  autocmd TermOpen * setlocal scrolloff=0
+  autocmd FileType checkhealth set nospell
+  autocmd FileType dockerfile set iskeyword+=-
+  autocmd FileType html set iskeyword+=-
+  autocmd FileType javascript set iskeyword+=$,-
+  autocmd FileType lazygit set mouse=a | autocmd BufLeave <buffer> set mouse=
+  autocmd FileType plantuml set iskeyword+=$
+  autocmd FileType svelte set iskeyword+=$,-
+  autocmd FileType typescript set iskeyword+=#,$,-
+  autocmd FileType typescriptreact set iskeyword+=$,-
+  autocmd FileType yaml set iskeyword+=-
+  autocmd BufRead,BufNewFile docker-compose*.yml set filetype=yaml.docker-compose
+  autocmd BufRead,BufNewFile *.env.* set filetype=sh
+  autocmd BufRead,BufNewFile * if !did_filetype() && getline(1) =~# '@startuml\>'| setfiletype plantuml | endif
+  autocmd BufRead,BufNewFile *.pu,*.uml,*.plantuml,*.puml,*.iuml set filetype=plantuml
+augroup END
+]]

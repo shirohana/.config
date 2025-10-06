@@ -1,3 +1,5 @@
+local macos = require('shirohana.config').USE_MACOS_OPT_KEYMAPS
+
 local M = {}
 
 -- stylua: ignore
@@ -60,7 +62,6 @@ M.Icons = {
   Warning       = '',
 }
 
-local macos = require('shirohana.config').USE_MACOS_OPT_KEYMAPS
 M.Keys = {
   ['<M-,>'] = macos and '≤' or '<M-,>',
   ['<M-.>'] = macos and '≥' or '<M-.>',
@@ -92,7 +93,6 @@ M.Keys = {
   ['<M-p>'] = macos and 'π' or '<M-p>',
   ['<M-r>'] = macos and '®' or '<M-r>',
   ['<M-s>'] = macos and 'ß' or '<M-s>',
-  ['<M-t>'] = macos and '†' or '<M-t>',
   ['<M-w>'] = macos and '∑' or '<M-w>',
 }
 
