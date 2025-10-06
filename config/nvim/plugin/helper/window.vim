@@ -7,14 +7,19 @@ function! helper#window#Jump (winnr)
 endfunction
 
 function! helper#window#SwitchBufferOfTwoWindows (a_winnr, b_winnr) abort
-  let original_winnr = winnr()
+  execute a:a_winnr.'wincmd w'
+  let a_view = winsaveview()
+  let a_bufnr = bufnr()
+  execute a:b_winnr.'wincmd w'
+  let b_view = winsaveview()
+  let b_bufnr = bufnr()
 
-  let a_bufnr = winbufnr(a:a_winnr)
-  let b_bufnr = winbufnr(a:b_winnr)
-
-  execute a:a_winnr.'windo '.b_bufnr.'buffer | '.a:b_winnr.'windo '.a_bufnr.'buffer'
-
-  call helper#window#Jump(original_winnr)
+  execute 'buffer '.a_bufnr
+  call winrestview(a_view)
+  execute a:a_winnr.'wincmd w'
+  execute 'buffer '.b_bufnr
+  call winrestview(b_view)
+  execute a:b_winnr.'wincmd w'
 endfunction
 
 function! helper#window#SwapTo (direction)
