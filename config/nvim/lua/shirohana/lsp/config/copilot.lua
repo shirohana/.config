@@ -2,10 +2,7 @@
 
 ---@type vim.lsp.ClientConfig
 return {
-  cmd = {
-    'copilot-language-server',
-    '--stdio',
-  },
+  cmd = { 'copilot-language-server', '--stdio' },
   root_markers = { '.git' },
   init_options = {
     editorInfo = {

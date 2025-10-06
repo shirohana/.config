@@ -1,0 +1,383 @@
+FUNCTION  ctrlspace#api#BufferList()
+    Defined: ~/.local/share/nvim/lazy/vim-ctrlspace/autoload/ctrlspace/api.vim:6
+Called 38 times
+Total time:   0.005982
+ Self time:   0.004318
+
+count  total (s)   self (s)
+   38              0.000361     let bufferList     = []
+   38   0.002186   0.000522     let singleList     = ctrlspace#buffers#Buffers(a:tabnr)
+   38              0.000162     let visibleBuffers = tabpagebuflist(a:tabnr)
+                            
+   76              0.000287     for i in keys(singleList)
+   38              0.000106         let i = str2nr(i)
+                            
+   38              0.000133         let bufname = bufname(i)
+   38              0.000177         let bufVisible = index(visibleBuffers, i) != -1
+   38              0.000202         let bufModified = (getbufvar(i, '&modified'))
+                            
+   38              0.000142         if !strlen(bufname) && (bufModified || bufVisible)
+                                        let bufname = '[' . i . '*No Name]'
+   38              0.000026         endif
+                            
+   38              0.000076         if strlen(bufname)
+   38              0.000412             call add(bufferList, { "index": i, "text": bufname, "visible": bufVisible, "modified": bufModified })
+   38              0.000031         endif
+   76              0.000175     endfor
+                            
+   38              0.000212     call sort(bufferList, function("ctrlspace#engine#CompareByText"))
+                            
+   38              0.000061     return bufferList
+
+FUNCTION  ctrlspace#api#TabBuffersNumber()
+    Defined: ~/.local/share/nvim/lazy/vim-ctrlspace/autoload/ctrlspace/api.vim:170
+Called 19 times
+Total time:   0.002698
+ Self time:   0.000855
+
+count  total (s)   self (s)
+   19   0.002075   0.000232     let buffersNumber = len(ctrlspace#api#Buffers(a:tabnr))
+   19              0.000033     let numberToShow  = ""
+                            
+   19              0.000032     if buffersNumber > 1
+                                    if s:config.UseUnicode
+                                        let smallNumbers = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"]
+                                        let numberStr    = string(buffersNumber)
+                            
+                                        for i in range(len(numberStr))
+                                            let numberToShow .= smallNumbers[str2nr(numberStr[i])]
+                                        endfor
+                                    else
+                                        let numberToShow = string(buffersNumber)
+                                    endif
+   19              0.000012     endif
+                            
+   19              0.000028     return numberToShow
+
+FUNCTION  <SNR>81_vm_persist()
+    Defined: ~/.local/share/nvim/lazy/vim-visual-multi/plugin/visual-multi.vim:82
+Called 1 time
+Total time:   0.000017
+ Self time:   0.000017
+
+count  total (s)   self (s)
+    1              0.000006   if exists('g:VM_PERSIST') && !g:VM_persistent_registers
+                                unlet g:VM_PERSIST
+    1              0.000002   elseif g:VM_persistent_registers
+                                let g:VM_PERSIST = deepcopy(g:Vm.registers)
+    1              0.000001   endif
+
+FUNCTION  <SNR>80_Event()
+    Defined: ~/.local/share/nvim/lazy/copilot.vim/plugin/copilot.vim:45
+Called 2 times
+Total time:   0.000044
+ Self time:   0.000043
+
+count  total (s)   self (s)
+    2              0.000004   try
+    2   0.000024   0.000023     call call('copilot#On' . a:type, [])
+                              catch
+                                call copilot#logger#Exception('autocmd.' . a:type)
+    2              0.000004   endtry
+
+FUNCTION  ctrlspace#util#Gettabvar()
+    Defined: ~/.local/share/nvim/lazy/vim-ctrlspace/autoload/ctrlspace/util.vim:122
+Called 19 times
+Total time:   0.000393
+ Self time:   0.000393
+
+count  total (s)   self (s)
+   19              0.000084     let value = gettabvar(a:nr, a:name)
+                            
+   19              0.000074     if type(value) == 1 && empty(value)
+   19              0.000077         unlet value
+   19              0.000061         let value = gettabvar(a:nr, a:name)
+   19              0.000014     endif
+                            
+   19              0.000023     return value
+
+FUNCTION  ctrlspace#api#Buffers()
+    Defined: ~/.local/share/nvim/lazy/vim-ctrlspace/autoload/ctrlspace/api.vim:32
+Called 19 times
+Total time:   0.001843
+ Self time:   0.001285
+
+count  total (s)   self (s)
+   19              0.000039     let bufferList     = {}
+   19   0.000741   0.000184     let ctrlspaceList  = ctrlspace#buffers#Buffers(a:tabnr)
+   19              0.000061     let visibleBuffers = tabpagebuflist(a:tabnr)
+                            
+   38              0.000097     for i in keys(ctrlspaceList)
+   19              0.000060         let i = str2nr(i)
+                            
+   19              0.000047         let bufname = bufname(i)
+                            
+   19              0.000104         if !strlen(bufname) && (getbufvar(i, '&modified') || (index(visibleBuffers, i) != -1))
+                                        let bufname = '[' . i . '*No Name]'
+   19              0.000012         endif
+                            
+   19              0.000034         if strlen(bufname)
+   19              0.000122             let bufferList[i] = bufname
+   19              0.000012         endif
+   38              0.000045     endfor
+                            
+   19              0.000025     return bufferList
+
+FUNCTION  <SNR>79_ClearHighlighting()
+    Defined: ~/.local/share/nvim/lazy/vim-better-whitespace/plugin/better-whitespace.vim:191
+Called 1 time
+Total time:   0.000032
+ Self time:   0.000032
+
+count  total (s)   self (s)
+    1              0.000007         let match_id = get(w:, 'better_whitespace_match_id', -1)
+    1              0.000012         let valid_ids = map(getmatches(), 'v:val["id"]')
+    1              0.000003         if match_id >= 0 && index(valid_ids, match_id) >= 0
+    1              0.000005             call matchdelete(match_id)
+    1              0.000001         endif
+
+FUNCTION  <SNR>54_Remove_Matches()
+    Defined: /opt/homebrew/Cellar/neovim/0.11.4/share/nvim/runtime/plugin/matchparen.vim:203
+Called 1 time
+Total time:   0.000030
+ Self time:   0.000030
+
+count  total (s)   self (s)
+    1              0.000007   if exists('w:paren_hl_on') && w:paren_hl_on
+                                while !empty(w:matchparen_ids)
+                                  silent! call remove(w:matchparen_ids, 0)->matchdelete()
+                                endwhile
+                                let w:paren_hl_on = 0
+    1              0.000001   endif
+
+FUNCTION  copilot#OnVimLeavePre()
+    Defined: ~/.local/share/nvim/lazy/copilot.vim/autoload/copilot.vim:472
+Called 1 time
+Total time:   0.000001
+ Self time:   0.000001
+
+count  total (s)   self (s)
+
+FUNCTION  <SNR>54_Highlight_Matching_Pair()
+    Defined: /opt/homebrew/Cellar/neovim/0.11.4/share/nvim/runtime/plugin/matchparen.vim:45
+Called 1 time
+Total time:   0.000191
+ Self time:   0.000161
+
+count  total (s)   self (s)
+    1              0.000014   if !exists("w:matchparen_ids")
+                                let w:matchparen_ids = []
+    1              0.000002   endif
+                              " Remove any previous match.
+    1   0.000047   0.000017   call s:Remove_Matches()
+                            
+                              " Avoid that we remove the popup menu.
+                              " Return when there are no colors (looks like the cursor jumps).
+    1              0.000009   if pumvisible() || (&t_Co < 8 && !has("gui_running"))
+                                return
+    1              0.000001   endif
+                            
+                              " Get the character under the cursor and check if it's in 'matchpairs'.
+    1              0.000006   let c_lnum = line('.')
+    1              0.000005   let c_col = col('.')
+    1              0.000002   let before = 0
+                            
+    1              0.000006   let text = getline(c_lnum)
+    1              0.000011   let c_before = text->strpart(0, c_col - 1)->slice(-1)
+    1              0.000008   let c = text->strpart(c_col - 1)->slice(0, 1)
+    1              0.000030   let plist = split(&matchpairs, '.\zs[:,]')
+    1              0.000006   let i = index(plist, c)
+    1              0.000002   if i < 0
+                                " not found, in Insert mode try character before the cursor
+    1              0.000005     if c_col > 1 && (mode() == 'i' || mode() == 'R')
+                                  let before = strlen(c_before)
+                                  let c = c_before
+                                  let i = index(plist, c)
+    1              0.000001     endif
+    1              0.000002     if i < 0
+                                  " not found, nothing to do
+    1              0.000002       return
+                                endif
+                              endif
+                            
+                              " Figure out the arguments for searchpairpos().
+                              if i % 2 == 0
+                                let s_flags = 'nW'
+                                let c2 = plist[i + 1]
+                              else
+                                let s_flags = 'nbW'
+                                let c2 = c
+                                let c = plist[i - 1]
+                              endif
+                              if c == '['
+                                let c = '\['
+                                let c2 = '\]'
+                              endif
+                            
+                              " Find the match.  When it was just before the cursor move it there for a
+                              " moment.
+                              if before > 0
+                                let save_cursor = getcurpos()
+                                call cursor(c_lnum, c_col - before)
+                                defer setpos('.', save_cursor)
+                              endif
+                            
+                              if !has("syntax") || !exists("g:syntax_on")
+                                let s_skip = "0"
+                              elseif exists("b:ts_highlight") && &syntax != 'on'
+                                let s_skip = "match(v:lua.vim.treesitter.get_captures_at_cursor(), '" .. 'string\|character\|singlequote\|escape\|symbol\|comment' .. "') != -1"
+                              else
+                                " do not attempt to match when the syntax item where the cursor is
+                                " indicates there does not exist a matching parenthesis, e.g. for shells
+                                " case statement: "case $var in foobar)"
+                                "
+                                " add the check behind a filetype check, so it only needs to be
+                                " evaluated for certain filetypes
+                                if ['sh']->index(&filetype) >= 0 && synstack(".", col("."))->indexof({_, id -> synIDattr(id, "name") =~? "shSnglCase"}) >= 0
+                                  return
+                                endif
+                                " Build an expression that detects whether the current cursor position is
+                                " in certain syntax types (string, comment, etc.), for use as
+                                " searchpairpos()'s skip argument.
+                                " We match "escape" for special items, such as lispEscapeSpecial, and
+                                " match "symbol" for lispBarSymbol.
+                                let s_skip = 'synstack(".", col("."))' . '->indexof({_, id -> synIDattr(id, "name") =~? ' . '"string\\|character\\|singlequote\\|escape\\|symbol\\|comment"}) >= 0'
+                                " If executing the expression determines that the cursor is currently in
+                                " one of the syntax types, then we want searchpairpos() to find the pair
+                                " within those syntax types (i.e., not skip).  Otherwise, the cursor is
+                                " outside of the syntax types and s_skip should keep its value so we skip
+                                " any matching pair inside the syntax types.
+                                " Catch if this throws E363: pattern uses more memory than 'maxmempattern'.
+                                try
+                                  execute 'if ' . s_skip . ' | let s_skip = "0" | endif'
+                                catch /^Vim\%((\a\+)\)\=:E363/
+                                  " We won't find anything, so skip searching, should keep Vim responsive.
+                                  return
+                                endtry
+                              endif
+                            
+                              " Limit the search to lines visible in the window.
+                              let stoplinebottom = line('w$')
+                              let stoplinetop = line('w0')
+                              if i % 2 == 0
+                                let stopline = stoplinebottom
+                              else
+                                let stopline = stoplinetop
+                              endif
+                            
+                              " Limit the search time to 300 msec to avoid a hang on very long lines.
+                              " This fails when a timeout is not supported.
+                              if mode() == 'i' || mode() == 'R'
+                                let timeout = exists("b:matchparen_insert_timeout") ? b:matchparen_insert_timeout : g:matchparen_insert_timeout
+                              else
+                                let timeout = exists("b:matchparen_timeout") ? b:matchparen_timeout : g:matchparen_timeout
+                              endif
+                              try
+                                let [m_lnum, m_col] = searchpairpos(c, '', c2, s_flags, s_skip, stopline, timeout)
+                              catch /E118/
+                                " Can't use the timeout, restrict the stopline a bit more to avoid taking
+                                " a long time on closed folds and long lines.
+                                " The "viewable" variables give a range in which we can scroll while
+                                " keeping the cursor at the same position.
+                                " adjustedScrolloff accounts for very large numbers of scrolloff.
+                                let adjustedScrolloff = min([&scrolloff, (line('w$') - line('w0')) / 2])
+                                let bottom_viewable = min([line('$'), c_lnum + &lines - adjustedScrolloff - 2])
+                                let top_viewable = max([1, c_lnum-&lines+adjustedScrolloff + 2])
+                                " one of these stoplines will be adjusted below, but the current values are
+                                " minimal boundaries within the current window
+                                if i % 2 == 0
+                                  if has("byte_offset") && has("syntax_items") && &smc > 0
+                            	let stopbyte = min([line2byte("$"), line2byte(".") + col(".") + &smc * 2])
+                            	let stopline = min([bottom_viewable, byte2line(stopbyte)])
+                                  else
+                            	let stopline = min([bottom_viewable, c_lnum + 100])
+                                  endif
+                                  let stoplinebottom = stopline
+                                else
+                                  if has("byte_offset") && has("syntax_items") && &smc > 0
+                            	let stopbyte = max([1, line2byte(".") + col(".") - &smc * 2])
+                            	let stopline = max([top_viewable, byte2line(stopbyte)])
+                                  else
+                            	let stopline = max([top_viewable, c_lnum - 100])
+                                  endif
+                                  let stoplinetop = stopline
+                                endif
+                                let [m_lnum, m_col] = searchpairpos(c, '', c2, s_flags, s_skip, stopline)
+                              endtry
+                            
+                              " If a match is found setup match highlighting.
+                              if m_lnum > 0 && m_lnum >= stoplinetop && m_lnum <= stoplinebottom
+                                if !g:matchparen_disable_cursor_hl
+                                  call add(w:matchparen_ids, matchaddpos('MatchParen', [[c_lnum, c_col - before], [m_lnum, m_col]], 10))
+                                else
+                                  call add(w:matchparen_ids, matchaddpos('MatchParen', [[m_lnum, m_col]], 10))
+                                endif
+                                let w:paren_hl_on = 1
+                              endif
+
+FUNCTION  copilot#OnBufUnload()
+    Defined: ~/.local/share/nvim/lazy/copilot.vim/autoload/copilot.vim:469
+Called 1 time
+Total time:   0.000000
+ Self time:   0.000000
+
+count  total (s)   self (s)
+
+FUNCTION  ctrlspace#buffers#Buffers()
+    Defined: ~/.local/share/nvim/lazy/vim-ctrlspace/autoload/ctrlspace/buffers.vim:47
+Called 57 times
+Total time:   0.002222
+ Self time:   0.002222
+
+count  total (s)   self (s)
+   57              0.000114     if a:tabnr
+   57              0.000263         let buffers = gettabvar(a:tabnr, "CtrlSpaceList")
+                            
+                                    " Workaround for a Vim bug after :only and e.g. help window:
+                                    " for the first time after :only gettabvar cannot properly ready any tab variable
+                                    " More info: https://github.com/vim/vim/issues/394
+                                    " TODO Remove when decided to drop support for Vim 7.3
+   57              0.000192         if type(buffers) == 1
+                                        unlet buffers
+                                        let buffers = gettabvar(a:tabnr, "CtrlSpaceList")
+   57              0.000059         endif
+                            
+   57              0.000134         if type(buffers) != 4
+                                        return {}
+   57              0.000036         endif
+                                else
+                                    let buffers = s:allBuffers
+   57              0.000039     endif
+                            
+   57              0.000483     return filter(buffers, "buflisted(str2nr(v:key))") " modify proper dictionary and return it
+
+FUNCTIONS SORTED ON TOTAL TIME
+count  total (s)   self (s)  function
+   38   0.005982   0.004318  ctrlspace#api#BufferList()
+   19   0.002698   0.000855  ctrlspace#api#TabBuffersNumber()
+   57   0.002222             ctrlspace#buffers#Buffers()
+   19   0.001843   0.001285  ctrlspace#api#Buffers()
+   19   0.000393             ctrlspace#util#Gettabvar()
+    1   0.000191   0.000161  <SNR>54_Highlight_Matching_Pair()
+    2   0.000044   0.000043  <SNR>80_Event()
+    1   0.000032             <SNR>79_ClearHighlighting()
+    1   0.000030             <SNR>54_Remove_Matches()
+    1   0.000017             <SNR>81_vm_persist()
+    1   0.000001             copilot#OnVimLeavePre()
+    1   0.000000             copilot#OnBufUnload()
+
+FUNCTIONS SORTED ON SELF TIME
+count  total (s)   self (s)  function
+   38   0.005982   0.004318  ctrlspace#api#BufferList()
+   57              0.002222  ctrlspace#buffers#Buffers()
+   19   0.001843   0.001285  ctrlspace#api#Buffers()
+   19   0.002698   0.000855  ctrlspace#api#TabBuffersNumber()
+   19              0.000393  ctrlspace#util#Gettabvar()
+    1   0.000191   0.000161  <SNR>54_Highlight_Matching_Pair()
+    2   0.000044   0.000043  <SNR>80_Event()
+    1              0.000032  <SNR>79_ClearHighlighting()
+    1              0.000030  <SNR>54_Remove_Matches()
+    1              0.000017  <SNR>81_vm_persist()
+    1              0.000001  copilot#OnVimLeavePre()
+    1              0.000000  copilot#OnBufUnload()
+

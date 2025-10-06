@@ -18,6 +18,25 @@ keymap('n', '<F1>', '<Nop>')
 
 keymap({ 'i', 'n', 'v' }, '<C-l>', '<Esc>')
 
+-- Scrolling
+
+keymap('n', '<C-u>', function()
+  if vim.fn.line 'w0' > 1 then
+    vim.cmd 'normal! M\x15'
+  else
+    vim.cmd 'normal! gg'
+  end
+end, { desc = 'Scroll up' })
+keymap('n', '<C-d>', function()
+  if vim.fn.line 'w$' < vim.fn.line '$' then
+    vim.cmd 'normal! M\x04'
+  else
+    vim.cmd 'normal! G'
+  end
+end, { desc = 'Scroll down' })
+keymap('n', 'zh', 'z20h', { desc = 'Scroll left' })
+keymap('n', 'zl', 'z20l', { desc = 'Scroll right' })
+
 -- Editing
 
 keymap('i', 'OO', '<C-o>O', { desc = 'Insert newline above' })
@@ -86,6 +105,13 @@ keymap('n', Keys['<M-7>'], '<Cmd>7tabn<CR>', { desc = 'Go to tab 7' })
 keymap('n', Keys['<M-8>'], '<Cmd>8tabn<CR>', { desc = 'Go to tab 8' })
 keymap('n', Keys['<M-9>'], '<Cmd>9tabn<CR>', { desc = 'Go to tab 9' })
 
+-- Navigating
+
+keymap('n', '<Bslash>', '<C-o>', { desc = 'Go to previous location' })
+keymap('n', '<Bar>', '<C-i>', { desc = 'Go to next location' })
+keymap('n', Keys['<M-.>'], ';', { desc = 'Repeat latest f, t, F or T' })
+keymap('n', Keys['<M-,>'], ',', { desc = 'Repeat latest f, t, F or T in opposite direction' })
+
 -- Selection
 
 keymap('n', '<Esc><Esc>', '<Cmd>nohlsearch<CR>', { desc = 'Clear hlighlight search' })
@@ -106,32 +132,6 @@ keymap('n', 'zx', function()
     -- return
   end
 end, { desc = 'Highlight current word' })
-
--- Navigating
-
-keymap('n', '<Bslash>', '<C-o>', { desc = 'Go to previous location' })
-keymap('n', '<Bar>', '<C-i>', { desc = 'Go to next location' })
-keymap('n', Keys['<M-.>'], ';', { desc = 'Repeat latest f, t, F or T' })
-keymap('n', Keys['<M-,>'], ',', { desc = 'Repeat latest f, t, F or T in opposite direction' })
-
--- Other
-
-keymap('n', '<C-d>', function()
-  if vim.fn.line('w$') < vim.fn.line('$') then
-    vim.cmd('normal! M\x04')
-  else
-    vim.cmd('normal! G')
-  end
-end, { desc = 'Scroll down' })
-keymap('n', '<C-u>', function()
-  if vim.fn.line('w0') > 1 then
-    vim.cmd('normal! M\x15')
-  else
-    vim.cmd('normal! gg')
-  end
-end, { desc = 'Scroll up' })
-keymap('n', 'zl', 'z20l', { desc = 'Scroll right' })
-keymap('n', 'zh', 'z20h', { desc = 'Scroll left' })
 
 -- Terminal
 

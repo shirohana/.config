@@ -37,9 +37,12 @@ brew "kubernetes-cli" # Kubernetes command-line interface
 cask "alacritty" # GPU-accelerated terminal emulator
 cask "easy-move+resize" # Utility to support moving and resizing using a modifier key and mouse drag
 cask "font-sauce-code-pro-nerd-font" # SauceCodePro Nerd Font (Source Code Pro)
+cask "ghostty" # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "iterm2" # Terminal emulator as alternative to Apple's Terminal app
 cask "karabiner-elements" # Keyboard customiser
+cask "kitty" # GPU-based terminal emulator
 cask "squirrel" # Rime input method engine
+cask "wezterm" # GPU-accelerated cross-platform terminal emulator and multiplexer
 
 # Additional Casks
 
