@@ -16,7 +16,7 @@ brew "neovim" # Ambitious Vim-fork focused on extensibility and agility
 brew "ripgrep" # Search tool like grep and The Silver Searcher
 brew "tig" # Text interface for Git repositories
 brew "tlrc" # Official tldr client written in Rust
-brew "tree-sitter-cli" # Parser generator tool
+# brew "tree-sitter-cli" # Parser generator tool
 brew "yazi" # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "zinit" # Flexible and fast Zsh plugin manager
 brew "zoxide" # Shell extension to navigate your filesystem faster
@@ -24,7 +24,7 @@ brew "zsh" # UNIX shell (command interpreter)
 
 # Additional
 
-brew "asimov" # Automatically exclude development dependencies from Time Machine backups
+# brew "asimov" # Automatically exclude development dependencies from Time Machine backups
 brew "colima" # Container runtimes on MacOS (and Linux) with minimal setup
 brew "docker" # Pack, ship and run any application as a lightweight container
 brew "fnm" # Fast and simple Node.js version manager
@@ -37,19 +37,19 @@ brew "kubernetes-cli" # Kubernetes command-line interface
 cask "alacritty" # GPU-accelerated terminal emulator
 cask "easy-move+resize" # Utility to support moving and resizing using a modifier key and mouse drag
 cask "font-sauce-code-pro-nerd-font" # SauceCodePro Nerd Font (Source Code Pro)
-cask "ghostty" # Terminal emulator that uses platform-native UI and GPU acceleration
+# cask "ghostty" # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "iterm2" # Terminal emulator as alternative to Apple's Terminal app
 cask "karabiner-elements" # Keyboard customiser
-cask "kitty" # GPU-based terminal emulator
+# cask "kitty" # GPU-based terminal emulator
 cask "squirrel" # Rime input method engine
-cask "wezterm" # GPU-accelerated cross-platform terminal emulator and multiplexer
+# cask "wezterm" # GPU-accelerated cross-platform terminal emulator and multiplexer
 
 # Additional Casks
 
 cask "alfred" # Application launcher and productivity software
 cask "anytype" # Local-first and end-to-end encrypted notes app
 cask "chatgpt" # OpenAI's official ChatGPT desktop app
-cask "discord" # Voice and text chat software
+# cask "discord" # Voice and text chat software
 cask "fantastical" # Calendar software
 cask "google-chrome" # Web browser
 cask "heptabase" # Note-taking tool for visual learning

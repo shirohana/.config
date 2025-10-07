@@ -1,0 +1,162 @@
+global !p
+import snippets
+bga_props = {
+	's': 'scroll',
+	'f': 'fixed',
+	'l': 'local'
+}
+bgbm_props = {
+	'c': 'color',
+	'cd': 'color-dodge',
+	'd': 'darken',
+	'l': 'lighten',
+	'lu': 'luminosity',
+	'm': 'multiply',
+	'n': 'normal',
+	'o': 'overlay',
+	's': 'screen',
+	'sa': 'saturation'
+}
+bgcl_props = {
+	'b': 'border-box',
+	'p': 'padding-box',
+	'c': 'content-box'
+}
+bgo_props = {
+	'b': 'border-box',
+	'p': 'padding-box',
+	'c': 'content-box'
+}
+bgp_props = {
+	't': 'top',
+	'r': 'right',
+	'b': 'bottom',
+	'l': 'left',
+	'c': 'center'
+}
+bgr_props = {
+	'r': 'repeat',
+	'rx': 'repeat-x',
+	'ry': 'repeat-y',
+	'n': 'no-repeat',
+	's': 'space',
+	'ro': 'round'
+}
+bgs_props = {
+	'a': 'auto',
+	'cov': 'cover',
+	'con': 'contain'
+}
+endglobal
+
+# background:
+snippet bg "background: _" b
+background: $0
+endsnippet
+
+# background-attachment:
+snippet bga "background-attachment: _" b
+background-attachment: $0
+endsnippet
+# background-attachment: {prop}
+snippet /bga;(s|f|l)/ "bga;(s|f|l) => background-attachment: (scroll|fixed|local)" rb
+background-attachment: `!p snip.rv = bga_props[match.group(1)]`
+$0
+endsnippet
+
+# background-blend-mode:
+snippet bgbm "background-blend-mode: _" b
+background-blend-mode: $0
+endsnippet
+# background-blend-mode: {prop}
+snippet /bgbm;(cd?|d|lu?|m|n|o|sa?)/ "bgbm;(c|cd|d|l|lu|m|n|o|s|sa) => background-blend-mode: (color|color-dodge|darken|lighten|luminosity|multiply|normal|overlay|screen|saturation)" rb
+background-blend-mode: `!p snip.rv = bgbm_props[match.group(1)]`
+$0
+endsnippet
+
+# background-clip:
+snippet bgcl "background-clip: _" b
+background-clip: $0
+endsnippet
+# background-clip: {prop}
+snippet /bgcl;(b|c|p)/ "bgcl;(b|c|p) => background-clip: (border-box|content-box|padding-box)" rb
+background-clip: `!p snip.rv = bgcl_props[match.group(1)]`
+$0
+endsnippet
+
+# background-color:
+snippet bgc "background-color: _" b
+background-color: $0
+endsnippet
+
+# background-image
+snippet bgi "background-image: _" b
+background-image: $0
+endsnippet
+# background-image: {prop}
+snippet /bgi;n/ "background-image: none" rb
+background-image: none
+$0
+endsnippet
+snippet /bgi;u/ "background-image: url()" rb
+background-image: url('$0')
+endsnippet
+snippet /bgi;l/ "background-image: linear-gradient()" rb
+background-image: linear-gradient($0)
+endsnippet
+snippet /bgi;r/ "background-image: radial-gradient()" rb
+background-image: radial-gradient($0)
+endsnippet
+snippet /bgi;rl/ "background-image: repeating-linear-gradient()" rb
+background-image: repeating-linear-gradient($0)
+endsnippet
+snippet /bgi;rr/ "background-image: repeating-radial-gradient()" rb
+background-image: repeating-radial-gradient($0)
+endsnippet
+
+# background-origin:
+snippet bgo "background-origin: _" b
+background-origin: $0
+endsnippet
+# background-origin: {prop}
+snippet /bgo;(b|c|p)/ "bgo;(b|c|p) => background-origin: (border-box|content-box|padding-box)" rb
+background-origin: `!p snip.rv = bgo_props[match.group(1)]`
+$0
+endsnippet
+
+# background-position:
+snippet bgp "background-position: _" b
+background-position: $0
+endsnippet
+# background-position: {pos} [{pos}]
+snippet /bgp;(?=.)([trblc]{1,2})/ "bgp;([trblc]{1,2}) => background-position" rb
+background-position: `!p
+str = match.group(1)
+snip.rv = bgp_props[str] if len(str) == 1 else bgp_props[str[:1]]+' '+bgp_props[str[-1:]]`
+$0
+endsnippet
+
+# background-repeat:
+snippet bgr "background-repeat: _" b
+background-repeat: $0
+endsnippet
+# background-repeat: {prop}
+snippet /bgr;(r[xyo]?|n|s)/ "bgr;(r|rx|ry|n|s|ro) => background-repeat: (repeat|repeat-x|repeat-y|no-repeat|space|round)" rb
+background-repeat: `!p snip.rv = bgr_props[match.group(1)]`
+$0
+endsnippet
+
+# background-size:
+snippet bgs "background-size: _" b
+background-size: $0
+endsnippet
+# background-size: {prop}
+snippet /bgs;(a|co[vn])/ "bgs;(a|cov|con) => background-size: (auto|cover|contain)" rb
+background-size: `!p snip.rv = bgs_props[match.group(1)]`
+$0
+endsnippet
+
+# mix-blend-mode
+snippet mbm "mix-blend-mode: _" b
+mix-blend-mode: $0
+endsnippet

@@ -1,5 +1,5 @@
-[terminal.shell]
-program = '/bin/zsh'
+# [terminal.shell]
+# program = '/bin/zsh'
 
 # [window]
 # option_as_alt = 'OnlyLeft'

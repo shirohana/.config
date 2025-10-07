@@ -35,8 +35,11 @@ local lsp_configs = {}
 for name, type in vim.fs.dir(config_path) do
   if type == 'file' and name:match '%.lua$' then
     local lsp_name = name:gsub('%.lua$', '')
-    vim.lsp.config[lsp_name] = require('shirohana.lsp.config.' .. lsp_name)
-    table.insert(lsp_configs, lsp_name)
+    -- Temporarily ignore cssls
+    if lsp_name ~= 'cssls' then
+      vim.lsp.config[lsp_name] = require('shirohana.lsp.config.' .. lsp_name)
+      table.insert(lsp_configs, lsp_name)
+    end
   end
 end
 

@@ -50,7 +50,7 @@ local Cmp = {
   event = 'InsertEnter',
 
   dependencies = {
-    -- 'SirVer/ultisnips',
+    'SirVer/ultisnips',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'onsails/lspkind-nvim',
@@ -85,9 +85,14 @@ local Cmp = {
     local function get_document_color(entry, vim_item)
       if vim_item.kind == 'Color' and entry.completion_item.documentation then
         local _, _, r, g, b =
-          string.find(entry.completion_item.documentation, '^rgb%((%d+), (%d+), (%d+)')
+            string.find(entry.completion_item.documentation, '^rgb%((%d+), (%d+), (%d+)')
         if r then
           return string.format('%02x%02x%02x', r, g, b)
+        end
+
+        local hex = string.match(entry.completion_item.documentation, '^#([%da-fA-F]+)')
+        if hex and #hex == 6 then
+          return hex:lower()
         end
       end
     end
@@ -113,7 +118,7 @@ local Cmp = {
         -- { name = 'codeium' },
         { name = 'nvim_lsp' },
         -- { name = 'luasnip' },
-        -- { name = 'ultisnips' },
+        { name = 'ultisnips' },
       }, {
         { name = 'treesitter' },
         { name = 'buffer' },
@@ -140,6 +145,7 @@ local Cmp = {
           local symbol_kind = vim_item.kind
           local symbol_icon = require('lspkind').symbolic(vim_item.kind)
           local color = get_document_color(entry, vim_item)
+          print('color', color)
 
           if color then
             symbol_icon = ' '
