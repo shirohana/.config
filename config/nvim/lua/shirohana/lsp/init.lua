@@ -35,8 +35,11 @@ local lsp_configs = {}
 for name, type in vim.fs.dir(config_path) do
   if type == 'file' and name:match '%.lua$' then
     local lsp_name = name:gsub('%.lua$', '')
-    vim.lsp.config[lsp_name] = require('shirohana.lsp.config.' .. lsp_name)
-    table.insert(lsp_configs, lsp_name)
+    -- Temporarily ignore cssls
+    if lsp_name ~= 'cssls' then
+      vim.lsp.config[lsp_name] = require('shirohana.lsp.config.' .. lsp_name)
+      table.insert(lsp_configs, lsp_name)
+    end
   end
 end
 
@@ -75,9 +78,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bkeymap('n', 'zo', vim.diagnostic.open_float)
     bkeymap('n', '<Space>r', vim.lsp.buf.rename)
 
-    -- bkeymap('n', 'gt', vim.lsp.buf.type_definition)
-    -- bkeymap('n', 'gD', vim.lsp.buf.declaration)
-    -- bkeymap('n', 'gd', vim.lsp.buf.definition)
+    bkeymap('n', 'gt', vim.lsp.buf.type_definition)
+    bkeymap('n', 'gD', vim.lsp.buf.declaration)
+    bkeymap('n', 'gd', vim.lsp.buf.definition)
 
     bkeymap('n', 'gu', vim.lsp.buf.references)
     bkeymap('n', 'gi', vim.lsp.buf.implementation)

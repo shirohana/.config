@@ -33,3 +33,7 @@ zstyle ':completion:*' format '%F{yellow}-- %d --%f'
 # (( ${fpath[(Ie)"$ZSH_CACHE_DIR/completions"]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export CPPFLAGS="-I/opt/homebrew/include"
+export LDFLAGS="-L/opt/homebrew/lib"
+export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig"

@@ -3,7 +3,6 @@ local Snacks = {
   -- https://github.com/folke/snacks.nvim
   'folke/snacks.nvim',
   priority = 1000,
-  enabled = false,
   lazy = false,
   ---@type snacks.Config
   opts = {

@@ -19,4 +19,18 @@ local MarkdownPreview = {
   end,
 }
 
-return MarkdownPreview
+---@type LazyPluginSpec
+local RenderMarkdown = {
+  -- https://github.com/MeanderingProgrammer/render-markdown.nvim
+  'MeanderingProgrammer/render-markdown.nvim',
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+    'nvim-treesitter/nvim-treesitter',
+  },
+  ft = 'markdown',
+  ---@module 'render-markdown'
+  ---@type render.md.UserConfig
+  opts = {},
+}
+
+return { MarkdownPreview, RenderMarkdown }

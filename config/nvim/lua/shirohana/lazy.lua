@@ -24,5 +24,6 @@ require('lazy').setup {
     { import = 'shirohana.plugins.ide' },
     { import = 'shirohana.plugins.lsp' },
     { import = 'shirohana.plugins.lang' },
+    { import = 'shirohana.plugins.snippets' },
   },
 }

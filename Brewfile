@@ -16,33 +16,36 @@ brew "neovim" # Ambitious Vim-fork focused on extensibility and agility
 brew "ripgrep" # Search tool like grep and The Silver Searcher
 brew "tig" # Text interface for Git repositories
 brew "tlrc" # Official tldr client written in Rust
-brew "tree-sitter-cli" # Parser generator tool
 brew "yazi" # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "zinit" # Flexible and fast Zsh plugin manager
 brew "zoxide" # Shell extension to navigate your filesystem faster
 brew "zsh" # UNIX shell (command interpreter)
+brew "zstd" # Zstandard is a real-time compression algorithm
 
 # Additional
 
 brew "asimov" # Automatically exclude development dependencies from Time Machine backups
 brew "colima" # Container runtimes on MacOS (and Linux) with minimal setup
 brew "docker" # Pack, ship and run any application as a lightweight container
+brew "docker-buildx" # Docker CLI plugin for extended build capabilities with BuildKit
+brew "docker-compose" # Isolated development environments using Docker
+brew "docker-credential-helper" # Platform keystore credential helper for Docker
 brew "fnm" # Fast and simple Node.js version manager
 brew "gh" # GitHub command-line tool
 brew "httpie" # User-friendly cURL replacement (command-line HTTP client)
+brew "k9s" # Kubernetes CLI To Manage Your Clusters In Style!
 brew "kubernetes-cli" # Kubernetes command-line interface
+brew "pyenv" # Python version management
+brew "pyenv-virtualenv" # Pyenv plugin to manage virtualenv
 
 # Essential Casks
 
 cask "alacritty" # GPU-accelerated terminal emulator
 cask "easy-move+resize" # Utility to support moving and resizing using a modifier key and mouse drag
 cask "font-sauce-code-pro-nerd-font" # SauceCodePro Nerd Font (Source Code Pro)
-cask "ghostty" # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "iterm2" # Terminal emulator as alternative to Apple's Terminal app
 cask "karabiner-elements" # Keyboard customiser
-cask "kitty" # GPU-based terminal emulator
 cask "squirrel" # Rime input method engine
-cask "wezterm" # GPU-accelerated cross-platform terminal emulator and multiplexer
 
 # Additional Casks
 
@@ -54,6 +57,7 @@ cask "fantastical" # Calendar software
 cask "google-chrome" # Web browser
 cask "heptabase" # Note-taking tool for visual learning
 cask "lyricsx" # Lyrics for iTunes, Spotify, Vox and Audirvana Plus
+cask "openvpn-connect" # Client program for the OpenVPN Access Server
 
 # Extra Casks
 
@@ -78,8 +82,6 @@ cask "lyricsx" # Lyrics for iTunes, Spotify, Vox and Audirvana Plus
 # brew "pipx"
 # brew "plantuml"
 # brew "pv"
-# brew "pyenv"
-# brew "pyenv-virtualenv"
 # brew "rust"
 # brew "stylua"
 # brew "the_silver_searcher"
