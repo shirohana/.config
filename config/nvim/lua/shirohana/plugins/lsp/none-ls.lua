@@ -12,6 +12,8 @@ local NoneLs = {
     nls.setup {
       sources = {
         diag.hadolint,
+        -- fmt.blackd,
+        fmt.black,
         fmt.prettierd,
         fmt.shfmt,
         fmt.stylua,

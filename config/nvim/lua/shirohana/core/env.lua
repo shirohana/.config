@@ -63,6 +63,7 @@ vim.cmd [[
 augroup HanaEnv
   autocmd!
   autocmd TermOpen * setlocal scrolloff=0
+  autocmd TermOpen * setlocal nospell
   autocmd FileType checkhealth set nospell
   autocmd FileType dockerfile set iskeyword+=-
   autocmd FileType html set iskeyword+=-

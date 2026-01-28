@@ -33,6 +33,7 @@ brew "docker-credential-helper" # Platform keystore credential helper for Docker
 brew "fnm" # Fast and simple Node.js version manager
 brew "gh" # GitHub command-line tool
 brew "httpie" # User-friendly cURL replacement (command-line HTTP client)
+brew "jstkdng/programs/ueberzugpp" # Drop in replacement for ueberzug written in C++
 brew "k9s" # Kubernetes CLI To Manage Your Clusters In Style!
 brew "kubernetes-cli" # Kubernetes command-line interface
 brew "pyenv" # Python version management
@@ -41,6 +42,7 @@ brew "pyenv-virtualenv" # Pyenv plugin to manage virtualenv
 # Essential Casks
 
 cask "alacritty" # GPU-accelerated terminal emulator
+cask "claude-code" # Terminal-based AI coding assistant
 cask "easy-move+resize" # Utility to support moving and resizing using a modifier key and mouse drag
 cask "font-sauce-code-pro-nerd-font" # SauceCodePro Nerd Font (Source Code Pro)
 cask "iterm2" # Terminal emulator as alternative to Apple's Terminal app

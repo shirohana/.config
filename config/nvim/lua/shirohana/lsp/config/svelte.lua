@@ -3,6 +3,9 @@ return {
   cmd = { 'svelteserver', '--stdio' },
   filetypes = { 'svelte' },
   root_markers = { 'pnpm-lock.yaml', 'package-lock.json', 'yarn.lock', '.git' },
+  settings = {
+    ['format.enable'] = false,
+  },
   on_attach = function(client, bufnr)
     -- See https://github.com/sveltejs/language-tools/issues/2008
     vim.api.nvim_create_autocmd('BufWritePost', {
