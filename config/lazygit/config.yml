@@ -5,7 +5,7 @@ git:
 gui:
   screenMode: "normal"
   scrollHeight: 8
-  # mouseEvents: false
+  enlargedSideViewLocation: top
 keybinding:
   universal:
     quit: "q"
