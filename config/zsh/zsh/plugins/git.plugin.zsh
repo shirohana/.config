@@ -1,7 +1,7 @@
 function _git_wip_all() {
     git add --all
     git rm $(git ls-files --deleted) 2> /dev/null
-    git commit --no-verify --no-gpg-sign --message "--wip-- $(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M:%S') ->$(git diff --cached --shortstat) [skip ci]"
+    git commit --no-verify --no-gpg-sign --message "--wip-- $(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M:%S') ->$(git diff --cached --shortstat)"
 }
 
 function git_checkout_detached_rev() {
@@ -43,7 +43,7 @@ function git_log_match() {
   for pattern in "$@"; do
     while IFS= read -r ref; do
       branches+=("$ref")
-    done < <(git for-each-ref --format='%(refname:short)' "refs/heads/$pattern")
+    done < <(git for-each-ref --format='%(refname:short)' "refs/remotes/origin/$pattern")
   done
 
   if [ -z "$branches" ]; then
@@ -56,7 +56,7 @@ function git_log_match() {
 
 alias grt='cd "$(git rev-parse --show-toplevel || echo .)"'
 
-alias  g='git status'
+# alias  g='git status'
 alias gs='git status'
 
 alias gwl='git worktree list'
@@ -98,7 +98,7 @@ alias  gca!='git commit --verbose --all --amend'
 alias  gcn!='git commit --verbose --no-verify --amend'
 alias gcnn!='git commit --no-edit --no-verify --amend --allow-empty'
 alias   gcs='git commit --verbose --gpg-sign'
-alias  gcnm="git commit --no-verify --no-gpg-sign --message \"--wip-- \$(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M:%S') ->\$(git diff --cached --shortstat) [skip ci]\""
+alias  gcnm="git commit --no-verify --no-gpg-sign --message \"--wip-- \$(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M:%S') ->\$(git diff --cached --shortstat)\""
 # alias  gwip="git add --all; git rm \$(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message \"--wip-- \$(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M:%S') ->\$(git diff --cached --shortstat) [skip ci]\""
 alias gcanm="_git_wip_all"
 
@@ -190,5 +190,3 @@ alias  gyc="git rev-parse HEAD | tr -d '\n' | pbcopy"
 
 alias ts='tig status'
 alias ta='tig --all'
-
-alias lg='lazygit'

@@ -60,12 +60,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.diagnostic.config { virtual_lines = not current_config }
     end
 
-    bkeymap(
-      'n',
-      '<Space>v',
-      toggle_virtual_lines,
-      { desc = 'Toggle diagnostic virtual lines manually' }
-    )
+    bkeymap('n', 'zv', toggle_virtual_lines, { desc = 'Toggle diagnostic virtual lines manually' })
 
     bkeymap('n', 'd<Space>', vim.lsp.buf.hover)
     bkeymap('n', 'zj', function()
@@ -78,9 +73,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bkeymap('n', 'zo', vim.diagnostic.open_float)
     bkeymap('n', '<Space>r', vim.lsp.buf.rename)
 
-    -- bkeymap('n', 'gt', vim.lsp.buf.type_definition)
-    -- bkeymap('n', 'gD', vim.lsp.buf.declaration)
-    -- bkeymap('n', 'gd', vim.lsp.buf.definition)
+    bkeymap('n', 'gt', vim.lsp.buf.type_definition)
+    bkeymap('n', 'gD', vim.lsp.buf.declaration)
+    bkeymap('n', 'gd', vim.lsp.buf.definition)
 
     bkeymap('n', 'gu', vim.lsp.buf.references)
     bkeymap('n', 'gi', vim.lsp.buf.implementation)

@@ -1,4 +1,4 @@
-zinit ice wait lucid \
+zinit ice \
   from="gh-r" \
   atclone="./zoxide init zsh --no-cmd > zoxide.zsh" \
   atpull="%atclone" \

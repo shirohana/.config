@@ -6,7 +6,7 @@ local M = {}
 M.colorscheme = 'catppuccin'
 
 ---@type nil | 'Copilot'
-M.CODE_COMPLETION_AI = 'Copilot'
+M.CODE_COMPLETION_AI = nil
 
 ---@type 'fzf' | 'Telescope'
 M.FILE_EXPLORER = 'fzf'

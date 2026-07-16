@@ -5,6 +5,7 @@ git:
 gui:
   screenMode: "normal"
   scrollHeight: 8
+  skipRewordInEditorWarning: true
   # mouseEvents: false
 keybinding:
   universal:
