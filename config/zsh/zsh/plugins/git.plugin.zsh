@@ -56,7 +56,7 @@ function git_log_match() {
 
 alias grt='cd "$(git rev-parse --show-toplevel || echo .)"'
 
-alias  g='git status'
+# alias  g='git status' # g for lazygit
 alias gs='git status'
 
 alias gwl='git worktree list'
@@ -190,5 +190,3 @@ alias  gyc="git rev-parse HEAD | tr -d '\n' | pbcopy"
 
 alias ts='tig status'
 alias ta='tig --all'
-
-alias lg='lazygit'

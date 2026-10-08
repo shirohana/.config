@@ -1,1 +1,1 @@
-alias lg='lazygit'
+alias g='lazygit'

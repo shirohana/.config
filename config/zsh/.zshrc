@@ -37,3 +37,15 @@ zstyle ':completion:*' format '%F{yellow}-- %d --%f'
 export CPPFLAGS="-I/opt/homebrew/include"
 export LDFLAGS="-L/opt/homebrew/lib"
 export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig"
+
+# bun completions
+[ -s "/Users/shirohana/.bun/_bun" ] && source "/Users/shirohana/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+[[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
+
+# Added by codebase-memory-mcp install
+export PATH="/Users/shirohana/.local/bin:$PATH"
+eval "$(mise activate zsh)"
