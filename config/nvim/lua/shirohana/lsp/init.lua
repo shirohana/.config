@@ -62,12 +62,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     bkeymap(
       'n',
-      '<Space>v',
+      '<Leader>v',
       toggle_virtual_lines,
       { desc = 'Toggle diagnostic virtual lines manually' }
     )
 
-    bkeymap('n', 'd<Space>', vim.lsp.buf.hover)
+    bkeymap('n', 'd<Leader>', vim.lsp.buf.hover)
     bkeymap('n', 'zj', function()
       vim.diagnostic.jump { count = 1, float = true }
     end)
@@ -76,7 +76,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end)
     bkeymap('n', 'zi', vim.lsp.buf.code_action)
     bkeymap('n', 'zo', vim.diagnostic.open_float)
-    bkeymap('n', '<Space>r', vim.lsp.buf.rename)
+    bkeymap('n', '<Leader>r', vim.lsp.buf.rename)
 
     bkeymap('n', 'gt', vim.lsp.buf.type_definition)
     bkeymap('n', 'gD', vim.lsp.buf.declaration)
@@ -84,10 +84,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     bkeymap('n', 'gu', vim.lsp.buf.references)
     bkeymap('n', 'gi', vim.lsp.buf.implementation)
-    bkeymap('n', 'z<Space>', vim.diagnostic.setloclist)
-    bkeymap('n', '<Space>f', vim.lsp.buf.format)
+    bkeymap('n', 'z<Leader>', vim.diagnostic.setloclist)
+    bkeymap('n', '<Leader>f', function()
+      require('conform').format { timeout_ms = 5000, lsp_format = 'first' }
+    end)
     bkeymap('i', '<C-k>', vim.lsp.buf.signature_help)
-    -- bkeymap('n', '<Space>D', function()
+    -- bkeymap('n', '<Leader>D', function()
     --   require('shirohana.lsp.workspace-diagnostics').populate_all_workspace_diagnostics()
     -- end, { desc = 'Populate workspace diagnostics' })
 

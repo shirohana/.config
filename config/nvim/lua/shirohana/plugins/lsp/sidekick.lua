@@ -38,7 +38,7 @@ local Sidekick = {
         },
       },
       tools = {
-        -- claude = { cmd = { 'claude' }, url = 'https://github.com/anthropics/claude-code' },
+        claude = { cmd = { 'claude' }, url = 'https://github.com/anthropics/claude-code' },
         -- copilot = { cmd = { 'copilot' }, url = 'https://github.com/github/copilot-cli' },
       },
     },

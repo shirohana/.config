@@ -3,7 +3,7 @@ local ensure_installed = {
   'dockerfile',
   'html',
   'javascript',
-  'javascriptreact',
+  -- 'javascriptreact',
   'json',
   'lua',
   'markdown',
@@ -15,7 +15,7 @@ local ensure_installed = {
   'toml',
   'tsx',
   'typescript',
-  'typescriptreact',
+  -- 'typescriptreact',
   'vim',
   'yaml',
 }

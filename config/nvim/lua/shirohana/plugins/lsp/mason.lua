@@ -30,7 +30,7 @@ local MasonToolInstaller = {
       'yaml-language-server',
       'yamlfmt',
       -- llm
-      'copilot-language-server',
+      -- 'copilot-language-server',
       -- lua
       'lua-language-server',
       'stylua',

@@ -14,7 +14,7 @@ local NoneLs = {
         diag.hadolint,
         -- fmt.blackd,
         fmt.black,
-        fmt.prettierd,
+        -- fmt.prettierd,
         fmt.shfmt,
         fmt.stylua,
         fmt.yamlfmt,

@@ -97,7 +97,7 @@ local Lualine = {
             return status.get() ~= nil
           end,
         },
-        { 'lsp_status', ignore_lsp = { 'GitHub Copilot', 'null-ls' } },
+        { 'lsp_status', ignore_lsp = { 'null-ls' } },
         'encoding',
         'fileformat',
         'filetype',
@@ -110,7 +110,7 @@ local Lualine = {
       lualine_b = {},
       lualine_c = { 'filename' },
       lualine_x = {
-        { 'lsp_status', ignore_lsp = { 'GitHub Copilot', 'null-ls' } },
+        { 'lsp_status', ignore_lsp = { 'null-ls' } },
         'location',
       },
       lualine_y = {},

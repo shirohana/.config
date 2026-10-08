@@ -78,5 +78,6 @@ augroup HanaEnv
   autocmd BufRead,BufNewFile *.env.* set filetype=sh
   autocmd BufRead,BufNewFile * if !did_filetype() && getline(1) =~# '@startuml\>'| setfiletype plantuml | endif
   autocmd BufRead,BufNewFile *.pu,*.uml,*.plantuml,*.puml,*.iuml set filetype=plantuml
+  autocmd BufRead,BufNewFile *.svx set filetype=markdown
 augroup END
 ]]

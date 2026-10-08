@@ -31,11 +31,12 @@ end
 
 M.save_with_formatting = function()
   local should_format = true
-  if vim.tbl_contains({ 'javascript', 'typescript', 'typescriptreact' }, vim.bo.filetype) then
-    should_format = detect_local_prettier()
-  end
+  -- if vim.tbl_contains({ 'javascript', 'svelte', 'typescript', 'typescriptreact' }, vim.bo.filetype) then
+  --   should_format = detect_local_prettier()
+  -- end
   if should_format then
-    vim.lsp.buf.format { timeout_ms = 5000 }
+    -- vim.lsp.buf.format { timeout_ms = 5000 }
+    require('conform').format({ timeout_ms = 5000, lsp_format = 'first' })
   end
   vim.cmd 'write'
 end
