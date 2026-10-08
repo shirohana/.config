@@ -1,93 +1,117 @@
 # Handoff — repo cleanup & Claude config home
 
-Status: **planned, not started.** Nothing has been executed. Working tree still dirty.
-Written 2026-08-09. Read this top-to-bottom before touching the repo.
+Status 2026-10-09: **Phase 1 landed on `main`; Phases 2–5 deferred to the next session.**
+Read top-to-bottom before touching the repo. `main` is the only branch you need; checkout
+and work there.
 
 ## Goal
 
-Turn this repo into something an agent can pick up cold: one trunk, clean tree,
-a real README, and a single source of truth for the Claude setup.
+One trunk, clean tree, a real README, and this repo as the single source of truth for the
+Claude setup that today lives in `~/.claude` and in the gist "Hana's Claude Setup".
 
 ## Decisions already made (do not re-litigate)
 
-- **Claude config lives in THIS repo.** Not a separate one. Repo is public but not a
-  showcase; Claude setup is already entangled with the shell config
-  (`config/zsh/zsh/plugins/claude.plugin.zsh` is untracked in the tree right now).
-- **No history rewrite.** Measured: `.git` is 836K, 129 commits since 2018, largest
-  blob ever is `.p10k.zsh` at 90KB, no secrets (grepped every path ever committed for
-  key/token/credential/pem/env patterns, and the current tree for assignment-shaped
-  secrets — clean). The only junk is `profile.log` / `profile2.log`, ~20KB, already
-  deleted in the working tree. Rewriting 129 commits to prettify `--wip--` messages
-  would break every clone and the archive tags below, for cosmetics. Don't.
+- **Claude config lives in THIS repo.** Repo is public but not a showcase.
+- **No history rewrite.** `.git` is small, no secrets in history (re-checked 2026-10-09,
+  see Secrets below). The `--wip--` messages stay.
+- **Deletes are a separate, confirmed session.** Branch deletes, remote deletes, and file
+  removals all wait for Hana's explicit go; this doc lists them so nothing is forgotten.
 
-## Measured branch state
+## What landed (2026-10-09)
 
-`main` is already the real trunk. Nothing needs merging — branches need deleting.
-Tip-to-tip diff `git diff main..<branch>`:
+- The 27 dirty paths are committed on `main` in four commits (nvim, zsh, Brewfile+lazygit+yazi,
+  log removal + `*.log` ignored). `main` was fast-forwarded from `rebuild-workspace`; the two
+  are the same commit. **Not pushed.**
+- Every branch tip is archive-tagged locally: `git tag -l 'archive/*'` lists 12. Tags are
+  not pushed. They make the later branch deletes zero-risk.
+- `~/.zshrc.local` is now sourced by `.zshrc` and holds the HuggingFace token that was
+  sitting in the `.zshrc` diff (never committed). Side effect: that file's older
+  `GITHUB_AUTH` export is now live in every shell. Hand check: confirm that is wanted.
 
-| Branch | SHA | vs `main` |
-|---|---|---|
-| `backup-20250607` | cfc81c8 | fully merged, zero unique content |
-| `rebuild-config` | 24cea63 | fully merged, zero unique content |
-| `upgrade-nvim_0.10.0` | 3467ea6 | fully merged, zero unique content |
-| `origin/original-main` | 3a84cc0 | fully merged, zero unique content |
-| `_a01` | 60efc38 | 4,477 lines behind main; 309 main lacks |
-| `_a02` | 5164b0b | 4,422 behind; 318 main lacks |
-| `_a03` | 7930af3 | 4,062 behind; 200 main lacks |
-| `_a04` | 0ab7f40 | 3,915 behind; 163 main lacks |
-| `_backup` | 9ba0a9d | 8,074 behind; 91 main lacks |
-| `origin/hana-wip` | c3bd030 | 369 lines main lacks |
-| `origin/shoalter-env` | 548e2da | 1,243 lines main lacks — work-laptop env, separate purpose |
-| `rebuild-workspace` | ff0266d | **1 line** + the 27 dirty files (current branch) |
+## Open in the tree
 
-## Two findings that shape the work
+- `todo-comments-nvim.md` (untracked): an upstream bug report for folke/todo-comments.nvim.
+  Not config. Decide: file it as an issue and remove, or move to notes.
+- `~/.config/alacritty` symlink is broken (points to `<repo>/alacritty`). Moot once alacritty
+  is removed (Phase 2).
+- `~/.config/ghostty` is a plain directory, not a symlink; the repo copy has an extra `config`
+  file the live dir lacks. Compare before linking.
 
-1. **`~/.claude/plugins` is not user content.** It is Claude Code's plugin-manager
-   state — `cache/`, `repos/`, `marketplaces/`, `.last_inuse_sweep`. Symlinking it into
-   the repo fights the tool every session. Track only `installed_plugins.json` and
-   `known_marketplaces.json` (the declaration of what's installed).
-2. **Existing duplication.** `coding-principles/SKILL.md` and `commit-style/SKILL.md`
-   are byte-identical in both `~/.claude/skills/` and this repo's `.claude/skills/`.
-   Two sources of truth. Dedupe via symlink (below).
-   `~/.claude/skills/goal-prompt` exists only in home, not in the repo.
+## Phase 2 — Platform trim (Hana's call, 2026-10-09: do it)
 
-## Plan
+Hana no longer needs Linux/Windows support and no longer uses alacritty or wezterm.
+Measured 2026-10-09:
 
-### Phase 1 — Archive, then flatten to one trunk
-Tag every branch tip `archive/<name>` FIRST. Tags keep commits permanently reachable,
-making every delete zero-risk and reversible — which is why `shoalter-env` and
-`hana-wip` need no decision. Then delete all local + remote branches except `main`.
-Deleting remote branches is outward-facing: **confirm with Hana before pushing deletes.**
+- **nvim** OS branching is one table: `Keys` in `lua/shirohana/core/constants.lua`, every
+  entry `macos and '<glyph>' or '<M-x>'`. Collapse to the macOS glyph and drop the `macos`
+  constant. Nothing else in nvim or zsh branches on OS.
+- **tmux**: not in the repo (removed 2024). Only an empty `~/.tmux.conf` remains. Nothing to do.
+- **wezterm**: never tracked. Nothing to do.
+- **alacritty**: `config/alacritty/` (5 files), `cask "alacritty"` in Brewfile, broken symlink.
+  Remove all three.
+- Gate: `nvim --headless +q` exits 0; `zsh -ic true` exits 0.
 
-### Phase 2 — Land the working tree
-Commit the 27 dirty files onto `main` in coherent chunks (nvim/lsp, zsh plugins, yazi
-theme, Brewfile), per the short-commit rule. Commit the `profile*.log` deletions and add
-`*.log` to `.gitignore`. Fold in `rebuild-workspace`'s one-line delta.
+## Phase 3 — One trunk (delete session)
 
-### Phase 3 — `claude/` package, deduplicated
-Create `claude/` at repo top level: `skills/` (all three incl. `goal-prompt`),
-`CLAUDE.md`, `settings.json`, `hooks/`, and the two plugin manifests. Delete the
-duplicate copies under `.claude/skills/` and symlink `~/.claude/skills` → `claude/skills`,
-matching the existing style (`~/.config/nvim` → `repo/config/nvim`).
-Keep `.claude/CLAUDE.md` — it is project-scoped and legitimately differs from the global
-one (it has `SHORT COMMITS`; the global has 7 other principles).
-**Check `settings.json` for API keys before committing it**; anything sensitive goes in a
-gitignored local override.
+Tags exist. Remaining: delete all local branches except `main`; push tags; delete remote
+branches `backup-20250607 hana-wip original-main rebuild-config rebuild-workspace
+shoalter-env upgrade-nvim_0.10.0`. Remote deletes are outward-facing on a public repo:
+**confirm with Hana first, then push.**
 
-### Phase 4 — Handoff entry point
-`README.md` is currently two lines (`.config` / `=======`). Replace with the cold-start
-doc: what the repo is, directory map, symlink table (source → target), tracked vs
-runtime, new-machine bootstrap. Add a root `CLAUDE.md` with conventions: trunk-based on
-`main`, no long-lived branches, short commits, where Claude config lives.
+## Phase 4 — Claude package (three decisions pending, Hana defers to next session)
+
+Measured 2026-10-09. The gist `d2735eee7707340368f8f796e94d8114` (public, 44 revisions,
+flattened filenames, CHANGELOG as a manual sync log) and `~/.claude` have drifted BOTH ways:
+
+| Side | Has that the other lacks |
+|---|---|
+| Gist only (work laptop) | PIN THE UPSTREAM (work-only rule), A DEFERRED DECISION, 3 `coordinate` rules |
+| Home only | PLAN RE-COUNTS, REMOTE CONTROL, MEMORY AT EVERY CHECKPOINT, BRIEF NAMES FOLDERS, SEARCH FROM REPO; `fold-commits` conflicts paragraph |
+
+So the migration is a union merge. Produce the merged `CLAUDE.md`, `coordinate/SKILL.md` and
+`fold-commits/SKILL.md` as a diff for Hana to approve before committing. Keep the gist's
+`# Scope` section (per-machine drop list).
+
+Decisions Hana must make first (recommendation first):
+
+1. **Location**: `config/claude/` (matches `config/nvim`) — or top-level `claude/`.
+2. **Gist history**: copy current content only (flattened names make history useless as a
+   tree; CHANGELOG carries the narrative) — or `git subtree add` the 44 revisions.
+3. **settings.json**: symlink the whole file so both machines share one — or track only the
+   hooks fragment as the gist did (`settings.hooks.json`).
+
+Layout once decided: `CLAUDE.md`, `settings.json`, `statusline-command.sh`, `skills/<name>/`
+as real directories, `plugins/installed_plugins.json` + `known_marketplaces.json`.
+Symlink **per skill** into `~/.claude/skills/` — that directory also holds Claude Code's own
+`synced/` state and the external `write-doc` link, so never link the whole dir.
+Delete the repo's `.claude/skills/coding-principles` (drifted duplicate of the home skill).
+Keep `.claude/CLAUDE.md` and `.claude/skills/commit-style`: project-scoped, legitimately differ.
+Gate: a fresh `claude` session shows the saves banner and lists the skills.
+
+## Phase 5 — Retire the gist, write the entry point
+
+Replace the gist README with a pointer to this repo; leave it as a read-only archive.
+Rewrite `README.md` (currently two lines) as the cold-start doc: directory map, symlink table
+(source → target), tracked vs runtime, new-machine bootstrap. Then delete this file once the
+README carries what it needs.
+
+## Secrets
+
+Re-checked 2026-10-09: `git log --all -S'HF_TOKEN'` empty; the working-tree diff held one
+token (`.zshrc`, now in `~/.zshrc.local`). Before committing any `settings.json`, grep it for
+keys; anything sensitive goes to a gitignored local override.
 
 ## Install mechanism (existing)
 
 Hand-made per-directory symlinks, no stow, no Makefile, no CI:
 
-    ~/.config/nvim  -> <repo>/config/nvim
-    ~/.config/yazi  -> <repo>/config/yazi
-    ~/.config/zsh   -> <repo>/config/zsh/zsh
+    ~/.zshrc           -> <repo>/config/zsh/.zshrc
+    ~/.config/zsh      -> <repo>/config/zsh/zsh
+    ~/.config/nvim     -> <repo>/config/nvim
+    ~/.config/yazi     -> <repo>/config/yazi
+    ~/.config/lazygit  -> <repo>/config/lazygit
 
 ## Next step
 
-Phase 1, after confirming the remote-branch deletion with Hana.
+Phase 2 (platform trim) needs no decision and is safe to start. Phase 4 starts with the
+three decisions above; ask Hana, then produce the merge diff.
