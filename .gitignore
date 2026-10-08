@@ -8,3 +8,4 @@ vim-markdown-preview.html
 .git
 .next
 node_modules
+*.log
