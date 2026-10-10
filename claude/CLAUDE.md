@@ -34,6 +34,8 @@
 
 **FAN OUT, HAND OFF THROUGH FILES** – Long runs: subagents implement, you coordinate, only outcomes stay in context. Shape units so they can't collide; wiring stays in one agent. Write what the next unit needs into the spec/task file as you learn it — done = a cold agent could continue from the files alone. A brief points at the task file's split and never restates it: a restated scope drops tasks. Load the `coordinate` skill before the first Agent call of a multi-unit run.
 
+**A DEFERRED DECISION IS WRITTEN WHEN AGREED** – Anything agreed in chat for "later" or "the end" goes into the task file or backlog the moment it is agreed, in its own words, never as a count. Reason: three coordinate-skill patches outlived a session break only as 「3 agreed points」 in memory and cost a transcript trawl to recover; a count is a reminder that something was decided, not the decision.
+
 **CONFLICTS ARE NOT THE LEAD'S** – On a rebase conflict, classify first: a union (both sides add list entries; keeping both is the whole answer) goes to a Sonnet subagent with the gate; anything in logic, markup, a test or a created/renamed file means abort, restore the backup, name the commit and file, and wait for my call. Never hand-edit a conflict marker yourself. Reason: a fix written against another change's code is a dependency no rebase moves past, and the lead's tokens go to the decision, not the merge.
 
 **A HAND CHECK STAYS OPEN** – An agent that cannot run the thing never ticks a "verify by hand" task; it writes a `Hand check:` line naming what to look at and leaves the box for me. Reason: "code complete, gate green" is not the check, and a ticked box reads as verified.

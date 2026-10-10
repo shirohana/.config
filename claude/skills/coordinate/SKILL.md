@@ -41,6 +41,23 @@ task; it writes a `Hand check:` line under it and leaves `[ ]` for the owner. Th
 smoke test does not close it either: a two-click test could not tell "first click opens" from
 "second click opens".
 
+**VERIFY THE REPORT AGAINST THE DIFF** – Before a commit, the lead greps the diff for every
+test and fix the report names, and reproduces a claimed bug from the reference before it reaches
+a commit message. Reason: a unit's report claimed a bug fix that was not a bug (the reference
+behaved the same) and three tests it never wrote; the gate was green because nothing asserted
+them. A report is the agent's belief about its diff, not the diff.
+
+**PREPARE THE WORKTREE BEFORE THE BRIEF** – In a fresh worktree the lead runs the project's own
+setup step, installs, and gets one gate green before launching anyone, so an agent's first
+failure is its own. Reason: a per-worktree setup step the agent had not run made its command
+chains abort before the edit, so its early edits silently did not apply and the report
+described a tree that did not exist.
+
+**A PORT NAMES ITS OVERRIDES** – A unit that ports code lists, in its own task-file section,
+every place the port must differ from the reference. Reason: a ruling that lived in the design
+doc's analysis section, three sections away from the unit's spec, was ported as the reference
+had it; the agent read its section and the reference, as briefed, and both agreed.
+
 **A PATTERN FLAGGED TWICE GOES INTO THE NEXT BRIEF** – When two reviews flag the same
 mistake, put it in the next brief's "state of the repo" paragraph and in the project
 CLAUDE.md, instead of letting a third review find it.
