@@ -1,0 +1,102 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(head:*)",
+      "Bash(ls:*)",
+      "Bash(openspec:*)",
+      "Bash(playwright-cli:*)",
+      "Bash(pnpm build:*)",
+      "Bash(find audio:*)",
+      "Bash(find downloads:*)",
+      "Bash(find images:*)",
+      "Bash(find video:*)",
+      "Bash(find video_converted -name *.mp4)",
+      "Bash(python3:*)",
+      "Bash(node:*)"
+    ],
+    "defaultMode": "auto"
+  },
+  "model": "claude-opus-5-5[1m]",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/skills/memory-housekeep/hooks/memory-index-guard.sh",
+            "timeout": 10,
+            "statusMessage": "Checking MEMORY.md index"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/skills/save/hooks/session-start.sh",
+            "timeout": 10,
+            "statusMessage": "Loading saved handoffs"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/skills/save/hooks/stop.sh",
+            "timeout": 10,
+            "statusMessage": "Harvesting /save recap"
+          }
+        ]
+      }
+    ]
+  },
+  "worktree": {
+    "baseRef": "head",
+    "bgIsolation": "none"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "obsidian@obsidian-skills": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "obsidian-skills": {
+      "source": {
+        "source": "github",
+        "repo": "kepano/obsidian-skills"
+      }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
+  },
+  "alwaysThinkingEnabled": true,
+  "modelSettings": {
+    "claude-opus-5-5": {}
+  },
+  "promptSuggestionEnabled": false,
+  "autoDreamEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "dark",
+  "editorMode": "normal",
+  "autoCompactEnabled": true,
+  "autoContinueAtUsageLimit": false,
+  "agentPushNotifEnabled": false,
+  "skipAutoPermissionPrompt": true
+}

@@ -1,0 +1,26 @@
+{
+  "claude-plugins-official": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/claude-plugins-official"
+    },
+    "installLocation": "/Users/shirohana/.claude/plugins/marketplaces/claude-plugins-official",
+    "lastUpdated": "2026-10-10T09:05:01.947Z"
+  },
+  "openai-codex": {
+    "source": {
+      "source": "github",
+      "repo": "openai/codex-plugin-cc"
+    },
+    "installLocation": "/Users/shirohana/.claude/plugins/marketplaces/openai-codex",
+    "lastUpdated": "2026-03-31T14:04:58.923Z"
+  },
+  "obsidian-skills": {
+    "source": {
+      "source": "github",
+      "repo": "kepano/obsidian-skills"
+    },
+    "installLocation": "/Users/shirohana/.claude/plugins/marketplaces/obsidian-skills",
+    "lastUpdated": "2026-04-18T05:02:35.879Z"
+  }
+}

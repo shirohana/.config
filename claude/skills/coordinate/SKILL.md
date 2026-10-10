@@ -1,0 +1,86 @@
+---
+name: coordinate
+description: Run a multi-unit fan-out — brief subagents by the task file, gate and review each unit before the next starts, commit so every checkpoint builds alone. Load before the first Agent call of any run that splits work across subagents (an openspec apply, an overnight queue, a refactor in parallel units).
+allowed-tools: Bash, Read, Agent
+---
+
+# Coordinate a Fan-Out
+
+The lead coordinates; subagents implement; only outcomes stay in the lead's context
+(FAN OUT, HAND OFF THROUGH FILES). These rules are what one ten-hour run taught, each with
+the failure it prevents. Model choice per unit is SONNET BUILDS, OPUS JUDGES, FABLE WRITES.
+
+## Rules
+
+**A CHECKPOINT IS REVIEWED BEFORE THE NEXT UNIT STARTS** – After a unit lands, an Opus
+reviewer (the lead, for a diff under ~300 lines) reads the committed diff against its spec and
+the findings are fixed in the same pass. Reason: the gate proves the code runs, not that it
+does what the spec says; three reviews found five wrong writes green tests could not see
+(a first click that opened the viewer, a range selection shifting under a capture, a second
+click unrating a bulk selection, focus lost after a write, a selection reset before its
+confirmation). Budget: ~130k Opus tokens per review of a change-sized diff.
+
+**A GATE THE AGENT WROTE IS NOT A GATE** – When a unit's correctness is a wire format or an
+external contract, the brief supplies the matcher (documented request shape, recorded fixture)
+or the unit goes to Opus with the reference in hand. Reason: an API client came back green
+from Sonnet with every request body wrong, because its mocked server matched method and path
+only. The gate was the agent's own mocks.
+
+**EVERY COMMIT BUILDS ALONE** – A fix for unit A never rides in unit B's commit, and review
+fixes wait until every in-flight agent has landed. Reason: review fixes committed while
+another agent held a shared file produced a commit that imports a constant only its successor
+defines; it breaks bisect and cannot be folded on its own. Concurrent agents commit by file
+set; run review fixes after the last in-flight agent lands, or fold both units in one pass.
+
+**BRIEF BY THE TASK FILE'S OWN SPLIT** – The brief points at the task file's agent assignment
+and never restates the scope. Reason: restating "groups 1–4" dropped a task the file had
+assigned to the same agent. The task file is the single source of truth for who does what.
+
+**A HAND CHECK STAYS OPEN** – An agent that cannot run the app never ticks a "verify by hand"
+task; it writes a `Hand check:` line under it and leaves `[ ]` for the owner. The lead's own
+smoke test does not close it either: a two-click test could not tell "first click opens" from
+"second click opens".
+
+**A PATTERN FLAGGED TWICE GOES INTO THE NEXT BRIEF** – When two reviews flag the same
+mistake, put it in the next brief's "state of the repo" paragraph and in the project
+CLAUDE.md, instead of letting a third review find it.
+
+## The brief
+
+A brief that produced clean reports and unasked-for handoff notes had this shape, in order:
+
+1. **Reading list, ordered**: tasks → proposal → design → specs → the named source files.
+2. **State of the repo since the plan was written**: schema/migration number, which other
+   changes have landed, renamed helpers, patterns already flagged by review.
+3. **File ownership**: which files this agent owns, who else is editing what, right now.
+4. **The gate**: the exact commands that must pass before the agent reports.
+5. **Boundaries**: do not commit, do not run the dev server, do not tick hand checks.
+6. **Report format**, capped at N lines: what landed, deviations from the plan, open items
+   written into the task file's handoff section.
+
+Agents given this shape report deviations (a changed type shape, a shifted migration number)
+and write handoff notes into the task file without being asked.
+
+**Plans pin numbers in queue order.** A plan that names a migration or version number assumed
+its place in the queue; applied out of order, the real number is whatever the repo computes.
+Tell the agent to amend the plan's sentence to the real number, never to pin the planned one.
+
+## Running beside each other
+
+- Reviews are read-only agents on a commit range, so they run safely beside implementers.
+- Keep only reports in the lead's context. Never read a subagent's transcript. Read a diff
+  yourself only for a small unit (~300 lines was fine; a change-sized diff goes to a reviewer).
+- Sonnet on a Rust unit with the tests the tasks named came back green every time; Opus on a
+  webview unit with no gate still needed the review. The split holds; the review is not
+  optional for the gateless side.
+
+## Watch: Opus 5.5 (the `opus` alias since Claude Code 2.1.280, 2026-09-23)
+
+The rules above were earned on Opus 5 / Sonnet 5. The Opus 5.5 launch claims ~40% fewer
+tokens per task, stronger honesty, fewer hard-to-reverse actions, clearer reports. Each is a
+hypothesis; a rule relaxes only on evidence from a real run, recorded here with the run:
+- Review budget (~130k): log actual Opus tokens per change-sized review.
+- Gateless unit: did an Opus 5.5 implementer's unit pass review clean? Count findings.
+- Hand check: did any agent tick a hand-check box or claim a check it could not run?
+- Reports: did the capped report format hold without a reminder?
+Sonnet-side failures (the mock gate) stay as written until Sonnet 5.5 lands; repeat then.

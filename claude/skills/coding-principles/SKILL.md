@@ -1,6 +1,6 @@
 ---
 name: coding-principles
-description: Code philosophy for writing, modifying, or refactoring code. Use when implementing features, fixing bugs, or reviewing code quality. Covers happy-path-first development, zero duplication, and single source of truth.
+description: Code philosophy for writing, modifying, or refactoring code. Use when implementing features, fixing bugs, or reviewing code quality. Covers happy-path-first development, zero duplication, single source of truth, and self-describing code.
 ---
 
 # THE MAKE IT WORK FIRST FIELD GUIDE
@@ -53,7 +53,6 @@ Even AI misses duplicates.
 2. Before Adding Feature – Grep for similar patterns
 3. After Fixing Bug – Search for same logic elsewhere
 4. When Refactoring – Kill all copies, keep one source
-5. Complex Logic (>20 lines) – Extract immediately
 
 ## AI PREVENTION PROTOCOL
 Before writing any logic >10 lines, MANDATORY steps:
@@ -112,3 +111,29 @@ NO  → You passed
 Can you derive B from A instantly?
 YES → Delete B, compute it
 NO  → Maybe B is the true source
+
+---
+
+# THE SELF-DESCRIBING CODE LAW
+
+## CORE TRUTH
+A comment that says what the code does is a name the code is missing.
+A comment that explains the last edit is history in the wrong place.
+
+## THE RULES
+1. Name the Block – A block that needs a "what" comment becomes a function; the name replaces the comment
+2. Complex Logic (>20 lines) – Extract and name it
+3. Comment for the Next Edit – Keep a comment only if deleting it could let a bug back in
+4. History Goes to the Commit – What was wrong and why it changed: commit, spec, or test, never the file
+5. Mark the Shortcut – Shipped a shape you know is wrong? `FIXME` it, naming the right shape and why you didn't build it
+
+## COMMENT SMELLS
+- `// loop over users and pick the active ones` above the loop
+- `// fixed bug where…` / `// previously this was…`
+- `// TODO` with no shape named
+- Commented-out code
+
+## THE TEST
+Delete the comment. Could a bug come back?
+NO  → Delete it, or extract a name
+YES → It stays. That is the next editor's warning

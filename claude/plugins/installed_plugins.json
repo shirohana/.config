@@ -1,0 +1,53 @@
+{
+  "version": 2,
+  "plugins": {
+    "typescript-lsp@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/shirohana/.claude/plugins/cache/claude-plugins-official/typescript-lsp/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2025-12-26T18:39:44.396Z",
+        "lastUpdated": "2025-12-26T18:39:44.396Z"
+      }
+    ],
+    "lua-lsp@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/shirohana/.claude/plugins/cache/claude-plugins-official/lua-lsp/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2025-12-31T06:52:00.768Z",
+        "lastUpdated": "2025-12-31T06:52:00.768Z"
+      }
+    ],
+    "pyright-lsp@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/shirohana/.claude/plugins/cache/claude-plugins-official/pyright-lsp/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-01-26T11:42:14.124Z",
+        "lastUpdated": "2026-01-26T11:42:14.124Z",
+        "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
+      }
+    ],
+    "frontend-design@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/shirohana/.claude/plugins/cache/claude-plugins-official/frontend-design/b8e53f1c05df",
+        "version": "b8e53f1c05df",
+        "installedAt": "2026-04-16T13:57:08.281Z",
+        "lastUpdated": "2026-10-10T08:27:13.010Z",
+        "gitCommitSha": "b8e53f1c05dff3b6d751297f6527990ffc81c2f4"
+      }
+    ],
+    "obsidian@obsidian-skills": [
+      {
+        "scope": "user",
+        "installPath": "/Users/shirohana/.claude/plugins/cache/obsidian-skills/obsidian/1.0.1",
+        "version": "1.0.1",
+        "installedAt": "2026-04-18T05:02:43.098Z",
+        "lastUpdated": "2026-04-18T05:02:43.098Z",
+        "gitCommitSha": "fa1e131a014576ff8f8919f191a7ca8d8fded39b"
+      }
+    ]
+  }
+}

@@ -1,0 +1,257 @@
+#!/bin/bash
+# saves — the handoff journal CLI. The one reader/writer of ~/.claude/saves/;
+# the SessionStart and Stop hooks call this, so view and write logic live here.
+#
+#   saves list [--brief] [--limit N] [--expand <dir>]   newest first
+#   saves inject [<dir>]      exactly what SessionStart injects for <dir> (default: cwd)
+#   saves show <ref>          every field of one row
+#   saves add <folder> <purpose> [detail] [--flag F] [--branch B]
+#   saves set <ref> [--purpose P] [--detail D] [--flag F]   edit, keep saved-at
+#   saves retire <ref>... | gone                        delete rows
+#
+# <ref> = row index from `list`, a path (~ ok), or a unique folder substring.
+# Row file: <slug of folder>, one TSV line:
+#   saved-at  folder  branch  safe-flag  repo  purpose  detail
+# repo = the git common dir, so worktrees of one repo share it even after the
+# worktree folder is gone. Rows written before the purpose column existed have
+# 5 fields; they are read as purpose="" and render the head of detail instead.
+# Requires: jq-free, git optional. macOS /bin/bash 3.2. SAVES_DIR overridable.
+set -u
+
+SAVES_DIR="${SAVES_DIR:-$HOME/.claude/saves}"
+US=$(printf '\037')   # in-memory field separator: unlike TAB it is not IFS
+                       # whitespace, so `read` keeps empty fields in place
+PURPOSE_MAX=80
+DETAIL_MAX=300
+INJECT_LIMIT=15
+
+die() { printf 'saves: %s\n' "$*" >&2; exit 1; }
+
+expand_home() { case "$1" in "~"*) printf '%s' "$HOME${1#\~}" ;; *) printf '%s' "$1" ;; esac; }
+shrink_home() { case "$1" in "$HOME"*) printf '~%s' "${1#"$HOME"}" ;; *) printf '%s' "$1" ;; esac; }
+slug_of() { printf '%s' "$1" | sed 's|[^A-Za-z0-9]|-|g'; }
+
+# git toplevel if inside a repo, else the path as given
+normalize_folder() {
+  local p top; p=$(expand_home "$1")
+  top=$(git -C "$p" rev-parse --show-toplevel 2>/dev/null || true)
+  [ -n "$top" ] && p="$top"
+  printf '%s' "$p"
+}
+repo_of() { git -C "$1" rev-parse --path-format=absolute --git-common-dir 2>/dev/null || true; }
+branch_of() { git -C "$1" rev-parse --abbrev-ref HEAD 2>/dev/null || echo "-"; }
+
+# every row, normalized to 7 US-separated fields, newest first
+load_rows() {
+  [ -d "$SAVES_DIR" ] || return 0
+  cat "$SAVES_DIR"/* 2>/dev/null \
+    | awk -F'\t' -v OFS="$US" 'NF>=7 {print $1,$2,$3,$4,$5,$6,$7; next}
+                               NF>=5 {print $1,$2,$3,$4,"","",$5}' \
+    | sort -r
+}
+
+one_line() { printf '%s' "$1" | tr '\t\n' '  '; }
+clip() { # clip <text> <max> — word-boundary truncation
+  local t="$1" m="$2"
+  [ ${#t} -gt "$m" ] || { printf '%s' "$t"; return; }
+  t="${t:0:$m}"; printf '%s …' "${t% *}"
+}
+
+# markers a reader must see before trusting a row
+markers_of() { # markers_of <folder> <branch>
+  local m=""
+  if [ ! -d "$1" ]; then m="[gone]"
+  elif [ "$2" != "-" ]; then
+    local now; now=$(branch_of "$1")
+    [ "$now" != "-" ] && [ "$now" != "$2" ] && m="[branch now $now]"
+  fi
+  printf '%s' "$m"
+}
+purpose_or_head() { if [ -n "$1" ]; then printf '%s' "$1"; else clip "$2" 60; fi; }
+
+age_of() {
+  local epoch now d
+  epoch=$(date -j -f "%Y-%m-%dT%H:%M:%S%z" "$1" +%s 2>/dev/null \
+       || date -d "$1" +%s 2>/dev/null || echo 0)
+  now=$(date +%s); d=$(( now - epoch )); [ "$d" -lt 0 ] && d=0
+  if   [ "$d" -lt 60 ];    then echo "now"
+  elif [ "$d" -lt 3600 ];  then echo "$(( d / 60 ))m"
+  elif [ "$d" -lt 86400 ]; then echo "$(( d / 3600 ))h"
+  else                          echo "$(( d / 86400 ))d"; fi
+}
+
+# ---- list -------------------------------------------------------------------
+cmd_list() {
+  local brief=0 limit=0 expand=""
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --brief) brief=1 ;;
+      --limit) limit="$2"; shift ;;
+      --expand) expand=$(normalize_folder "$2"); shift ;;
+      *) die "list: unknown option $1" ;;
+    esac; shift
+  done
+  local rows; rows=$(load_rows)
+  [ -n "$rows" ] || { [ "$brief" -eq 1 ] || echo "No saves yet. /save in a session, or: saves add <folder> <purpose>"; return 0; }
+  [ "$limit" -gt 0 ] && rows=$(printf '%s\n' "$rows" | head -n "$limit")
+  local expand_repo=""; [ -n "$expand" ] && expand_repo=$(repo_of "$expand")
+
+  if [ "$brief" -eq 1 ]; then
+    printf '%s\n' "$rows" | while IFS="$US" read -r ts folder branch flag repo purpose detail; do
+      local m; m=$(markers_of "$folder" "$branch")
+      [ -z "$repo" ] && [ -d "$folder" ] && repo=$(repo_of "$folder")
+      printf '%s\t%s%s\t%s\t%s\t%s\n' "${ts%:*}" "$(shrink_home "$folder")" "${m:+ $m}" "$branch" "$flag" "$(purpose_or_head "$purpose" "$detail")"
+      if [ -n "$expand" ] && { [ "$folder" = "$expand" ] || { [ -n "$expand_repo" ] && [ "$repo" = "$expand_repo" ]; }; }; then
+        [ -n "$detail" ] && printf '    ↳ %s\n' "$detail"
+      fi
+    done
+    return 0
+  fi
+
+  local width; width=$(tput cols 2>/dev/null || echo 120)
+  local i=0
+  local idx=() ages=() dirs=() branches=() flags=() purposes=()
+  local iw=1 aw=3 dw=6 bw=6 fw=4
+  while IFS="$US" read -r ts folder branch flag repo purpose detail; do
+    i=$(( i + 1 ))
+    local m show a; m=$(markers_of "$folder" "$branch"); show="$(shrink_home "$folder")${m:+ $m}"; a=$(age_of "$ts")
+    idx+=("$i"); ages+=("$a"); dirs+=("$show"); branches+=("$branch"); flags+=("$flag"); purposes+=("$(purpose_or_head "$purpose" "$detail")")
+    [ ${#i} -gt "$iw" ] && iw=${#i}; [ ${#a} -gt "$aw" ] && aw=${#a}
+    [ ${#show} -gt "$dw" ] && dw=${#show}; [ ${#branch} -gt "$bw" ] && bw=${#branch}; [ ${#flag} -gt "$fw" ] && fw=${#flag}
+  done <<< "$rows"
+  local pw=$(( width - iw - aw - dw - bw - fw - 12 )); [ "$pw" -lt 20 ] && pw=20
+  printf '\n'
+  printf "  %${iw}s  %-${aw}s  %-${dw}s  %-${bw}s  %-${fw}s  %s\n" "#" "AGE" "FOLDER" "BRANCH" "SAFE" "PURPOSE"
+  i=0
+  while [ $i -lt ${#idx[@]} ]; do
+    local p="${purposes[$i]}"; [ ${#p} -gt "$pw" ] && p="${p:0:$(( pw - 1 ))}…"
+    printf "  %${iw}s  %-${aw}s  %-${dw}s  %-${bw}s  %-${fw}s  %s\n" "${idx[$i]}" "${ages[$i]}" "${dirs[$i]}" "${branches[$i]}" "${flags[$i]}" "$p"
+    i=$(( i + 1 ))
+  done
+  printf '\n  saves show <#|path|substring> for detail · saves retire <ref>… | gone\n\n'
+}
+
+# ---- ref resolution -> folder ------------------------------------------------
+resolve_ref() {
+  local ref="$1" rows folders n
+  rows=$(load_rows); folders=$(printf '%s\n' "$rows" | cut -d"$US" -f2)
+  case "$ref" in
+    ''|*[!0-9]*) ;;
+    *) n=$(printf '%s\n' "$folders" | sed -n "${ref}p"); [ -n "$n" ] || die "no row #$ref"; printf '%s' "$n"; return ;;
+  esac
+  case "$ref" in
+    "~"*|/*) local p; p=$(normalize_folder "$ref")
+             printf '%s\n' "$folders" | grep -Fxq "$p" && { printf '%s' "$p"; return; }
+             [ -f "$SAVES_DIR/$(slug_of "$p")" ] && { printf '%s' "$p"; return; }
+             die "no row for $ref" ;;
+  esac
+  local hits; hits=$(printf '%s\n' "$folders" | grep -iF -- "$ref" || true)
+  [ -n "$hits" ] || die "no row matches '$ref'"
+  [ "$(printf '%s\n' "$hits" | wc -l)" -eq 1 ] || die "'$ref' is ambiguous:
+$(printf '%s\n' "$hits" | sed 's/^/  /')"
+  printf '%s' "$hits"
+}
+
+# ---- show -------------------------------------------------------------------
+cmd_show() {
+  [ $# -eq 1 ] || die "usage: saves show <ref>"
+  local folder; folder=$(resolve_ref "$1") || exit 1
+  local row; row=$(load_rows | grep -F "$US$folder$US" | head -1)
+  [ -n "$row" ] || die "no row for $folder"
+  IFS="$US" read -r ts f branch flag repo purpose detail <<< "$row"
+  local m; m=$(markers_of "$f" "$branch")
+  printf 'folder:   %s%s\n' "$(shrink_home "$f")" "${m:+ $m}"
+  printf 'saved-at: %s (%s ago)\n' "$ts" "$(age_of "$ts")"
+  printf 'branch:   %s\nsafe:     %s\n' "$branch" "$flag"
+  [ -n "$repo" ] && printf 'repo:     %s\n' "$(shrink_home "$repo")"
+  printf 'purpose:  %s\ndetail:   %s\n' "${purpose:-(none — pre-purpose row)}" "$detail"
+}
+
+# ---- add --------------------------------------------------------------------
+cmd_add() {
+  local folder="" purpose="" detail="" flag="?" branch=""
+  local pos=0
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --flag) flag="$2"; shift ;;
+      --branch) branch="$2"; shift ;;
+      --*) die "add: unknown option $1" ;;
+      *) pos=$(( pos + 1 ))
+         case $pos in 1) folder="$1" ;; 2) purpose="$1" ;; 3) detail="$1" ;; *) die "add: too many arguments" ;; esac ;;
+    esac; shift
+  done
+  [ -n "$folder" ] && [ -n "$purpose" ] || die "usage: saves add <folder> <purpose> [detail] [--flag F] [--branch B]"
+  folder=$(normalize_folder "$folder")
+  [ -d "$folder" ] || printf 'saves: warning: %s does not exist, saving as [gone]\n' "$(shrink_home "$folder")" >&2
+  [ -n "$branch" ] || branch=$(branch_of "$folder")
+  local repo; repo=$(repo_of "$folder")
+  purpose=$(clip "$(one_line "$purpose")" $PURPOSE_MAX)
+  detail=$(clip "$(one_line "$detail")" $DETAIL_MAX)
+  mkdir -p "$SAVES_DIR"
+  printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "$(date +%Y-%m-%dT%H:%M:%S%z)" "$folder" "$branch" "$flag" "$repo" "$purpose" "$detail" \
+    > "$SAVES_DIR/$(slug_of "$folder")"
+  printf 'saved %s\n' "$(shrink_home "$folder")"
+}
+
+# ---- inject -----------------------------------------------------------------
+# The text SessionStart injects. Kept here, not in the hook, so `saves inject`
+# shows a human the real thing and the hook cannot drift from it.
+cmd_inject() {
+  local dir="${1:-$PWD}"
+  local view; view=$(cmd_list --brief --limit $INJECT_LIMIT --expand "$dir")
+  [ -n "$view" ] || return 0
+  cat <<HDR
+Saved handoffs (~/.claude/saves/, one row per folder, written only by /save; $INJECT_LIMIT newest). TSV: saved-at, folder, branch, safe-flag, purpose. Trust a row as that folder's resume point. [gone] = folder removed, commits likely hand-picked into the main stream: what landed, not where to resume. [branch now X] = folder reused, row is history. Rows of the launch repo carry a ↳ detail line; for others run \`saves show <folder>\` before acting. \`saves list\` / \`saves retire <ref>\` manage rows.
+HDR
+  printf '%s\n' "$view"
+}
+
+# ---- set --------------------------------------------------------------------
+cmd_set() {
+  [ $# -ge 1 ] || die "usage: saves set <ref> [--purpose P] [--detail D] [--flag F]"
+  local folder; folder=$(resolve_ref "$1") || exit 1; shift
+  local row; row=$(load_rows | grep -F "$US$folder$US" | head -1)
+  [ -n "$row" ] || die "no row for $folder"
+  IFS="$US" read -r ts f branch flag repo purpose detail <<< "$row"
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --purpose) purpose=$(clip "$(one_line "$2")" $PURPOSE_MAX); shift ;;
+      --detail) detail=$(clip "$(one_line "$2")" $DETAIL_MAX); shift ;;
+      --flag) flag="$2"; shift ;;
+      *) die "set: unknown option $1" ;;
+    esac; shift
+  done
+  local r; r=$(repo_of "$f"); [ -n "$r" ] && repo="$r"   # derived, so refresh; keep the stored value only when the folder is gone
+  printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "$ts" "$f" "$branch" "$flag" "$repo" "$purpose" "$detail" \
+    > "$SAVES_DIR/$(slug_of "$f")"
+  printf 'set %s\n' "$(shrink_home "$f")"
+}
+
+# ---- retire -----------------------------------------------------------------
+cmd_retire() {
+  [ $# -ge 1 ] || die "usage: saves retire <ref>... | gone"
+  local ref folder n=0
+  for ref in "$@"; do
+    if [ "$ref" = "gone" ]; then
+      while IFS="$US" read -r ts f rest; do
+        [ -n "$f" ] && [ ! -d "$f" ] || continue
+        rm -f "$SAVES_DIR/$(slug_of "$f")" && { printf 'retired %s [gone]\n' "$(shrink_home "$f")"; n=$(( n + 1 )); }
+      done < <(load_rows)
+      continue
+    fi
+    folder=$(resolve_ref "$ref") || exit 1
+    rm -f "$SAVES_DIR/$(slug_of "$folder")" && { printf 'retired %s\n' "$(shrink_home "$folder")"; n=$(( n + 1 )); }
+  done
+  [ "$n" -gt 0 ] || echo "nothing retired"
+}
+
+case "${1:-help}" in
+  list) shift; cmd_list "$@" ;;
+  show) shift; cmd_show "$@" ;;
+  add) shift; cmd_add "$@" ;;
+  set) shift; cmd_set "$@" ;;
+  inject) shift; cmd_inject "$@" ;;
+  retire) shift; cmd_retire "$@" ;;
+  help|-h|--help) sed -n '2,17p' "$0" | sed 's/^# \{0,1\}//' ;;
+  *) die "unknown command '$1' (list|show|add|retire)" ;;
+esac
