@@ -8,7 +8,8 @@ allowed-tools: Bash, Read, Agent
 
 The lead coordinates; subagents implement; only outcomes stay in the lead's context
 (FAN OUT, HAND OFF THROUGH FILES). These rules are what one ten-hour run taught, each with
-the failure it prevents. Model choice per unit is SONNET BUILDS, OPUS JUDGES, FABLE WRITES.
+the failure it prevents. Model choice per unit is SONNET BUILDS, OPUS JUDGES, FABLE WRITES,
+with Haiku on trial for sweeps (see the watch at the end).
 
 ## Rules
 
@@ -101,3 +102,26 @@ hypothesis; a rule relaxes only on evidence from a real run, recorded here with 
 - Hand check: did any agent tick a hand-check box or claim a check it could not run?
 - Reports: did the capped report format hold without a reminder?
 Sonnet-side failures (the mock gate) stay as written until Sonnet 5.5 lands; repeat then.
+
+## Watch: Haiku 5.5 (the `haiku` alias since Claude Code 2.1.293, 2026-10)
+
+Haiku 5.5 lists at $0.10 / $0.50 per MTok for prompts under 100K tokens ($0.50 / $2.50 above),
+1M context, and is the first Haiku with effort levels, default `medium`. That is one twentieth
+of Sonnet 5.5 per token below 100K and one quarter above it, so a brief that reads a large repo
+loses most of the discount. Anthropic's own framing: a subagent model for narrowly scoped work
+(compaction, summaries, sweeps); Sonnet and Opus "remain better choices for complex agentic
+coding" (Terminal-Bench 4.0: 39% vs 71%). Its prompting guide names two failure modes this
+skill already guards against: at `low`/`medium` effort it reports a code change done without
+running a check, and in a long agent prompt at `low` effort it stops early and hands the task
+back. How the subscription quota weights Haiku tokens is unverified.
+
+Until a run says otherwise, Haiku takes the **sweep tier** only: a unit whose brief fits one
+screen, whose edit is a mapping (a rename, a re-tag by table, a data table built from JSON, a
+grep-verify of another agent's sweep, a count), and whose gate is a command the lead reruns.
+Brief it at effort `high`, require the gate's output quoted in the report, and never hand it a
+spec-level unit. Each is a hypothesis; promote only on evidence recorded here with the run:
+- Sweep: did the lead's own grep-verify after the unit find misses? Count them.
+- Report: did it claim a check it did not run? The prompting guide says this is the known failure.
+- Prompt size: did reading the repo push the brief past 100K and into the upper price tier?
+- Trial: one of N parallel Sonnet build units on `haiku`; the Opus review counts findings per
+  unit. Promote Haiku to build units only when its count matches Sonnet's across two runs.
