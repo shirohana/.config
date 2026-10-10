@@ -30,8 +30,13 @@ Approve: `git commit` in each repo. Reject: `git checkout -- <file>` and say whi
 
 ## Hand checks
 
-- `~/.zshrc.local` is sourced since 2026-10-09 and carries an older `GITHUB_AUTH` export, now live
-  in every shell. Confirm that is wanted.
+- `~/.zshrc.local` is sourced since 2026-10-09, after the repo plugins, and it is a 144-line
+  leftover of the old `.zshrc`: two secret exports plus 59 git aliases and 6 functions. 52 of
+  the aliases also exist in the repo plugins and 20 differ, so the local copy silently wins
+  (`g` is `git status` again, `gms` lists merged branches instead of `merge --squash`, `gcom`
+  checks out local main instead of `origin/main`). Proposal: cut the file down to the two
+  exports; move the 5 local-only aliases and any wanted function into the repo's `git.plugin.zsh`.
+  Hana's call, the file is untracked.
 - `~/.config/ghostty` is a plain directory, not a symlink; the repo copy has an extra `config` file.
   Compare before linking.
 - `todo-comments-nvim.md` (untracked) is an upstream bug report, not config. File it or move it.
