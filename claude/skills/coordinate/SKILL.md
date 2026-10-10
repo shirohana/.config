@@ -119,7 +119,10 @@ Until a run says otherwise, Haiku takes the **sweep tier** only: a unit whose br
 screen, whose edit is a mapping (a rename, a re-tag by table, a data table built from JSON, a
 grep-verify of another agent's sweep, a count), and whose gate is a command the lead reruns.
 Brief it at effort `high`, require the gate's output quoted in the report, and never hand it a
-spec-level unit. Each is a hypothesis; promote only on evidence recorded here with the run:
+spec-level unit. Each is a hypothesis; promote only on evidence recorded here with the run. Token spend per
+agent and model comes from `scripts/model-watch.sh` (reads the session's subagent transcripts;
+run it from the project dir after the run, or pass the session dir); the qualitative rows below
+are the lead's own counts, written into the run's tasks.md as units land:
 - Sweep: did the lead's own grep-verify after the unit find misses? Count them.
 - Report: did it claim a check it did not run? The prompting guide says this is the known failure.
 - Prompt size: did reading the repo push the brief past 100K and into the upper price tier?
