@@ -18,13 +18,11 @@ layout; this file holds only what is still open.
 
 ## Hand checks
 
-- `~/.zshrc.local` is sourced since 2026-10-09, after the repo plugins, and it is a 144-line
-  leftover of the old `.zshrc`: two secret exports plus 59 git aliases and 6 functions. 52 of
-  the aliases also exist in the repo plugins and 20 differ, so the local copy silently wins
-  (`g` is `git status` again, `gms` lists merged branches instead of `merge --squash`, `gcom`
-  checks out local main instead of `origin/main`). Proposal: cut the file down to the two
-  exports; move the 5 local-only aliases and any wanted function into the repo's `git.plugin.zsh`.
-  Hana's call, the file is untracked.
+- `~/.zshrc.local` is a 144-line leftover of the old `.zshrc`, sourced after the repo plugins
+  since 2026-10-09. Its 20 differing git aliases overrode the repo ones until Hana commented them
+  out on 2026-10-10. Still to do, Hana's call: cut the file to the two secret exports and move the
+  5 local-only aliases (`gclone`, `gclone1`, `gcoom`, `gla`, `gwip`) and any wanted function into
+  `git.plugin.zsh`.
 - `~/.config/ghostty` is a plain directory, not a symlink; the repo copy has an extra `config` file.
   Compare before linking.
 
