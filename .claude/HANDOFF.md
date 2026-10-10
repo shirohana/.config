@@ -1,7 +1,7 @@
 # Handoff — repo cleanup
 
-Status 2026-10-10: **Claude package landed and linked; two merge diffs await Hana's approval;
-Phases 2 and 3 open.** `main` is the only branch. Read [README.md](../README.md) first for the
+Status 2026-10-10: **Claude package landed, linked and merged with the gist; Phases 2 and 3
+open.** `main` is the only branch. Read [README.md](../README.md) first for the
 layout; this file holds only what is still open.
 
 ## Decisions already made (do not re-litigate)
@@ -16,18 +16,6 @@ layout; this file holds only what is still open.
 - **Deletes are a separate, confirmed session.** Branch, remote and file deletes wait for Hana's go.
 - **Phase 2 (platform trim) is deferred**, Hana 2026-10-10: not blocking, do it later.
 
-## Awaiting Hana's approval (uncommitted in the working trees)
-
-- `.config`: `claude/CLAUDE.md` gains A DEFERRED DECISION after FAN OUT; `claude/skills/coordinate/SKILL.md`
-  gains VERIFY THE REPORT, PREPARE THE WORKTREE, A PORT NAMES ITS OVERRIDES before A PATTERN FLAGGED
-  TWICE; `claude/CLAUDE.work.md` is new with PIN THE UPSTREAM. `fold-commits` needed nothing.
-  MEMORY IS REWRITTEN AT EVERY CHECKPOINT stays in CLAUDE.md only; the gist had moved it into the
-  coordinate skill, and keeping it global was chosen so it applies outside fan-out runs too.
-- `claude-private`: `english/patterns.md` gains the 11 rows the gist had and home lacked, appended
-  at the table end. Both sides had edited independently since 2026-09-17.
-
-Approve: `git commit` in each repo. Reject: `git checkout -- <file>` and say which rule to drop.
-
 ## Hand checks
 
 - `~/.zshrc.local` is sourced since 2026-10-09, after the repo plugins, and it is a 144-line
@@ -39,7 +27,6 @@ Approve: `git commit` in each repo. Reject: `git checkout -- <file>` and say whi
   Hana's call, the file is untracked.
 - `~/.config/ghostty` is a plain directory, not a symlink; the repo copy has an extra `config` file.
   Compare before linking.
-- `todo-comments-nvim.md` (untracked) is an upstream bug report, not config. File it or move it.
 
 ## Phase 2 — Platform trim (deferred)
 
@@ -72,5 +59,5 @@ that grep before any later settings commit; anything sensitive goes to a gitigno
 
 ## Next step
 
-Hana approves or rejects the two merge diffs above. Then Phase 3 in a confirmed delete session.
+Phase 3 in a confirmed delete session.
 Delete this file once Phases 2 and 3 close; the README already carries the layout.
