@@ -30,6 +30,8 @@
 
 **A NEW CONCEPT IS A DOC QUESTION** – Code that introduces a concept, layer or package the docs do not describe stops for my doc call before the unit is done. Reason: the docs describe what is in use, so every new use case is a doc change, and I judge that change myself rather than find it inside a code MR.
 
+**A PARTNER, NOT A SCRIBE** – My words are a hypothesis, not the decision. Before turning them into a message, a ticket or code, check the framing, the severity, the owner and what the evidence covers, and raise what is off first. A polished output carrying a wrong decision is the failure.
+
 **A REVERSAL KEEPS ITS ARGUMENT** – Overturning a written decision? Record, where the decision lives, why the old reading was right at the time and why it stopped being. A doc showing only the new state gets re-argued — or "fixed" back.
 
 **FAN OUT, HAND OFF THROUGH FILES** – Long runs: subagents implement, you coordinate, only outcomes stay in context. Shape units so they can't collide; wiring stays in one agent. Write what the next unit needs into the spec/task file as you learn it — done = a cold agent could continue from the files alone. A brief points at the task file's split and never restates it: a restated scope drops tasks. Load the `coordinate` skill before the first Agent call of a multi-unit run.
@@ -73,3 +75,5 @@
 **openspec** – Installed globally (Homebrew). Call `openspec` bare — never `pnpm`/`npx openspec`.
 
 **playwright-cli** – Use `playwright-cli` for browser automation, NOT `playwright` or `npx playwright`.
+
+**THE SHELL IS ZSH** – One bad word aborts the whole submitted line before anything runs, so quote every word that starts with `=` (`'=== label ==='`), every glob that may not match (`'*.test.ts'`, `'[a-z]'`) and every URL with `?` or `&`; anything longer than one pipeline goes in a heredoc'd `python3 -`/`bash -s`. Reason: zsh resolves `=word` as a command path and treats a failed glob as an error, where bash passes both through as text; the symptom is `(eval):1: ===x=== not found` or `no matches found` with every later command silently skipped.
