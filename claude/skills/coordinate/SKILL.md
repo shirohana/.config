@@ -59,6 +59,11 @@ every place the port must differ from the reference. Reason: a ruling that lived
 doc's analysis section, three sections away from the unit's spec, was ported as the reference
 had it; the agent read its section and the reference, as briefed, and both agreed.
 
+**A PORT RE-CHECKS THE REFERENCE SINCE ITS PIN** – Before the MR goes up, diff the reference
+repo from the pinned commit to its tip and read every fix in the ported area. Reason: an auth
+module was ported from a pinned reference while the reference fixed a token-on-refresh bug in
+that same module; the copy did not carry the fix, and nothing in the run made the agent look.
+
 **A PATTERN FLAGGED TWICE GOES INTO THE NEXT BRIEF** – When two reviews flag the same
 mistake, put it in the next brief's "state of the repo" paragraph and in the project
 CLAUDE.md, instead of letting a third review find it.
@@ -72,9 +77,20 @@ A brief that produced clean reports and unasked-for handoff notes had this shape
    changes have landed, renamed helpers, patterns already flagged by review.
 3. **File ownership**: which files this agent owns, who else is editing what, right now.
 4. **The gate**: the exact commands that must pass before the agent reports.
-5. **Boundaries**: do not commit, do not run the dev server, do not tick hand checks.
-6. **Report format**, capped at N lines: what landed, deviations from the plan, open items
+5. **Boundaries**: do not commit, do not run the dev server, do not tick hand checks,
+   never `run_in_background` (foreground with a long timeout).
+6. **Finish rules**: delete what your change makes dead; a line that would look redundant
+   gets its why; a FIXME names the right shape in at most 3 lines.
+7. **Report format**, capped at N lines: what landed, deviations from the plan, open items
    written into the task file's handoff section.
+
+**A SUBAGENT NEVER BACKGROUNDS A COMMAND** – Every brief carries the foreground line from
+Boundaries. Reason: two Sonnet units ended their turn waiting on a backgrounded gate, and the
+work was simply unfinished; no recurrence once the line was in every brief.
+
+**THE BRIEF RESTATES THE FINISH RULES** – A subagent does not read CLAUDE.md as the lead does,
+so the brief carries them. Reason: briefs without them got back a dead export, an 8-line FIXME
+and a workaround with no comment.
 
 Agents given this shape report deviations (a changed type shape, a shifted migration number)
 and write handoff notes into the task file without being asked.
@@ -91,6 +107,14 @@ Tell the agent to amend the plan's sentence to the real number, never to pin the
 - Sonnet on a Rust unit with the tests the tasks named came back green every time; Opus on a
   webview unit with no gate still needed the review. The split holds; the review is not
   optional for the gateless side.
+
+**A WALK BRIEF FENCES ITS NEIGHBOURS** – A brief that runs the app kills by PID (never
+`pkill -f`), picks its own port range, and names any single-session account it logs into.
+Reason: one walk's `pkill -f` killed another worktree's dev server, and a single-session admin
+account gets bounced by parallel walks.
+
+**A TIMING RUNS ALONE** – A task that measures time runs with nothing else building, or labels
+its number an upper bound. Reason: a cold build was timed beside four other builds.
 
 ## Watch: Opus 5.5 (the `opus` alias since Claude Code 2.1.280, 2026-09-23)
 
