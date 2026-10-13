@@ -39,7 +39,7 @@ export LDFLAGS="-L/opt/homebrew/lib"
 export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig"
 
 # bun completions
-[ -s "/Users/shirohana/.bun/_bun" ] && source "/Users/shirohana/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -47,5 +47,8 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 [[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
 # Added by codebase-memory-mcp install
-export PATH="/Users/shirohana/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 eval "$(mise activate zsh)"
+export HUSKY=0
+
+export PATH="$HOME/.local/share/mise/shims:$PATH"

@@ -16,7 +16,7 @@ local NeoTree = {
   opts = {
     use_default_mappings = false,
     window = {
-      width = 36,
+      width = 48,
       mappings = {
         -- ['g?'] = 'show_help',
         ['o'] = 'open',
@@ -43,6 +43,7 @@ local NeoTree = {
     },
     filesystem = {
       bind_to_cwd = false,
+      group_empty_dirs = true,
       filtered_items = {
         hide_dotfiles = false,
         hide_gitignore = false,

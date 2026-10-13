@@ -59,7 +59,7 @@ local Sidekick = {
           return false
         end
 
-        -- Disabled temporarily
+        -- return true, disable temporarily
         return false
       end,
     },

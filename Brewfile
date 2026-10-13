@@ -13,61 +13,47 @@ brew "gnupg" # GNU Pretty Good Privacy (PGP) package
 brew "jq" # Lightweight and flexible command-line JSON processor
 brew "lazygit" # Simple terminal UI for git commands
 brew "neovim" # Ambitious Vim-fork focused on extensibility and agility
-brew "rclone" # Rsync for cloud storage
 brew "ripgrep" # Search tool like grep and The Silver Searcher
 brew "tig" # Text interface for Git repositories
 brew "tlrc" # Official tldr client written in Rust
+# brew "tree-sitter-cli" # Parser generator tool
 brew "yazi" # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "zinit" # Flexible and fast Zsh plugin manager
 brew "zoxide" # Shell extension to navigate your filesystem faster
 brew "zsh" # UNIX shell (command interpreter)
-brew "zstd" # Zstandard is a real-time compression algorithm
 
 # Additional
 
-brew "asimov" # Automatically exclude development dependencies from Time Machine backups
-brew "awscli" # Official Amazon AWS command-line interface
+# brew "asimov" # Automatically exclude development dependencies from Time Machine backups
 brew "colima" # Container runtimes on MacOS (and Linux) with minimal setup
-brew "defuddle" # Extract article content and metadata from web pages
 brew "docker" # Pack, ship and run any application as a lightweight container
-brew "docker-buildx" # Docker CLI plugin for extended build capabilities with BuildKit
-brew "docker-compose" # Isolated development environments using Docker
-brew "docker-credential-helper" # Platform keystore credential helper for Docker
 brew "fnm" # Fast and simple Node.js version manager
 brew "gh" # GitHub command-line tool
 brew "httpie" # User-friendly cURL replacement (command-line HTTP client)
-brew "k9s" # Kubernetes CLI To Manage Your Clusters In Style!
 brew "kubernetes-cli" # Kubernetes command-line interface
-brew "ollama" # Create, run, and share large language models (LLMs)
-brew "openspec" # Spec-driven development (SDD) for AI coding assistants
-brew "pyenv" # Python version management
-brew "pyenv-virtualenv" # Pyenv plugin to manage virtualenv
-# brew "mise" # Polyglot runtime manager (asdf rust clone)
-# brew "jstkdng/programs/ueberzugpp" # Drop in replacement for ueberzug written in C++
 
 # Essential Casks
 
 cask "alacritty" # GPU-accelerated terminal emulator
-cask "claude-code@latest" # Terminal-based AI coding assistant
 cask "easy-move+resize" # Utility to support moving and resizing using a modifier key and mouse drag
 cask "font-sauce-code-pro-nerd-font" # SauceCodePro Nerd Font (Source Code Pro)
+# cask "ghostty" # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "iterm2" # Terminal emulator as alternative to Apple's Terminal app
 cask "karabiner-elements" # Keyboard customiser
+# cask "kitty" # GPU-based terminal emulator
 cask "squirrel" # Rime input method engine
-cask "stats" # System monitor for the menu bar
+# cask "wezterm" # GPU-accelerated cross-platform terminal emulator and multiplexer
 
 # Additional Casks
 
 cask "alfred" # Application launcher and productivity software
 cask "anytype" # Local-first and end-to-end encrypted notes app
 cask "chatgpt" # OpenAI's official ChatGPT desktop app
-cask "discord" # Voice and text chat software
+# cask "discord" # Voice and text chat software
 cask "fantastical" # Calendar software
 cask "google-chrome" # Web browser
-# cask "heptabase" # Note-taking tool for visual learning
+cask "heptabase" # Note-taking tool for visual learning
 cask "lyricsx" # Lyrics for iTunes, Spotify, Vox and Audirvana Plus
-cask "obsidian" # Knowledge base that works on top of a local folder of plain text Markdown files
-# cask "openvpn-connect" # Client program for the OpenVPN Access Server
 
 # Extra Casks
 
@@ -92,6 +78,8 @@ cask "obsidian" # Knowledge base that works on top of a local folder of plain te
 # brew "pipx"
 # brew "plantuml"
 # brew "pv"
+# brew "pyenv"
+# brew "pyenv-virtualenv"
 # brew "rust"
 # brew "stylua"
 # brew "the_silver_searcher"

@@ -60,12 +60,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.diagnostic.config { virtual_lines = not current_config }
     end
 
-    bkeymap(
-      'n',
-      '<Leader>v',
-      toggle_virtual_lines,
-      { desc = 'Toggle diagnostic virtual lines manually' }
-    )
+    bkeymap('n', 'zv', toggle_virtual_lines, { desc = 'Toggle diagnostic virtual lines manually' })
 
     bkeymap('n', 'd<Leader>', vim.lsp.buf.hover)
     bkeymap('n', 'zj', function()

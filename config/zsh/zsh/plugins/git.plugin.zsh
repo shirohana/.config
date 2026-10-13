@@ -1,7 +1,57 @@
 function _git_wip_all() {
     git add --all
     git rm $(git ls-files --deleted) 2> /dev/null
-    git commit --no-verify --no-gpg-sign --message "--wip-- $(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M:%S') ->$(git diff --cached --shortstat) [skip ci]"
+    git commit --no-verify --no-gpg-sign --message "--wip-- $(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M:%S') ->$(git diff --cached --shortstat)"
+}
+
+function git_checkout_detached_rev() {
+  local ref
+  ref=$(__git_prompt_git rev-parse --short $1 2> /dev/null) || return
+  git checkout "$ref"
+}
+
+function git_sprint_branch() {
+  local REMOTE='origin'
+  local branch_name=$(git for-each-ref --sort=-committerdate --format='%(refname:short)' "refs/heads/sprint/*/*" "refs/heads/sprint/*" | head -n 1)
+  if [ -z "$branch_name" ]; then
+    branch_name=$(git for-each-ref --sort=-committerdate --format='%(refname:short)' "refs/remotes/$REMOTE/sprint/*/*" "refs/remotes/$REMOTE/sprint/*" | head -n 1)
+  fi
+  echo $branch_name
+}
+
+function git_log_all_graph() {
+  local cmd='git log --graph --abbrev-commit --decorate --date=relative --format=format:"%C(bold blue)%h%C(reset) %C(bold green)(%ar)%C(reset) %C(dim white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)" --all'
+  if [ -z "$1" ]; then
+    eval "$cmd"
+  else
+    # check all args
+    local all_ignored_pattern=()
+    for arg in "$@"; do
+      all_ignored_pattern+=("**/$arg*")
+      all_ignored_pattern+=("**/$arg**/*")
+    done
+    eval "$cmd" --not $(git for-each-ref --format='%(refname:short)' "${all_ignored_pattern[@]}")
+  fi
+}
+
+function git_log_match() {
+  if [ $# -eq 0 ]; then
+    echo "Usage: $0 <pattern> [...patterns]"
+  fi
+
+  local branches=()
+  for pattern in "$@"; do
+    while IFS= read -r ref; do
+      branches+=("$ref")
+    done < <(git for-each-ref --format='%(refname:short)' "refs/remotes/origin/$pattern")
+  done
+
+  if [ -z "$branches" ]; then
+    echo "Unable to match: '$branches'"
+    return 2
+  fi
+
+  git log --graph --abbrev-commit --decorate --date=relative --format=format:"%C(bold blue)%h%C(reset) %C(bold green)(%ar)%C(reset) %C(dim white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)" "${branches[@]}"
 }
 
 function git_checkout_detached_rev() {
@@ -98,7 +148,7 @@ alias  gca!='git commit --verbose --all --amend'
 alias  gcn!='git commit --verbose --no-verify --amend'
 alias gcnn!='git commit --no-edit --no-verify --amend --allow-empty'
 alias   gcs='git commit --verbose --gpg-sign'
-alias  gcnm="git commit --no-verify --no-gpg-sign --message \"--wip-- \$(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M:%S') ->\$(git diff --cached --shortstat) [skip ci]\""
+alias  gcnm="git commit --no-verify --no-gpg-sign --message \"--wip-- \$(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M:%S') ->\$(git diff --cached --shortstat)\""
 # alias  gwip="git add --all; git rm \$(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message \"--wip-- \$(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M:%S') ->\$(git diff --cached --shortstat) [skip ci]\""
 alias gcanm="_git_wip_all"
 

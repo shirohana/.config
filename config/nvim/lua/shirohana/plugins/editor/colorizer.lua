@@ -5,8 +5,9 @@ local Colorizer = {
   -- event = 'BufReadPre',
   opts = {
     user_default_options = {
-      -- names = false,
-      tailwind = 'both',
+      -- 'lsp', not 'both': 'both' broke Svelte scoped CSS with Tailwind on the home laptop; retry there
+      names = false,
+      tailwind = 'lsp',
       tailwind_opts = {      -- Options for highlighting tailwind names
         update_names = true, -- When using tailwind = 'both', update tailwind names from LSP results.  See tailwind section
       },

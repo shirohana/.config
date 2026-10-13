@@ -10,8 +10,8 @@ _pyenv_lazy_init() {
   (( ${+functions[python]} )) && unfunction python
   (( ${+functions[pip]} )) && unfunction pip
 
-  source <(pyenv init -)
-  source <(pyenv virtualenv-init -)
+  eval "$(command pyenv init -)"
+  eval "$(command pyenv virtualenv-init -)"
 
   command $cmd "$@"
 }

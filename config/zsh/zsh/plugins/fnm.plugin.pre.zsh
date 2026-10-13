@@ -3,4 +3,4 @@ if ! (( $+commands[fnm] )); then
   return 1
 fi
 
-source <(fnm env --use-on-cd --shell zsh)
+eval "$(command fnm env --use-on-cd --shell zsh)"

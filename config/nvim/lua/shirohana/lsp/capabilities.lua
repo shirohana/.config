@@ -17,6 +17,9 @@ table.insert(sources, {
     colorProvider = {
       dynamicRegistration = true,
     },
+    documentColor = {
+      dynamicRegistration = true,
+    },
   },
 })
 
