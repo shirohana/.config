@@ -42,8 +42,9 @@ Hand-made, no stow, no Makefile. Source is this repo, target is the live path.
 `claude/` is the home-laptop set: `CLAUDE.md`, `settings.json`, the statusline script, the
 plugin manifests under `plugins/`, and one real directory per skill under `skills/`.
 
-The work laptop appends `claude/CLAUDE.work.md` to its `CLAUDE.md` and keeps its own
-`settings.json`. A rule is in `CLAUDE.work.md` only while it is wrong for home. Reason: a
+The work laptop's `~/.claude/CLAUDE.md` is a two-line import file, `@…/claude/CLAUDE.md`
+then `@…/claude/CLAUDE.work.md`, and it keeps its own `settings.json`. Imports resolve on
+Claude Code 2.1.x; the file never needs regenerating after a pull. A rule is in `CLAUDE.work.md` only while it is wrong for home. Reason: a
 rule inside the shared file is read on both machines even when marked "work only".
 
 Skills that carry personal or work content live in the private repo
@@ -54,7 +55,8 @@ point here.
 
 ## New machine
 
-1. Clone this repo to `~/Repositories/@shirohana/.config` and run `brew bundle`.
+1. Clone this repo and run `brew bundle`. Home keeps it at `~/Repositories/@shirohana/.config`,
+   work at `~/@shirohana/.config`; the private repo sits beside it either way.
 2. Create every link in the Symlinks table with `ln -s <repo path> <live path>`.
 3. Clone claude-private and link each of its skills and its `english/` directory into
    `~/.claude`.

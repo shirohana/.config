@@ -1,7 +1,8 @@
 # Handoff — repo cleanup
 
-Status 2026-10-10: **Claude package landed, linked and merged with the gist; Phases 2 and 3
-open.** `main` is the only branch. Read [README.md](../README.md) first for the
+Status 2026-10-13: **both laptops run from `main`; Phases 2 and 3 open.** The work laptop
+merged its `shoalter-env` branch on 2026-10-13 (nvim + zsh, work side winning on collisions,
+Brewfile left as the work list) and links `~/.claude` the same way as home. Read [README.md](../README.md) first for the
 layout; this file holds only what is still open.
 
 ## Decisions already made (do not re-litigate)
@@ -25,6 +26,11 @@ layout; this file holds only what is still open.
   `git.plugin.zsh`.
 - `~/.config/ghostty` is a plain directory, not a symlink; the repo copy has an extra `config` file.
   Compare before linking.
+- `Brewfile` is the work laptop's list since the 2026-10-13 merge; the home additions (`awscli`,
+  `stats`) and the casks work commented out (`ghostty`, `kitty`, `wezterm`, `tree-sitter-cli`,
+  `asimov`) are untidied. Hana's call which machine's set is canonical, or whether to split.
+- Work laptop: `~/.config/btop` and `~/.config/tmux` still point into the old clone
+  `~/@shirohana/config-3`; `~/@shirohana/config-2`, `config-3`, `new-config` are stale clones.
 
 ## Phase 2 — Platform trim (deferred)
 
@@ -42,8 +48,8 @@ Measured 2026-10-09, still true 2026-10-10:
 - `.config`: 12 `archive/*` tags exist locally. Delete the 9 local branches other than `main`, push
   the tags, delete the remote branches `backup-20250607 hana-wip original-main rebuild-config
   rebuild-workspace shoalter-env upgrade-nvim_0.10.0`. Public repo: confirm, then push.
-- `claude-private`: `main` is fast-forwarded to the old `shoalter` content and is 54 ahead of
-  origin, unpushed. Delete remote `shoalter` and `worktree-slim-code-review-base` after the push.
+- `claude-private`: `main` holds everything; the work laptop's local `shoalter` equals `main`.
+  Delete remote `shoalter` and `worktree-slim-code-review-base` after the push.
 
 ## Not pushed
 
