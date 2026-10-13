@@ -34,3 +34,5 @@ zstyle ':completion:*' format '%F{yellow}-- %d --%f'
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export HUSKY=0
+
+export PATH="$HOME/.local/share/mise/shims:$PATH"
