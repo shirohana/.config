@@ -9,7 +9,10 @@ allowed-tools: Bash, Read, Agent
 The lead coordinates; subagents implement; only outcomes stay in the lead's context
 (FAN OUT, HAND OFF THROUGH FILES). These rules are what one ten-hour run taught, each with
 the failure it prevents. Model choice per unit is SONNET BUILDS, OPUS JUDGES, FABLE WRITES,
-with Haiku on trial for sweeps (see the watch at the end).
+with Haiku on trial for sweeps (see the watch at the end). A Fable docs unit (nine files plus
+the write-doc gates, 2026-10-14) cost ~210k tokens, the largest single spend of its run — not
+wrong, but the number to weigh before handing a docs unit to Fable whole instead of splitting it
+or writing it as the lead.
 
 ## Rules
 
@@ -19,7 +22,11 @@ the findings are fixed in the same pass. Reason: the gate proves the code runs, 
 does what the spec says; three reviews found five wrong writes green tests could not see
 (a first click that opened the viewer, a range selection shifting under a capture, a second
 click unrating a bulk selection, focus lost after a write, a selection reset before its
-confirmation). Budget: ~130k Opus tokens per review of a change-sized diff.
+confirmation). The review also reads the spec against itself across units, not only each
+diff against its section: two requirements on one path can each pass their own unit's tests and
+contradict — "an envelope failure reads as no saved data" and "never write over an unknown base"
+together let a save erase the stored document, and only the range review saw both. Budget: ~130k
+Opus tokens per review of a change-sized diff.
 
 **A GATE THE AGENT WROTE IS NOT A GATE** – When a unit's correctness is a wire format or an
 external contract, the brief supplies the matcher (documented request shape, recorded fixture)
@@ -122,10 +129,16 @@ The rules above were earned on Opus 5 / Sonnet 5. The Opus 5.5 launch claims ~40
 tokens per task, stronger honesty, fewer hard-to-reverse actions, clearer reports. Each is a
 hypothesis; a rule relaxes only on evidence from a real run, recorded here with the run:
 - Review budget (~130k): log actual Opus tokens per change-sized review.
+  Run 2026-10-14 (UserPreference, six Sonnet units, ~1,300 lines): 137k — the budget holds.
 - Gateless unit: did an Opus 5.5 implementer's unit pass review clean? Count findings.
+  Run 2026-10-14: not tested, no implementer ran on Opus.
 - Hand check: did any agent tick a hand-check box or claim a check it could not run?
+  Run 2026-10-14: nine briefs, zero ticked, two `Hand check:` lines written unasked.
 - Reports: did the capped report format hold without a reminder?
-Sonnet-side failures (the mock gate) stay as written until Sonnet 5.5 lands; repeat then.
+  Run 2026-10-14: held in nine of nine, with deviations and handoff lines unprompted.
+Sonnet-side failures (the mock gate) stay as written until Sonnet 5.5 lands; repeat then. The
+2026-10-14 ⛔ had the mock-gate shape but came from the brief and the spec, which both stated the
+wrong rule; the agent built what it was told (see the spec-against-itself reason above).
 
 ## Watch: Haiku 5.5 (the `haiku` alias since Claude Code 2.1.293, 2026-10)
 
