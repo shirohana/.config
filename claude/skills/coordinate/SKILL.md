@@ -55,6 +55,14 @@ a commit message. Reason: a unit's report claimed a bug fix that was not a bug (
 behaved the same) and three tests it never wrote; the gate was green because nothing asserted
 them. A report is the agent's belief about its diff, not the diff.
 
+**THE FINISH RULES ARE THE REVIEW CHECKLIST** – The lead's diff review checks the shape rules
+the brief restated — most important symbol on top, a test beside its subject, an example type
+whose name says what it holds, the exported surface — not only whether the behaviour matches
+the spec. Reason: a kit unit came back green and behaviourally right, and the owner's review
+found the private helper on top of the only export, `toString()` tests in the `declare` test
+file because that unit added them, and a borrowed `ListColumns { hidden }` example; every one
+was in the brief's finish rules and the lead read the diff for behaviour only.
+
 **PREPARE THE WORKTREE BEFORE THE BRIEF** – In a fresh worktree the lead runs the project's own
 setup step, installs, and gets one gate green before launching anyone, so an agent's first
 failure is its own. Reason: a per-worktree setup step the agent had not run made its command
@@ -88,6 +96,10 @@ A brief that produced clean reports and unasked-for handoff notes had this shape
    never `run_in_background` (foreground with a long timeout).
 6. **Finish rules**: delete what your change makes dead; a line that would look redundant
    gets its why; a FIXME names the right shape in at most 3 lines.
+   A doc task in a brief names **where** the content joins the existing doc and what it
+   displaces, never **what** to add: "README: the two members and why" produced an appended
+   section; "fold `declare` into the recipe beside `schema()`, drop what is not worth a line"
+   is the sentence that would not have.
 7. **Report format**, capped at N lines: what landed, deviations from the plan, open items
    written into the task file's handoff section.
 

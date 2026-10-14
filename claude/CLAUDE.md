@@ -16,6 +16,8 @@
 
 **MARK THE SHORTCUT** – Shipped a shape you know is wrong? `FIXME` it in the source, naming the right shape and why you didn't build it. Unmarked, the next reader inherits a workaround as the design.
 
+**BORROWED IS NOT VERIFIED** – A type, example or doc section lifted from the nearest existing code is re-read for whether its name says what it holds and whether it belongs where it lands; the nearest thing is the laziest thing. Reason: a `ListColumns { hidden }` lifted from a feature became the example in a shared kit, where nobody could tell what it was.
+
 # Execution
 
 **ALIGN THE RUN, THEN GO** – Small explicit ask: just do it. Question or report: findings and a proposal, not a patch. Multi-step work (spec, task list, refactor): propose the phases, subagent split, checkpoints, and what you verify against — start on my go.
