@@ -79,6 +79,18 @@ repo from the pinned commit to its tip and read every fix in the ported area. Re
 module was ported from a pinned reference while the reference fixed a token-on-refresh bug in
 that same module; the copy did not carry the fix, and nothing in the run made the agent look.
 
+**A REVIEW FINDING IS CHECKED AGAINST THE LINT CONFIG BEFORE IT IS APPLIED** – A reviewer's
+"revert to X" or "use Y" is grepped against the project's lint rules and their comments before
+the lead applies it. Reason: an Opus review of a provider said "revert to `extends WithChildren`";
+the house rule `no-extends-with-children` forbids exactly that when a Props interface has its own
+members, the implementer had it right, and applying the review cost a second force-push of a
+four-MR stack.
+
+**A BASE CHANGE RE-CONFLICTS THE STACK** – A review note on a stacked MR is fixed in the MR that
+was reviewed, even when the file also exists in its base, unless the base itself is wrong. Reason:
+one amend to the base MR re-conflicted the module MR above it in three files and cost the owner a
+hand resolution; the alphabetical-members note was therefore done in the top MR.
+
 **A PATTERN FLAGGED TWICE GOES INTO THE NEXT BRIEF** – When two reviews flag the same
 mistake, put it in the next brief's "state of the repo" paragraph and in the project
 CLAUDE.md, instead of letting a third review find it.
@@ -99,7 +111,10 @@ A brief that produced clean reports and unasked-for handoff notes had this shape
    A doc task in a brief names **where** the content joins the existing doc and what it
    displaces, never **what** to add: "README: the two members and why" produced an appended
    section; "fold `declare` into the recipe beside `schema()`, drop what is not worth a line"
-   is the sentence that would not have.
+   is the sentence that would not have. When a formatter will touch the file, the brief also
+   names a **shape the formatter is known to keep**: a brief that said `> …<br>` got a
+   `prettier-ignore` comment back, because Prettier re-joins `<br>` lines; the blank-`>`-line
+   blockquote survives it.
 7. **Report format**, capped at N lines: what landed, deviations from the plan, open items
    written into the task file's handoff section.
 

@@ -12,6 +12,8 @@
 
 **NAME THE BLOCK** – A block that needs a comment to say what it does is a function waiting for a name. Extract it; the name replaces the comment.
 
+**TOP-DOWN, PUBLIC FIRST** – A file reads from what a caller needs to what only the file needs: the exported surface and the types shaping its input and output on top, each helper right after its first user, private helpers last; non-exported never means less important. Reason: four notes in one review round moved symbols up; the posture line stops the fifth, the per-language cases live in the project skill.
+
 **A COMMENT IS FOR THE NEXT EDIT, NOT THE LAST ONE** – A comment is a warning to the next editor: keep it only if deleting it could let a bug back in. The story of the last edit — what was wrong, why it changed — belongs in the commit, the spec, or a test, never the file.
 
 **MARK THE SHORTCUT** – Shipped a shape you know is wrong? `FIXME` it in the source, naming the right shape and why you didn't build it. Unmarked, the next reader inherits a workaround as the design.
