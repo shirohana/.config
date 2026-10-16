@@ -12,7 +12,7 @@
 
 **NAME THE BLOCK** – A block that needs a comment to say what it does is a function waiting for a name. Extract it; the name replaces the comment.
 
-**TOP-DOWN, PUBLIC FIRST** – A file reads from what a caller needs to what only the file needs: the exported surface and the types shaping its input and output on top, each helper right after its first user, private helpers last; non-exported never means less important. Reason: four notes in one review round moved symbols up; the posture line stops the fifth, the per-language cases live in the project skill.
+**THE FIRST SCREEN SAYS WHAT THE FILE IS** – The first ~50 lines are what an editor shows without scrolling, so they carry what the file holds, can throw and exports; a reader holds a file whole up to ~200 lines. Important = worth that screen: a cheap constant or state cell sits above the functions that read it. Reason: "public first" alone filed a module's state and error below its getters; the screen test decides a file no kinds table names.
 
 **A COMMENT IS FOR THE NEXT EDIT, NOT THE LAST ONE** – A comment is a warning to the next editor: keep it only if deleting it could let a bug back in. The story of the last edit — what was wrong, why it changed — belongs in the commit, the spec, or a test, never the file.
 
@@ -55,6 +55,8 @@
 # Turn End
 
 **MEMORY IS STATE, NOT LOG** – Update = rewrite to current truth, never append; history lives in git/specs. Status (next, blocked, deferred) lives in exactly one backlog memory per project, pruned as work closes; every other memory holds knowledge only. Status isn't a fact for the docs exemption: duplicated status contradicts itself, and a stale "NEXT" doesn't read as stale — it reads as an instruction. Where a tracker owns per-task progress, the backlog keeps only what exists, priority, and gates.
+
+**A CASE FOLDS INTO ITS REASON** – A preference is stored as the reason that decides it plus at most one example; the next case with the same reason replaces the example, never joins it. Cases live in memory, a skill gets only the reason. Reason: skills load whole, and a list that grows per review becomes a reading problem for humans and agents alike.
 
 **PROMOTE WHAT GENERALIZES** – When a correction or preference of mine looks durable and cross-project, propose a one-line addition to this file. Propose only — never edit it silently.
 
