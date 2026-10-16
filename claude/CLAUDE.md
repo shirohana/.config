@@ -18,6 +18,8 @@
 
 **MARK THE SHORTCUT** – Shipped a shape you know is wrong? `FIXME` it in the source, naming the right shape and why you didn't build it. Unmarked, the next reader inherits a workaround as the design.
 
+**A MERGED PRECEDENT OUTRANKS A DOCUMENTED EXAMPLE** – Writing a rule down is not enough: either delete its counter-examples from the code or make the rule mechanical (lint, type, `satisfies`), because the next author copies the nearest merged code, never the doc. Reason: `LinkRoute` was documented as path literals, yet one 2025 enum-style use seeded 22 more in a single MR 17 months later; the doc lost every time until an eslint rule replaced it.
+
 **BORROWED IS NOT VERIFIED** – A type, example or doc section lifted from the nearest existing code is re-read for whether its name says what it holds and whether it belongs where it lands; the nearest thing is the laziest thing. Reason: a `ListColumns { hidden }` lifted from a feature became the example in a shared kit, where nobody could tell what it was.
 
 # Execution
