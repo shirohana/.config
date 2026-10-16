@@ -84,12 +84,19 @@ that same module; the copy did not carry the fix, and nothing in the run made th
 the lead applies it. Reason: an Opus review of a provider said "revert to `extends WithChildren`";
 the house rule `no-extends-with-children` forbids exactly that when a Props interface has its own
 members, the implementer had it right, and applying the review cost a second force-push of a
-four-MR stack.
+four-MR stack. The check is `eslint --print-config <file>` run from the package that owns the
+file (the root config ignores `apps/`; add `--no-warn-ignored`), never the rule's source: the
+rule file states the intent, the resolved config says whether it applies here. Reason: the lead
+read `no-interleaved-exports.mjs`, concluded the owner's order was a lint breach, and only the
+probe showed the rule is `src/core/**`-only and the file was in `features/`.
 
 **A BASE CHANGE RE-CONFLICTS THE STACK** – A review note on a stacked MR is fixed in the MR that
 was reviewed, even when the file also exists in its base, unless the base itself is wrong. Reason:
 one amend to the base MR re-conflicted the module MR above it in three files and cost the owner a
-hand resolution; the alphabetical-members note was therefore done in the top MR.
+hand resolution; the alphabetical-members note was therefore done in the top MR. When the
+reviewed MR *is* the base, the fix goes there, and the thread reply names the files that will
+conflict above it and the resolved shape of each, before anyone rebases. Reason: the owner
+rebases the stack by hand; a reply that only says "fixed" leaves them to rediscover the shape.
 
 **A PATTERN FLAGGED TWICE GOES INTO THE NEXT BRIEF** – When two reviews flag the same
 mistake, put it in the next brief's "state of the repo" paragraph and in the project
