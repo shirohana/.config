@@ -12,13 +12,13 @@
 
 **NAME THE BLOCK** – A block that needs a comment to say what it does is a function waiting for a name. Extract it; the name replaces the comment.
 
-**THE FIRST SCREEN SAYS WHAT THE FILE IS** – The first ~50 lines are what an editor shows without scrolling, so they carry what the file holds, can throw and exports; a reader holds a file whole up to ~200 lines. Important = worth that screen: a cheap constant or state cell sits above the functions that read it. Reason: "public first" alone filed a module's state and error below its getters; the screen test decides a file no kinds table names.
+**THE FIRST SCREEN SAYS WHAT THE FILE IS** – A strategy for code humans maintain, not a hard rule: the first ~50 lines are what an editor shows without scrolling, so they carry what the file holds, can throw and exports; a reader holds a file whole up to ~200 lines. Important = worth that screen: a cheap constant or state cell sits above the functions that read it. Reason: "public first" alone filed a module's state and error below its getters; the screen test says why and how to shape a file for a human reader, where a kinds table cannot.
 
 **A COMMENT IS FOR THE NEXT EDIT, NOT THE LAST ONE** – A comment is a warning to the next editor: keep it only if deleting it could let a bug back in. The story of the last edit — what was wrong, why it changed — belongs in the commit, the spec, or a test, never the file.
 
 **MARK THE SHORTCUT** – Shipped a shape you know is wrong? `FIXME` it in the source, naming the right shape and why you didn't build it. Unmarked, the next reader inherits a workaround as the design.
 
-**A MERGED PRECEDENT OUTRANKS A DOCUMENTED EXAMPLE** – Writing a rule down is not enough: either delete its counter-examples from the code or make the rule mechanical (lint, type, `satisfies`), because the next author copies the nearest merged code, never the doc. Reason: `LinkRoute` was documented as path literals, yet one 2025 enum-style use seeded 22 more in a single MR 17 months later; the doc lost every time until an eslint rule replaced it.
+**A MERGED PRECEDENT OUTRANKS A DOCUMENTED EXAMPLE** – Writing a rule down is not enough: either delete its counter-examples from the code or make the rule mechanical (lint, type, `satisfies`), because the next author copies the nearest merged code, never the doc. Reason: one merged counter-example of a documented idiom seeded a whole feature's worth of copies a year later; the doc lost every time until a lint rule replaced it.
 
 **BORROWED IS NOT VERIFIED** – A type, example or doc section lifted from the nearest existing code is re-read for whether its name says what it holds and whether it belongs where it lands; the nearest thing is the laziest thing. Reason: a `ListColumns { hidden }` lifted from a feature became the example in a shared kit, where nobody could tell what it was.
 
